@@ -146,26 +146,79 @@
   </div>
 </div></section>
 
+<style>
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+  .tab{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:9px 15px;font-size:14px;font-weight:600;color:var(--ink2);cursor:pointer;transition:all .15s}
+  .tab:hover{color:var(--ink);border-color:#33455c}
+  .tab.on{background:var(--gold);color:#1a1300;border-color:var(--gold)}
+  .lane{display:none}
+  .lane.on{display:block;animation:fade .25s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  .lane .pos{font-size:18px;color:var(--ink);max-width:720px;margin-bottom:14px;font-weight:600;letter-spacing:-.2px}
+  .lane ul{list-style:none} .lane li{position:relative;padding-left:24px;margin:9px 0;color:var(--ink2);font-size:14.5px;max-width:720px}
+  .lane li::before{content:"▸";position:absolute;left:0;color:var(--gold)}
+  .lane li b{color:var(--ink)}
+  .lane .roles{margin-top:14px;color:var(--ink3);font-size:13px}
+  .dl{display:inline-flex;align-items:center;gap:7px;margin-top:22px;padding:9px 15px;border:1px dashed var(--line);border-radius:10px;color:var(--ink2);font-size:13px;text-decoration:none}
+</style>
 <section id="experience"><div class="wrap">
-  <h2>Selected experience</h2>
-  <div class="xp">
-    <div class="job">
-      <div class="role">Senior Manager, Strategic Finance &amp; Business Operations</div>
-      <div class="co">Kaseya</div><div class="meta">High-growth SaaS · New York, NY</div>
-      <p>Operating partner to leadership through a $350M to $1.75B scale and 14 acquisitions. Owned the planning cadence, integration reporting, scenario models, KPI infrastructure, and board-level materials that let a $1.75B organization scale with discipline.</p>
-    </div>
-    <div class="job">
-      <div class="role">Director, Strategy &amp; Client Delivery</div>
-      <div class="co">SOL Consulting · embedded with AMC Networks</div><div class="meta">Media &amp; streaming · Remote</div>
-      <p>Ran the rhythm of business across 16 business units and 12 external partners — cutting execution cycle time roughly 30% without direct authority — and drove the AMC+ rollout across Product, Engineering, QA, and Marketing, contributing to 65% digital revenue growth. Grew the account from $280K to $2.1M.</p>
-    </div>
-    <div class="job">
-      <div class="role">Management Consulting — Strategy &amp; Transformation</div>
-      <div class="co">AArete · Optimity Advisors</div><div class="meta">Enterprise clients · New York, NY</div>
-      <p>Led transformation and operations engagements for enterprise clients, including a biotech transformation that delivered $1M+ in savings. Strategy advisory, change management, and measurable outcomes — the consulting foundation under everything above.</p>
-    </div>
+  <h2>Experience — by the role you're hiring for</h2>
+  <div class="tabs">
+    <button class="tab on" data-lane="cos">Chief of Staff</button>
+    <button class="tab" data-lane="so">Strategy &amp; Operations</button>
+    <button class="tab" data-lane="pmo">PMO &amp; Delivery</button>
+    <button class="tab" data-lane="con">Consulting &amp; Transformation</button>
   </div>
+
+  <div class="lane on" data-lane="cos">
+    <div class="pos">The operator a founder or C-suite leader hands the ambiguous mandate to — I run the rhythm of business and turn priorities into shipped outcomes.</div>
+    <ul>
+      <li>Operating partner to Kaseya leadership through a <b>$350M to $1.75B scale and 14 acquisitions</b> — owned the planning cadence and the board-level materials.</li>
+      <li>Ran the rhythm of business across <b>16 business units and 12 external partners</b> at AMC Networks; cut execution cycle time <b>~30%</b> without direct authority over any team.</li>
+      <li>Prepared board, QBR, and Steering Committee materials for a <b>$1.75B organization</b>, where performance and recommendations read as decision-ready narratives.</li>
+    </ul>
+    <div class="roles">Backed by: Kaseya · SOL Consulting / AMC Networks</div>
+  </div>
+
+  <div class="lane" data-lane="so">
+    <div class="pos">I build the operating system beneath fast-moving teams — the cadence, models, and KPI infrastructure that make execution measurable.</div>
+    <ul>
+      <li>Built the <b>scenario models, forecasts, and KPI infrastructure</b> that tied investment to outcomes through Kaseya's $1B+ scale.</li>
+      <li>Stood up the single source of truth and operating cadence across <b>16 BUs and 32 channels</b> at AMC Networks.</li>
+      <li>Drove the AMC+ product rollout across Product, Engineering, QA, and Marketing, contributing to <b>65% digital revenue growth</b>.</li>
+    </ul>
+    <div class="roles">Backed by: Kaseya · SOL Consulting / AMC Networks</div>
+  </div>
+
+  <div class="lane" data-lane="pmo">
+    <div class="pos">I run complex cross-functional programs end to end — governance, integration tracking, and the follow-through that actually ships.</div>
+    <ul>
+      <li>Owned acquisition-integration tracking and reporting across <b>14 acquisitions</b> at Kaseya.</li>
+      <li>Drove the AMC+ rollout across four functions, <b>driving accountability out of meetings</b> and keeping every team aligned on priorities and tradeoffs.</li>
+      <li>Grew the AMC Networks account from <b>$280K to $2.1M</b> as the operating liaison to client leadership.</li>
+    </ul>
+    <div class="roles">Backed by: Kaseya · SOL Consulting / AMC Networks</div>
+  </div>
+
+  <div class="lane" data-lane="con">
+    <div class="pos">Strategy advisory and change management for enterprise clients, aimed at measurable P&amp;L outcomes.</div>
+    <ul>
+      <li>Led a biotech transformation at AArete delivering <b>$1M+ in savings</b>.</li>
+      <li>Management consulting across enterprise clients at <b>AArete and Optimity Advisors</b> — strategy, operations, and change management.</li>
+      <li>Embedded operator with AMC Networks across multiple engagement cycles, progressing from Technical Project Manager to Senior Program Manager.</li>
+    </ul>
+    <div class="roles">Backed by: AArete · Optimity Advisors · SOL Consulting / AMC Networks</div>
+  </div>
+
+  <a class="dl" href="mailto:khlittlejohn@gmail.com?subject=Resume%20request">📄 Want the full résumé? Email me and I'll send the version matched to your role.</a>
 </div></section>
+<script>
+  document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
+    const k=t.dataset.lane;
+    document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x===t));
+    document.querySelectorAll('.lane').forEach(l=>l.classList.toggle('on',l.dataset.lane===k));
+  }));
+</script>
 
 <section><div class="wrap">
   <div class="two">
