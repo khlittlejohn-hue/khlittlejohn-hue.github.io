@@ -15,6 +15,8 @@
 <meta name="twitter:title" content="Kyle Littlejohn — Operator & Applied-AI Builder">
 <meta name="twitter:description" content="I turn executive ambiguity into shipped outcomes — and I built a 60+ agent AI system that runs my professional life.">
 <meta name="twitter:image" content="https://khlittlejohn-hue.github.io/assets/system.png">
+<!-- Privacy-friendly view analytics (no cookies, no personal data). Kyle: replace YOURCODE with your GoatCounter code after free signup at goatcounter.com. -->
+<script data-goatcounter="https://YOURCODE.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20rx='13'%20fill='%230a0d12'/%3E%3Crect%20x='1.5'%20y='1.5'%20width='61'%20height='61'%20rx='12'%20fill='none'%20stroke='%23f5c451'%20stroke-opacity='0.35'/%3E%3Ctext%20x='32'%20y='45'%20font-family='Arial,Helvetica,sans-serif'%20font-size='33'%20font-weight='700'%20fill='%23f5c451'%20text-anchor='middle'%3EKL%3C/text%3E%3C/svg%3E">
 <style>
   :root{
@@ -96,9 +98,39 @@
   .js .reveal{opacity:0;transform:translateY(16px);transition:opacity .55s ease,transform .55s cubic-bezier(.2,.7,.3,1)}
   .js .reveal.in{opacity:1;transform:none}
   @media(prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none;transition:none}}
+  /* ===== metrics proof strip ===== */
+  .proof{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .proof .m{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 18px;text-align:center}
+  .proof .m .big{font-size:34px;font-weight:800;letter-spacing:-1px;line-height:1;
+    background:linear-gradient(100deg,var(--gold),#ffe6a8);-webkit-background-clip:text;background-clip:text;color:transparent;
+    font-variant-numeric:tabular-nums}
+  .proof .m .lbl{display:block;margin-top:9px;color:var(--ink2);font-size:13px;line-height:1.35}
+  /* ===== selected work case studies ===== */
+  .cases{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .case{background:linear-gradient(150deg,#131b27,#0e141d);border:1px solid var(--line);border-radius:16px;
+    padding:22px 22px 24px;display:flex;flex-direction:column;transition:border-color .18s,transform .12s}
+  .case:hover{border-color:#33455c;transform:translateY(-2px)}
+  .case .co{font-size:12px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--blue)}
+  .case .ttl{font-size:18px;font-weight:800;letter-spacing:-.3px;margin:4px 0 16px;line-height:1.2}
+  .case .hero{display:flex;align-items:baseline;gap:10px;padding:14px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .case .hero .num{font-size:38px;font-weight:800;letter-spacing:-1.5px;line-height:.9;
+    background:linear-gradient(100deg,var(--gold),#ffe6a8);-webkit-background-clip:text;background-clip:text;color:transparent;
+    font-variant-numeric:tabular-nums;white-space:nowrap}
+  .case .hero .cap{font-size:13px;color:var(--ink2);line-height:1.35}
+  .case .cs{margin-top:16px}
+  .case .cs .row{display:flex;gap:9px;margin:10px 0}
+  .case .cs .k{flex:0 0 78px;font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--ink3);padding-top:2px}
+  .case .cs .v{font-size:14px;color:var(--ink2);line-height:1.5}
+  .case .cs .v b{color:var(--ink)}
+  .case .cta-row{margin-top:auto;padding-top:18px}
+  .case a.mini{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--gold);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .15s}
+  .case a.mini:hover{border-color:var(--gold)}
+  .case.flagship{border-color:#3a3010;background:linear-gradient(150deg,#1a1608,#0f141d)}
+  .case.flagship .co{color:var(--gold)}
   @media(max-width:760px){
     .hero-name{font-size:42px} .tag{font-size:21px} .why{grid-template-columns:1fr}
     .flag{grid-template-columns:1fr} .grid2,.two{grid-template-columns:1fr}
+    .proof{grid-template-columns:1fr 1fr} .cases{grid-template-columns:1fr}
     .hero-top{gap:16px} .avatar{width:78px;height:78px} nav .links a:not(.gh){display:none}
   }
 </style>
@@ -108,8 +140,8 @@
 <nav><div class="wrap">
   <span class="brand"><img src="assets/kyle.jpg" alt="Kyle Littlejohn">Kyle Littlejohn</span>
   <span class="links">
-    <a href="#why">Why Kyle</a><a href="#work">Work</a><a href="#experience">Experience</a>
-    <a href="#building">Building</a><a href="#contact">Contact</a>
+    <a href="#why">Why Kyle</a><a href="#cases">Selected Work</a><a href="#work">System</a><a href="#experience">Experience</a>
+    <a href="#contact">Contact</a>
     <a class="gh" href="https://github.com/khlittlejohn-hue/executive-office" target="_blank" rel="noopener">GitHub ↗</a>
   </span>
 </div></nav>
@@ -139,6 +171,81 @@
     <div class="c"><div class="ic">🎯</div><b>The operator execs trust</b><span>I'm the person a founder or C-suite leader hands the ambiguous mandate to. I set the cadence, align the people who don't report to me, and drive it to a measurable result.</span></div>
     <div class="c"><div class="ic">🤖</div><b>AI-first, for real</b><span>I don't just use AI — I architected a production, human-in-the-loop, 60+ agent system that runs my own work. Rare credibility with both technical and executive rooms.</span></div>
     <div class="c"><div class="ic">📈</div><b>A receipt, not a pitch</b><span>$280K → $2.1M account growth. A $350M → $1.75B scale. ~30% cycle-time cut without authority. The outcomes are real and they're specific.</span></div>
+  </div>
+</div></section>
+
+<section id="cases" class="reveal"><div class="wrap">
+  <h2>Selected work — the receipts</h2>
+  <p class="lead-p" style="margin-bottom:6px">Four mandates, each shown as the problem, what I actually built, and what happened.</p>
+
+  <div class="proof" id="proofStrip" style="margin:24px 0 30px">
+    <div class="m"><span class="big" data-count="1.75" data-prefix="$" data-suffix="B" data-dec="2">$0B</span><span class="lbl">org scaled with, as operating partner to the C-suite</span></div>
+    <div class="m"><span class="big" data-count="14">0</span><span class="lbl">acquisitions integrated &amp; tracked</span></div>
+    <div class="m"><span class="big" data-count="2.1" data-prefix="$" data-suffix="M" data-dec="1">$0M</span><span class="lbl">account grown from $280K</span></div>
+    <div class="m"><span class="big" data-count="1" data-prefix="$" data-suffix="M+" data-dec="0">$0M+</span><span class="lbl">annualized cost savings delivered</span></div>
+  </div>
+
+  <div class="cases">
+
+    <div class="case">
+      <div class="co">Kaseya</div>
+      <div class="ttl">The operating &amp; KPI spine of a $1.75B org</div>
+      <div class="hero">
+        <span class="num">$350M→$1.75B</span>
+        <span class="cap">scale and 14-acquisition integration, run off one reporting spine</span>
+      </div>
+      <div class="cs">
+        <div class="row"><span class="k">Challenge</span><span class="v">Leadership was scaling fast and acquiring aggressively, with no single source of truth tying investment to outcomes.</span></div>
+        <div class="row"><span class="k">Built</span><span class="v">The <b>Tableau / SQL / Excel KPI dashboards</b> and the <b>board / QBR reporting</b> a $1B+ org ran on — as operating partner to the C-suite through 14 acquisitions.</span></div>
+        <div class="row"><span class="k">Outcome</span><span class="v">Leadership ran a <b>$1.75B organization</b> and set portfolio and acquisition priorities directly off that spine.</span></div>
+      </div>
+    </div>
+
+    <div class="case">
+      <div class="co">AMC Networks</div>
+      <div class="ttl">The rhythm of business across 16 BUs</div>
+      <div class="hero">
+        <span class="num">~30%</span>
+        <span class="cap">execution-cycle-time cut — with no direct authority</span>
+      </div>
+      <div class="cs">
+        <div class="row"><span class="k">Challenge</span><span class="v">A sprawling operating footprint — 16 business units, 12 partners, 32 channels — with no shared cadence, plus the AMC+ launch to ship across four functions.</span></div>
+        <div class="row"><span class="k">Built</span><span class="v">The operating cadence and single source of truth, and drove the <b>AMC+ rollout</b> across Product, Engineering, QA, and Marketing.</span></div>
+        <div class="row"><span class="k">Outcome</span><span class="v"><b>~30% faster</b> execution cycles, <b>~65% digital revenue growth</b>, and the account grown <b>$280K → $2.1M</b>.</span></div>
+      </div>
+    </div>
+
+    <div class="case flagship">
+      <div class="co">★ Flagship — built solo</div>
+      <div class="ttl">The Executive Office — a production AI system</div>
+      <div class="hero">
+        <span class="num">60+</span>
+        <span class="cap">specialized agents across 12 departments, human on every decision</span>
+      </div>
+      <div class="cs">
+        <div class="row"><span class="k">Challenge</span><span class="v">Prove AI-first operating isn't a talking point — by running my own professional life on a real, auditable system.</span></div>
+        <div class="row"><span class="k">Built</span><span class="v">A coordinated <b>60+ agent, 12-department</b> system with a <b>14-stage QC pipeline</b> and a human on every decision that leaves the system. Public and fully documented.</span></div>
+        <div class="row"><span class="k">Outcome</span><span class="v">Rare credibility in both technical and executive rooms — explore it live in the map below, or read the source.</span></div>
+      </div>
+      <div class="cta-row">
+        <a class="mini" href="https://github.com/khlittlejohn-hue/executive-office" target="_blank" rel="noopener">View the repo on GitHub ↗</a>
+      </div>
+    </div>
+
+    <div class="case">
+      <div class="co">AArete · bluebird bio engagement</div>
+      <div class="ttl">Cost transformation, quality held</div>
+      <div class="hero">
+        <span class="num">$1M+</span>
+        <span class="cap">in annualized savings, SLA quality preserved</span>
+      </div>
+      <div class="cs">
+        <div class="row"><span class="k">Challenge</span><span class="v">As the consultant on an AArete engagement, a biotech client needed material cost reduction without compromising the service levels its operations depended on.</span></div>
+        <div class="row"><span class="k">Built</span><span class="v">Drove <b>5 vendor and process initiatives</b> — scoping, renegotiation, and redesign.</span></div>
+        <div class="row"><span class="k">Outcome</span><span class="v"><b>$1M+ in annualized savings</b>, with SLA quality fully preserved.</span></div>
+      </div>
+    </div>
+
   </div>
 </div></section>
 
@@ -516,6 +623,35 @@
     es.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
   },{threshold:.12,rootMargin:'0px 0px -8% 0px'});
   els.forEach(function(e){io.observe(e);});
+})();
+</script>
+<script>
+/* ===== count-up-on-scroll for the proof strip ===== */
+(function(){
+  var nums=[].slice.call(document.querySelectorAll('.proof .big[data-count]'));
+  if(!nums.length) return;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function fmt(n,pre,suf,dec){ return (pre||'')+n.toFixed(dec)+(suf||''); }
+  function finalText(t){ return fmt(parseFloat(t.dataset.count), t.dataset.prefix, t.dataset.suffix, parseInt(t.dataset.dec||'0',10)); }
+  if(reduce || !('IntersectionObserver' in window) || !('requestAnimationFrame' in window)){
+    nums.forEach(function(t){ t.textContent=finalText(t); }); return;
+  }
+  function run(t){
+    var target=parseFloat(t.dataset.count), pre=t.dataset.prefix, suf=t.dataset.suffix, dec=parseInt(t.dataset.dec||'0',10);
+    var dur=1100, start=null;
+    function step(ts){
+      if(start===null) start=ts;
+      var p=Math.min((ts-start)/dur,1);
+      var eased=1-Math.pow(1-p,3); /* easeOutCubic */
+      t.textContent=fmt(target*eased,pre,suf,dec);
+      if(p<1) requestAnimationFrame(step); else t.textContent=finalText(t);
+    }
+    requestAnimationFrame(step);
+  }
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(en){ if(en.isIntersecting){ run(en.target); io.unobserve(en.target); } });
+  },{threshold:.5});
+  nums.forEach(function(t){ io.observe(t); });
 })();
 </script>
 </body>
