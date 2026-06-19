@@ -73,6 +73,10 @@
   .flag .stat b{display:block;font-size:22px;color:var(--gold);font-weight:800;line-height:1}
   .flag .stat span{font-size:11px;color:var(--ink3);text-transform:uppercase;letter-spacing:.5px}
   .flag img{width:100%;border-radius:12px;border:1px solid var(--line);display:block}
+  /* intro variant has no image — single column so there's no empty half; center the stats */
+  .flag.intro{grid-template-columns:1fr;text-align:center}
+  .flag.intro .stats{justify-content:center}
+  .flag.intro h3{font-size:24px}
   /* experience */
   .xp{border-left:2px solid var(--line);padding-left:22px;margin-left:4px}
   .job{position:relative;padding:0 0 24px}
@@ -121,7 +125,7 @@
   .case .cs .row{display:flex;gap:9px;margin:10px 0}
   .case .cs .k{flex:0 0 78px;font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--ink3);padding-top:2px}
   .case .cs .v{font-size:14px;color:var(--ink2);line-height:1.5}
-  .case .cs .v b{color:var(--ink)}
+  .case .cs .v b{color:var(--ink);font-weight:600}
   .case .cta-row{margin-top:auto;padding-top:18px}
   .case a.mini{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--gold);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .15s}
   .case a.mini:hover{border-color:var(--gold)}
@@ -140,7 +144,7 @@
 <nav><div class="wrap">
   <span class="brand"><img src="assets/kyle.jpg" alt="Kyle Littlejohn">Kyle Littlejohn</span>
   <span class="links">
-    <a href="#why">Why Kyle</a><a href="#cases">Selected Work</a><a href="#work">System</a><a href="#opensource">Open Source</a><a href="#experience">Experience</a>
+    <a href="#cases">Work</a><a href="#work">System</a><a href="#opensource">Open Source</a><a href="#experience">Experience</a><a href="#education">Education</a>
     <a href="#contact">Contact</a>
     <a class="gh" href="https://github.com/khlittlejohn-hue/executive-office" target="_blank" rel="noopener">GitHub ↗</a>
   </span>
@@ -151,14 +155,14 @@
     <img class="avatar" src="assets/kyle.jpg" alt="Kyle Littlejohn">
     <div>
       <h1 class="hero-name">Kyle <span class="last">Littlejohn</span></h1>
-      <div class="kick">Chief of Staff · Strategy &amp; Operations · Applied-AI builder</div>
+      <div class="kick">Chief of Staff · Strategy &amp; Operations · Program &amp; Project Management · Consulting</div>
     </div>
   </div>
-  <p class="tag">I turn executive ambiguity into <span class="grad">shipped outcomes</span> — and I built a 60+ agent AI system that runs my professional life.</p>
-  <p class="lede">Twelve years as the operator behind senior executives in high-growth SaaS: the operating cadence, cross-functional execution, and decision support that actually move a company. I read the technology well enough to build with it, not just talk about it.</p>
+  <p class="tag">I turn executive ambiguity into <span class="grad">shipped outcomes</span>.</p>
+  <p class="lede">12 years as the operator behind senior executives across SaaS, media, and management consulting: the operating cadence, cross-functional execution, and decision support that actually move a company. Industry-agnostic, and AI-native — I read the technology well enough to build with it, not just talk about it.</p>
   <div class="cta">
     <a class="btn primary" href="#why">Why Kyle ↓</a>
-    <a class="btn ghost" href="assets/Kyle-Littlejohn-Resume.pdf" target="_blank" rel="noopener">📄 Résumé</a>
+    <a class="btn ghost" href="assets/Kyle-Littlejohn-Resume.pdf" target="_blank" rel="noopener">📄 Resume</a>
     <a class="btn ghost" href="https://www.linkedin.com/in/kyle-littlejohn-" target="_blank" rel="noopener">LinkedIn</a>
     <a class="btn ghost" href="https://github.com/khlittlejohn-hue/executive-office" target="_blank" rel="noopener">GitHub</a>
     <a class="btn ghost" href="mailto:khlittlejohn@gmail.com">Email</a>
@@ -364,7 +368,7 @@
   .gh-foot .gh-lang{display:inline-flex;align-items:center;gap:6px}
   .gh-foot .gh-lang i{width:10px;height:10px;border-radius:50%;background:var(--ink3);display:inline-block}
   .gh-note{color:var(--ink3);font-size:12px;margin-top:14px}
-  /* résumé inline preview */
+  /* resume inline preview */
   .resume-actions{display:flex;gap:11px;flex-wrap:wrap;margin-top:10px}
   .resume-frame{margin-top:18px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--panel2)}
   .resume-frame object{width:100%;height:760px;display:block;border:0}
@@ -396,13 +400,13 @@
 <script>
 (function(){
   var CORE={name:"Chief of Staff — Orchestration",tag:"The core",
-    desc:"A Chief of Staff aggregates all twelve departments into one operating picture, an Executive Assistant runs the day, and an independent QA / super-user team reviews the system from the outside.",
+    desc:"A Chief of Staff aggregates all 12 departments into one operating picture, an Executive Assistant runs the day, and an independent QA / super-user team reviews the system from the outside.",
     roles:["Chief of Staff (aggregates all 12 departments)","Executive Assistant","Independent QA / Super-User Review"],
     note:"A human on every decision that leaves the system."};
   var DEPTS=[
     {k:"careers",lbl:"Careers",name:"Careers & Job Search",c:"#5aa2ff",
-      desc:"Sources roles, tailors résumés to each posting, runs a 14-stage quality-control pipeline, and drafts the outreach that follows.",
-      roles:["Talent Sourcer","Résumé Strategist","Application QC Reviewer","Outreach Writer"]},
+      desc:"Sources roles, tailors resumes to each posting, runs a 14-stage quality-control pipeline, and drafts the outreach that follows.",
+      roles:["Talent Sourcer","Resume Strategist","Application QC Reviewer","Outreach Writer"]},
     {k:"research",lbl:"Research",name:"Research & Intelligence",c:"#a78bfa",
       desc:"Deep-dive research on companies, people, and decisions — every claim backed by a cited source.",
       roles:["Company Analyst","People Researcher","Source Verifier","Briefing Synthesizer"]},
@@ -439,7 +443,7 @@
   ];
 
   var SVGNS="http://www.w3.org/2000/svg";
-  var cx=300,cy=300,ring=214,coreR=56,nodeR=27,labelR=255;
+  var cx=300,cy=300,ring=206,coreR=56,nodeR=25,labelR=268;
   var stage=document.getElementById("smStage");
   var detail=document.getElementById("smDetail");
   var list=document.getElementById("smList");
@@ -450,7 +454,7 @@
   function el(t,a){var e=document.createElementNS(SVGNS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
 
   // build SVG
-  var svg=el("svg",{viewBox:"0 0 600 600",role:"img","aria-label":"Twelve departments orbiting a Chief of Staff orchestration core"});
+  var svg=el("svg",{viewBox:"-40 -28 680 656",role:"img","aria-label":"12 departments orbiting a Chief of Staff orchestration core"});
 
   // connecting lines first (under nodes)
   DEPTS.forEach(function(d,i){
@@ -621,13 +625,13 @@
   </div>
 
   <div class="resume-actions">
-    <a class="btn primary" href="assets/Kyle-Littlejohn-Resume.pdf" target="_blank" rel="noopener">📄 Open résumé</a>
+    <a class="btn primary" href="assets/Kyle-Littlejohn-Resume.pdf" target="_blank" rel="noopener">📄 Open resume</a>
     <a class="btn ghost" href="assets/Kyle-Littlejohn-Resume.pdf" download>⤓ Download PDF</a>
     <button class="btn ghost" id="resToggle" type="button" aria-expanded="false" aria-controls="resFrame">👁 Preview right here</button>
   </div>
   <div class="resume-frame" id="resFrame" hidden>
-    <object data="assets/Kyle-Littlejohn-Resume.pdf#view=FitH" type="application/pdf" aria-label="Kyle Littlejohn résumé (PDF)">
-      <p style="padding:18px;color:var(--ink2)">Inline preview isn't supported in this browser — <a href="assets/Kyle-Littlejohn-Resume.pdf" target="_blank" rel="noopener">open the résumé PDF in a new tab</a>.</p>
+    <object data="assets/Kyle-Littlejohn-Resume.pdf#view=FitH" type="application/pdf" aria-label="Kyle Littlejohn resume (PDF)">
+      <p style="padding:18px;color:var(--ink2)">Inline preview isn't supported in this browser — <a href="assets/Kyle-Littlejohn-Resume.pdf" target="_blank" rel="noopener">open the resume PDF in a new tab</a>.</p>
     </object>
   </div>
 </div></section>
@@ -639,23 +643,24 @@
   }));
 </script>
 
-<section class="reveal"><div class="wrap">
-  <div class="two">
-    <div class="edu" id="education">
-      <h2>Education</h2>
-      <b>College of William &amp; Mary</b>
-      <div class="meta">2010 – 2014 · Williamsburg, VA</div>
-      <div class="co">B.S. Neuroscience</div>
-      <p>Minor in Process Management &amp; Consulting. A neuroscience degree turned out to be unexpectedly good training for the work I do: understanding how complex systems actually behave, then building the structure that makes them work.</p>
-    </div>
-    <div class="build" id="building">
-      <h2>Also building</h2>
-      <ul>
-        <li><b>The Executive Office</b> — open-sourced architecture of my multi-agent system, on GitHub.</li>
-        <li><b>Building With Claude</b> — content and guides on running an AI-first operating system, in development.</li>
-        <li><b>Endurance</b> — marathoner; I think the discipline of training and the discipline of operating are the same skill.</li>
-      </ul>
-    </div>
+<section id="education" class="reveal"><div class="wrap">
+  <div class="edu">
+    <h2>Education</h2>
+    <b>College of William &amp; Mary</b>
+    <div class="meta">2010 – 2014 · Williamsburg, VA</div>
+    <div class="co">B.S. Neuroscience</div>
+    <p>Minor in Process Management &amp; Consulting. A neuroscience degree turned out to be unexpectedly good training for the work I do: understanding how complex systems actually behave, then building the structure that makes them work.</p>
+  </div>
+</div></section>
+
+<section id="building" class="reveal"><div class="wrap">
+  <div class="build">
+    <h2>Also building</h2>
+    <ul>
+      <li><b>The Executive Office</b> — open-sourced architecture of my multi-agent system, on GitHub.</li>
+      <li><b>Building With Claude</b> — content and guides on running an AI-first operating system, in development.</li>
+      <li><b>Endurance</b> — marathoner; the discipline of training and the discipline of operating are the same skill.</li>
+    </ul>
   </div>
 </div></section>
 
@@ -670,13 +675,14 @@
 </div></section>
 
 <section id="contact" class="contact reveal"><div class="wrap">
-  <h2>Let's talk</h2>
-  <p class="lead-p">Open to Chief of Staff, Strategy &amp; Operations, and AI-transformation roles — and to building AI systems for teams that need one.</p>
-  <p class="lead-p" style="margin-top:14px">
-    <a href="mailto:khlittlejohn@gmail.com">khlittlejohn@gmail.com</a> &nbsp;·&nbsp;
-    <a href="https://www.linkedin.com/in/kyle-littlejohn-" target="_blank" rel="noopener">LinkedIn</a> &nbsp;·&nbsp;
-    <a href="https://github.com/khlittlejohn-hue/executive-office" target="_blank" rel="noopener">GitHub</a>
-  </p>
+  <h2>Get in touch</h2>
+  <p class="lead-p">Open to Chief of Staff, Strategy &amp; Operations, and transformation roles, and to building AI systems for teams that need one. If you've got a hard operating problem, I'd like to hear about it.</p>
+  <div class="contact-cta" style="display:flex;gap:11px;flex-wrap:wrap;margin-top:22px">
+    <a class="btn primary" href="mailto:khlittlejohn@gmail.com">✉ Email me</a>
+    <a class="btn ghost" href="https://www.linkedin.com/in/kyle-littlejohn-" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="btn ghost" href="https://github.com/khlittlejohn-hue/executive-office" target="_blank" rel="noopener">GitHub</a>
+    <a class="btn ghost" href="assets/Kyle-Littlejohn-Resume.pdf" target="_blank" rel="noopener">📄 Resume</a>
+  </div>
 </div></section>
 
 <footer><div class="wrap">Kyle Littlejohn · New York, NY · Built and run on systems thinking.</div></footer>
@@ -752,13 +758,32 @@
     })
     .catch(function(){/* keep static fallback card */});
 })();
-/* ===== résumé inline preview toggle ===== */
+/* ===== resume inline preview toggle ===== */
 (function(){
   var b=document.getElementById('resToggle'),f=document.getElementById('resFrame'); if(!b||!f)return;
   b.addEventListener('click',function(){
     if(f.hasAttribute('hidden')){f.removeAttribute('hidden');b.setAttribute('aria-expanded','true');b.textContent='✕ Hide preview';f.scrollIntoView({behavior:'smooth',block:'nearest'});}
     else{f.setAttribute('hidden','');b.setAttribute('aria-expanded','false');b.textContent='👁 Preview right here';}
   });
+})();
+</script>
+<style>nav .links a.active{color:var(--gold)}</style>
+<script>
+/* ===== scroll-spy: highlight the nav link for the section in view ===== */
+(function(){
+  var links=[].slice.call(document.querySelectorAll('nav .links a[href^="#"]'));
+  if(!links.length||!('IntersectionObserver' in window))return;
+  var map={};
+  links.forEach(function(a){var id=a.getAttribute('href').slice(1);var s=document.getElementById(id);if(s)map[id]=a;});
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(en){
+      if(en.isIntersecting){
+        links.forEach(function(a){a.classList.remove('active');});
+        var a=map[en.target.id]; if(a)a.classList.add('active');
+      }
+    });
+  },{rootMargin:'-45% 0px -50% 0px'});
+  Object.keys(map).forEach(function(id){io.observe(document.getElementById(id));});
 })();
 </script>
 </body>
