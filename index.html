@@ -140,7 +140,7 @@
 <nav><div class="wrap">
   <span class="brand"><img src="assets/kyle.jpg" alt="Kyle Littlejohn">Kyle Littlejohn</span>
   <span class="links">
-    <a href="#why">Why Kyle</a><a href="#cases">Selected Work</a><a href="#work">System</a><a href="#experience">Experience</a>
+    <a href="#why">Why Kyle</a><a href="#cases">Selected Work</a><a href="#work">System</a><a href="#opensource">Open Source</a><a href="#experience">Experience</a>
     <a href="#contact">Contact</a>
     <a class="gh" href="https://github.com/khlittlejohn-hue/executive-office" target="_blank" rel="noopener">GitHub ↗</a>
   </span>
@@ -336,6 +336,62 @@
   <noscript>
     <img src="assets/system.png" alt="The Executive Office — system dashboard" style="width:100%;border-radius:12px;border:1px solid var(--line);margin-top:16px;display:block">
   </noscript>
+</div></section>
+
+<style>
+  /* ===== Build in the open — live GitHub showcase ===== */
+  .gh-head{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:18px}
+  .gh-profile{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink)}
+  .gh-profile img{width:46px;height:46px;border-radius:50%;border:1px solid var(--line)}
+  .gh-profile b{display:block;font-size:15px}
+  .gh-profile span{color:var(--ink2);font-size:13px}
+  .gh-stats{display:flex;gap:22px}
+  .gh-stats .s b{font-size:22px;font-weight:800;color:var(--gold);line-height:1;font-variant-numeric:tabular-nums}
+  .gh-stats .s span{display:block;font-size:11px;color:var(--ink3);text-transform:uppercase;letter-spacing:.5px;margin-top:3px}
+  .gh-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .gh-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 18px 16px;
+    display:flex;flex-direction:column;text-decoration:none;color:var(--ink);transition:border-color .18s,transform .12s}
+  .gh-card:hover{border-color:#33455c;transform:translateY(-2px)}
+  .gh-card.feat{grid-column:1/-1;border-color:#3a3010;background:linear-gradient(150deg,#1a1608,#0f141d)}
+  .gh-card-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .gh-name{font-size:16px;font-weight:800;letter-spacing:-.2px}
+  .gh-card.feat .gh-name{color:var(--gold)}
+  .gh-name .pin{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);
+    border:1px solid #3a3010;border-radius:6px;padding:2px 7px;margin-left:8px;vertical-align:middle}
+  .gh-star{font-size:13px;color:var(--ink2);font-variant-numeric:tabular-nums;white-space:nowrap}
+  .gh-desc{color:var(--ink2);font-size:14px;line-height:1.5;margin:10px 0 14px;flex:1}
+  .gh-foot{display:flex;align-items:center;gap:16px;font-size:12px;color:var(--ink3)}
+  .gh-foot .gh-lang{display:inline-flex;align-items:center;gap:6px}
+  .gh-foot .gh-lang i{width:10px;height:10px;border-radius:50%;background:var(--ink3);display:inline-block}
+  .gh-note{color:var(--ink3);font-size:12px;margin-top:14px}
+  /* résumé inline preview */
+  .resume-actions{display:flex;gap:11px;flex-wrap:wrap;margin-top:10px}
+  .resume-frame{margin-top:18px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--panel2)}
+  .resume-frame object{width:100%;height:760px;display:block;border:0}
+  @media(max-width:760px){.gh-grid{grid-template-columns:1fr}.gh-stats{gap:16px}.resume-frame object{height:520px}}
+</style>
+<section id="opensource" class="reveal"><div class="wrap">
+  <h2>Build in the open</h2>
+  <p class="lead-p" style="margin-bottom:22px">I work in public — the same systems thinking, legible enough to read. These cards are pulled <b>live from GitHub</b> when you load the page.</p>
+  <div class="gh-head">
+    <a class="gh-profile" href="https://github.com/khlittlejohn-hue" target="_blank" rel="noopener">
+      <img src="assets/kyle.jpg" alt="@khlittlejohn-hue" id="ghAvatar">
+      <div><b>@khlittlejohn-hue</b><span id="ghMeta">building in public on GitHub ↗</span></div>
+    </a>
+    <div class="gh-stats" id="ghStats">
+      <div class="s"><b id="ghRepoCount">—</b><span>public repos</span></div>
+      <div class="s"><b id="ghStarCount">—</b><span>total stars</span></div>
+    </div>
+  </div>
+  <div class="gh-grid" id="ghGrid">
+    <!-- Static fallback (no-JS / API rate-limit). JS replaces this with live repo data. -->
+    <a class="gh-card feat" href="https://github.com/khlittlejohn-hue/executive-office" target="_blank" rel="noopener">
+      <div class="gh-card-top"><span class="gh-name">executive-office<span class="pin">Flagship</span></span><span class="gh-star">★ —</span></div>
+      <p class="gh-desc">A production multi-agent Executive Office on Claude Code — 60+ agents across 12 departments, a 14-stage QC pipeline, and a human on every decision that leaves the system.</p>
+      <div class="gh-foot"><span class="gh-lang"><i style="background:#3572A5"></i>Python</span><span class="gh-upd">View on GitHub ↗</span></div>
+    </a>
+  </div>
+  <p class="gh-note" id="ghNote">Live from the GitHub API · no tracking · falls back gracefully if GitHub is unreachable.</p>
 </div></section>
 <script>
 (function(){
@@ -564,7 +620,16 @@
     <div class="roles">Backed by: AArete · Optimity Advisors · SOL Consulting / AMC Networks</div>
   </div>
 
-  <a class="dl" href="assets/Kyle-Littlejohn-Resume.pdf" target="_blank" rel="noopener">📄 Download the full résumé (PDF)</a>
+  <div class="resume-actions">
+    <a class="btn primary" href="assets/Kyle-Littlejohn-Resume.pdf" target="_blank" rel="noopener">📄 Open résumé</a>
+    <a class="btn ghost" href="assets/Kyle-Littlejohn-Resume.pdf" download>⤓ Download PDF</a>
+    <button class="btn ghost" id="resToggle" type="button" aria-expanded="false" aria-controls="resFrame">👁 Preview right here</button>
+  </div>
+  <div class="resume-frame" id="resFrame" hidden>
+    <object data="assets/Kyle-Littlejohn-Resume.pdf#view=FitH" type="application/pdf" aria-label="Kyle Littlejohn résumé (PDF)">
+      <p style="padding:18px;color:var(--ink2)">Inline preview isn't supported in this browser — <a href="assets/Kyle-Littlejohn-Resume.pdf" target="_blank" rel="noopener">open the résumé PDF in a new tab</a>.</p>
+    </object>
+  </div>
 </div></section>
 <script>
   document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
@@ -652,6 +717,48 @@
     es.forEach(function(en){ if(en.isIntersecting){ run(en.target); io.unobserve(en.target); } });
   },{threshold:.5});
   nums.forEach(function(t){ io.observe(t); });
+})();
+</script>
+<script>
+/* ===== live GitHub showcase ===== */
+(function(){
+  var grid=document.getElementById('ghGrid'); if(!grid) return;
+  var FEAT='executive-office';
+  var LANG={Python:'#3572A5',JavaScript:'#f1e05a',TypeScript:'#3178c6',HTML:'#e34c26',CSS:'#563d7c',Shell:'#89e051','Jupyter Notebook':'#DA5B0B'};
+  function esc(s){return (s||'').replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function ago(d){var s=(Date.now()-new Date(d).getTime())/86400000;
+    if(s<1)return 'today'; if(s<2)return 'yesterday';
+    if(s<30)return Math.round(s)+' days ago';
+    if(s<365)return Math.round(s/30)+' mo ago'; return Math.round(s/365)+' yr ago';}
+  function card(r){
+    var feat=r.name===FEAT;
+    var lang=r.language?'<span class="gh-lang"><i style="background:'+(LANG[r.language]||'#5d6b7d')+'"></i>'+esc(r.language)+'</span>':'';
+    return '<a class="gh-card'+(feat?' feat':'')+'" href="'+r.html_url+'" target="_blank" rel="noopener">'+
+      '<div class="gh-card-top"><span class="gh-name">'+esc(r.name)+(feat?'<span class="pin">Flagship</span>':'')+'</span>'+
+      '<span class="gh-star">★ '+(r.stargazers_count||0)+'</span></div>'+
+      '<p class="gh-desc">'+(esc(r.description)||'—')+'</p>'+
+      '<div class="gh-foot">'+lang+'<span class="gh-upd">updated '+ago(r.pushed_at)+'</span></div></a>';
+  }
+  fetch('https://api.github.com/users/khlittlejohn-hue/repos?per_page=100&sort=pushed')
+    .then(function(r){if(!r.ok)throw 0;return r.json();})
+    .then(function(repos){
+      if(!Array.isArray(repos)||!repos.length)return;
+      repos=repos.filter(function(r){return !r.fork;});
+      var stars=repos.reduce(function(a,r){return a+(r.stargazers_count||0);},0);
+      var rc=document.getElementById('ghRepoCount'),sc=document.getElementById('ghStarCount');
+      if(rc)rc.textContent=repos.length; if(sc)sc.textContent=stars;
+      repos.sort(function(a,b){if(a.name===FEAT)return -1; if(b.name===FEAT)return 1; return new Date(b.pushed_at)-new Date(a.pushed_at);});
+      grid.innerHTML=repos.slice(0,7).map(card).join('');
+    })
+    .catch(function(){/* keep static fallback card */});
+})();
+/* ===== résumé inline preview toggle ===== */
+(function(){
+  var b=document.getElementById('resToggle'),f=document.getElementById('resFrame'); if(!b||!f)return;
+  b.addEventListener('click',function(){
+    if(f.hasAttribute('hidden')){f.removeAttribute('hidden');b.setAttribute('aria-expanded','true');b.textContent='✕ Hide preview';f.scrollIntoView({behavior:'smooth',block:'nearest'});}
+    else{f.setAttribute('hidden','');b.setAttribute('aria-expanded','false');b.textContent='👁 Preview right here';}
+  });
 })();
 </script>
 </body>
