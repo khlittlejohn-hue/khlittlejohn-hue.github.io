@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Kyle Littlejohn — Operator &amp; Applied-AI Builder</title>
-<meta name="description" content="Kyle Littlejohn — Chief of Staff & Strategy/Operations leader who builds AI systems. 12 years turning executive ambiguity into shipped outcomes, now AI-first.">
-<meta property="og:title" content="Kyle Littlejohn — Operator & Applied-AI Builder">
-<meta property="og:description" content="I turn executive ambiguity into shipped outcomes — and I built a 60+ agent AI system that runs my professional life.">
+<title>Kyle Littlejohn — Chief of Staff & Strategy / Operations Leader</title>
+<meta name="description" content="Kyle Littlejohn — Chief of Staff and Strategy / Operations leader. Over a decade turning ambiguous executive mandates into measurable results, across industries and AI-native.">
+<meta property="og:title" content="Kyle Littlejohn — Chief of Staff & Strategy / Operations Leader">
+<meta property="og:description" content="The operator senior leaders trust to turn an ambiguous mandate into a measurable result. Strategy, operations, program management, and consulting — across industries, and AI-native.">
 <meta property="og:image" content="https://khlittlejohn-hue.github.io/assets/system.png">
 <meta property="og:url" content="https://khlittlejohn-hue.github.io/">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#0a0d12">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Kyle Littlejohn — Operator & Applied-AI Builder">
-<meta name="twitter:description" content="I turn executive ambiguity into shipped outcomes — and I built a 60+ agent AI system that runs my professional life.">
+<meta name="twitter:title" content="Kyle Littlejohn — Chief of Staff & Strategy / Operations Leader">
+<meta name="twitter:description" content="The operator senior leaders trust to turn an ambiguous mandate into a measurable result. Strategy, operations, program management, and consulting — across industries, and AI-native.">
 <meta name="twitter:image" content="https://khlittlejohn-hue.github.io/assets/system.png">
 <!-- Privacy-friendly view analytics (no cookies, no personal data). Dashboard: https://khlittlejohn.goatcounter.com/ -->
 <script data-goatcounter="https://khlittlejohn.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -138,43 +138,105 @@
     .hero-top{gap:16px} .avatar{width:78px;height:78px} nav .links a:not(.gh){display:none}
   }
 </style>
+<style>
+  /* ===== desktop side rail — portrait + jump-nav that stay with you (Masato pattern) ===== */
+  @media(min-width:980px){
+    body{padding-left:268px}
+    nav{position:fixed;left:0;top:0;bottom:0;height:100vh;width:268px;border-bottom:none;border-right:1px solid var(--line);
+      background:var(--panel2);backdrop-filter:none}
+    nav .wrap{flex-direction:column;align-items:flex-start;height:100%;gap:0;padding:38px 28px;overflow-y:auto}
+    nav .brand{flex-direction:column;align-items:flex-start;gap:0}
+    nav .brand .rail-portrait{width:88px;height:88px;border-radius:50%;border:2px solid var(--gold);object-fit:cover;box-shadow:0 0 0 5px #f5c45114;margin-bottom:16px}
+    .rail-name{font-size:22px;font-weight:800;letter-spacing:-.5px;line-height:1.04;color:var(--ink)}
+    .rail-role{color:var(--ink2);font-size:12px;line-height:1.55;margin-top:9px}
+    nav .links{margin:28px 0 0 0;flex-direction:column;align-items:flex-start;gap:13px;font-size:14.5px}
+    .rail-contact{margin-top:auto;padding-top:22px;display:flex;flex-direction:column;gap:10px;font-size:13px}
+    .rail-contact a{color:var(--ink2);text-decoration:none}
+    .rail-contact a:hover{color:var(--gold)}
+  }
+  nav .links a.active{color:var(--gold)}
+  @media(max-width:979px){
+    .rail-portrait{width:28px;height:28px;border-radius:50%;border:1px solid var(--line)}
+    .rail-role,.rail-contact{display:none}
+    nav .links{display:none}
+  }
+  /* ===== "How can I help you?" — hover-lit, fully-clickable intent cards (Ali pattern) ===== */
+  .help{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:4px}
+  .help a{display:flex;flex-direction:column;gap:9px;background:linear-gradient(150deg,#131b27,#0e141d);border:1px solid var(--line);
+    border-radius:16px;padding:22px 22px 20px;text-decoration:none;color:var(--ink);
+    transition:border-color .18s,transform .12s,box-shadow .18s}
+  .help a:hover{border-color:var(--gold);transform:translateY(-3px);box-shadow:0 12px 32px -18px rgba(245,196,81,.45)}
+  .help .hic{font-size:23px}
+  .help .ht{font-size:16px;font-weight:800;letter-spacing:-.2px}
+  .help .hd{color:var(--ink2);font-size:13.5px;line-height:1.5;flex:1}
+  .help .harrow{color:var(--gold);font-size:13px;font-weight:700}
+  @media(max-width:760px){.help{grid-template-columns:1fr}}
+  section{scroll-margin-top:22px}
+  /* on desktop the rail carries identity, so the hero leads with the value prop (no duplicate name) */
+  @media(min-width:980px){ header .kick, header .hero-name{display:none} header{padding-top:48px} }
+</style>
 </head>
 <body>
 <script>document.documentElement.className='js';</script>
 <nav><div class="wrap">
-  <span class="brand"><img src="assets/kyle.jpg" alt="Kyle Littlejohn">Kyle Littlejohn</span>
+  <span class="brand">
+    <img class="rail-portrait" src="assets/kyle.jpg" alt="Kyle Littlejohn">
+    <span class="rail-name">Kyle Littlejohn</span>
+    <span class="rail-role">Chief of Staff · Strategy &amp; Operations · Program &amp; Project Management · Consulting</span>
+  </span>
   <span class="links">
-    <a href="#cases">Work</a><a href="#work">System</a><a href="#opensource">Open Source</a><a href="#experience">Experience</a><a href="#education">Education</a>
-    <a href="#contact">Contact</a>
-    <a class="gh" href="https://github.com/khlittlejohn-hue/executive-office" target="_blank" rel="noopener">GitHub ↗</a>
+    <a href="#help">Start here</a><a href="#cases">Work</a><a href="#work">The System</a><a href="#opensource">Open Source</a><a href="#experience">Experience</a><a href="#education">Education</a><a href="#contact">Contact</a>
+  </span>
+  <span class="rail-contact">
+    <a href="assets/Kyle-Littlejohn-Resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a>
+    <a href="https://www.linkedin.com/in/kyle-littlejohn-" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://github.com/khlittlejohn-hue/executive-office" target="_blank" rel="noopener">GitHub</a>
+    <a href="mailto:khlittlejohn@gmail.com">Email</a>
   </span>
 </div></nav>
 
 <header><div class="wrap">
-  <div class="hero-top">
-    <img class="avatar" src="assets/kyle.jpg" alt="Kyle Littlejohn">
-    <div>
-      <h1 class="hero-name">Kyle <span class="last">Littlejohn</span></h1>
-      <div class="kick">Chief of Staff · Strategy &amp; Operations · Program &amp; Project Management · Consulting</div>
-    </div>
-  </div>
-  <p class="tag">I turn executive ambiguity into <span class="grad">shipped outcomes</span>.</p>
-  <p class="lede">12 years as the operator behind senior executives across SaaS, media, and management consulting: the operating cadence, cross-functional execution, and decision support that actually move a company. Industry-agnostic, and AI-native — I read the technology well enough to build with it, not just talk about it.</p>
+  <div class="kick">Chief of Staff · Strategy &amp; Operations · Program &amp; Project Management · Consulting</div>
+  <h1 class="hero-name">Kyle <span class="last">Littlejohn</span></h1>
+  <p class="tag">The operator senior leaders trust to turn an ambiguous mandate into a <span class="grad">measurable result</span>.</p>
+  <p class="lede">For over a decade I've worked alongside founders and the C-suite as the person who builds the plan, the operating cadence, and the reporting that move a company forward. I work across industries, and I build with AI directly: fluent enough in the technology to put it to work, not just talk about it.</p>
   <div class="cta">
-    <a class="btn primary" href="#why">Why Kyle ↓</a>
-    <a class="btn ghost" href="assets/Kyle-Littlejohn-Resume.pdf" target="_blank" rel="noopener">📄 Resume</a>
-    <a class="btn ghost" href="https://www.linkedin.com/in/kyle-littlejohn-" target="_blank" rel="noopener">LinkedIn</a>
-    <a class="btn ghost" href="https://github.com/khlittlejohn-hue/executive-office" target="_blank" rel="noopener">GitHub</a>
-    <a class="btn ghost" href="mailto:khlittlejohn@gmail.com">Email</a>
+    <a class="btn primary" href="#cases">See the work</a>
+    <a class="btn ghost" href="assets/Kyle-Littlejohn-Resume.pdf" target="_blank" rel="noopener">Resume</a>
+    <a class="btn ghost" href="#contact">Get in touch</a>
   </div>
 </div></header>
 
+<section id="help" class="reveal"><div class="wrap">
+  <h2>How can I help?</h2>
+  <div class="help">
+    <a href="#experience">
+      <span class="hic">🧭</span>
+      <span class="ht">You're hiring</span>
+      <span class="hd">Chief of Staff, Strategy &amp; Operations, PMO, or transformation. See the track record and the lanes I fit.</span>
+      <span class="harrow">View experience →</span>
+    </a>
+    <a href="#work">
+      <span class="hic">⚙️</span>
+      <span class="ht">You're curious about the AI system</span>
+      <span class="hd">I designed and run a production multi-agent operating system. Explore how it's built.</span>
+      <span class="harrow">Explore the system →</span>
+    </a>
+    <a href="#contact">
+      <span class="hic">✉️</span>
+      <span class="ht">You'd like to talk</span>
+      <span class="hd">Have a hard operating problem, or just want to connect? Reach out — I read every message.</span>
+      <span class="harrow">Get in touch →</span>
+    </a>
+  </div>
+</div></section>
+
 <section id="why" class="reveal"><div class="wrap">
-  <h2>Why Kyle Littlejohn</h2>
+  <h2>Why work with me</h2>
   <div class="why">
-    <div class="c"><div class="ic">🎯</div><b>The operator execs trust</b><span>I'm the person a founder or C-suite leader hands the ambiguous mandate to. I set the cadence, align the people who don't report to me, and drive it to a measurable result.</span></div>
-    <div class="c"><div class="ic">🤖</div><b>AI-first, and proven</b><span>I don't just use AI — I architected a production, human-in-the-loop, 60+ agent system that runs my own work. Rare credibility in both technical and executive rooms.</span></div>
-    <div class="c"><div class="ic">📈</div><b>Proof, not a pitch</b><span>$280K → $2.1M account growth. A $350M → $1.75B scale. ~30% cycle-time cut without authority. The outcomes are real, and they're specific.</span></div>
+    <div class="c"><div class="ic">🎯</div><b>The operator execs trust</b><span>Founders and C-suite leaders hand me the ambiguous mandate. I set the cadence, align people who don't report to me, and drive it to a result.</span></div>
+    <div class="c"><div class="ic">⚙️</div><b>AI-native, and proven</b><span>I don't just use AI. I designed and run a production, human-in-the-loop multi-agent system that handles my own operation — equally at home in the technical room and the executive one.</span></div>
+    <div class="c"><div class="ic">📈</div><b>Specific, real outcomes</b><span>A $350M to $1.75B scale. An account grown $280K to $2.1M. Roughly 30% faster execution cycles, with no direct authority. The proof is in the record below.</span></div>
   </div>
 </div></section>
 
@@ -229,7 +291,7 @@
       <div class="cs">
         <div class="row"><span class="k">Challenge</span><span class="v">Prove AI-first operating isn't a talking point — by running my own work on a real, auditable system.</span></div>
         <div class="row"><span class="k">Built</span><span class="v">A coordinated <b>60+ agent, 12-department</b> system with a <b>14-stage QC pipeline</b> and a human on every decision that leaves the system. Public and fully documented.</span></div>
-        <div class="row"><span class="k">Outcome</span><span class="v">Rare credibility in both technical and executive rooms — explore it live in the map below, or read the source.</span></div>
+        <div class="row"><span class="k">Outcome</span><span class="v">Credibility in both the technical and the executive room. Explore it live in the map below, or read the source.</span></div>
       </div>
       <div class="cta-row">
         <a class="mini" href="https://github.com/khlittlejohn-hue/executive-office" target="_blank" rel="noopener">View the repo on GitHub ↗</a>
