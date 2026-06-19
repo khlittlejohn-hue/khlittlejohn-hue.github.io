@@ -683,7 +683,30 @@
     <a class="btn ghost" href="https://github.com/khlittlejohn-hue/executive-office" target="_blank" rel="noopener">GitHub</a>
     <a class="btn ghost" href="assets/Kyle-Littlejohn-Resume.pdf" target="_blank" rel="noopener">📄 Resume</a>
   </div>
+  <form id="contactForm" class="cform" novalidate>
+    <div class="cform-row">
+      <input name="name" type="text" placeholder="Your name" required autocomplete="name">
+      <input name="email" type="email" placeholder="Your email" required autocomplete="email">
+    </div>
+    <input name="subject" type="text" placeholder="Subject">
+    <textarea name="message" rows="4" placeholder="Your message" required></textarea>
+    <div class="cform-foot">
+      <button type="submit" class="btn primary">Send message</button>
+      <span id="cformMsg" class="cform-msg" role="status" aria-live="polite"></span>
+    </div>
+  </form>
 </div></section>
+<style>
+  .cform{margin-top:26px;max-width:620px;display:flex;flex-direction:column;gap:12px}
+  .cform-row{display:flex;gap:12px}
+  .cform input,.cform textarea{flex:1;width:100%;background:var(--panel);border:1px solid var(--line);border-radius:10px;
+    padding:12px 14px;color:var(--ink);font-family:inherit;font-size:14px;transition:border-color .15s}
+  .cform input:focus,.cform textarea:focus{outline:none;border-color:#33455c}
+  .cform textarea{resize:vertical;min-height:96px}
+  .cform-foot{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .cform-msg{font-size:13px;color:var(--ink2)}
+  @media(max-width:760px){.cform-row{flex-direction:column}}
+</style>
 
 <footer><div class="wrap">Kyle Littlejohn · New York, NY · Built and run on systems thinking.</div></footer>
 <script>
@@ -764,6 +787,37 @@
   b.addEventListener('click',function(){
     if(f.hasAttribute('hidden')){f.removeAttribute('hidden');b.setAttribute('aria-expanded','true');b.textContent='✕ Hide preview';f.scrollIntoView({behavior:'smooth',block:'nearest'});}
     else{f.setAttribute('hidden','');b.setAttribute('aria-expanded','false');b.textContent='👁 Preview right here';}
+  });
+})();
+</script>
+<script>
+/* ===== contact form -> Kyle's Gmail =====
+   Direct-to-inbox: paste your free Web3Forms access key below (get one in 60s at https://web3forms.com,
+   enter khlittlejohn@gmail.com, they email you a key). Until then, the form composes a message to your
+   Gmail via the visitor's mail client (still lands in your inbox when they hit send). */
+(function(){
+  var WEB3FORMS_KEY=''; /* <-- paste key here to enable serverless direct delivery */
+  var GMAIL='khlittlejohn@gmail.com';
+  var form=document.getElementById('contactForm'); if(!form)return;
+  var msg=document.getElementById('cformMsg');
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(!form.checkValidity()){msg.textContent='Please fill in your name, a valid email, and a message.';return;}
+    var fd=new FormData(form);
+    var subject=fd.get('subject')||('Website message from '+fd.get('name'));
+    if(WEB3FORMS_KEY){
+      fd.append('access_key',WEB3FORMS_KEY); fd.set('subject',subject); fd.append('from_name',fd.get('name'));
+      msg.textContent='Sending…';
+      fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Accept':'application/json'},body:fd})
+        .then(function(r){return r.json();})
+        .then(function(j){ if(j.success){form.reset();msg.textContent='Thanks — your message is on its way to Kyle.';}
+          else{msg.textContent='Hmm, that failed. Email me directly at '+GMAIL+'.';} })
+        .catch(function(){msg.textContent='Network issue. Email me directly at '+GMAIL+'.';});
+    } else {
+      var body='From: '+fd.get('name')+' <'+fd.get('email')+'>\n\n'+fd.get('message');
+      window.location.href='mailto:'+GMAIL+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
+      msg.textContent='Opening your email app to send to Kyle…';
+    }
   });
 })();
 </script>
