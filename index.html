@@ -15,6 +15,32 @@
 <meta name="twitter:title" content="Kyle Littlejohn · Chief of Staff & Strategy / Operations Leader">
 <meta name="twitter:description" content="The operator Senior Leaders trust to turn an ambiguous mandate into a measurable result. Strategy, operations, program management, and consulting, across industries and AI-native.">
 <meta name="twitter:image" content="https://khlittlejohn-hue.github.io/assets/website-card.png">
+<link rel="canonical" href="https://khlittlejohn-hue.github.io/">
+<meta name="author" content="Kyle Littlejohn">
+<meta name="robots" content="index, follow, max-image-preview:large">
+
+<!-- Structured data: lets Google render a rich knowledge result for Kyle. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Kyle Littlejohn",
+  "url": "https://khlittlejohn-hue.github.io/",
+  "image": "https://khlittlejohn-hue.github.io/assets/kyle.jpg",
+  "jobTitle": "Chief of Staff / Strategy & Operations Leader",
+  "description": "Operator who turns ambiguous executive mandates into measurable results. Chief of Staff, Strategy & Operations, Program Management, and Consulting, across industries and AI-native.",
+  "email": "mailto:khlittlejohn@gmail.com",
+  "knowsAbout": ["Chief of Staff", "Strategy & Operations", "Program Management", "Business Transformation", "AI Systems", "KPI & Reporting Infrastructure"],
+  "alumniOf": {
+    "@type": "CollegeOrUniversity",
+    "name": "College of William & Mary"
+  },
+  "sameAs": [
+    "https://www.linkedin.com/in/kyle-littlejohn-",
+    "https://github.com/khlittlejohn-hue"
+  ]
+}
+</script>
 
 <!-- No flash of wrong theme: set the theme attribute before first paint. -->
 <script>
@@ -73,6 +99,11 @@
   h1,h2,h3{text-wrap:balance}
   p{text-wrap:pretty}
   ::selection{background:var(--gold);color:var(--gold-fill-ink)}
+  .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+  .skip-link{position:fixed;top:-60px;left:14px;z-index:200;background:var(--gold);color:var(--gold-fill-ink);
+    font-family:var(--sans);font-weight:600;font-size:14px;padding:10px 16px;border-radius:9px;text-decoration:none;
+    transition:top .2s ease;box-shadow:0 8px 24px -8px rgba(0,0,0,.5)}
+  .skip-link:focus{top:14px;outline:none}
 
   /* atmosphere: aurora wash + film grain */
   #aurora{position:fixed;inset:0;z-index:0;pointer-events:none;
@@ -181,6 +212,24 @@
   .why .c .ic{font-size:22px;margin-bottom:12px}
   .why .c b{display:block;font-size:16px;margin-bottom:7px;font-weight:600}
   .why .c span{color:var(--ink2);font-size:14px}
+
+  /* Industries credibility band: seamless marquee, edge-faded, pauses on hover */
+  .industries{padding-top:14px;padding-bottom:14px}
+  .ind-eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:1.4px;text-transform:uppercase;
+    color:var(--ink3);text-align:center;margin-bottom:18px}
+  .ind-marquee{position:relative;overflow:hidden;
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);
+    mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+  .ind-track{display:flex;width:max-content;gap:0;animation:indScroll 34s linear infinite;will-change:transform}
+  .ind-marquee:hover .ind-track{animation-play-state:paused}
+  .ind-item{display:inline-flex;align-items:center;gap:13px;padding:0 30px;white-space:nowrap;
+    font-family:var(--serif);font-size:22px;font-weight:500;color:var(--ink2);letter-spacing:-.2px}
+  .ind-item::after{content:"";width:5px;height:5px;border-radius:50%;
+    background:color-mix(in oklab,var(--gold) 70%,transparent);margin-left:30px}
+  @keyframes indScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  @media(prefers-reduced-motion:reduce){.ind-track{animation:none;flex-wrap:wrap;justify-content:center;width:auto}
+    .ind-marquee{-webkit-mask-image:none;mask-image:none}}
+  @media(max-width:760px){.ind-item{font-size:18px;padding:0 20px}.ind-item::after{margin-left:20px}}
 
   /* help / intent cards */
   .help{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:4px}
@@ -309,12 +358,12 @@
     @keyframes rsPulse{0%{box-shadow:0 0 0 0 color-mix(in oklab,var(--green) 55%,transparent)}70%{box-shadow:0 0 0 6px transparent}100%{box-shadow:0 0 0 0 transparent}}
     @media(prefers-reduced-motion:reduce){.rail-status .rs-dot{animation:none}}
     nav .rail-name{font-size:31px;font-weight:700;letter-spacing:-.8px;line-height:1.0;color:var(--ink)}
-    /* one-line value hook under the name — the rail now sells, not just labels */
+    /* one-line value hook under the name: the rail now sells, not just labels */
     .rail-value{display:block;margin-top:12px;font-family:var(--serif);font-size:14.5px;font-weight:500;
       line-height:1.42;color:var(--ink);max-width:232px}
     .rail-value .rv-accent{color:var(--accent-bright);font-weight:600}
     :root[data-theme="light"] .rail-value .rv-accent{color:var(--accent-deep)}
-    /* title line: BOLD, brighter, readable — not faded grey mono */
+    /* title line: BOLD, brighter, readable, not faded grey mono */
     .rail-role{color:var(--ink2);font-weight:600;font-size:11px;line-height:1.95;margin-top:16px;font-family:var(--mono);letter-spacing:.3px;max-width:238px}
     .rail-role b{color:var(--ink);font-weight:700}
     nav .links{margin:30px 0 0 0;flex-direction:column;align-items:flex-start;gap:14px;font-size:14px;position:relative;padding-left:16px}
@@ -339,6 +388,7 @@
 </style>
 </head>
 <body>
+<a class="skip-link" href="#help">Skip to content</a>
 <div id="grid" aria-hidden="true"></div>
 <div id="aurora" aria-hidden="true"></div>
 <div id="spotlight" aria-hidden="true"></div>
@@ -347,7 +397,7 @@
 
 <nav><div class="wrap">
   <a class="brand" href="#top" aria-label="Kyle Littlejohn, home">
-    <img class="rail-portrait" src="assets/kyle.jpg" alt="Kyle Littlejohn" width="212" height="212">
+    <img class="rail-portrait" src="assets/kyle.jpg" alt="Kyle Littlejohn" width="212" height="212" fetchpriority="high" decoding="async">
     <span class="rail-status"><span class="rs-dot" aria-hidden="true"></span>Open to roles</span>
     <span class="rail-name">Kyle Littlejohn</span>
     <span class="rail-value">Turning an ambiguous mandate into a <span class="rv-accent">measurable result</span>.</span>
@@ -429,6 +479,25 @@
     <div class="c"><div class="ic">⚙️</div><b>AI-native, and proven</b><span>I don't just use AI. I designed and run a production, human-in-the-loop multi-agent system that handles my own operation, equally at home in the technical room and the executive one.</span></div>
     <div class="c"><div class="ic">📈</div><b>Specific, real outcomes</b><span>A $350M to $1.75B scale. An account grown $280K to $2.1M. Roughly 30% faster execution cycles, with no direct authority. The proof is in the record below.</span></div>
   </div>
+</div></section>
+
+<section class="industries reveal" aria-label="Industries"><div class="wrap">
+  <p class="ind-eyebrow">Operating experience across</p>
+  <div class="ind-marquee" aria-hidden="true">
+    <div class="ind-track">
+      <span class="ind-item">Healthcare</span>
+      <span class="ind-item">Media &amp; Entertainment</span>
+      <span class="ind-item">Biotech</span>
+      <span class="ind-item">SaaS</span>
+      <span class="ind-item">Financial Services</span>
+      <span class="ind-item">Healthcare</span>
+      <span class="ind-item">Media &amp; Entertainment</span>
+      <span class="ind-item">Biotech</span>
+      <span class="ind-item">SaaS</span>
+      <span class="ind-item">Financial Services</span>
+    </div>
+  </div>
+  <p class="visually-hidden">Healthcare, Media and Entertainment, Biotech, SaaS, and Financial Services.</p>
 </div></section>
 
 <section id="cases" class="reveal"><div class="wrap">
@@ -627,7 +696,7 @@
   <p class="lead-p" style="margin-bottom:22px">I work in public: the same systems thinking, legible enough to read. These cards are pulled <b>live from GitHub</b> when you load the page.</p>
   <div class="gh-head">
     <a class="gh-profile" href="https://github.com/khlittlejohn-hue" target="_blank" rel="noopener">
-      <img src="assets/kyle.jpg" alt="@khlittlejohn-hue" id="ghAvatar" width="46" height="46">
+      <img src="assets/kyle.jpg" alt="@khlittlejohn-hue" id="ghAvatar" width="46" height="46" loading="lazy" decoding="async">
       <div><b>@khlittlejohn-hue</b><span id="ghMeta">building in public on GitHub ↗</span></div>
     </a>
     <div class="gh-stats" id="ghStats">
@@ -1230,7 +1299,7 @@
 })();
 </script>
 <script>
-/* hero "Last shipped" tile — real push time from the executive-office repo */
+/* hero "Last shipped" tile: real push time from the executive-office repo */
 (function(){
   var el=document.getElementById('hpLastPush'); if(!el||!window.fetch) return;
   function ago(d){var s=(Date.now()-new Date(d).getTime())/1000;
