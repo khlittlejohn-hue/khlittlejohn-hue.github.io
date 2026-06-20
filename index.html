@@ -280,41 +280,64 @@
 </style>
 <style>
   /* ===== desktop side rail ===== */
+  /* rail availability pill + value line: hidden by default, surfaced in the desktop rail */
+  .rail-status,.rail-value{display:none}
   @media(min-width:980px){
-    body{padding-left:272px}
-    #progress{left:272px;width:calc(100% - 272px)}
-    nav{position:fixed;left:0;top:0;bottom:0;height:100vh;width:272px;border-bottom:none;border-right:1px solid var(--line);
-      background:var(--panel2);backdrop-filter:none}
-    nav .wrap{flex-direction:column;align-items:center;height:100%;gap:0;padding:46px 26px 40px;overflow-y:auto;max-width:none}
+    body{padding-left:300px}
+    #progress{left:300px;width:calc(100% - 300px)}
+    nav{position:fixed;left:0;top:0;bottom:0;height:100vh;width:300px;border-bottom:none;border-right:1px solid var(--line);
+      background:linear-gradient(180deg, color-mix(in oklab,var(--accent) 6%,var(--panel2)), var(--panel2) 44%);backdrop-filter:none}
+    nav .wrap{flex-direction:column;align-items:center;height:100%;gap:0;padding:48px 28px 36px;overflow-y:auto;max-width:none}
     nav .brand{flex-direction:column;align-items:center;text-align:center;gap:0;width:100%}
-    /* portrait: larger, centered, refined ring + ambient glow ring */
-    nav .brand .rail-portrait{width:188px;height:188px;border-radius:50%;border:2.5px solid color-mix(in oklab,var(--accent) 70%,transparent);object-fit:cover;
-      box-shadow:0 0 0 7px color-mix(in oklab, var(--accent) 12%, transparent), 0 18px 44px -18px color-mix(in oklab,var(--accent) 55%,transparent);
-      margin-bottom:22px}
-    nav .rail-name{font-size:27px;font-weight:700;letter-spacing:-.6px;line-height:1.02}
-    .rail-role{color:var(--ink);font-weight:600;font-size:11px;line-height:1.7;margin-top:13px;font-family:var(--mono);letter-spacing:.1px}
-    nav .links{margin:32px 0 0 0;flex-direction:column;align-items:flex-start;gap:15px;font-size:14.5px;position:relative;padding-left:18px;width:100%;font-weight:700;letter-spacing:.1px}
-    nav .links a{transition:color .15s ease,transform .18s cubic-bezier(.2,.9,.3,1);color:var(--ink2)}
-    nav .links a:hover{transform:translateX(4px)}
-    nav .links a.active{color:var(--accent-bright);font-weight:700}
-    /* numbered markers (Brittany Chiang): counter on the rail links, skipping the indicator span */
-    nav .links{counter-reset:railnav}
+    /* portrait: BIG, centered, double refined ring + ambient glow */
+    nav .brand .rail-portrait{width:212px;height:212px;border-radius:50%;border:3px solid color-mix(in oklab,var(--accent) 80%,transparent);object-fit:cover;
+      box-shadow:0 0 0 1px color-mix(in oklab,#fff 10%,transparent),
+                 0 0 0 9px color-mix(in oklab, var(--accent) 13%, transparent),
+                 0 22px 52px -16px color-mix(in oklab,var(--accent) 60%,transparent);
+      margin-bottom:24px}
+    /* available-for-work pill: lifts the rail from CV to "live operator" */
+    .rail-status{display:inline-flex;align-items:center;gap:7px;margin-bottom:17px;
+      font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:1.1px;text-transform:uppercase;
+      color:var(--green);padding:5px 12px;border-radius:999px;
+      border:1px solid color-mix(in oklab,var(--green) 38%,var(--line));background:color-mix(in oklab,var(--green) 9%,transparent)}
+    .rail-status .rs-dot{width:7px;height:7px;border-radius:50%;background:var(--green);
+      box-shadow:0 0 0 0 color-mix(in oklab,var(--green) 60%,transparent);animation:rsPulse 2.6s ease-out infinite}
+    @keyframes rsPulse{0%{box-shadow:0 0 0 0 color-mix(in oklab,var(--green) 55%,transparent)}70%{box-shadow:0 0 0 6px transparent}100%{box-shadow:0 0 0 0 transparent}}
+    @media(prefers-reduced-motion:reduce){.rail-status .rs-dot{animation:none}}
+    nav .rail-name{font-size:31px;font-weight:700;letter-spacing:-.8px;line-height:1.0;color:var(--ink)}
+    /* one-line value hook under the name — the rail now sells, not just labels */
+    .rail-value{display:block;margin-top:12px;font-family:var(--serif);font-size:14.5px;font-weight:500;
+      line-height:1.42;color:var(--ink);max-width:232px}
+    .rail-value .rv-accent{color:var(--accent-bright);font-weight:600}
+    :root[data-theme="light"] .rail-value .rv-accent{color:var(--accent-deep)}
+    /* title line: BOLD, brighter, readable — not faded grey mono */
+    .rail-role{color:var(--ink2);font-weight:600;font-size:11px;line-height:1.95;margin-top:16px;font-family:var(--mono);letter-spacing:.3px;max-width:238px}
+    .rail-role b{color:var(--ink);font-weight:700}
+    nav .links{margin:30px 0 0 0;flex-direction:column;align-items:flex-start;gap:3px;font-size:14.5px;position:relative;padding-left:0;width:100%;font-weight:700;letter-spacing:.1px;counter-reset:railnav}
+    nav .links a{display:flex;align-items:center;width:100%;padding:9px 12px;border-radius:9px;
+      transition:color .15s ease,background .18s ease,transform .18s cubic-bezier(.2,.9,.3,1);color:var(--ink2);font-weight:700}
+    nav .links a:hover{transform:translateX(3px);color:var(--ink);background:color-mix(in oklab,var(--accent) 7%,transparent)}
+    nav .links a.active{color:var(--accent-bright);font-weight:700;background:color-mix(in oklab,var(--accent) 12%,transparent)}
+    :root[data-theme="light"] nav .links a.active{color:var(--accent-deep)}
+    /* numbered markers (Brittany Chiang) — bolder, accent on active */
     nav .links a::before{counter-increment:railnav;content:counter(railnav,decimal-leading-zero);
-      font-family:var(--mono);font-size:10.5px;font-weight:600;color:var(--ink3);margin-right:11px;
-      letter-spacing:.5px;transition:color .15s}
-    nav .links a:hover::before,nav .links a.active::before{color:var(--accent-bright)}
-    .nav-indicator{position:absolute;left:0;top:0;width:3px;height:18px;border-radius:3px;
+      font-family:var(--mono);font-size:11px;font-weight:700;color:var(--ink3);margin-right:13px;
+      letter-spacing:.5px;transition:color .15s;flex:0 0 auto}
+    nav .links a:hover::before{color:var(--ink2)}
+    nav .links a.active::before{color:var(--accent-bright)}
+    :root[data-theme="light"] nav .links a.active::before{color:var(--accent-deep)}
+    .nav-indicator{position:absolute;left:0;top:0;width:3px;height:34px;border-radius:3px;
       background:linear-gradient(var(--grad-a),var(--grad-b));opacity:0;
       transform:translateY(0);transition:transform .34s cubic-bezier(.34,1.2,.3,1),opacity .25s ease;
-      box-shadow:0 0 12px color-mix(in oklab,var(--accent) 65%,transparent)}
+      box-shadow:0 0 14px color-mix(in oklab,var(--accent) 70%,transparent)}
     .nav-tools{margin-top:26px}
-    .rail-contact{margin-top:auto;padding-top:24px;display:flex;flex-direction:column;gap:11px;font-size:12.5px;font-family:var(--mono)}
+    .rail-contact{margin-top:auto;padding-top:24px;display:flex;flex-direction:column;gap:11px;font-size:12.5px;font-family:var(--mono);font-weight:500}
     .rail-contact a{color:var(--ink2);text-decoration:none;transition:color .15s}
-    .rail-contact a:hover{color:var(--gold-ink)}
+    .rail-contact a:hover{color:var(--accent-bright)}
     .kbd-pill kbd{display:inline}
   }
   @media(max-width:979px){
-    .rail-role,.rail-contact{display:none}
+    .rail-role,.rail-contact,.rail-status,.rail-value{display:none}
     nav .nav-tools{margin-left:auto}
   }
   /* on desktop, the rail carries the identity; the hero leads with the value prop */
@@ -329,9 +352,11 @@
 
 <nav><div class="wrap">
   <a class="brand" href="#top" aria-label="Kyle Littlejohn, home">
-    <img class="rail-portrait" src="assets/kyle.jpg" alt="Kyle Littlejohn" width="168" height="168">
+    <img class="rail-portrait" src="assets/kyle.jpg" alt="Kyle Littlejohn" width="212" height="212">
+    <span class="rail-status"><span class="rs-dot" aria-hidden="true"></span>Open to roles</span>
     <span class="rail-name">Kyle Littlejohn</span>
-    <span class="rail-role">Chief of Staff · Strategy &amp; Operations · Program &amp; Project Management · Consulting</span>
+    <span class="rail-value">Turning an ambiguous mandate into a <span class="rv-accent">measurable result</span>.</span>
+    <span class="rail-role"><b>Chief of Staff</b> · <b>Strategy &amp; Operations</b> · <b>Program &amp; Project Management</b> · <b>Consulting</b></span>
   </a>
   <span class="links">
     <span class="nav-indicator" aria-hidden="true"></span>
