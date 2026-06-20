@@ -410,7 +410,7 @@
   </a>
   <span class="links">
     <span class="nav-indicator" aria-hidden="true"></span>
-    <a href="#help">How I help</a><a href="#cases">Highlights</a><a href="#arc">Career Arc</a><a href="#work">The System</a><a href="#opensource">Building</a><a href="#experience">Experience</a><a href="#education">Education</a><a href="#beyond">Beyond</a><a href="#contact">Contact</a>
+    <a href="#help">How I help</a><a href="#cases">Highlights</a><a href="#range">Operating range</a><a href="#arc">Career Arc</a><a href="#work">The System</a><a href="#opensource">Building</a><a href="#experience">Experience</a><a href="#education">Education</a><a href="#beyond">Beyond</a><a href="#contact">Contact</a>
   </span>
   <span class="nav-tools">
     <button class="kbd-pill" id="cmdkOpen" type="button" aria-label="Open command menu"><span>Menu</span><kbd>⌘K</kbd></button>
@@ -684,6 +684,144 @@
     es.forEach(function(en){ if(en.isIntersecting){ arc.classList.add('lit'); io.disconnect(); } });
   },{threshold:.22});
   io.observe(arc);
+})();
+</script>
+
+<style>
+  /* ===== Operating Range: interactive lane / capability matrix ===== */
+  .range-intro{max-width:680px;margin-bottom:26px}
+  .or{display:grid;grid-template-columns:.92fr 1.08fr;gap:18px;align-items:stretch}
+  /* lane selector column */
+  .or-lanes{display:flex;flex-direction:column;gap:10px}
+  .or-lane{position:relative;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:15px;
+    padding:16px 18px;color:var(--ink2);cursor:pointer;font-family:inherit;
+    transition:border-color .18s,transform .12s,box-shadow .18s;overflow:hidden}
+  .or-lane::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;
+    background:linear-gradient(var(--grad-a),var(--grad-b));transform:scaleY(0);transform-origin:50% 0;
+    transition:transform .28s cubic-bezier(.2,.8,.3,1)}
+  .or-lane:hover{border-color:color-mix(in oklab,var(--gold) 30%,var(--line));transform:translateY(-2px)}
+  .or-lane.on{border-color:color-mix(in oklab,var(--gold) 55%,var(--line));
+    box-shadow:0 16px 38px -26px color-mix(in oklab,var(--gold) 60%,transparent)}
+  .or-lane.on::before{transform:scaleY(1)}
+  .or-lane .or-n{font-family:var(--mono);font-size:10.5px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink3)}
+  .or-lane .or-t{display:block;font-family:var(--serif);font-size:17.5px;font-weight:600;letter-spacing:-.3px;color:var(--ink);margin-top:5px;line-height:1.15}
+  .or-lane.on .or-t{color:var(--gold-ink)}
+  .or-lane .or-s{display:block;font-size:12.5px;color:var(--ink2);margin-top:6px;line-height:1.45}
+  /* detail panel */
+  .or-panel{background:linear-gradient(160deg,color-mix(in oklab,var(--panel) 55%,transparent),var(--panel2));
+    border:1px solid var(--line);border-radius:18px;padding:24px 24px 22px;min-height:300px;
+    box-shadow:inset 0 1px 0 color-mix(in oklab,#fff 6%,transparent)}
+  :root[data-theme="light"] .or-panel{box-shadow:inset 0 1px 0 #fff}
+  .or-eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink3)}
+  .or-head{font-family:var(--serif);font-size:23px;font-weight:600;letter-spacing:-.4px;line-height:1.1;margin:8px 0 14px;
+    background:linear-gradient(100deg,var(--grad-a),var(--grad-b));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .or-caps{list-style:none;display:flex;flex-direction:column;gap:9px;margin:0 0 18px}
+  .or-caps li{position:relative;padding-left:24px;font-size:14.5px;color:var(--ink2);line-height:1.5}
+  .or-caps li::before{content:"▸";position:absolute;left:0;color:var(--gold-ink)}
+  .or-caps li b{color:var(--ink);font-weight:600}
+  .or-proof{display:flex;align-items:baseline;gap:14px;border-top:1px solid var(--line);padding-top:16px;flex-wrap:wrap}
+  .or-proof .or-num{font-family:var(--serif);font-size:32px;font-weight:600;letter-spacing:-1px;line-height:.9;white-space:nowrap;
+    font-variant-numeric:tabular-nums;
+    background:linear-gradient(100deg,var(--grad-a),var(--grad-b));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .or-proof .or-cap{font-size:13px;color:var(--ink2);line-height:1.4;flex:1;min-width:180px}
+  .or-proof .or-cap b{color:var(--ink);font-weight:600}
+  .or-link{display:inline-flex;align-items:center;gap:6px;margin-top:18px;font-family:var(--mono);font-size:12.5px;
+    color:var(--gold-ink);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .15s}
+  .or-link:hover{border-color:var(--gold)}
+  .or-swap{animation:orFade .32s ease}
+  @keyframes orFade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  @media(prefers-reduced-motion:reduce){.or-swap{animation:none}}
+  @media(max-width:760px){
+    .or{grid-template-columns:1fr;gap:12px}
+    .or-lanes{flex-direction:row;flex-wrap:wrap;gap:8px}
+    .or-lane{flex:1 1 46%;padding:13px 14px}
+    .or-lane .or-s{display:none}
+    .or-panel{min-height:0;padding:20px}
+  }
+</style>
+<section id="range" class="reveal"><div class="wrap">
+  <h2>Operating range</h2>
+  <p class="lead-p range-intro">One operator, four lanes hiring teams actually budget for. Pick a lane to see the capabilities I bring and the hardest real result behind each.</p>
+  <div class="or" id="opRange" aria-label="Operating range: capabilities by lane">
+    <div class="or-lanes" id="orLanes" role="tablist" aria-label="Operating lanes"></div>
+    <div class="or-panel" id="orPanel" aria-live="polite"></div>
+  </div>
+</div></section>
+<script>
+(function(){
+  var LANES=[
+    {k:"cos",tab:"cos",t:"Chief of Staff",
+      s:"Operating partner to the founder or C-suite.",
+      head:"The operator execs hand the ambiguous mandate to",
+      caps:[
+        "Own the <b>rhythm of business</b>: planning cadence, priorities, and the follow-through that ships.",
+        "Build the <b>board, QBR, and Steering Committee</b> materials leadership decides off of.",
+        "<b>Align people who don't report to me</b> and drive the mandate to a measurable result."
+      ],
+      num:"$350M→$1.75B",cap:"Operating partner to Kaseya leadership through the scale, across <b>14 acquisitions</b>."},
+    {k:"so",tab:"so",t:"Strategy & Operations",
+      s:"The operating system beneath fast-moving teams.",
+      head:"The cadence, models, and KPI spine that make execution measurable",
+      caps:[
+        "Stand up the <b>single source of truth</b> and operating cadence across a sprawling footprint.",
+        "Build the <b>scenario models, forecasts, and KPI infrastructure</b> that tie investment to outcomes.",
+        "Turn a strategy on a slide into an <b>operating plan</b> teams can actually run."
+      ],
+      num:"~65%",cap:"Digital revenue growth from the <b>AMC+ rollout</b>, across 16 business units and 32 channels."},
+    {k:"pmo",tab:"pmo",t:"PMO & Delivery",
+      s:"Complex cross-functional programs, end to end.",
+      head:"Governance, integration tracking, and the follow-through that ships",
+      caps:[
+        "Run <b>acquisition-integration tracking and reporting</b> across a live portfolio.",
+        "Drive <b>cross-functional rollouts</b> across Product, Engineering, QA, and Marketing.",
+        "Turn meetings into <b>accountability</b>, keeping every team aligned on priorities and tradeoffs."
+      ],
+      num:"$280K→$2.1M",cap:"Grew the AMC Networks account as the operating liaison to client leadership."},
+    {k:"con",tab:"con",t:"Consulting & Transformation",
+      s:"Strategy advisory aimed at P&L outcomes.",
+      head:"Change management for enterprise clients, measured in the P&L",
+      caps:[
+        "Lead <b>cost and process transformation</b> without compromising service levels.",
+        "Scope, renegotiate, and redesign <b>vendor and process initiatives</b> end to end.",
+        "Advise across <b>strategy, operations, and change management</b> for enterprise clients."
+      ],
+      num:"$1M+",cap:"Annualized savings on a biotech transformation (<b>bluebird bio</b>), SLA quality fully preserved."}
+  ];
+  var lanesEl=document.getElementById('orLanes'), panel=document.getElementById('orPanel');
+  if(!lanesEl||!panel) return;
+  var btns={}, active=null;
+  function render(k){
+    var d=LANES.filter(function(x){return x.k===k;})[0]; if(!d) return;
+    active=k;
+    for(var bk in btns){ var on=bk===k; btns[bk].classList.toggle('on',on); btns[bk].setAttribute('aria-selected',String(on)); btns[bk].tabIndex=on?0:-1; }
+    var caps=d.caps.map(function(c){return '<li>'+c+'</li>';}).join('');
+    panel.innerHTML='<div class="or-swap">'+
+      '<div class="or-eyebrow">'+d.t+'</div>'+
+      '<div class="or-head">'+d.head+'</div>'+
+      '<ul class="or-caps">'+caps+'</ul>'+
+      '<div class="or-proof"><span class="or-num">'+d.num+'</span><span class="or-cap">'+d.cap+'</span></div>'+
+      '<a class="or-link" href="#experience" data-tab="'+d.tab+'">See this lane in Experience &rarr;</a>'+
+      '</div>';
+    var link=panel.querySelector('.or-link');
+    if(link) link.addEventListener('click',function(){
+      var tab=document.querySelector('.tab[data-lane="'+d.tab+'"]');
+      if(tab) setTimeout(function(){tab.click();},420);
+    });
+  }
+  LANES.forEach(function(d,i){
+    var b=document.createElement('button');
+    b.type='button'; b.className='or-lane'; b.setAttribute('role','tab');
+    b.setAttribute('aria-controls','orPanel');
+    b.innerHTML='<span class="or-n">Lane 0'+(i+1)+'</span><span class="or-t">'+d.t+'</span><span class="or-s">'+d.s+'</span>';
+    b.addEventListener('click',function(){render(d.k);});
+    b.addEventListener('keydown',function(e){
+      var ks=LANES.map(function(x){return x.k;}); var idx=ks.indexOf(active);
+      if(e.key==='ArrowDown'||e.key==='ArrowRight'){e.preventDefault();var n=ks[(idx+1)%ks.length];render(n);btns[n].focus();}
+      else if(e.key==='ArrowUp'||e.key==='ArrowLeft'){e.preventDefault();var p=ks[(idx-1+ks.length)%ks.length];render(p);btns[p].focus();}
+    });
+    btns[d.k]=b; lanesEl.appendChild(b);
+  });
+  render('cos');
 })();
 </script>
 
@@ -1240,6 +1378,7 @@
   var CMDS=[
     {ic:'🧭',label:'How I help',kw:'help start',act:function(){go('#help');}},
     {ic:'★',label:'Engagement Highlights',kw:'work cases highlights results',act:function(){go('#cases');}},
+    {ic:'🎚',label:'Operating range · lanes & capabilities',kw:'range lanes capabilities skills chief of staff strategy operations pmo consulting',act:function(){go('#range');}},
     {ic:'📈',label:'Career Arc · timeline',kw:'career arc timeline history progression kaseya amc optimity aarete',act:function(){go('#arc');}},
     {ic:'⚙️',label:'The System · Executive Office',kw:'system ai agents map',act:function(){go('#work');}},
     {ic:'💻',label:'Building (live GitHub)',kw:'github open source building repos',act:function(){go('#opensource');}},
