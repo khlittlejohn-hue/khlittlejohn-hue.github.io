@@ -495,6 +495,8 @@
   .sysmap-stage svg{width:100%;height:auto;display:block;touch-action:manipulation}
   .sm-hint{position:absolute;left:14px;bottom:11px;font-size:10.5px;color:var(--ink3);letter-spacing:.3px;pointer-events:none;font-family:var(--mono)}
   .sm-line{stroke:var(--line);stroke-width:1.4;opacity:.55;transition:stroke .25s,opacity .25s,stroke-width .25s}
+  .sm-packet{pointer-events:none}
+  @media(prefers-reduced-motion:reduce){.sm-packet{display:none}}
   .sm-node{cursor:pointer;outline:none}
   .sm-node .dot{fill:var(--panel2);stroke:color-mix(in oklab,var(--blue) 25%,var(--line));stroke-width:1.6;transition:stroke .2s,stroke-width .2s,fill .2s}
   .sm-node .num{fill:var(--ink2);font-size:13px;font-weight:600;font-family:var(--mono);text-anchor:middle;dominant-baseline:central;pointer-events:none;transition:fill .2s}
@@ -769,15 +771,29 @@
 
   show("core",false);
 
+  // live "work routing": a packet dispatches from the core out along each edge
+  function addPackets(){
+    if(addPackets.done) return; addPackets.done=true;
+    DEPTS.forEach(function(d,i){
+      var ln=lineEls[d.k];
+      var p="M"+ln.getAttribute("x1")+" "+ln.getAttribute("y1")+" L"+ln.getAttribute("x2")+" "+ln.getAttribute("y2");
+      var begin=(1.0+i*0.42).toFixed(2)+"s";
+      var pk=el("circle",{r:2.7,fill:d.c,class:"sm-packet"});
+      pk.appendChild(el("animateMotion",{dur:"3.4s",repeatCount:"indefinite",begin:begin,calcMode:"linear",path:p}));
+      pk.appendChild(el("animate",{attributeName:"opacity",dur:"3.4s",repeatCount:"indefinite",begin:begin,keyTimes:"0;0.12;0.82;1",values:"0;0.95;0.95;0",calcMode:"linear"}));
+      svg.appendChild(pk);
+    });
+  }
+
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if(!reduce){
     sysmap.classList.add("anim");
     if("IntersectionObserver" in window){
       var io=new IntersectionObserver(function(es){
-        es.forEach(function(en){ if(en.isIntersecting){ sysmap.classList.add("lit"); io.disconnect(); } });
+        es.forEach(function(en){ if(en.isIntersecting){ sysmap.classList.add("lit"); addPackets(); io.disconnect(); } });
       },{threshold:.3});
       io.observe(sysmap);
-    } else { sysmap.classList.add("lit"); }
+    } else { sysmap.classList.add("lit"); addPackets(); }
   }
 })();
 </script>
