@@ -71,7 +71,8 @@
     /* ACCENT: warm gold brand. --accent aliases kept in sync with --gold. */
     --accent:#f5c451; --accent-bright:#ffe6a8; --accent-deep:#e0a92e; --accent-fill-ink:#1a1300;
     --gold:#f5c451; --gold-ink:#f5c451; --grad-a:#f5c451; --grad-b:#ffe6a8; --gold-fill-ink:#1a1300;
-    --blue:#5aa2ff; --green:#34d399; --violet:#a78bfa; --pink:#f472b6;
+    /* --blue retired: aliased to gold so nothing renders blue (zero-blue brand rule) */
+    --blue:var(--gold); --green:#34d399; --violet:#a78bfa; --pink:#f472b6;
     --card:linear-gradient(150deg,#17151d,#100f15);
     --card-flag:linear-gradient(150deg,#1b1608,#100f15); --flag-line:#3a3010;
     --grain-blend:overlay; --grain-op:.05;
@@ -397,7 +398,11 @@
 
 <nav><div class="wrap">
   <a class="brand" href="#top" aria-label="Kyle Littlejohn, home">
-    <img class="rail-portrait" src="assets/kyle.jpg" alt="Kyle Littlejohn" width="212" height="212" fetchpriority="high" decoding="async">
+    <!-- HEADSHOT HOOK: assets/kyle@2x.jpg loads on retina/large displays. It is currently a 1:1 copy of kyle.jpg (placeholder, NOT upscaled).
+         To ship the crisp portrait: overwrite assets/kyle@2x.jpg with a real >=600px square photo. No markup change needed. Do NOT fake-upscale the 100px source. -->
+    <img class="rail-portrait" src="assets/kyle.jpg"
+         srcset="assets/kyle.jpg 1x, assets/kyle@2x.jpg 2x"
+         alt="Kyle Littlejohn" width="212" height="212" fetchpriority="high" decoding="async">
     <span class="rail-status"><span class="rs-dot" aria-hidden="true"></span>Open to roles</span>
     <span class="rail-name">Kyle Littlejohn</span>
     <span class="rail-value">Turning an ambiguous mandate into a <span class="rv-accent">measurable result</span>.</span>
@@ -405,7 +410,7 @@
   </a>
   <span class="links">
     <span class="nav-indicator" aria-hidden="true"></span>
-    <a href="#help">How I help</a><a href="#cases">Highlights</a><a href="#work">The System</a><a href="#opensource">Building</a><a href="#experience">Experience</a><a href="#education">Education</a><a href="#beyond">Beyond</a><a href="#contact">Contact</a>
+    <a href="#help">How I help</a><a href="#cases">Highlights</a><a href="#arc">Career Arc</a><a href="#work">The System</a><a href="#opensource">Building</a><a href="#experience">Experience</a><a href="#education">Education</a><a href="#beyond">Beyond</a><a href="#contact">Contact</a>
   </span>
   <span class="nav-tools">
     <button class="kbd-pill" id="cmdkOpen" type="button" aria-label="Open command menu"><span>Menu</span><kbd>⌘K</kbd></button>
@@ -575,6 +580,113 @@
   </div>
 </div></section>
 
+<!-- ===== Career Arc — interactive scroll-revealed timeline ===== -->
+<section id="arc" class="reveal"><div class="wrap">
+  <h2>Career Arc</h2>
+  <p class="lead-p arc-lead">A decade-plus from consulting bench to operating partner of a $1.75B organization. The same job throughout: take the ambiguous mandate, build the operating spine, ship the result.</p>
+
+  <ol class="arc" id="arcLine" aria-label="Career timeline, earliest to most recent">
+
+    <li class="arc-step" data-era="Consulting">
+      <span class="arc-dot" aria-hidden="true"></span>
+      <div class="arc-card">
+        <span class="arc-era">Consulting · transformation</span>
+        <h3 class="arc-co">Optimity Advisors &amp; AArete</h3>
+        <p class="arc-role">Management consultant → strategy, operations, and change management for enterprise clients.</p>
+        <p class="arc-win">Led a biotech cost transformation on the <b>bluebird bio</b> engagement: <b>$1M+ in annualized savings</b> with SLA quality fully preserved.</p>
+      </div>
+    </li>
+
+    <li class="arc-step" data-era="Operating">
+      <span class="arc-dot" aria-hidden="true"></span>
+      <div class="arc-card">
+        <span class="arc-era">Operating cadence at scale</span>
+        <h3 class="arc-co">AMC Networks <span class="arc-via">via SOL Consulting</span></h3>
+        <p class="arc-role">Technical Project Manager → Senior Program Manager. The operating liaison to client leadership.</p>
+        <p class="arc-win">Ran the rhythm of business across <b>16 business units and 12 partners</b>, cut execution cycle time <b>~30%</b> with no direct authority, drove the AMC+ rollout to <b>~65% digital revenue growth</b>, and grew the account <b>$280K → $2.1M</b>.</p>
+      </div>
+    </li>
+
+    <li class="arc-step arc-flag" data-era="Operating partner">
+      <span class="arc-dot" aria-hidden="true"></span>
+      <div class="arc-card">
+        <span class="arc-era">Enterprise scale · operating partner</span>
+        <h3 class="arc-co">Kaseya</h3>
+        <p class="arc-role">Operating partner to leadership through the company's defining growth run.</p>
+        <p class="arc-win">Owned the planning cadence, the KPI spine, and the board-level materials a <b>$350M → $1.75B</b> organization ran on, across <b>14 acquisitions</b>.</p>
+      </div>
+    </li>
+
+    <li class="arc-step arc-now" data-era="Today">
+      <span class="arc-dot" aria-hidden="true"></span>
+      <div class="arc-card">
+        <span class="arc-era">Today · building in public</span>
+        <h3 class="arc-co">The Executive Office</h3>
+        <p class="arc-role">Proving AI-first operating is real, on an auditable system I run my own work on.</p>
+        <p class="arc-win">A <b>60+ agent, 12-department</b> system with a <b>14-stage QC pipeline</b> and a human on every decision that leaves it. Public and fully documented.</p>
+        <a class="arc-cta" href="#work">Explore the system below ↓</a>
+      </div>
+    </li>
+
+  </ol>
+</div></section>
+
+<style>
+  /* ===== Career Arc timeline ===== */
+  .arc-lead{max-width:680px;margin-bottom:30px}
+  .arc{list-style:none;position:relative;margin:0;padding:0}
+  /* the spine */
+  .arc::before{content:"";position:absolute;left:13px;top:6px;bottom:6px;width:2px;
+    background:linear-gradient(180deg,color-mix(in oklab,var(--gold) 55%,var(--line)),var(--line));border-radius:2px}
+  @media(min-width:760px){.arc::before{left:15px}}
+  .arc-step{position:relative;padding:0 0 26px 50px;min-height:30px}
+  .arc-step:last-child{padding-bottom:0}
+  @media(min-width:760px){.arc-step{padding-left:58px}}
+  .arc-dot{position:absolute;left:5px;top:4px;width:18px;height:18px;border-radius:50%;
+    background:var(--panel);border:2px solid color-mix(in oklab,var(--gold) 60%,var(--line));
+    box-shadow:0 0 0 4px var(--bg);transition:border-color .3s,box-shadow .3s,transform .3s;z-index:1}
+  @media(min-width:760px){.arc-dot{left:7px}}
+  .arc-flag .arc-dot{border-color:var(--gold);background:color-mix(in oklab,var(--gold) 22%,var(--panel))}
+  .arc-now .arc-dot{border-color:var(--gold);background:var(--gold);box-shadow:0 0 0 4px var(--bg),0 0 16px -2px color-mix(in oklab,var(--gold) 70%,transparent)}
+  .arc-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 22px;
+    box-shadow:inset 0 1px 0 color-mix(in oklab,#fff 6%,transparent);transition:border-color .25s,transform .25s,box-shadow .25s}
+  :root[data-theme="light"] .arc-card{box-shadow:inset 0 1px 0 #fff}
+  .arc-step:hover .arc-card{border-color:color-mix(in oklab,var(--gold) 30%,var(--line));transform:translateY(-2px)}
+  .arc-step:hover .arc-dot{transform:scale(1.12)}
+  .arc-flag .arc-card{background:var(--card-flag);border-color:var(--flag-line)}
+  .arc-era{display:inline-block;font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:1.4px;
+    text-transform:uppercase;color:var(--gold-ink);margin-bottom:9px}
+  .arc-co{font-family:var(--serif);font-size:22px;font-weight:600;letter-spacing:-.4px;line-height:1.1;margin-bottom:7px}
+  .arc-via{font-family:var(--mono);font-size:12px;font-weight:400;color:var(--ink3);letter-spacing:0;text-transform:none}
+  .arc-role{color:var(--ink2);font-size:14.5px;line-height:1.5;margin-bottom:10px}
+  .arc-win{color:var(--ink);font-size:15px;line-height:1.6}
+  .arc-win b{color:var(--ink);font-weight:600}
+  .arc-cta{display:inline-block;margin-top:14px;font-family:var(--mono);font-size:12.5px;color:var(--gold-ink);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .15s}
+  .arc-cta:hover{border-color:var(--gold)}
+  /* staged scroll reveal — each step slides + fades in turn */
+  .js .arc-step{opacity:0;transform:translateY(22px)}
+  .js .arc.lit .arc-step{opacity:1;transform:none;transition:opacity .55s ease,transform .55s cubic-bezier(.2,.7,.3,1)}
+  .js .arc.lit .arc-step:nth-child(1){transition-delay:.05s}
+  .js .arc.lit .arc-step:nth-child(2){transition-delay:.18s}
+  .js .arc.lit .arc-step:nth-child(3){transition-delay:.31s}
+  .js .arc.lit .arc-step:nth-child(4){transition-delay:.44s}
+  @media(prefers-reduced-motion:reduce){
+    .js .arc-step{opacity:1;transform:none;transition:none}
+    .arc-dot,.arc-card{transition:none}
+  }
+</style>
+<script>
+/* ===== Career Arc — fire the staged reveal once the timeline scrolls into view ===== */
+(function(){
+  var arc=document.getElementById('arcLine'); if(!arc) return;
+  if(!('IntersectionObserver' in window)){arc.classList.add('lit');return;}
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(en){ if(en.isIntersecting){ arc.classList.add('lit'); io.disconnect(); } });
+  },{threshold:.22});
+  io.observe(arc);
+})();
+</script>
+
 <style>
   /* ===== Interactive system map ===== */
   .sysmap{margin-top:20px;display:grid;grid-template-columns:1.15fr .85fr;gap:20px;align-items:stretch}
@@ -728,7 +840,7 @@
     roles:["Chief of Staff (aggregates all 12 departments)","Executive Assistant","Independent QA / Super-User Review"],
     note:"A human on every decision that leaves the system."};
   var DEPTS=[
-    {k:"careers",lbl:"Careers",name:"Careers & Job Search",c:"#5aa2ff",
+    {k:"careers",lbl:"Careers",name:"Careers & Job Search",c:"#e8954e",
       desc:"Sources roles, tailors resumes to each posting, runs a 14-stage quality-control pipeline, and drafts the outreach that follows.",
       roles:["Talent Sourcer","Resume Strategist","Application QC Reviewer","Outreach Writer"]},
     {k:"research",lbl:"Research",name:"Research & Intelligence",c:"#a78bfa",
@@ -740,7 +852,7 @@
     {k:"finance",lbl:"Finance",name:"Accounting & Finance",c:"#f5c451",
       desc:"Wealth strategy, an investment research desk, and the tax and portfolio operations behind them.",
       roles:["Wealth Strategist","Investment Analyst","Tax Operations","Portfolio Manager"]},
-    {k:"calendar",lbl:"Calendar",name:"Calendar & Scheduling",c:"#5aa2ff",
+    {k:"calendar",lbl:"Calendar",name:"Calendar & Scheduling",c:"#f472b6",
       desc:"Conflict resolution, focus-block protection, and a briefing packet ready before every meeting.",
       roles:["Scheduling Coordinator","Focus-Block Guardian","Briefing-Packet Builder","Conflict Resolver"]},
     {k:"email",lbl:"Email",name:"Email Operations",c:"#a78bfa",
@@ -755,7 +867,7 @@
     {k:"tools",lbl:"Tools",name:"Dashboard & Tools",c:"#f5c451",
       desc:"The internal tooling, data pipelines, and rendering layer the rest of the office runs on.",
       roles:["Tooling Engineer","Data-Pipeline Owner","Rendering Engineer","UX Designer"]},
-    {k:"learning",lbl:"Learning",name:"Learning & Improvement",c:"#5aa2ff",
+    {k:"learning",lbl:"Learning",name:"Learning & Improvement",c:"#ffd47e",
       desc:"Captures incoming tips, evaluates them on the merits, and implements the ones worth adopting.",
       roles:["Tip Capture","Evaluation Reviewer","Implementation Engineer","Adoption Tracker"]},
     {k:"marketing",lbl:"Marketing",name:"Social & Marketing",c:"#a78bfa",
@@ -1128,6 +1240,7 @@
   var CMDS=[
     {ic:'🧭',label:'How I help',kw:'help start',act:function(){go('#help');}},
     {ic:'★',label:'Engagement Highlights',kw:'work cases highlights results',act:function(){go('#cases');}},
+    {ic:'📈',label:'Career Arc · timeline',kw:'career arc timeline history progression kaseya amc optimity aarete',act:function(){go('#arc');}},
     {ic:'⚙️',label:'The System · Executive Office',kw:'system ai agents map',act:function(){go('#work');}},
     {ic:'💻',label:'Building (live GitHub)',kw:'github open source building repos',act:function(){go('#opensource');}},
     {ic:'🗂',label:'Experience',kw:'experience track record jobs',act:function(){go('#experience');}},
