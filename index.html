@@ -456,7 +456,7 @@
   </a>
   <span class="links">
     <span class="nav-indicator" aria-hidden="true"></span>
-    <a href="#help">How I help</a><a href="#cases">Highlights</a><a href="#range">Operating range</a><a href="#arc">Career Arc</a><a href="#work">The System</a><a href="#opensource">Building</a><a href="#experience">Experience</a><a href="#education">Education</a><a href="#beyond">Beyond</a><a href="#contact">Contact</a>
+    <a href="#help">How I help</a><a href="#cases">Highlights</a><a href="#range">Operating range</a><a href="#arc">Career Arc</a><a href="#now">Now</a><a href="#work">The System</a><a href="#opensource">Building</a><a href="#experience">Experience</a><a href="#education">Education</a><a href="#beyond">Beyond</a><a href="#contact">Contact</a>
   </span>
   <span class="nav-tools">
     <button class="kbd-pill" id="cmdkOpen" type="button" aria-label="Open command menu"><span>Menu</span><kbd>⌘K</kbd></button>
@@ -762,6 +762,87 @@
     </li>
 
   </ol>
+</div></section>
+
+<!-- ===== Now: forward-looking, what Kyle is building right now ===== -->
+<style>
+  /* ===== Now / What I'm building ===== */
+  #now .now-head{display:flex;align-items:baseline;flex-wrap:wrap;gap:12px}
+  #now .now-stamp{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11.5px;
+    letter-spacing:.04em;text-transform:uppercase;color:var(--gold-ink);
+    border:1px solid color-mix(in oklab,var(--gold) 32%,var(--line));border-radius:999px;padding:5px 11px;
+    background:color-mix(in oklab,var(--gold) 7%,transparent)}
+  #now .now-stamp .nd{width:7px;height:7px;border-radius:50%;background:var(--gold);
+    box-shadow:0 0 0 3px color-mix(in oklab,var(--gold) 22%,transparent);animation:nowPulse 2.6s ease-in-out infinite}
+  @keyframes nowPulse{0%,100%{opacity:1}50%{opacity:.42}}
+  @media(prefers-reduced-motion:reduce){#now .now-stamp .nd{animation:none}}
+  #now .now-lead{max-width:62ch;margin:14px 0 30px}
+  .now-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .now-card{position:relative;display:flex;flex-direction:column;background:var(--card);
+    border:1px solid var(--line);border-radius:16px;padding:24px 22px;
+    transition:transform .25s cubic-bezier(.2,.7,.3,1),border-color .25s,box-shadow .25s;overflow:hidden}
+  .now-card::before{content:"";position:absolute;inset:0 0 auto 0;height:2px;
+    background:linear-gradient(90deg,var(--grad-a),var(--grad-b));transform:scaleX(0);transform-origin:left;
+    transition:transform .35s cubic-bezier(.2,.7,.3,1)}
+  .now-card:hover{transform:translateY(-3px);border-color:color-mix(in oklab,var(--gold) 38%,var(--line));
+    box-shadow:0 16px 40px -24px color-mix(in oklab,var(--gold) 60%,transparent)}
+  .now-card:hover::before{transform:scaleX(1)}
+  .nc-tag{display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;
+    color:var(--gold-ink);margin-bottom:13px}
+  .nc-ic{font-size:22px;line-height:1;margin-bottom:13px}
+  .now-card h3{font-family:var(--serif);font-size:19px;font-weight:560;line-height:1.2;margin:0 0 9px;color:var(--ink)}
+  .now-card p{font-size:14.5px;line-height:1.62;color:var(--ink2);margin:0}
+  .nc-meta{margin-top:auto;padding-top:16px;font-family:var(--mono);font-size:11.5px;color:var(--ink3);
+    display:flex;align-items:center;gap:7px}
+  .nc-meta b{color:var(--ink2);font-weight:500}
+  .now-foot{display:flex;align-items:center;flex-wrap:wrap;gap:14px 18px;margin-top:26px;
+    padding:18px 22px;border:1px dashed color-mix(in oklab,var(--gold) 30%,var(--line));border-radius:14px;
+    background:color-mix(in oklab,var(--gold) 5%,transparent)}
+  .now-foot .nf-t{font-size:14.5px;color:var(--ink2);margin:0;flex:1 1 280px}
+  .now-foot .nf-t b{color:var(--ink);font-weight:600}
+  .now-foot .nf-cta{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:13px;
+    color:var(--accent-fill-ink);background:var(--gold);border-radius:10px;padding:10px 16px;text-decoration:none;
+    transition:filter .15s,transform .15s;white-space:nowrap}
+  .now-foot .nf-cta:hover{filter:brightness(1.06);transform:translateY(-1px)}
+  @media(max-width:880px){.now-grid{grid-template-columns:1fr}}
+</style>
+<section id="now" class="reveal"><div class="wrap">
+  <div class="now-head">
+    <h2>Now</h2>
+    <span class="now-stamp"><span class="nd" aria-hidden="true"></span>Updated June 2026</span>
+  </div>
+  <p class="lead-p now-lead">Open to a full-time operating seat, and building a practice around the same skill in parallel. Here is where my time is going right now.</p>
+
+  <div class="now-grid">
+    <article class="now-card">
+      <span class="nc-tag">Practice</span>
+      <span class="nc-ic" aria-hidden="true">🧭</span>
+      <h3>Fractional Chief of Staff</h3>
+      <p>Standing up the operating cadence, planning rhythm, and board and QBR reporting for founders and small leadership teams who need an operator before they need a full-time hire.</p>
+      <span class="nc-meta"><b>Engagement:</b> retained, part-time</span>
+    </article>
+
+    <article class="now-card">
+      <span class="nc-tag">Practice</span>
+      <span class="nc-ic" aria-hidden="true">⚙️</span>
+      <h3>AI-transformation consulting</h3>
+      <p>Helping teams put AI to work inside real operations rather than in a deck: where it earns its place, how to keep a human on every decision, and how to build it so it holds up. Drawn straight from running my own system.</p>
+      <span class="nc-meta"><b>Proof:</b> my own Executive Office, public</span>
+    </article>
+
+    <article class="now-card">
+      <span class="nc-tag">Building</span>
+      <span class="nc-ic" aria-hidden="true">🏗</span>
+      <h3>Productizing the Executive Office</h3>
+      <p>Turning the multi-agent operating system I run for myself into something other operators can stand up: 12 departments, 60+ agents, a 14-stage QC pipeline, and a human on every external move. Documented in the open.</p>
+      <span class="nc-meta"><b>Status:</b> active, in the open</span>
+    </article>
+  </div>
+
+  <div class="now-foot">
+    <p class="nf-t">The throughline is the same as it has always been: <b>take the ambiguous mandate, build the operating spine, ship the result.</b> If any of this fits a problem you have, the door is open.</p>
+    <a class="nf-cta" href="#contact">Start a conversation →</a>
+  </div>
 </div></section>
 
 <style>
@@ -1514,6 +1595,7 @@
     {ic:'📊',label:'Impact, visualized · metric board',kw:'impact metrics dashboard numbers results scale velocity savings chart',act:function(){go('#impact');}},
     {ic:'🎚',label:'Operating range · lanes & capabilities',kw:'range lanes capabilities skills chief of staff strategy operations pmo consulting',act:function(){go('#range');}},
     {ic:'📈',label:'Career Arc · timeline',kw:'career arc timeline history progression kaseya amc optimity aarete',act:function(){go('#arc');}},
+    {ic:'🟡',label:'Now · what I am building',kw:'now building fractional chief of staff ai transformation consulting practice productizing executive office current',act:function(){go('#now');}},
     {ic:'⚙️',label:'The System · Executive Office',kw:'system ai agents map',act:function(){go('#work');}},
     {ic:'💻',label:'Building (live GitHub)',kw:'github open source building repos',act:function(){go('#opensource');}},
     {ic:'🗂',label:'Experience',kw:'experience track record jobs',act:function(){go('#experience');}},
