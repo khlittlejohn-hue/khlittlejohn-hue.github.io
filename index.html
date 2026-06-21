@@ -252,6 +252,48 @@
     font-variant-numeric:tabular-nums}
   .proof .m .lbl{display:block;margin-top:10px;color:var(--ink2);font-size:13px;line-height:1.4}
 
+  /* ===== Impact, Visualized: interactive filterable metric board ===== */
+  .impact{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:26px 26px 28px;overflow:hidden}
+  .impact-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:20px}
+  .impact-head .ih-t{font-family:var(--serif);font-size:21px;font-weight:600;letter-spacing:-.3px;line-height:1.2}
+  .impact-head .ih-s{color:var(--ink2);font-size:13.5px;margin-top:4px;max-width:440px;line-height:1.45}
+  .impact-filters{display:flex;gap:8px;flex-wrap:wrap}
+  .impact-filters .ifb{background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:12.5px;font-weight:500;
+    color:var(--ink2);cursor:pointer;transition:color .15s,border-color .15s,background .15s;font-family:var(--mono);letter-spacing:.2px}
+  .impact-filters .ifb:hover{color:var(--ink);border-color:color-mix(in oklab, var(--gold) 35%, var(--line))}
+  .impact-filters .ifb[aria-pressed="true"]{background:var(--gold);color:var(--gold-fill-ink);border-color:var(--gold)}
+  .impact-filters .ifb:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+  .impact-board{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;align-items:stretch}
+  .impact-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  .ic{position:relative;display:flex;flex-direction:column;justify-content:space-between;text-decoration:none;color:inherit;
+    background:var(--panel2);border:1px solid var(--line);border-radius:15px;padding:17px 17px 15px;min-height:118px;
+    transition:opacity .35s ease,transform .35s cubic-bezier(.2,.7,.3,1),border-color .18s,box-shadow .2s}
+  .ic:hover{border-color:color-mix(in oklab, var(--gold) 38%, var(--line));transform:translateY(-3px);box-shadow:0 16px 34px -24px rgba(0,0,0,.6)}
+  .ic:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+  .ic .ic-v{font-family:var(--serif);font-size:33px;font-weight:600;letter-spacing:-1px;line-height:1;font-variant-numeric:tabular-nums;
+    background:linear-gradient(100deg,var(--grad-a),var(--grad-b));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .ic .ic-l{display:block;margin-top:9px;color:var(--ink2);font-size:12.5px;line-height:1.4}
+  .ic .ic-src{display:flex;align-items:center;gap:5px;margin-top:11px;color:var(--ink3);font-size:10.5px;letter-spacing:.5px;
+    text-transform:uppercase;font-family:var(--mono)}
+  .ic .ic-src .ic-arr{color:var(--gold-ink);opacity:0;transform:translateX(-3px);transition:opacity .15s,transform .15s}
+  .ic:hover .ic-arr,.ic:focus-visible .ic-arr{opacity:1;transform:none}
+  .ic[data-dim="1"]{opacity:.16;transform:scale(.97);pointer-events:none;filter:grayscale(.4)}
+  /* growth trajectory chart */
+  .impact-chart{background:var(--panel2);border:1px solid var(--line);border-radius:15px;padding:18px 18px 14px;display:flex;flex-direction:column}
+  .impact-chart .chh{font-size:10.5px;letter-spacing:.6px;text-transform:uppercase;color:var(--ink3);font-family:var(--mono);margin-bottom:2px}
+  .impact-chart .chs{font-family:var(--serif);font-size:16px;font-weight:600;letter-spacing:-.2px;margin-bottom:12px}
+  .impact-chart .chs b{background:linear-gradient(100deg,var(--grad-a),var(--grad-b));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .impact-chart svg{width:100%;height:auto;display:block;overflow:visible}
+  .ic-bar{transition:transform .9s cubic-bezier(.2,.8,.25,1);transform:scaleY(0);transform-origin:bottom}
+  .impact-chart.lit .ic-bar{transform:scaleY(1)}
+  .ic-bar-g{cursor:default}
+  .ic-bar-g:hover .ic-barlbl,.ic-bar-g:focus-visible .ic-barlbl{opacity:1}
+  .ic-barlbl{opacity:0;transition:opacity .15s}
+  .ic-bar-g:focus-visible{outline:none}
+  .ic-bar-g:focus-visible .ic-bar{filter:drop-shadow(0 0 0 2px var(--gold))}
+  .impact-note{margin-top:16px;color:var(--ink3);font-size:11.5px;font-family:var(--mono);letter-spacing:.2px}
+  @media(prefers-reduced-motion:reduce){.ic-bar{transition:none;transform:scaleY(1)} .ic{transition:border-color .18s}}
+
   /* cases */
   .cases{display:grid;grid-template-columns:1fr 1fr;gap:16px}
   .case{background:var(--card);border:1px solid var(--line);border-radius:18px;
@@ -329,7 +371,11 @@
   @media(max-width:820px){
     .hero-name{font-size:46px} .tag{font-size:22px} .why,.help{grid-template-columns:1fr}
     .grid2{grid-template-columns:1fr} .proof{grid-template-columns:1fr 1fr} .cases{grid-template-columns:1fr}
+    .impact-board{grid-template-columns:1fr} .impact{padding:22px 18px 24px}
     nav .links{display:none}
+  }
+  @media(max-width:460px){
+    .impact-cards{grid-template-columns:1fr} .ic{min-height:0}
   }
 </style>
 <style>
@@ -514,6 +560,93 @@
     <div class="m"><span class="big" data-count="14">0</span><span class="lbl">acquisitions integrated &amp; tracked</span></div>
     <div class="m"><span class="big" data-count="2.1" data-prefix="$" data-suffix="M" data-dec="1">$0M</span><span class="lbl">account grown from $280K</span></div>
     <div class="m"><span class="big" data-count="1" data-prefix="$" data-suffix="M+" data-dec="0">$0M+</span><span class="lbl">annualized cost savings delivered</span></div>
+  </div>
+
+  <!-- ===== Impact, Visualized: filterable metric board + growth trajectory ===== -->
+  <div class="impact reveal" id="impact" aria-label="Impact, visualized">
+    <div class="impact-head">
+      <div>
+        <div class="ih-t">Impact, visualized</div>
+        <p class="ih-s">Outcomes from the mandates above, filtered by what they moved. Every number traces back to its engagement.</p>
+      </div>
+      <div class="impact-filters" role="group" aria-label="Filter impact by type">
+        <button class="ifb" type="button" data-filter="all" aria-pressed="true">All</button>
+        <button class="ifb" type="button" data-filter="scale" aria-pressed="false">Scale</button>
+        <button class="ifb" type="button" data-filter="velocity" aria-pressed="false">Velocity</button>
+        <button class="ifb" type="button" data-filter="savings" aria-pressed="false">Savings</button>
+        <button class="ifb" type="button" data-filter="ai" aria-pressed="false">AI</button>
+      </div>
+    </div>
+
+    <div class="impact-board">
+      <div class="impact-cards" id="impactCards">
+        <a class="ic" href="#cases" data-cat="scale" data-count="1.75" data-prefix="$" data-suffix="B" data-dec="2">
+          <span class="ic-v" aria-hidden="true">$0B</span>
+          <span class="visually-hidden">$1.75 billion</span>
+          <span class="ic-l">org scaled with, as operating partner to the C-suite</span>
+          <span class="ic-src">Kaseya <span class="ic-arr" aria-hidden="true">→</span></span>
+        </a>
+        <a class="ic" href="#cases" data-cat="scale" data-count="14" data-dec="0">
+          <span class="ic-v" aria-hidden="true">0</span>
+          <span class="visually-hidden">14</span>
+          <span class="ic-l">acquisitions integrated and tracked on one spine</span>
+          <span class="ic-src">Kaseya <span class="ic-arr" aria-hidden="true">→</span></span>
+        </a>
+        <a class="ic" href="#cases" data-cat="velocity" data-count="30" data-prefix="~" data-suffix="%" data-dec="0">
+          <span class="ic-v" aria-hidden="true">~0%</span>
+          <span class="visually-hidden">about 30 percent</span>
+          <span class="ic-l">faster execution cycles, no direct authority</span>
+          <span class="ic-src">AMC Networks <span class="ic-arr" aria-hidden="true">→</span></span>
+        </a>
+        <a class="ic" href="#cases" data-cat="velocity" data-count="2.1" data-prefix="$" data-suffix="M" data-dec="1">
+          <span class="ic-v" aria-hidden="true">$0M</span>
+          <span class="visually-hidden">$2.1 million</span>
+          <span class="ic-l">account grown from $280K (~65% digital growth)</span>
+          <span class="ic-src">AMC Networks <span class="ic-arr" aria-hidden="true">→</span></span>
+        </a>
+        <a class="ic" href="#cases" data-cat="savings" data-count="1" data-prefix="$" data-suffix="M+" data-dec="0">
+          <span class="ic-v" aria-hidden="true">$0M+</span>
+          <span class="visually-hidden">$1 million plus</span>
+          <span class="ic-l">annualized savings, SLA quality fully preserved</span>
+          <span class="ic-src">AArete · bluebird bio <span class="ic-arr" aria-hidden="true">→</span></span>
+        </a>
+        <a class="ic" href="#work" data-cat="ai" data-count="60" data-suffix="+" data-dec="0">
+          <span class="ic-v" aria-hidden="true">0+</span>
+          <span class="visually-hidden">60 plus</span>
+          <span class="ic-l">specialized agents, 12 departments, human on every decision</span>
+          <span class="ic-src">Executive Office <span class="ic-arr" aria-hidden="true">→</span></span>
+        </a>
+      </div>
+
+      <figure class="impact-chart" id="impactChart" data-cat="scale" aria-label="Kaseya growth trajectory: $350 million to $1.75 billion across 14 integrated acquisitions">
+        <figcaption class="chh">Kaseya · operating spine</figcaption>
+        <div class="chs"><b>$350M → $1.75B</b> · 14 acquisitions</div>
+        <svg viewBox="0 0 320 140" role="img" aria-hidden="true" preserveAspectRatio="xMidYMax meet">
+          <line x1="2" y1="120" x2="318" y2="120" stroke="var(--line)" stroke-width="1"/>
+          <g class="ic-bar-g" tabindex="0" role="group" aria-label="Start: $350 million">
+            <rect class="ic-bar" x="34" y="86" width="48" height="34" rx="4" fill="color-mix(in oklab, var(--gold) 28%, var(--panel))" style="transition-delay:.05s"/>
+            <text x="58" y="134" text-anchor="middle" font-size="9" fill="var(--ink3)" font-family="var(--mono)">Start</text>
+            <text class="ic-barlbl" x="58" y="78" text-anchor="middle" font-size="10" fill="var(--ink)" font-family="var(--mono)">$350M</text>
+          </g>
+          <g class="ic-bar-g" tabindex="0" role="group" aria-label="Mid: roughly $900 million">
+            <rect class="ic-bar" x="136" y="48" width="48" height="72" rx="4" fill="color-mix(in oklab, var(--gold) 55%, var(--panel))" style="transition-delay:.22s"/>
+            <text x="160" y="134" text-anchor="middle" font-size="9" fill="var(--ink3)" font-family="var(--mono)">Scaling</text>
+            <text class="ic-barlbl" x="160" y="40" text-anchor="middle" font-size="10" fill="var(--ink)" font-family="var(--mono)">~$900M</text>
+          </g>
+          <g class="ic-bar-g" tabindex="0" role="group" aria-label="End: $1.75 billion">
+            <rect class="ic-bar" x="238" y="14" width="48" height="106" rx="4" fill="url(#icGrad)" style="transition-delay:.4s"/>
+            <text x="262" y="134" text-anchor="middle" font-size="9" fill="var(--ink3)" font-family="var(--mono)">Today</text>
+            <text class="ic-barlbl" x="262" y="6" text-anchor="middle" font-size="10" fill="var(--ink)" font-family="var(--mono)">$1.75B</text>
+          </g>
+          <defs>
+            <linearGradient id="icGrad" x1="0" y1="1" x2="0" y2="0">
+              <stop offset="0" stop-color="var(--grad-a)"/><stop offset="1" stop-color="var(--grad-b)"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <p class="impact-note">5× scale, run off one reporting spine.</p>
+      </figure>
+    </div>
   </div>
 
   <div class="cases">
@@ -1378,6 +1511,7 @@
   var CMDS=[
     {ic:'🧭',label:'How I help',kw:'help start',act:function(){go('#help');}},
     {ic:'★',label:'Engagement Highlights',kw:'work cases highlights results',act:function(){go('#cases');}},
+    {ic:'📊',label:'Impact, visualized · metric board',kw:'impact metrics dashboard numbers results scale velocity savings chart',act:function(){go('#impact');}},
     {ic:'🎚',label:'Operating range · lanes & capabilities',kw:'range lanes capabilities skills chief of staff strategy operations pmo consulting',act:function(){go('#range');}},
     {ic:'📈',label:'Career Arc · timeline',kw:'career arc timeline history progression kaseya amc optimity aarete',act:function(){go('#arc');}},
     {ic:'⚙️',label:'The System · Executive Office',kw:'system ai agents map',act:function(){go('#work');}},
@@ -1491,6 +1625,54 @@
     es.forEach(function(en){ if(en.isIntersecting){ run(en.target); io.unobserve(en.target); } });
   },{threshold:.5});
   nums.forEach(function(t){ io.observe(t); });
+})();
+</script>
+<script>
+/* ===== Impact, Visualized: count-up + filter + chart reveal ===== */
+(function(){
+  var board=document.getElementById('impactCards'); if(!board) return;
+  var chart=document.getElementById('impactChart');
+  var cards=[].slice.call(board.querySelectorAll('.ic[data-count]'));
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function fmt(n,pre,suf,dec){return (pre||'')+n.toFixed(dec)+(suf||'');}
+  function finalText(c){return fmt(parseFloat(c.dataset.count),c.dataset.prefix,c.dataset.suffix,parseInt(c.dataset.dec||'0',10));}
+
+  /* count-up (mirrors the proof-strip easing) */
+  function run(c){
+    var v=c.querySelector('.ic-v'); if(!v) return;
+    var target=parseFloat(c.dataset.count),pre=c.dataset.prefix,suf=c.dataset.suffix,dec=parseInt(c.dataset.dec||'0',10);
+    var dur=1100,start=null;
+    function step(ts){ if(start===null)start=ts;
+      var p=Math.min((ts-start)/dur,1),e=1-Math.pow(1-p,3);
+      v.textContent=fmt(target*e,pre,suf,dec);
+      if(p<1)requestAnimationFrame(step); else v.textContent=finalText(c);
+    }
+    requestAnimationFrame(step);
+  }
+  if(reduce||!('IntersectionObserver' in window)||!('requestAnimationFrame' in window)){
+    cards.forEach(function(c){var v=c.querySelector('.ic-v'); if(v)v.textContent=finalText(c);});
+    if(chart)chart.classList.add('lit');
+  }else{
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(en){ if(en.isIntersecting){ run(en.target); io.unobserve(en.target); } });
+    },{threshold:.5});
+    cards.forEach(function(c){ io.observe(c); });
+    if(chart){
+      var cio=new IntersectionObserver(function(es){
+        es.forEach(function(en){ if(en.isIntersecting){ chart.classList.add('lit'); cio.disconnect(); } });
+      },{threshold:.35});
+      cio.observe(chart);
+    }
+  }
+
+  /* filter */
+  var btns=[].slice.call(document.querySelectorAll('.impact-filters .ifb'));
+  function applyFilter(f){
+    cards.forEach(function(c){ c.setAttribute('data-dim', (f==='all'||c.dataset.cat===f)?'0':'1'); });
+    if(chart) chart.style.display=(f==='all'||chart.dataset.cat===f)?'':'none';
+    btns.forEach(function(b){ b.setAttribute('aria-pressed', b.dataset.filter===f?'true':'false'); });
+  }
+  btns.forEach(function(b){ b.addEventListener('click', function(){ applyFilter(b.dataset.filter); }); });
 })();
 </script>
 <script>
