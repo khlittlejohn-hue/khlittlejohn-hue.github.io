@@ -172,7 +172,7 @@
   .tag-full{max-width:none;width:100%;text-align:center}
   .tag .grad{background:linear-gradient(100deg,var(--accent),var(--accent-bright));-webkit-background-clip:text;background-clip:text;color:transparent}
   :root[data-theme="light"] .tag .grad{background:linear-gradient(100deg,var(--accent-deep),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
-  .lede{font-size:18px;color:var(--ink2);max-width:690px}
+  .lede{font-size:18px;color:var(--ink2);max-width:660px;margin-inline:auto}
   .lede b{color:var(--ink);font-weight:500}
   .cta{display:flex;gap:11px;flex-wrap:wrap;margin-top:30px}
   .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 19px;border-radius:11px;font-size:14px;font-weight:500;
@@ -184,7 +184,7 @@
   .btn.ghost:hover{border-color:color-mix(in oklab, var(--gold) 40%, var(--line))}
   /* command-center hero: asymmetric two-column, live status panel fills the right */
   .hero-grid{display:grid;grid-template-columns:1fr;gap:28px;align-items:start}
-  @media(min-width:900px){ .hero-grid{grid-template-columns:1.18fr .82fr;gap:42px;align-items:center} }
+  @media(min-width:900px){ .hero-grid{grid-template-columns:1fr;justify-items:center;text-align:center} .hero-main{max-width:760px} .cta{justify-content:center} .lede{text-align:left} }
   .hero-panel{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px 20px 18px;
     box-shadow:inset 0 1px 0 color-mix(in oklab,#fff 9%,transparent), 0 28px 64px -44px rgba(0,0,0,.75)}
   :root[data-theme="light"] .hero-panel{box-shadow:inset 0 1px 0 #fff, 0 26px 60px -46px rgba(60,50,20,.35)}
@@ -209,8 +209,8 @@
 
   /* ============================ SECTIONS ============================ */
   section{padding:48px 0;border-top:1px solid var(--line);scroll-margin-top:78px}
-  h2{font-size:12px;text-transform:uppercase;letter-spacing:2.5px;color:var(--ink3);font-weight:500;font-family:var(--mono);margin-bottom:22px;display:flex;align-items:center;gap:10px}
-  h2::before{content:"";width:18px;height:1px;background:color-mix(in oklab, var(--gold) 60%, var(--line))}
+  h2{font-size:13px;text-transform:uppercase;letter-spacing:1.8px;color:var(--ink2);font-weight:700;font-family:var(--mono);margin-bottom:24px;display:flex;align-items:center;gap:11px}
+  h2::before{content:"";width:24px;height:2px;border-radius:2px;background:var(--gold)}
   .lead-p{font-size:18px;color:var(--ink);max-width:720px}
   /* below-the-fold render skipping for snappy scroll */
   #experience,#education,#approach,#contact{content-visibility:auto;contain-intrinsic-size:auto 600px}
@@ -471,11 +471,11 @@
     <span class="rail-status"><span class="rs-dot" aria-hidden="true"></span>Open to roles</span>
     <span class="rail-name">Kyle Littlejohn</span>
     <span class="rail-value">Turning an ambiguous mandate into a <span class="rv-accent">measurable result</span>.</span>
-    <span class="rail-role"><b>Chief of Staff</b> · <b>Strategy &amp; Operations</b> · <b>Program &amp; Project Management</b> · <b>Consulting</b></span>
+    <span class="rail-role"><b>Chief of Staff</b> · <b>Strategy &amp; Operations</b> · <b>Program &amp; Project Management</b> · <b>Management Consulting</b></span>
   </a>
   <span class="links">
     <span class="nav-indicator" aria-hidden="true"></span>
-    <a href="#help">How I help</a><a href="#cases">Highlights</a><a href="#range">Operating range</a><a href="#arc">Career Arc</a><a href="#now">Now</a><a href="#work">The System</a><a href="#opensource">Building</a><a href="#experience">Experience</a><a href="#education">Education</a><a href="#beyond">Beyond</a><a href="#contact">Contact</a>
+    <a href="#help">How I provide value</a><a href="#cases">Highlights</a><a href="#arc">Career Arc</a><a href="#now">Current Goals</a><a href="#range">Operating Range</a><a href="#work">My AI System</a><a href="#opensource">Open Source</a><a href="#experience">Experience</a><a href="#education">Education</a><a href="#beyond">Beyond the work</a><a href="#contact">Contact</a>
   </span>
   <span class="nav-tools">
     <button class="kbd-pill" id="cmdkOpen" type="button" aria-label="Open command menu"><span>Menu</span><kbd>⌘K</kbd></button>
@@ -496,7 +496,7 @@
   <p class="tag tag-full" data-anim style="--d:120">The operator Senior Leaders trust to turn an ambiguous mandate into a <span class="grad">measurable result</span></p>
   <div class="hero-grid">
     <div class="hero-main">
-      <div class="kick" data-anim style="--d:0">Chief of Staff · Strategy &amp; Operations · Program &amp; Project Management · Consulting</div>
+      <div class="kick" data-anim style="--d:0">Chief of Staff · Strategy &amp; Operations · Program &amp; Project Management · Management Consulting</div>
       <h1 class="hero-name" data-anim style="--d:60">Kyle <span class="last">Littlejohn</span></h1>
       <p class="lede" data-anim style="--d:200">For over a decade I've worked alongside founders and the C-suite as the person who builds the plan, the operating cadence, and the reporting that move a company forward. I'm industry-agnostic, but I carry the skills required for success no matter the industry, and I've put them to work across <b>Healthcare, Media &amp; Entertainment, Biotech, SaaS, and Financial Services</b>. I build with AI directly, fluent enough in the technology to put it to work, not just talk about it.</p>
       <div class="cta" data-anim style="--d:280">
@@ -505,22 +505,41 @@
         <a class="btn ghost" href="#contact">Get in touch</a>
       </div>
     </div>
-    <aside class="hero-panel" data-anim style="--d:240" aria-label="Operating snapshot">
-      <div class="hp-top"><span class="hp-dot" aria-hidden="true"></span><span class="hp-title">The Executive Office</span><span class="hp-live">live</span></div>
-      <div class="hp-rows">
-        <div class="hp-row"><span class="hp-k">System</span><span class="hp-v"><span class="tick">12</span> departments · <span class="tick">60+</span> agents · <span class="tick">14</span>-stage QC</span></div>
-        <div class="hp-row"><span class="hp-k">Open to</span><span class="hp-v">Chief of Staff · Strategy &amp; Operations · Transformation · Program / Project Management</span></div>
-        <div class="hp-row"><span class="hp-k">Based</span><span class="hp-v">New York · Remote · open to Sydney</span></div>
-        <div class="hp-row"><span class="hp-k">Last shipped</span><span class="hp-v" id="hpLastPush">executive-office · built on Claude Code</span></div>
-      </div>
-      <a class="hp-cta" href="#work">Explore the system →</a>
-    </aside>
   </div>
 </div></header>
 
 <main id="content">
+<section id="snapshot" class="reveal"><div class="wrap">
+  <h2>Career snapshot</h2>
+  <div class="snap">
+    <div class="snap-cell">
+      <span class="snap-k">Experience</span>
+      <span class="snap-v">12+ years as an operator beside founders and the C-suite</span>
+    </div>
+    <div class="snap-cell">
+      <span class="snap-k">Open to</span>
+      <span class="snap-v">Chief of Staff · Strategy &amp; Operations · Program &amp; Project Management · Transformation · Management Consulting</span>
+    </div>
+    <div class="snap-cell">
+      <span class="snap-k">Industries</span>
+      <span class="snap-v">Healthcare · Media &amp; Entertainment · Biotech · SaaS · Financial Services</span>
+    </div>
+    <div class="snap-cell">
+      <span class="snap-k">Based</span>
+      <span class="snap-v">New York · Remote · open to Sydney</span>
+    </div>
+  </div>
+</div></section>
+<style>
+  #snapshot .snap{display:grid;grid-template-columns:1fr;gap:14px}
+  @media(min-width:680px){ #snapshot .snap{grid-template-columns:1fr 1fr} }
+  #snapshot .snap-cell{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+  #snapshot .snap-k{display:block;font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold-ink);font-weight:700;margin-bottom:9px}
+  #snapshot .snap-v{font-size:15.5px;color:var(--ink);line-height:1.5}
+</style>
+
 <section id="help" class="reveal"><div class="wrap">
-  <h2>How I help</h2>
+  <h2>How I provide value</h2>
   <div class="help">
     <a href="#experience">
       <span class="hic">🧭</span>
@@ -835,7 +854,7 @@
 </style>
 <section id="now" class="reveal"><div class="wrap">
   <div class="now-head">
-    <h2>Now</h2>
+    <h2>Current Goals</h2>
     <span class="now-stamp"><span class="nd" aria-hidden="true"></span>Updated June 2026</span>
   </div>
   <p class="lead-p now-lead">Open to a full-time operating seat across every lane below, and building a practice around the same skill in parallel.</p>
@@ -998,7 +1017,7 @@
   }
 </style>
 <section id="range" class="reveal"><div class="wrap">
-  <h2>Operating range</h2>
+  <h2>Operating Range</h2>
   <p class="lead-p range-intro">One operator, four lanes hiring teams actually budget for. Pick a lane to see the capabilities I bring and the hardest real result behind each.</p>
   <div class="or" id="opRange" aria-label="Operating range: capabilities by lane">
     <div class="or-lanes" id="orLanes" role="tablist" aria-label="Operating lanes"></div>
@@ -1142,7 +1161,7 @@
   }
 </style>
 <section id="work" class="reveal"><div class="wrap">
-  <h2>The System</h2>
+  <h2>My AI System</h2>
   <div class="flag">
     <h3>The Executive Office</h3>
     <p>A personal, production multi-agent system I designed and run on Claude Code: a coordinated team of 60+ specialized agents across research, drafting, pipelines, reporting, and review, with a human on every decision that leaves the system. Public and fully documented.</p>
@@ -1200,7 +1219,7 @@
   @media(max-width:760px){.gh-grid{grid-template-columns:1fr}.gh-stats{gap:16px}}
 </style>
 <section id="opensource" class="reveal"><div class="wrap">
-  <h2>Building</h2>
+  <h2>Open Source</h2>
   <p class="lead-p" style="margin-bottom:22px">I work in public: the same systems thinking, legible enough to read. These cards are pulled <b>live from GitHub</b> when you load the page.</p>
   <div class="gh-head">
     <a class="gh-profile" href="https://github.com/khlittlejohn-hue" target="_blank" rel="noopener">
