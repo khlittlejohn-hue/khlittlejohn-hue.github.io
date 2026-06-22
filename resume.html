@@ -3,52 +3,79 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Kyle Littlejohn — Resume</title>
-<meta name="description" content="Kyle Littlejohn — Chief of Staff & Strategy/Operations leader. 12 years operating to the C-suite, now AI-first.">
-<meta property="og:title" content="Kyle Littlejohn — Resume">
+<title>Kyle Littlejohn · Resume</title>
+<meta name="description" content="Kyle Littlejohn · Chief of Staff and Strategy / Operations leader. 12 years operating to the C-suite, now AI-first. Download the resume or open the full profile.">
+<meta property="og:title" content="Kyle Littlejohn · Resume">
 <meta property="og:description" content="Chief of Staff · Strategy & Operations · Applied-AI Builder. The numbers and the lanes, on two pages.">
-<meta property="og:image" content="https://khlittlejohn-hue.github.io/assets/resume-card.png">
+<meta property="og:image" content="https://khlittlejohn-hue.github.io/assets/website-card.png">
+<meta property="og:url" content="https://khlittlejohn-hue.github.io/resume.html">
 <meta property="og:type" content="website">
+<meta name="theme-color" content="#0c0b0e">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://khlittlejohn-hue.github.io/assets/website-card.png">
+<link rel="canonical" href="https://khlittlejohn-hue.github.io/resume.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20rx='13'%20fill='%230c0b0e'/%3E%3Crect%20x='1.5'%20y='1.5'%20width='61'%20height='61'%20rx='12'%20fill='none'%20stroke='%23f5c451'%20stroke-opacity='0.35'/%3E%3Ctext%20x='32'%20y='45'%20font-family='Georgia,serif'%20font-size='33'%20font-weight='700'%20fill='%23f5c451'%20text-anchor='middle'%3EKL%3C/text%3E%3C/svg%3E">
+<script>
+  (function(){
+    try{
+      var stored=localStorage.getItem('theme');
+      var sys=matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';
+      document.documentElement.dataset.theme=stored||sys;
+    }catch(e){document.documentElement.dataset.theme='dark';}
+  })();
+</script>
 <style>
-  :root{--bg:#0a0d12;--panel:#11161f;--line:#1d2733;--ink:#eaf0f8;--ink2:#9aa6b5;--gold:#f5c451;--blue:#5aa2ff}
+  :root{
+    --bg:#0c0b0e; --panel:#16151b; --line:#262430;
+    --ink:#f3f0ea; --ink2:#a39d97; --ink3:#6c6760;
+    --gold:#f5c451; --gold-fill-ink:#1a1300;
+  }
+  :root[data-theme="light"]{
+    --bg:#f6f3ec; --panel:#fffdf9; --line:#e4ddcf;
+    --ink:#1b1916; --ink2:#5a554c; --ink3:#8c867a;
+    --gold:#e0a92e; --gold-fill-ink:#1a1300;
+  }
   *{margin:0;padding:0;box-sizing:border-box}
-  body{background:radial-gradient(1000px 520px at 75% -12%,#16223316,transparent),var(--bg);color:var(--ink);
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.6;
+  body{background:radial-gradient(1000px 520px at 75% -12%,color-mix(in oklab,var(--gold) 9%,transparent),transparent),var(--bg);
+    color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.6;
     min-height:100vh;display:flex;align-items:center;justify-content:center;padding:40px 24px}
   .card{max-width:680px;width:100%;text-align:center}
-  .avatar{width:110px;height:110px;border-radius:50%;border:2px solid var(--gold);object-fit:cover;box-shadow:0 0 0 6px #f5c45114;margin-bottom:22px}
+  .avatar{width:110px;height:110px;border-radius:50%;border:2px solid var(--gold);object-fit:cover;
+    box-shadow:0 0 0 6px color-mix(in oklab,var(--gold) 9%,transparent);margin-bottom:22px}
   .kick{color:var(--gold);font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase}
   h1{font-size:44px;font-weight:800;letter-spacing:-1px;margin:8px 0 6px}
   .role{font-size:18px;color:var(--ink2)}
   .stats{display:flex;justify-content:center;gap:30px;margin:30px 0;flex-wrap:wrap}
   .stat b{display:block;font-size:22px;color:var(--gold);font-weight:800;line-height:1}
-  .stat span{font-size:11px;color:#5d6b7d;text-transform:uppercase;letter-spacing:.5px;margin-top:5px;display:block}
-  .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:11px;font-size:16px;font-weight:700;text-decoration:none;background:var(--gold);color:#1a1300;margin:8px}
+  .stat span{font-size:11px;color:var(--ink3);text-transform:uppercase;letter-spacing:.5px;margin-top:5px;display:block}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:11px;font-size:16px;font-weight:700;
+    text-decoration:none;background:var(--gold);color:var(--gold-fill-ink);margin:8px}
   .btn.ghost{background:var(--panel);color:var(--ink);border:1px solid var(--line)}
-  .links{margin-top:28px;color:#5d6b7d;font-size:13px}
-  .links a{color:var(--blue);text-decoration:none}
+  .btn:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+  .links{margin-top:28px;color:var(--ink3);font-size:13px}
+  .links a{color:var(--gold);text-decoration:none}
+  .links a:hover{text-decoration:underline}
 </style>
 </head>
 <body>
-  <div class="card">
-    <img class="avatar" src="assets/kyle.jpg" alt="Kyle Littlejohn">
+  <main class="card">
+    <img class="avatar" src="assets/kyle.jpg" srcset="assets/kyle.jpg 1x, assets/kyle@2x.jpg 2x" alt="Kyle Littlejohn" width="110" height="110">
     <div class="kick">Resume</div>
     <h1>Kyle Littlejohn</h1>
     <div class="role">Chief of Staff · Strategy &amp; Operations · Program &amp; Project Management · Consulting</div>
     <div class="stats">
       <div class="stat"><b>12+ yrs</b><span>Operator to the C-suite</span></div>
-      <div class="stat"><b>$350M→$1.75B</b><span>Scale partnered through</span></div>
+      <div class="stat"><b>$350M to $1.75B</b><span>Scale partnered through</span></div>
       <div class="stat"><b>~30%</b><span>Cycle-time cut</span></div>
       <div class="stat"><b>60+ agents</b><span>AI system built</span></div>
     </div>
-    <a class="btn" href="assets/Kyle-Littlejohn-Resume.pdf" target="_blank" rel="noopener">📄 Download resume (PDF)</a>
-    <a class="btn ghost" href="index.html">← Full profile</a>
+    <a class="btn" href="assets/Kyle-Littlejohn-Resume.pdf" target="_blank" rel="noopener">Download resume (PDF)</a>
+    <a class="btn ghost" href="index.html">Full profile</a>
     <div class="links">
       <a href="https://www.linkedin.com/in/kyle-littlejohn-" target="_blank" rel="noopener">LinkedIn</a> ·
       <a href="https://github.com/khlittlejohn-hue/executive-office" target="_blank" rel="noopener">GitHub</a> ·
       <a href="mailto:khlittlejohn@gmail.com">Email</a>
     </div>
-  </div>
+  </main>
 </body>
 </html>

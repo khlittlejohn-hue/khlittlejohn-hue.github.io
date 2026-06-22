@@ -377,6 +377,16 @@
   @media(max-width:460px){
     .impact-cards{grid-template-columns:1fr} .ic{min-height:0}
   }
+
+  /* Clean print / save-as-PDF: recruiters print profiles. Strip chrome, ink-light, gold kept for accents. */
+  @media print{
+    :root,:root[data-theme="light"]{--bg:#fff;--panel:#fff;--line:#d8d2c4;--ink:#000;--ink2:#333;--ink3:#666;--gold:#9a6f06;--gold-ink:#9a6f06;--gold-fill-ink:#fff}
+    #aurora,#spotlight,#grain,nav,.skip-link,#cmdkOpen,#themeToggle{display:none!important}
+    body{background:#fff!important;color:#000!important}
+    a{color:#000!important;text-decoration:none}
+    section,.reveal{opacity:1!important;transform:none!important;break-inside:avoid;page-break-inside:avoid}
+    header{padding-top:0}
+  }
 </style>
 <style>
   /* ===== desktop side rail ===== */
@@ -435,7 +445,7 @@
 </style>
 </head>
 <body>
-<a class="skip-link" href="#help">Skip to content</a>
+<a class="skip-link" href="#content">Skip to content</a>
 <div id="grid" aria-hidden="true"></div>
 <div id="aurora" aria-hidden="true"></div>
 <div id="spotlight" aria-hidden="true"></div>
@@ -499,6 +509,7 @@
   </div>
 </div></header>
 
+<main id="content">
 <section id="help" class="reveal"><div class="wrap">
   <h2>How I help</h2>
   <div class="help">
@@ -713,7 +724,7 @@
   </div>
 </div></section>
 
-<!-- ===== Career Arc — interactive scroll-revealed timeline ===== -->
+<!-- ===== Career Arc - interactive scroll-revealed timeline ===== -->
 <section id="arc" class="reveal"><div class="wrap">
   <h2>Career Arc</h2>
   <p class="lead-p arc-lead">A decade-plus from consulting bench to operating partner of a $1.75B organization. The same job throughout: take the ambiguous mandate, build the operating spine, ship the result.</p>
@@ -877,7 +888,7 @@
   .arc-win b{color:var(--ink);font-weight:600}
   .arc-cta{display:inline-block;margin-top:14px;font-family:var(--mono);font-size:12.5px;color:var(--gold-ink);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .15s}
   .arc-cta:hover{border-color:var(--gold)}
-  /* staged scroll reveal — each step slides + fades in turn */
+  /* staged scroll reveal - each step slides + fades in turn */
   .js .arc-step{opacity:0;transform:translateY(22px)}
   .js .arc.lit .arc-step{opacity:1;transform:none;transition:opacity .55s ease,transform .55s cubic-bezier(.2,.7,.3,1)}
   .js .arc.lit .arc-step:nth-child(1){transition-delay:.05s}
@@ -890,7 +901,7 @@
   }
 </style>
 <script>
-/* ===== Career Arc — fire the staged reveal once the timeline scrolls into view ===== */
+/* ===== Career Arc - fire the staged reveal once the timeline scrolls into view ===== */
 (function(){
   var arc=document.getElementById('arcLine'); if(!arc) return;
   if(!('IntersectionObserver' in window)){arc.classList.add('lit');return;}
@@ -1537,6 +1548,7 @@
   .cform-msg{font-size:13px;color:var(--ink2)}
   @media(max-width:760px){.cform-row{flex-direction:column}}
 </style>
+</main>
 
 <footer><div class="wrap">Kyle Littlejohn · New York, NY · Built and run on systems thinking.</div></footer>
 
