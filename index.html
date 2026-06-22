@@ -116,13 +116,8 @@
   .skip-link:focus{top:14px;outline:none}
 
   /* atmosphere: aurora wash + film grain */
-  #aurora{position:fixed;inset:0;z-index:0;pointer-events:none;
-    background:
-      radial-gradient(720px 480px at 82% -8%, color-mix(in oklab, var(--gold) 16%, transparent), transparent 60%),
-      radial-gradient(640px 520px at 6% 12%, color-mix(in oklab, var(--blue) 11%, transparent), transparent 62%);
-    opacity:.85}
-  #spotlight{position:fixed;inset:0;pointer-events:none;z-index:0;
-    background:radial-gradient(540px circle at var(--mx,50%) var(--my,-15%), color-mix(in oklab, var(--gold) 9%, transparent), transparent 60%)}
+  #aurora{display:none}
+  #spotlight{display:none}
   @media(prefers-reduced-motion:reduce){#spotlight{display:none}}
   @media(max-width:760px){#spotlight{display:none}}
   #grain{position:fixed;inset:0;pointer-events:none;z-index:1;opacity:var(--grain-op);mix-blend-mode:var(--grain-blend)}
@@ -650,14 +645,14 @@
 
   <ol class="arc" id="arcLine" aria-label="Career timeline, earliest to most recent">
 
-    <li class="arc-step">
+    <li class="arc-step arc-now">
       <span class="arc-dot" aria-hidden="true"></span>
       <div class="arc-card">
         <div class="arc-head">
-          <h3 class="arc-co">Maximus <span class="arc-title">Systems Analyst Intern</span></h3>
-          <span class="arc-date">Summer 2013</span>
+          <h3 class="arc-co">SOL Consulting <span class="arc-title">Director, Strategy &amp; Client Delivery</span></h3>
+          <span class="arc-date">2020–Present</span>
         </div>
-        <p class="arc-role">Bridged business and technical teams on a government technology program, translating requirements into specs for enterprise software delivery.</p>
+        <p class="arc-role">Owns the multi-year AMC Networks account end to end, progressing from Account Manager to Senior Program Manager. Grew it from $280K to $2.1M, ran the operating cadence across 16 business units, and cut execution cycle time ~30%.</p>
       </div>
     </li>
 
@@ -665,10 +660,10 @@
       <span class="arc-dot" aria-hidden="true"></span>
       <div class="arc-card">
         <div class="arc-head">
-          <h3 class="arc-co">Optimity Advisors <span class="arc-title">Consultant → Senior Consultant</span></h3>
-          <span class="arc-date">2014–2017</span>
+          <h3 class="arc-co">Kaseya <span class="arc-title">Senior Manager, Strategic Finance &amp; Business Operations</span></h3>
+          <span class="arc-date">2018–2020</span>
         </div>
-        <p class="arc-role">Drove enterprise transformation across Financial Services, Media &amp; Entertainment, and Healthcare, from a next-gen credit-rating platform at Moody's (20% efficiency gains) to a compliance-critical health-insurance product launch at CareFirst.</p>
+        <p class="arc-role">Operating partner to the C-suite through the scale from $350M to $1.75B, owning the financial planning, KPI infrastructure, and board reporting that integrated 14 acquisitions onto one spine.</p>
       </div>
     </li>
 
@@ -687,21 +682,21 @@
       <span class="arc-dot" aria-hidden="true"></span>
       <div class="arc-card">
         <div class="arc-head">
-          <h3 class="arc-co">Kaseya <span class="arc-title">Senior Manager, Strategic Finance &amp; Business Operations</span></h3>
-          <span class="arc-date">2018–2020</span>
+          <h3 class="arc-co">Optimity Advisors <span class="arc-title">Consultant → Senior Consultant</span></h3>
+          <span class="arc-date">2014–2017</span>
         </div>
-        <p class="arc-role">Operating partner to the C-suite through the scale from $350M to $1.75B, owning the financial planning, KPI infrastructure, and board reporting that integrated 14 acquisitions onto one spine.</p>
+        <p class="arc-role">Drove enterprise transformation across Financial Services, Media &amp; Entertainment, and Healthcare, from a next-gen credit-rating platform at Moody's (20% efficiency gains) to a compliance-critical health-insurance product launch at CareFirst.</p>
       </div>
     </li>
 
-    <li class="arc-step arc-now">
+    <li class="arc-step">
       <span class="arc-dot" aria-hidden="true"></span>
       <div class="arc-card">
         <div class="arc-head">
-          <h3 class="arc-co">SOL Consulting <span class="arc-title">Director, Strategy &amp; Client Delivery</span></h3>
-          <span class="arc-date">2020–Present</span>
+          <h3 class="arc-co">Maximus <span class="arc-title">Systems Analyst Intern</span></h3>
+          <span class="arc-date">Summer 2013</span>
         </div>
-        <p class="arc-role">Owns the multi-year AMC Networks account end to end, progressing from Account Manager to Senior Program Manager. Grew it from $280K to $2.1M, ran the operating cadence across 16 business units, and cut execution cycle time ~30%.</p>
+        <p class="arc-role">Bridged business and technical teams on a government technology program, translating requirements into specs for enterprise software delivery.</p>
       </div>
     </li>
 
