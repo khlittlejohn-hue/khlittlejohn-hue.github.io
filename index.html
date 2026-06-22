@@ -55,8 +55,8 @@
   (function(){
     try{
       var stored=localStorage.getItem('theme');
-      var sys=matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';
-      document.documentElement.dataset.theme=stored||sys;
+      /* dark is the brand default; only an explicit user toggle to light overrides it */
+      document.documentElement.dataset.theme=(stored==='light'||stored==='dark')?stored:'dark';
     }catch(e){document.documentElement.dataset.theme='dark';}
     document.documentElement.className='js';
   })();
@@ -1563,6 +1563,7 @@
     </div>
     <input name="subject" type="text" placeholder="Subject">
     <textarea name="message" rows="4" placeholder="Your message" required></textarea>
+    <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
     <div class="cform-foot">
       <button type="submit" class="btn primary">Send message</button>
       <span id="cformMsg" class="cform-msg" role="status" aria-live="polite"></span>
@@ -1848,33 +1849,36 @@
 })();
 </script>
 <script>
-/* ===== contact form -> Kyle's Gmail =====
-   Direct-to-inbox: paste your free Web3Forms access key below (get one in 60s at https://web3forms.com,
-   enter khlittlejohn@gmail.com, they email you a key). Until then, the form composes a message to your
-   Gmail via the visitor's mail client (still lands in your inbox when they hit send). */
+/* ===== contact form -> Kyle's Gmail (FormSubmit: no signup, no key) =====
+   Messages POST straight to Kyle's inbox. The FIRST real submission triggers a one-time
+   confirmation email from FormSubmit to khlittlejohn@gmail.com — Kyle clicks it once to
+   activate, then every message lands in his Gmail with no mail client opening. If the
+   network call fails, it falls back to opening the visitor's mail app prefilled. */
 (function(){
-  var WEB3FORMS_KEY=''; /* <-- paste key here to enable serverless direct delivery */
+  var ENDPOINT='https://formsubmit.co/ajax/khlittlejohn@gmail.com';
   var GMAIL='khlittlejohn@gmail.com';
   var form=document.getElementById('contactForm'); if(!form)return;
   var msg=document.getElementById('cformMsg');
+  var btn=form.querySelector('button[type="submit"]');
   form.addEventListener('submit',function(e){
     e.preventDefault();
-    if(!form.checkValidity()){msg.textContent='Please fill in your name, a valid email, and a message.';return;}
+    if(!form.checkValidity()){msg.textContent='Please add your name, a valid email, and a message.';return;}
     var fd=new FormData(form);
     var subject=fd.get('subject')||('Website message from '+fd.get('name'));
-    if(WEB3FORMS_KEY){
-      fd.append('access_key',WEB3FORMS_KEY); fd.set('subject',subject); fd.append('from_name',fd.get('name'));
-      msg.textContent='Sending…';
-      fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Accept':'application/json'},body:fd})
-        .then(function(r){return r.json();})
-        .then(function(j){ if(j.success){form.reset();msg.textContent='Thanks, your message is on its way to Kyle.';}
-          else{msg.textContent='Hmm, that failed. Email me directly at '+GMAIL+'.';} })
-        .catch(function(){msg.textContent='Network issue. Email me directly at '+GMAIL+'.';});
-    } else {
-      var body='From: '+fd.get('name')+' <'+fd.get('email')+'>\n\n'+fd.get('message');
-      window.location.href='mailto:'+GMAIL+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
-      msg.textContent='Opening your email app to send to Kyle…';
-    }
+    fd.set('_subject',subject); fd.set('_template','table'); fd.set('_captcha','false');
+    if(btn)btn.disabled=true; msg.textContent='Sending…';
+    fetch(ENDPOINT,{method:'POST',headers:{'Accept':'application/json'},body:fd})
+      .then(function(r){return r.json();})
+      .then(function(j){
+        if(j&&(j.success===true||j.success==='true')){ form.reset(); msg.textContent='Thanks, your message is on its way to Kyle.'; }
+        else{ msg.textContent='Could not send just now. Email me directly at '+GMAIL+'.'; }
+        if(btn)btn.disabled=false;
+      })
+      .catch(function(){
+        var body='From: '+fd.get('name')+' <'+fd.get('email')+'>\n\n'+fd.get('message');
+        window.location.href='mailto:'+GMAIL+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
+        msg.textContent='Opening your email app instead…';
+      });
   });
 })();
 </script>
