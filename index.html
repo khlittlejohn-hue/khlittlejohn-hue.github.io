@@ -463,8 +463,8 @@
 
 <nav><div class="wrap">
   <a class="brand" href="#top" aria-label="Kyle Littlejohn, home">
-    <!-- HEADSHOT HOOK: assets/kyle@2x.jpg loads on retina/large displays. It is currently a 1:1 copy of kyle.jpg (placeholder, NOT upscaled).
-         To ship the crisp portrait: overwrite assets/kyle@2x.jpg with a real >=600px square photo. No markup change needed. Do NOT fake-upscale the 100px source. -->
+    <!-- HEADSHOT HOOK: real photo. kyle.jpg = 256px 1x, kyle@2x.jpg = 512px 2x (retina). Source kept at assets/kyle-headshot-src.jpg.
+         512px is sharp for the 212px rail avatar. If a >=600px original ever lands, re-run the resize into these two files; no markup change needed. -->
     <img class="rail-portrait" src="assets/kyle.jpg"
          srcset="assets/kyle.jpg 1x, assets/kyle@2x.jpg 2x"
          alt="Kyle Littlejohn" width="212" height="212" fetchpriority="high" decoding="async">
@@ -798,6 +798,13 @@
   @media(prefers-reduced-motion:reduce){#now .now-stamp .nd{animation:none}}
   #now .now-lead{max-width:62ch;margin:14px 0 30px}
   .now-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .now-roles{grid-column:1/-1;background:var(--card-flag);border-color:var(--flag-line)}
+  .now-roles::before{transform:scaleX(1)}
+  .now-roles h3{font-size:22px}
+  .nc-lanes{margin-top:15px;display:flex;flex-wrap:wrap;gap:8px}
+  .nc-lanes span{font-family:var(--mono);font-size:11.5px;color:var(--gold-ink);
+    border:1px solid color-mix(in oklab,var(--gold) 38%,var(--line));border-radius:999px;padding:5px 12px;
+    background:color-mix(in oklab,var(--gold) 6%,transparent)}
   .now-card{position:relative;display:flex;flex-direction:column;background:var(--card);
     border:1px solid var(--line);border-radius:16px;padding:24px 22px;
     transition:transform .25s cubic-bezier(.2,.7,.3,1),border-color .25s,box-shadow .25s;overflow:hidden}
@@ -831,9 +838,26 @@
     <h2>Now</h2>
     <span class="now-stamp"><span class="nd" aria-hidden="true"></span>Updated June 2026</span>
   </div>
-  <p class="lead-p now-lead">Open to a full-time operating seat, and building a practice around the same skill in parallel. Here is where my time is going right now.</p>
+  <p class="lead-p now-lead">Open to a full-time operating seat across every lane below, and building a practice around the same skill in parallel.</p>
 
   <div class="now-grid">
+    <article class="now-card now-roles">
+      <span class="nc-tag">Open · full-time</span>
+      <span class="nc-ic" aria-hidden="true">🎯</span>
+      <h3>A full-time operating seat, in any of these lanes</h3>
+      <p>This is the priority. Wherever the job is to turn an ambiguous mandate into a shipped result, I want to hear about it. Open across industries, in New York, remote, or open to Sydney.</p>
+      <div class="nc-lanes">
+        <span>Chief of Staff</span>
+        <span>Strategy &amp; Operations</span>
+        <span>Program / Project Management</span>
+        <span>Strategic Initiatives</span>
+        <span>Transformation</span>
+        <span>Consulting</span>
+        <span>Corporate Development</span>
+        <span>Business Operations</span>
+      </div>
+    </article>
+
     <article class="now-card">
       <span class="nc-tag">Practice</span>
       <span class="nc-ic" aria-hidden="true">🧭</span>
