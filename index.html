@@ -680,44 +680,58 @@
 
   <ol class="arc" id="arcLine" aria-label="Career timeline, earliest to most recent">
 
-    <li class="arc-step" data-era="Consulting">
+    <li class="arc-step">
       <span class="arc-dot" aria-hidden="true"></span>
       <div class="arc-card">
-        <span class="arc-era">Consulting · transformation</span>
-        <h3 class="arc-co">Optimity Advisors &amp; AArete</h3>
-        <p class="arc-role">Management consultant → strategy, operations, and change management for enterprise clients.</p>
-        <p class="arc-win">Led a biotech cost transformation on the <b>bluebird bio</b> engagement: <b>$1M+ in annualized savings</b> with SLA quality fully preserved.</p>
+        <div class="arc-head">
+          <h3 class="arc-co">Maximus <span class="arc-title">Systems Analyst Intern</span></h3>
+          <span class="arc-date">Summer 2013</span>
+        </div>
+        <p class="arc-role">Bridged business and technical teams on a government technology program, translating requirements into specs for enterprise software delivery.</p>
       </div>
     </li>
 
-    <li class="arc-step" data-era="Operating">
+    <li class="arc-step">
       <span class="arc-dot" aria-hidden="true"></span>
       <div class="arc-card">
-        <span class="arc-era">Operating cadence at scale</span>
-        <h3 class="arc-co">AMC Networks <span class="arc-via">via SOL Consulting</span></h3>
-        <p class="arc-role">Technical Project Manager → Senior Program Manager. The operating liaison to client leadership.</p>
-        <p class="arc-win">Ran the rhythm of business across <b>16 business units and 12 partners</b>, cut execution cycle time <b>~30%</b> with no direct authority, drove the AMC+ rollout to <b>~65% digital revenue growth</b>, and grew the account <b>$280K → $2.1M</b>.</p>
+        <div class="arc-head">
+          <h3 class="arc-co">Optimity Advisors <span class="arc-title">Consultant → Senior Consultant</span></h3>
+          <span class="arc-date">2014–2017</span>
+        </div>
+        <p class="arc-role">Drove enterprise transformation across Financial Services, Media &amp; Entertainment, and Healthcare, from a next-gen credit-rating platform at Moody's (20% efficiency gains) to a compliance-critical health-insurance product launch at CareFirst.</p>
       </div>
     </li>
 
-    <li class="arc-step arc-flag" data-era="Operating partner">
+    <li class="arc-step">
       <span class="arc-dot" aria-hidden="true"></span>
       <div class="arc-card">
-        <span class="arc-era">Enterprise scale · operating partner</span>
-        <h3 class="arc-co">Kaseya</h3>
-        <p class="arc-role">Operating partner to leadership through the company's defining growth run.</p>
-        <p class="arc-win">Owned the planning cadence, the KPI spine, and the board-level materials a <b>$350M → $1.75B</b> organization ran on, across <b>14 acquisitions</b>.</p>
+        <div class="arc-head">
+          <h3 class="arc-co">AArete <span class="arc-title">Consulting Manager</span></h3>
+          <span class="arc-date">2017–2018</span>
+        </div>
+        <p class="arc-role">Led an operational and cost transformation for gene-therapy company bluebird bio, delivering over $1M in annualized savings with service levels fully preserved.</p>
       </div>
     </li>
 
-    <li class="arc-step arc-now" data-era="Today">
+    <li class="arc-step">
       <span class="arc-dot" aria-hidden="true"></span>
       <div class="arc-card">
-        <span class="arc-era">Today · building in public</span>
-        <h3 class="arc-co">The Executive Office</h3>
-        <p class="arc-role">Proving AI-first operating is real, on an auditable system I run my own work on.</p>
-        <p class="arc-win">A <b>60+ agent, 12-department</b> system with a <b>14-stage QC pipeline</b> and a human on every decision that leaves it. Public and fully documented.</p>
-        <a class="arc-cta" href="#work">Explore the system below ↓</a>
+        <div class="arc-head">
+          <h3 class="arc-co">Kaseya <span class="arc-title">Senior Manager, Strategic Finance &amp; Business Operations</span></h3>
+          <span class="arc-date">2018–2020</span>
+        </div>
+        <p class="arc-role">Operating partner to the C-suite through the scale from $350M to $1.75B, owning the financial planning, KPI infrastructure, and board reporting that integrated 14 acquisitions onto one spine.</p>
+      </div>
+    </li>
+
+    <li class="arc-step arc-now">
+      <span class="arc-dot" aria-hidden="true"></span>
+      <div class="arc-card">
+        <div class="arc-head">
+          <h3 class="arc-co">SOL Consulting <span class="arc-title">Director, Strategy &amp; Client Delivery</span></h3>
+          <span class="arc-date">2020–Present</span>
+        </div>
+        <p class="arc-role">Owns the multi-year AMC Networks account end to end, progressing from Account Manager to Senior Program Manager. Grew it from $280K to $2.1M, ran the operating cadence across 16 business units, and cut execution cycle time ~30%.</p>
       </div>
     </li>
 
@@ -868,6 +882,12 @@
   .js .arc.lit .arc-step:nth-child(2){transition-delay:.18s}
   .js .arc.lit .arc-step:nth-child(3){transition-delay:.31s}
   .js .arc.lit .arc-step:nth-child(4){transition-delay:.44s}
+  .js .arc.lit .arc-step:nth-child(5){transition-delay:.57s}
+  #arc .arc-head{display:flex;justify-content:space-between;align-items:baseline;gap:8px 16px;flex-wrap:wrap;margin-bottom:7px}
+  #arc .arc-co{font-size:19px;margin-bottom:0}
+  #arc .arc-title{font-family:var(--sans);font-size:13.5px;font-weight:400;color:var(--ink2);letter-spacing:0}
+  #arc .arc-date{font-family:var(--mono);font-size:12px;color:var(--gold-ink);white-space:nowrap;flex-shrink:0}
+  #arc .arc-role{margin-bottom:0}
   @media(prefers-reduced-motion:reduce){
     .js .arc-step{opacity:1;transform:none;transition:none}
     .arc-dot,.arc-card{transition:none}
