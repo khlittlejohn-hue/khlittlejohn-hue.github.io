@@ -509,6 +509,20 @@
 </div></header>
 
 <main id="content">
+<div class="wrap"><nav class="jumpbar" aria-label="Jump to a section">
+  <a href="#arc"><span>Background &amp; experience</span></a>
+  <a href="#now"><span>What I'm looking for</span></a>
+  <a href="#work"><span>AI expertise</span></a>
+  <a href="#contact"><span>Contact</span></a>
+</nav></div>
+<style>
+  .jumpbar{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:0 0 8px}
+  .jumpbar a{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12.5px;letter-spacing:.3px;
+    color:var(--ink2);background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:10px 17px;text-decoration:none;
+    transition:color .15s,border-color .15s,transform .15s}
+  .jumpbar a::after{content:"↓";opacity:.55;font-size:11px}
+  .jumpbar a:hover{color:var(--gold-ink);border-color:color-mix(in oklab,var(--gold) 42%,var(--line));transform:translateY(-2px)}
+</style>
 <section id="snapshot" class="reveal"><div class="wrap">
   <h2>Career snapshot</h2>
   <div class="snap">
