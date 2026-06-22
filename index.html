@@ -206,17 +206,18 @@
   section{padding:48px 0;border-top:1px solid var(--line);scroll-margin-top:78px}
   h2{font-size:13px;text-transform:uppercase;letter-spacing:1.8px;color:var(--ink2);font-weight:700;font-family:var(--mono);margin-bottom:24px;display:flex;align-items:center;gap:11px}
   h2::before{content:"";width:24px;height:2px;border-radius:2px;background:var(--gold)}
-  .lead-p{font-size:18px;color:var(--ink);max-width:720px}
+  .lead-p{font-size:18px;color:var(--ink);max-width:none}
   /* below-the-fold render skipping for snappy scroll */
   #experience,#education,#approach,#contact{content-visibility:auto;contain-intrinsic-size:auto 600px}
 
   /* why */
   .why{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-  .why .c{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;transition:border-color .18s,transform .12s}
+  .why .c{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;transition:border-color .18s,transform .12s;
+    display:grid;grid-template-columns:56px 1fr;column-gap:16px;row-gap:13px;align-items:center}
   .why .c:hover{border-color:color-mix(in oklab, var(--gold) 30%, var(--line));transform:translateY(-2px)}
-  .why .c .ic{display:inline-flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:15px;font-size:27px;margin-bottom:16px;background:color-mix(in oklab,var(--gold) 13%,var(--panel2));border:1px solid color-mix(in oklab,var(--gold) 32%,var(--line));box-shadow:inset 0 1px 0 color-mix(in oklab,#fff 8%,transparent)}
-  .why .c b{display:block;font-size:16px;margin-bottom:7px;font-weight:600}
-  .why .c span{color:var(--ink2);font-size:14px}
+  .why .c .ic{grid-row:1;grid-column:1;display:inline-flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:15px;font-size:27px;background:color-mix(in oklab,var(--gold) 13%,var(--panel2));border:1px solid color-mix(in oklab,var(--gold) 32%,var(--line));box-shadow:inset 0 1px 0 color-mix(in oklab,#fff 8%,transparent)}
+  .why .c b{grid-row:1;grid-column:2;font-size:17px;font-weight:600;line-height:1.25}
+  .why .c span{grid-row:2;grid-column:1 / -1;color:var(--ink2);font-size:14px;line-height:1.55}
 
   /* Industries credibility band: seamless marquee, edge-faded, pauses on hover */
   .industries{padding-top:14px;padding-bottom:14px}
@@ -470,7 +471,7 @@
   </a>
   <span class="links">
     <span class="nav-indicator" aria-hidden="true"></span>
-    <a href="#cases">Highlights</a><a href="#arc">Career Arc</a><a href="#skills">Skills</a><a href="#now">What I'm Looking For</a><a href="#work">AI Expertise</a><a href="#beyond">Outside the office</a><a href="#resources">Explore more</a><a href="#contact">Contact</a>
+    <a href="#cases">Highlights</a><a href="#arc">Career Arc</a><a href="#skills">Skills</a><a href="#now">What I'm Looking For</a><a href="#work">AI Expertise</a><a href="#beyond">Outside the office</a><a href="#resources">Additional Info</a><a href="#contact">Contact</a>
   </span>
   <span class="nav-tools">
     <button class="kbd-pill" id="cmdkOpen" type="button" aria-label="Open command menu"><span>Menu</span><kbd>⌘K</kbd></button>
@@ -537,7 +538,7 @@
   <h2>Why work with me</h2>
   <div class="why">
     <div class="c"><div class="ic">🎯</div><b>The operator execs trust</b><span>Founders and C-suite leaders hand me the ambiguous mandate. I set the cadence, align people who don't report to me, and drive it to a result.</span></div>
-    <div class="c"><div class="ic">⚙️</div><b>AI-native, and proven</b><span>I don't just use AI. I design and run a production, human-in-the-loop AI operating system that handles my own operation, equally at home in the technical room and the executive one.</span></div>
+    <div class="c"><div class="ic">⚙️</div><b>AI-native, and proven</b><span>Beyond using AI, I design and run a production, human-in-the-loop AI operating system that manages my own operation, equally at home in the technical room and the executive one.</span></div>
     <div class="c"><div class="ic">📈</div><b>Specific, real outcomes</b><span>A $350M to $1.75B scale. An account grown $280K to $2.1M. Roughly 30% faster execution cycles, with no direct authority. The proof is in the record below.</span></div>
   </div>
 </div></section>
@@ -650,9 +651,9 @@
       <div class="arc-card">
         <div class="arc-head">
           <h3 class="arc-co">SOL Consulting <span class="arc-title">Director, Strategy &amp; Client Delivery</span></h3>
-          <span class="arc-date">2020–Present</span>
+          <span class="arc-date">2020–2026</span>
         </div>
-        <p class="arc-role">Owns the multi-year AMC Networks account end to end, progressing from Account Manager to Senior Program Manager. Grew it from $280K to $2.1M, ran the operating cadence across 16 business units, and cut execution cycle time ~30%.</p>
+        <p class="arc-role">Owned the multi-year AMC Networks account end to end, progressing from Account Manager to Senior Program Manager. Grew it from $280K to $2.1M, ran the operating cadence across 16 business units, and cut execution cycle time by roughly 30%.</p>
       </div>
     </li>
 
@@ -759,7 +760,7 @@
     box-shadow:0 0 0 3px color-mix(in oklab,var(--gold) 22%,transparent);animation:nowPulse 2.6s ease-in-out infinite}
   @keyframes nowPulse{0%,100%{opacity:1}50%{opacity:.42}}
   @media(prefers-reduced-motion:reduce){#now .now-stamp .nd{animation:none}}
-  #now .now-lead{max-width:62ch;margin:14px 0 30px}
+  #now .now-lead{max-width:none;margin:14px 0 30px}
   .now-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
   .now-roles{grid-column:1/-1;background:var(--card-flag);border-color:var(--flag-line)}
   .now-roles::before{transform:scaleX(1)}
@@ -839,7 +840,7 @@
       <span class="nc-tag">Lane</span>
       <span class="nc-ic" aria-hidden="true">⚙️</span>
       <h3>AI Transformation</h3>
-      <p>Putting AI to work inside real operations, not in a demo. I design agentic workflows, keep a human on every decision, and build systems that hold up. The proof is the 60+ specialist operating system I built and run on Claude.</p>
+      <p>Putting AI to work inside real operations rather than demonstrations. I design agentic workflows, keep a human on every decision, and build systems that hold up under real use. The proof is the 60+ specialist operating system I built and run on Claude.</p>
       <a class="nc-link" href="#work">See the system below →</a>
     </article>
   </div>
@@ -852,7 +853,7 @@
 
 <style>
   /* ===== Career Arc timeline ===== */
-  .arc-lead{max-width:680px;margin-bottom:30px}
+  .arc-lead{max-width:none;margin-bottom:30px}
   .arc{list-style:none;position:relative;margin:0;padding:0}
   /* the spine */
   .arc::before{content:"";position:absolute;left:13px;top:6px;bottom:6px;width:2px;
@@ -968,7 +969,7 @@
   <h2>AI Expertise &amp; Examples</h2>
   <div class="flag">
     <h3>AI, put to work inside real operations</h3>
-    <p>I don't just talk about AI, I run on it. In my program work at AMC Networks I built AI-assisted reporting that turned raw status into decision-ready narratives. Then I built something bigger, a production operating system on Claude that runs my own strategy, operations, and reporting, with <b>60+ specialists across 12 departments</b>, a 14-stage quality pipeline, and a human on every decision that leaves it.</p>
+    <p>I bring AI directly into the operating work, not just the conversation around it. At AMC Networks, I built AI-assisted reporting that turned raw status into decision-ready narratives. Beyond that, I designed and run a production operating system on Claude that manages my own strategy, operations, and reporting, with <b>60+ specialists across 12 departments</b>, a 14-stage quality pipeline, and a human on every decision that leaves it.</p>
     <div class="stats">
       <div class="stat"><b>12</b><span>departments</span></div>
       <div class="stat"><b>60+</b><span>specialists</span></div>
@@ -1082,12 +1083,12 @@
   .gh-note{color:var(--ink3);font-size:11.5px;margin-top:14px;font-family:var(--mono)}
   @media(max-width:760px){.gh-grid{grid-template-columns:1fr}.gh-stats{gap:16px}}
   #work .sm-label{font-family:var(--serif);font-size:21px;font-weight:600;letter-spacing:-.3px;margin:36px 0 8px}
-  #work .sm-intro{color:var(--ink2);font-size:14.5px;line-height:1.55;max-width:640px;margin:0 0 18px}
+  #work .sm-intro{color:var(--ink2);font-size:14.5px;line-height:1.55;max-width:none;margin:0 0 18px}
   #work .ai-sub{font-family:var(--serif);font-size:21px;font-weight:600;letter-spacing:-.3px;margin:40px 0 14px}
   #work .gh-foot-cta{display:inline-flex;align-items:center;gap:8px;margin-top:26px;padding:12px 19px;border-radius:11px;font-size:14px;font-weight:600;text-decoration:none;background:var(--gold);color:var(--gold-fill-ink);border:1px solid var(--gold);transition:transform .12s}
   #work .gh-foot-cta:hover{transform:translateY(-2px)}
 </style>
-  <h3 class="ai-sub" id="opensource">More examples, in the open</h3>
+  <h3 class="ai-sub" id="opensource">Examples of my AI work</h3>
   <p class="lead-p" style="margin-bottom:22px">The same systems thinking, legible enough to read. These cards are pulled <b>live from GitHub</b> when you load the page.</p>
   <div class="gh-head">
     <a class="gh-profile" href="https://github.com/khlittlejohn-hue" target="_blank" rel="noopener">
@@ -1311,32 +1312,32 @@
 </style>
 <section id="beyond" class="reveal"><div class="wrap">
   <h2>Outside the office</h2>
-  <p class="lead-p" style="margin-bottom:24px">The operating discipline has to come from somewhere. Here's the fun half.</p>
+  <p class="lead-p" style="margin-bottom:24px">The same discipline that drives the work carries into the pursuits outside of it.</p>
   <div class="beyond-grid">
     <div class="bcard">
       <span class="bic">🏃</span>
       <b>Endurance Athlete</b>
-      <p>I collect finish lines. Hyrox, road marathons, and ultras, 25+ races and counting, with more already on the calendar.</p>
+      <p>An endurance athlete across Hyrox, road marathons, and ultras, with 25+ races completed and more on the calendar.</p>
       <span class="bfeat"><span class="star">★</span> Featured on OutSports</span>
     </div>
     <div class="bcard">
       <span class="bic">🌍</span>
       <b>Travel Fanatic</b>
-      <p>50+ countries and counting. I've gotten good at optimizing travel, turning limited PTO into real trips.</p>
+      <p>50+ countries and counting, with a disciplined approach to making the most of limited time away from work.</p>
       <span class="bfeat"><span class="star">★</span> Featured in Condé Nast Traveler</span>
     </div>
     <div class="bcard">
       <span class="bic">🍳</span>
       <b>Foodie</b>
-      <p>A huge fan of cooking and food, always exploring new cuisines and new cooking methods.</p>
+      <p>A dedicated home cook, continually exploring new cuisines and techniques.</p>
       <span class="bfeat"><span class="star">★</span> Featured on Food Network's <i>Must Love Food</i></span>
     </div>
   </div>
 </div></section>
 
 <section id="resources" class="reveal"><div class="wrap">
-  <h2>Explore more</h2>
-  <p class="lead-p" style="margin-bottom:22px">More on my background, in three places.</p>
+  <h2>Additional Information</h2>
+  <p class="lead-p" style="margin-bottom:22px">Further detail on my background can be found in the resources below.</p>
   <div class="res-grid">
     <a class="res-card" href="https://www.linkedin.com/in/kyle-littlejohn-" target="_blank" rel="noopener">
       <span class="res-ic">in</span>
@@ -1464,7 +1465,7 @@
     {ic:'🎯',label:'What I am looking for',kw:'looking for roles chief of staff strategy operations pmo management consulting ai transformation lanes',act:function(){go('#now');}},
     {ic:'⚙️',label:'AI Expertise & Examples',kw:'ai system specialists executive office github examples claude',act:function(){go('#work');}},
     {ic:'🌍',label:'Outside the office',kw:'beyond hobbies travel food marathon endurance foodie conde nast food network',act:function(){go('#beyond');}},
-    {ic:'🔎',label:'Explore more · LinkedIn, GitHub, résumé',kw:'explore more resources links linkedin github resume',act:function(){go('#resources');}},
+    {ic:'🔎',label:'Additional Information · LinkedIn, GitHub, résumé',kw:'additional information resources links linkedin github resume',act:function(){go('#resources');}},
     {ic:'✉️',label:'Contact',kw:'contact reach hire talk',act:function(){go('#contact');}},
     {ic:'📄',label:'Open résumé (PDF)',kw:'resume cv pdf download',act:function(){window.open('assets/Kyle-Littlejohn-Resume.pdf','_blank','noopener');}},
     {ic:'📋',label:'Copy email address',kw:'email copy gmail',act:function(){copyEmail();}},
