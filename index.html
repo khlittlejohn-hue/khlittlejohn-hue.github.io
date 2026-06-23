@@ -1382,7 +1382,19 @@
 
 <section id="contact" class="contact reveal"><div class="wrap">
   <h2>Contact</h2>
-  <p class="lead-p">Reach out with any questions about my background, or to discuss a potential fit. I typically respond within a day.</p>
+  <form id="contactForm" class="cform" novalidate>
+    <div class="cform-row">
+      <input name="name" type="text" placeholder="Your name" required autocomplete="name">
+      <input name="email" type="email" placeholder="Your email" required autocomplete="email">
+    </div>
+    <input name="subject" type="text" placeholder="Subject">
+    <textarea name="message" rows="4" placeholder="Your message" required></textarea>
+    <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+    <div class="cform-foot">
+      <button type="submit" class="btn primary">Send message</button>
+      <span id="cformMsg" class="cform-msg" role="status" aria-live="polite"></span>
+    </div>
+  </form>
   <div class="contact-list">
     <div class="contact-row">
       <span class="contact-k">Email</span>
@@ -1397,25 +1409,9 @@
       <a class="contact-v" href="https://www.linkedin.com/in/kyle-littlejohn-" target="_blank" rel="noopener">linkedin.com/in/kyle-littlejohn-</a>
     </div>
   </div>
-
-  <p class="cform-intro">Or send a message directly:</p>
-  <form id="contactForm" class="cform" novalidate>
-    <div class="cform-row">
-      <input name="name" type="text" placeholder="Your name" required autocomplete="name">
-      <input name="email" type="email" placeholder="Your email" required autocomplete="email">
-    </div>
-    <input name="subject" type="text" placeholder="Subject">
-    <textarea name="message" rows="4" placeholder="Your message" required></textarea>
-    <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
-    <div class="cform-foot">
-      <button type="submit" class="btn primary">Send message</button>
-      <span id="cformMsg" class="cform-msg" role="status" aria-live="polite"></span>
-    </div>
-  </form>
 </div></section>
 <style>
-  #contact .cform-intro{margin-top:30px;margin-bottom:0;color:var(--ink2);font-size:15px}
-  .cform{margin-top:14px;max-width:580px;display:flex;flex-direction:column;gap:12px}
+  .cform{margin-top:0;max-width:580px;display:flex;flex-direction:column;gap:12px}
   .cform-row{display:flex;gap:12px}
   .cform input,.cform textarea{flex:1;width:100%;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;color:var(--ink);font-family:inherit;font-size:14px;transition:border-color .15s}
   .cform input::placeholder,.cform textarea::placeholder{color:var(--ink3)}
@@ -1435,6 +1431,7 @@
 </main>
 
 <footer><div class="wrap">
+  <p class="foot-cta">Reach out with any questions. I respond within a day.</p>
   <div class="foot-links">
     <a href="https://www.linkedin.com/in/kyle-littlejohn-" target="_blank" rel="noopener">LinkedIn</a>
     <a href="https://github.com/khlittlejohn-hue" target="_blank" rel="noopener">GitHub</a>
@@ -1445,6 +1442,7 @@
   <div class="foot-meta">© 2026 Kyle Littlejohn · New York, NY · Built and run on systems thinking</div>
 </div></footer>
 <style>
+  footer .foot-cta{font-family:var(--serif);font-size:19px;font-weight:600;color:var(--ink);margin:0 0 16px;letter-spacing:-.2px}
   footer .foot-links{display:flex;flex-wrap:wrap;gap:8px 22px;margin-bottom:14px}
   footer .foot-links a{color:var(--ink2);text-decoration:none;font-size:13.5px;transition:color .15s}
   footer .foot-links a:hover{color:var(--gold-ink)}
