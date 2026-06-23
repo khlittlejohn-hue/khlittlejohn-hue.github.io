@@ -1383,36 +1383,29 @@
 <section id="contact" class="contact reveal"><div class="wrap">
   <h2>Contact</h2>
   <p class="lead-p">Reach out with any questions about my background, or to discuss a potential fit. I typically respond within a day.</p>
-  <div class="contact-cta" style="display:flex;gap:11px;flex-wrap:wrap;margin-top:22px">
-    <a class="btn primary" href="mailto:khlittlejohn@gmail.com">✉ Email me</a>
-    <a class="btn ghost" href="https://www.linkedin.com/in/kyle-littlejohn-" target="_blank" rel="noopener">LinkedIn</a>
-    <a class="btn ghost" href="tel:+15406043405">📞 +1 (540) 604-3405</a>
+  <div class="contact-list">
+    <div class="contact-row">
+      <span class="contact-k">Email</span>
+      <a class="contact-v" href="mailto:khlittlejohn@gmail.com">khlittlejohn@gmail.com</a>
+    </div>
+    <div class="contact-row">
+      <span class="contact-k">Phone</span>
+      <a class="contact-v" href="tel:+15406043405">+1 (540) 604-3405</a>
+    </div>
+    <div class="contact-row">
+      <span class="contact-k">LinkedIn</span>
+      <a class="contact-v" href="https://www.linkedin.com/in/kyle-littlejohn-" target="_blank" rel="noopener">linkedin.com/in/kyle-littlejohn-</a>
+    </div>
   </div>
-  <form id="contactForm" class="cform" novalidate>
-    <div class="cform-row">
-      <input name="name" type="text" placeholder="Your name" required autocomplete="name">
-      <input name="email" type="email" placeholder="Your email" required autocomplete="email">
-    </div>
-    <input name="subject" type="text" placeholder="Subject">
-    <textarea name="message" rows="4" placeholder="Your message" required></textarea>
-    <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
-    <div class="cform-foot">
-      <button type="submit" class="btn primary">Send message</button>
-      <span id="cformMsg" class="cform-msg" role="status" aria-live="polite"></span>
-    </div>
-  </form>
 </div></section>
 <style>
-  .cform{margin-top:26px;max-width:620px;display:flex;flex-direction:column;gap:12px}
-  .cform-row{display:flex;gap:12px}
-  .cform input,.cform textarea{flex:1;width:100%;background:var(--panel);border:1px solid var(--line);border-radius:10px;
-    padding:12px 14px;color:var(--ink);font-family:inherit;font-size:14px;transition:border-color .15s}
-  .cform input::placeholder,.cform textarea::placeholder{color:var(--ink3)}
-  .cform input:focus,.cform textarea:focus{outline:none;border-color:color-mix(in oklab,var(--gold) 50%,var(--line))}
-  .cform textarea{resize:vertical;min-height:96px}
-  .cform-foot{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-  .cform-msg{font-size:13px;color:var(--ink2)}
-  @media(max-width:760px){.cform-row{flex-direction:column}}
+  #contact .contact-list{margin-top:26px;max-width:580px;background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+  #contact .contact-row{display:grid;grid-template-columns:110px 1fr;gap:16px;align-items:center;padding:16px 22px;border-top:1px solid var(--line)}
+  #contact .contact-row:first-child{border-top:none}
+  #contact .contact-k{font-family:var(--mono);font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:var(--gold-ink);font-weight:700}
+  #contact .contact-v{font-size:16px;color:var(--ink);text-decoration:none;word-break:break-word}
+  #contact .contact-v:hover{color:var(--gold-ink);text-decoration:underline}
+  @media(max-width:520px){#contact .contact-row{grid-template-columns:1fr;gap:4px}}
 </style>
 </main>
 
