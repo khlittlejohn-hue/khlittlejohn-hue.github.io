@@ -164,7 +164,7 @@
   header{padding:44px 0 50px}
   .kick{color:var(--gold-ink);font-size:12px;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;font-family:var(--mono);margin-bottom:20px}
   .hero-name{font-family:var(--serif);font-size:74px;line-height:.96;letter-spacing:-2px;font-weight:600}
-  .hero-name .last{background:linear-gradient(100deg,var(--grad-a),var(--grad-b));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero-name .last{color:var(--ink);-webkit-text-fill-color:var(--ink);background:none}
   .tag{font-size:32px;font-weight:600;letter-spacing:-.7px;margin:20px 0 18px;max-width:780px;line-height:1.18;font-family:var(--serif);color:var(--ink)}
   /* full-width hero tagline: span the whole content width; body in ink, key phrase in accent blue */
   .tag-full{max-width:none;width:100%;text-align:center}
@@ -400,7 +400,7 @@
   /* ===== desktop side rail ===== */
   /* rail availability pill + value line: hidden by default, surfaced in the desktop rail */
   .rail-status,.rail-value{display:none}
-  @media(min-width:860px){
+  @media(min-width:640px){
     body{padding-left:288px}
     #progress{left:288px;width:calc(100% - 288px)}
     nav{position:fixed;left:0;top:0;bottom:0;height:100vh;width:288px;border-bottom:none;border-right:1px solid var(--line);
@@ -431,7 +431,7 @@
     /* title line: BOLD, brighter, readable, not faded grey mono */
     .rail-role{color:var(--ink2);font-weight:600;font-size:11px;line-height:1.95;margin-top:16px;font-family:var(--mono);letter-spacing:.3px;max-width:238px}
     .rail-role b{color:var(--ink);font-weight:700}
-    nav .links{margin:30px 0 0 0;flex-direction:column;align-items:flex-start;gap:14px;font-size:14px;position:relative;padding-left:16px}
+    nav .links{display:flex;margin:30px 0 0 0;flex-direction:column;align-items:flex-start;gap:14px;font-size:14px;position:relative;padding-left:16px}
     nav .links a{transition:color .15s ease,transform .18s cubic-bezier(.2,.9,.3,1)}
     nav .links a:hover{transform:translateX(3px)}
     .nav-indicator{position:absolute;left:0;top:0;width:2.5px;height:17px;border-radius:3px;
@@ -444,12 +444,12 @@
     .rail-contact a:hover{color:var(--accent-bright)}
     .kbd-pill kbd{display:inline}
   }
-  @media(max-width:859px){
+  @media(max-width:639px){
     .rail-role,.rail-contact,.rail-status,.rail-value{display:none}
     nav .nav-tools{margin-left:auto}
   }
   /* on desktop, the rail carries the identity; the hero leads with the value prop */
-  @media(min-width:860px){ header .kick, header .hero-name{display:none} header{padding-top:30px} }
+  @media(min-width:640px){ header .kick, header .hero-name{display:none} header{padding-top:30px} }
 </style>
 </head>
 <body>
