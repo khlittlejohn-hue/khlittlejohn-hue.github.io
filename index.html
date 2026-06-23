@@ -400,10 +400,10 @@
   /* ===== desktop side rail ===== */
   /* rail availability pill + value line: hidden by default, surfaced in the desktop rail */
   .rail-status,.rail-value{display:none}
-  @media(min-width:980px){
-    body{padding-left:300px}
-    #progress{left:300px;width:calc(100% - 300px)}
-    nav{position:fixed;left:0;top:0;bottom:0;height:100vh;width:300px;border-bottom:none;border-right:1px solid var(--line);
+  @media(min-width:860px){
+    body{padding-left:288px}
+    #progress{left:288px;width:calc(100% - 288px)}
+    nav{position:fixed;left:0;top:0;bottom:0;height:100vh;width:288px;border-bottom:none;border-right:1px solid var(--line);
       background:linear-gradient(180deg, color-mix(in oklab,var(--accent) 6%,var(--panel2)), var(--panel2) 44%);backdrop-filter:none}
     nav .wrap{flex-direction:column;align-items:center;height:100%;gap:0;padding:48px 28px 36px;overflow-y:auto;max-width:none}
     nav .brand{flex-direction:column;align-items:center;text-align:center;gap:0;width:100%}
@@ -444,12 +444,12 @@
     .rail-contact a:hover{color:var(--accent-bright)}
     .kbd-pill kbd{display:inline}
   }
-  @media(max-width:979px){
+  @media(max-width:859px){
     .rail-role,.rail-contact,.rail-status,.rail-value{display:none}
     nav .nav-tools{margin-left:auto}
   }
   /* on desktop, the rail carries the identity; the hero leads with the value prop */
-  @media(min-width:980px){ header .kick, header .hero-name{display:none} header{padding-top:30px} }
+  @media(min-width:860px){ header .kick, header .hero-name{display:none} header{padding-top:30px} }
 </style>
 </head>
 <body>
