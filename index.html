@@ -1397,8 +1397,33 @@
       <a class="contact-v" href="https://www.linkedin.com/in/kyle-littlejohn-" target="_blank" rel="noopener">linkedin.com/in/kyle-littlejohn-</a>
     </div>
   </div>
+
+  <p class="cform-intro">Or send a message directly:</p>
+  <form id="contactForm" class="cform" novalidate>
+    <div class="cform-row">
+      <input name="name" type="text" placeholder="Your name" required autocomplete="name">
+      <input name="email" type="email" placeholder="Your email" required autocomplete="email">
+    </div>
+    <input name="subject" type="text" placeholder="Subject">
+    <textarea name="message" rows="4" placeholder="Your message" required></textarea>
+    <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+    <div class="cform-foot">
+      <button type="submit" class="btn primary">Send message</button>
+      <span id="cformMsg" class="cform-msg" role="status" aria-live="polite"></span>
+    </div>
+  </form>
 </div></section>
 <style>
+  #contact .cform-intro{margin-top:30px;margin-bottom:0;color:var(--ink2);font-size:15px}
+  .cform{margin-top:14px;max-width:580px;display:flex;flex-direction:column;gap:12px}
+  .cform-row{display:flex;gap:12px}
+  .cform input,.cform textarea{flex:1;width:100%;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;color:var(--ink);font-family:inherit;font-size:14px;transition:border-color .15s}
+  .cform input::placeholder,.cform textarea::placeholder{color:var(--ink3)}
+  .cform input:focus,.cform textarea:focus{outline:none;border-color:color-mix(in oklab,var(--gold) 50%,var(--line))}
+  .cform textarea{resize:vertical;min-height:96px}
+  .cform-foot{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .cform-msg{font-size:13px;color:var(--ink2)}
+  @media(max-width:760px){.cform-row{flex-direction:column}}
   #contact .contact-list{margin-top:26px;max-width:580px;background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden}
   #contact .contact-row{display:grid;grid-template-columns:110px 1fr;gap:16px;align-items:center;padding:16px 22px;border-top:1px solid var(--line)}
   #contact .contact-row:first-child{border-top:none}
@@ -1706,7 +1731,7 @@
     fetch(ENDPOINT,{method:'POST',headers:{'Accept':'application/json'},body:fd})
       .then(function(r){return r.json();})
       .then(function(j){
-        if(j&&(j.success===true||j.success==='true')){ form.reset(); msg.textContent='Thanks, your message is on its way to Kyle.'; }
+        if(j&&(j.success===true||j.success==='true')){ form.reset(); msg.textContent='Message sent. I will get back to you shortly.'; }
         else{ msg.textContent='Could not send just now. Email me directly at '+GMAIL+'.'; }
         if(btn)btn.disabled=false;
       })
