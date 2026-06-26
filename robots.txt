@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://khlittlejohn-hue.github.io/sitemap.xml
+Sitemap: https://kylelittlejohn.com/sitemap.xml
