@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://khlittlejohn-hue.github.io/sitemap.xml

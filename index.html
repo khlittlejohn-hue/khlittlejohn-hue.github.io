@@ -1386,11 +1386,11 @@
   <h2>Contact</h2>
   <form id="contactForm" class="cform" novalidate>
     <div class="cform-row">
-      <input name="name" type="text" placeholder="Your name" required autocomplete="name">
-      <input name="email" type="email" placeholder="Your email" required autocomplete="email">
+      <input name="name" type="text" placeholder="Your name" aria-label="Your name" required autocomplete="name">
+      <input name="email" type="email" placeholder="Your email" aria-label="Your email" required autocomplete="email">
     </div>
-    <input name="subject" type="text" placeholder="Subject">
-    <textarea name="message" rows="4" placeholder="Your message" required></textarea>
+    <input name="subject" type="text" placeholder="Subject" aria-label="Subject">
+    <textarea name="message" rows="4" placeholder="Your message" aria-label="Your message" required></textarea>
     <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
     <div class="cform-foot">
       <button type="submit" class="btn primary">Send message</button>
