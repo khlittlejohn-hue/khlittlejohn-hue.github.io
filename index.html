@@ -717,6 +717,29 @@
     </li>
 
   </ol>
+
+  <div class="arc-edu" aria-label="Education">
+    <span class="arc-edu-label">Education</span>
+    <div class="arc-edu-body">
+      <h3 class="arc-edu-school">College of William &amp; Mary <span class="arc-edu-loc">Williamsburg, VA</span></h3>
+      <p class="arc-edu-degree">B.S. Neuroscience &middot; Minor in Process Management &amp; Consulting</p>
+    </div>
+    <span class="arc-edu-date">2010–2014</span>
+  </div>
+  <style>
+    .arc-edu{display:flex;align-items:baseline;flex-wrap:wrap;gap:6px 20px;margin-top:26px;
+      padding:18px 22px;border:1px solid var(--line);border-radius:16px;background:var(--card)}
+    :root[data-theme="light"] .arc-edu{box-shadow:inset 0 1px 0 #fff}
+    .arc-edu-label{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+      color:var(--gold-ink);flex:0 0 100%}
+    .arc-edu-body{flex:1 1 auto;min-width:0}
+    .arc-edu-school{font-family:var(--serif);font-size:20px;font-weight:640;letter-spacing:-.3px;line-height:1.15;
+      margin:0 0 5px;color:var(--ink)}
+    .arc-edu-loc{font-family:var(--sans);font-size:13px;font-weight:400;color:var(--ink3);letter-spacing:0}
+    .arc-edu-degree{font-size:14.5px;line-height:1.5;color:var(--ink2);margin:0}
+    .arc-edu-date{font-family:var(--mono);font-size:12px;color:var(--gold-ink);white-space:nowrap;flex-shrink:0}
+    @media(max-width:600px){.arc-edu-school .arc-edu-loc{display:block;margin-top:3px}}
+  </style>
 </div></section>
 
 
