@@ -1852,9 +1852,7 @@
   }
   seed(); addEventListener("resize",seed,{passive:true});
 
-  var booted=false, px=0, py=0, pw=0;
-  addEventListener("pointermove",function(e){
-    px=(e.clientX/W-.5); py=(e.clientY/H-.5); pw=1;},{passive:true});
+  var booted=false;
 
   var packets=[], lastPk=0, bursts=[];
   // COMMAND BURST: click the open backdrop and the office responds. Never
@@ -1889,7 +1887,7 @@
     var settled=boot>=1;
     if(settled&&!booted){booted=true;}
     var alpha=settled?(TH.light?.15:.22):(.10+.75*boot);
-    var ox=pw*px*14, oy=pw*py*10;                     // pointer parallax
+    var ox=0, oy=0;
     var e=ease(boot);
     for(var i=0;i<N;i++){var a=nodes[i];
       a.x=a.sx+(a.tx-a.sx)*e; a.y=a.sy+(a.ty-a.sy)*e;
