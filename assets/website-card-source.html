@@ -1,0 +1,40 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+  /* Source for assets/website-card.png (1200x630 og image). Regenerate with:
+     "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new \
+       --screenshot=website-card.png --window-size=1200,630 --hide-scrollbars \
+       file://$PWD/website-card-source.html
+     Rebuilt 2026-07-12: the prior PNG (no source file) carried the retired
+     "60+ agent" count baked into pixels — invisible to the canonical-facts
+     lint. Copy now matches the canonical 100+. Keep THIS file as the editable
+     source of truth for the card. */
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{width:1200px;height:630px;background:#0c0b0e;font-family:Georgia,serif;overflow:hidden;position:relative}
+  body::before{content:"";position:absolute;inset:0;
+    background:radial-gradient(900px 500px at 82% -10%, rgba(245,196,81,.10), transparent 60%),
+               radial-gradient(700px 400px at -5% 110%, rgba(245,196,81,.05), transparent 60%);}
+  .grid{position:absolute;inset:0;opacity:.5;
+    background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+                     linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+    background-size:75px 75px}
+  .panel{position:absolute;inset:24px;border:1px solid rgba(255,255,255,.10);border-radius:26px}
+  .chip{position:absolute;left:84px;top:76px;width:76px;height:76px;border-radius:18px;
+    background:#12100a;border:1px solid rgba(245,196,81,.4);display:flex;align-items:center;justify-content:center;
+    color:#f5c451;font-size:34px;font-weight:700}
+  .kicker{position:absolute;left:186px;top:76px;font-family:Menlo,monospace;font-size:17px;
+    letter-spacing:5px;color:#c9a24a;font-weight:600}
+  .name{position:absolute;left:186px;top:102px;color:#f3f0ea;font-size:44px;font-weight:700;letter-spacing:-.5px}
+  .statement{position:absolute;left:84px;top:258px;width:1000px;color:#f3f0ea;
+    font-size:46px;line-height:1.28;font-weight:600;letter-spacing:-.3px}
+  .statement .gold{color:#e8b64c}
+  .foot{position:absolute;left:84px;bottom:74px;color:#8b857d;font-size:21px;font-family:Helvetica,Arial,sans-serif}
+  .domain{position:absolute;right:96px;bottom:70px;color:#e8b64c;font-family:Menlo,monospace;font-size:21px;letter-spacing:2px}
+</style></head><body>
+  <div class="grid"></div><div class="panel"></div>
+  <div class="chip">KL</div>
+  <div class="kicker">CHIEF OF STAFF &nbsp;·&nbsp; STRATEGY &amp; OPERATIONS &nbsp;·&nbsp; APPLIED-AI BUILDER</div>
+  <div class="name">Kyle Littlejohn</div>
+  <div class="statement">I turn executive ambiguity into <span class="gold">shipped outcomes</span>,
+    and I built a 100+ agent AI system that runs my professional life.</div>
+  <div class="foot">Operator who builds with AI, not just talks about it.</div>
+  <div class="domain">kylelittlejohn.com</div>
+</body></html>
