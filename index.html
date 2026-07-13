@@ -1790,7 +1790,7 @@
      show-someone moment.
      ═══════════════════════════════════════════════════════════════════════ -->
 <canvas id="constellation" aria-hidden="true"></canvas>
-<a id="constellationKey" href="#work" aria-label="About the background animation: my AI operating system, 100 plus specialists across 12 departments, a human on every decision. See the labeled map in the AI section."><span class="pulse" aria-hidden="true"></span><span>this is my <b>AI office</b>, live · 100+ specialists · 12 departments · one human approves · <b>move your cursor, click the dark</b> &nbsp;<b>map ↓</b></span></a>
+<a id="constellationKey" href="#work" aria-label="About the background animation: my AI operating system, 100 plus specialists across 12 departments, a human on every decision. See the labeled map in the AI section."><span class="pulse" aria-hidden="true"></span><span>this is my <b>AI office</b>, live · 100+ specialists · 12 departments · one human approves · <b>see the</b> &nbsp;<b>map ↓</b></span></a>
 <style id="fable-wow-css">
   #constellation{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:0;
     transition:opacity 1.1s ease}
@@ -1856,8 +1856,7 @@
   addEventListener("pointermove",function(e){
     px=(e.clientX/W-.5); py=(e.clientY/H-.5); pw=1;},{passive:true});
 
-  var packets=[], lastPk=0, bursts=[], mx=-1e4, my=-1e4;
-  addEventListener("pointermove",function(e){mx=e.clientX;my=e.clientY;},{passive:true});
+  var packets=[], lastPk=0, bursts=[];
   // COMMAND BURST: click the open backdrop and the office responds. Never
   // hijacks real UI: ignores clicks on links, buttons, inputs, and text blocks.
   addEventListener("click",function(e){
@@ -1907,16 +1906,6 @@
       ctx.globalAlpha=(n.dept?alpha*2.6:alpha*1.5)*amb;
       ctx.fillStyle=n.dept?n.c:TH.gold;
       ctx.beginPath();ctx.arc(n.x+ox,n.y+oy,n.s,0,7);ctx.fill();}
-    // CURSOR TETHERS — agents near the pointer wake up and link to it
-    if(!reduce&&mx>-9999){
-      for(i=0;i<N;i++){var nn=nodes[i],dxm=nn.x+ox-mx,dym=nn.y+oy-my,ddm=dxm*dxm+dym*dym;
-        if(ddm<26000){var w=1-ddm/26000;
-          ctx.globalAlpha=Math.min(.85,(alpha*2.8+w*.45))*amb;
-          ctx.strokeStyle=nn.dept?nn.c:TH.gold; ctx.lineWidth=.9;
-          ctx.beginPath();ctx.moveTo(nn.x+ox,nn.y+oy);ctx.lineTo(mx,my);ctx.stroke();
-          ctx.globalAlpha=Math.min(1,alpha*3+w)*amb; ctx.fillStyle=nn.dept?nn.c:TH.gold;
-          ctx.beginPath();ctx.arc(nn.x+ox,nn.y+oy,nn.s+w*2.2,0,7);ctx.fill();}}
-    }
     // BOOT TRAILS — assembly streaks
     if(!settled&&!skipBoot){ctx.lineWidth=1.1;
       for(i=0;i<N;i++){var tn=nodes[i],pe=ease(Math.max(0,boot-.06)),
