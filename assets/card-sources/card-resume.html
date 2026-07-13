@@ -1,28 +1,17 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><style>
-  /* RESUME card: the PAPER member of the family — inverted palette (warm white,
-     ink, deep gold) so it reads as the printed artifact it advertises, while
-     fonts, chip, grid, and gold keep it unmistakably the same brand. */
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{width:1200px;height:630px;background:#f5f3ec;font-family:Georgia,serif;overflow:hidden;position:relative}
-  .grid{position:absolute;inset:0;opacity:.55;
-    background-image:linear-gradient(rgba(20,16,8,.035) 1px,transparent 1px),
-                     linear-gradient(90deg,rgba(20,16,8,.035) 1px,transparent 1px);
-    background-size:75px 75px}
-  .panel{position:absolute;inset:24px;border:1px solid rgba(20,16,8,.14);border-radius:26px;background:rgba(255,255,255,.35)}
-  .chip{position:absolute;left:84px;top:76px;width:76px;height:76px;border-radius:18px;
-    background:#16140f;border:1px solid rgba(154,111,6,.5);display:flex;align-items:center;justify-content:center;
-    color:#e8b64c;font-size:34px;font-weight:700}
-  .kicker{position:absolute;left:186px;top:78px;font-family:Menlo,monospace;font-size:17px;
-    letter-spacing:5px;color:#9a6f06;font-weight:600}
-  .name{position:absolute;left:186px;top:104px;color:#16140f;font-size:44px;font-weight:700;letter-spacing:-.5px}
-  .rule{position:absolute;left:84px;right:84px;top:216px;height:2px;background:rgba(154,111,6,.45)}
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="base.css"><style>
+  /* RESUME card — dark like the rest of the family (Kyle's call, 2026-07-13).
+     Distinct through its layout: numbers-forward stat blocks, document rule. */
+  body{width:1200px;height:630px}
+  .chip{position:absolute;left:84px;top:76px}
+  .kicker{position:absolute;left:186px;top:78px;font-size:17px}
+  .name{position:absolute;left:186px;top:104px;color:#f3f0ea;font-size:44px;font-weight:700;letter-spacing:-.5px}
+  .rule{position:absolute;left:84px;right:84px;top:216px;height:1px;background:rgba(245,196,81,.35)}
   .stats{position:absolute;left:84px;right:84px;top:262px;display:flex;gap:26px}
-  .stat{flex:1;border:1px solid rgba(20,16,8,.15);border-radius:18px;padding:30px 28px 26px;background:#fffdf7;
-    box-shadow:0 1px 0 rgba(20,16,8,.06)}
-  .stat b{display:block;color:#9a6f06;font-size:35px;letter-spacing:-.5px;margin-bottom:10px;white-space:nowrap}
-  .stat span{color:#4c463c;font-size:19px;line-height:1.4;font-family:Helvetica,Arial,sans-serif}
-  .foot{position:absolute;left:84px;bottom:74px;color:#6e675b;font-size:18px;font-family:Helvetica,Arial,sans-serif;width:700px}
-  .domain{position:absolute;right:96px;bottom:70px;color:#9a6f06;font-family:Menlo,monospace;font-size:21px;letter-spacing:2px;font-weight:700}
+  .stat{flex:1;border:1px solid rgba(255,255,255,.10);border-radius:18px;padding:30px 28px 26px;background:rgba(255,255,255,.015)}
+  .stat b{display:block;color:#e8b64c;font-size:35px;letter-spacing:-.5px;margin-bottom:10px;white-space:nowrap}
+  .stat span{color:#b7b1a9;font-size:19px;line-height:1.4;font-family:Helvetica,Arial,sans-serif}
+  .foot{position:absolute;left:84px;bottom:74px;color:#8b857d;font-size:18px;font-family:Helvetica,Arial,sans-serif;width:700px}
+  .domain{position:absolute;right:96px;bottom:70px;font-size:21px;letter-spacing:2px}
 </style></head><body>
   <div class="grid"></div><div class="panel"></div>
   <div class="chip">KL</div>
@@ -35,5 +24,5 @@
     <div class="stat"><b>100+ agents</b><span>the AI operating system I built and run myself</span></div>
   </div>
   <div class="foot">Chief of Staff · Strategy &amp; Operations · PMO · Management Consulting</div>
-  <div class="domain">kylelittlejohn.com/resume</div>
+  <div class="domain mono gold">kylelittlejohn.com/resume</div>
 </body></html>
