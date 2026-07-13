@@ -1,0 +1,43 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="base.css"><style>
+  /* LinkedIn profile banner 1584x396. SAFE ZONES: avatar overlaps bottom-left
+     (~x<420 on mobile), UI can clip extreme edges — all text sits center-right,
+     vertically centered. Constellation runs full-bleed; denser on the left
+     where the avatar will sit over it (texture, not information). */
+  body{width:1584px;height:396px}
+  body::before{content:"";position:absolute;inset:0;
+    background:radial-gradient(700px 320px at 88% 0%, rgba(245,196,81,.12), transparent 65%),
+               radial-gradient(500px 300px at 8% 110%, rgba(245,196,81,.06), transparent 60%)}
+  svg.web{position:absolute;left:0;top:0;width:1584px;height:396px}
+  .kicker{position:absolute;left:640px;top:96px;font-size:15px;letter-spacing:4px}
+  .statement{position:absolute;left:640px;top:130px;width:760px;color:#f3f0ea;
+    font-size:38px;line-height:1.3;font-weight:600;letter-spacing:-.3px}
+  .domain{position:absolute;left:642px;top:264px;font-size:19px;letter-spacing:2px}
+</style></head><body>
+  <div class="grid"></div>
+  <svg class="web" viewBox="0 0 1584 396" xmlns="http://www.w3.org/2000/svg" fill="none">
+    <g stroke="#f5c451" stroke-opacity=".20" stroke-width="1.1">
+      <path d="M90 300 L200 180 L340 260 L470 140 L560 250 M200 180 L120 90 L280 60 L340 260 M470 140 L360 40 L280 60 M560 250 L620 120 L470 140 M120 90 L40 200 L90 300 M340 260 L430 350 L560 250 M620 120 L760 70 M760 70 L880 42 L1050 60 M880 42 L1000 220 M1050 60 L1250 48 L1350 50 M1250 48 L1370 330 L1450 160 M1350 50 L1450 160 L1544 90 M1000 220 L1050 356 L1370 330 M1050 356 L1240 360 M1450 160 L1520 280"/>
+    </g>
+    <g>
+      <circle cx="200" cy="180" r="6" fill="#e8954e"/><circle cx="470" cy="140" r="6" fill="#a78bfa"/>
+      <circle cx="340" cy="260" r="6" fill="#5aa2ff"/><circle cx="120" cy="90" r="6" fill="#34d399"/>
+      <circle cx="560" cy="250" r="6" fill="#f472b6"/><circle cx="280" cy="60" r="6" fill="#fbbf24"/>
+      <circle cx="880" cy="42" r="6" fill="#22d3ee"/><circle cx="1050" cy="60" r="6" fill="#f87171"/>
+      <circle cx="1250" cy="48" r="6" fill="#a3e635"/><circle cx="1370" cy="330" r="6" fill="#c084fc"/>
+      <circle cx="1450" cy="160" r="6" fill="#fb923c"/><circle cx="1050" cy="356" r="6" fill="#60a5fa"/>
+      <g fill="#f5c451" fill-opacity=".75">
+        <circle cx="90" cy="300" r="2.2"/><circle cx="360" cy="40" r="2.2"/><circle cx="620" cy="120" r="2.2"/>
+        <circle cx="430" cy="350" r="2.2"/><circle cx="40" cy="200" r="2.2"/><circle cx="760" cy="70" r="2.2"/>
+        <circle cx="1000" cy="220" r="2.2"/><circle cx="1350" cy="50" r="2.2"/><circle cx="1240" cy="360" r="2.2"/>
+        <circle cx="1520" cy="280" r="2.2"/><circle cx="1544" cy="90" r="2.2"/>
+      </g>
+      <circle cx="560" cy="250" r="0" fill="none"/>
+      <circle cx="470" cy="140" r="11" stroke="#f5c451" stroke-width="2"/>
+      <circle cx="470" cy="140" r="18" stroke="#f5c451" stroke-opacity=".35" stroke-width="1.3"/>
+    </g>
+  </svg>
+  <div class="kicker">100+ AGENTS &nbsp;·&nbsp; 12 DEPARTMENTS &nbsp;·&nbsp; ONE HUMAN APPROVES</div>
+  <div class="statement">I built an AI operating system that runs my
+    professional life, <span class="gold">and it is public.</span></div>
+  <div class="domain mono gold">kylelittlejohn.com &nbsp;·&nbsp; github.com/khlittlejohn-hue</div>
+</body></html>
