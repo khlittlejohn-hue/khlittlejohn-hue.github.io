@@ -409,7 +409,12 @@
     nav{position:fixed;left:0;top:0;bottom:0;height:100vh;width:288px;border-bottom:none;border-right:1px solid var(--line);
       background:linear-gradient(180deg, color-mix(in oklab,var(--accent) 6%,var(--panel2)), var(--panel2) 44%);backdrop-filter:none}
     .wrap{max-width:min(1100px, calc(100vw - 288px - 80px))}
-    nav .wrap{flex-direction:column;align-items:center;height:100%;gap:0;padding:48px 28px 36px;overflow-y:auto;max-width:none}
+    nav .wrap{flex-direction:column;align-items:center;height:100%;gap:0;padding:48px 28px 36px;overflow-y:auto;max-width:none;
+      scrollbar-width:thin;scrollbar-color:color-mix(in oklab,var(--gold) 45%,transparent) transparent}
+    nav .wrap::-webkit-scrollbar{width:5px}
+    nav .wrap::-webkit-scrollbar-track{background:transparent}
+    nav .wrap::-webkit-scrollbar-thumb{background:color-mix(in oklab,var(--gold) 45%,transparent);border-radius:999px}
+    nav .wrap::-webkit-scrollbar-thumb:hover{background:color-mix(in oklab,var(--gold) 65%,transparent)}
     nav .brand{flex-direction:column;align-items:center;text-align:center;gap:0;width:100%}
     /* portrait: BIG, centered, double refined ring + ambient glow */
     nav .brand .rail-portrait{width:212px;height:212px;border-radius:50%;border:3px solid color-mix(in oklab,var(--accent) 80%,transparent);object-fit:cover;
@@ -587,6 +592,16 @@
 
   <div class="cases">
 
+    <div class="case" id="hl-kaseya">
+      <div class="co">Kaseya · Senior Manager, Strategic Finance &amp; Business Operations · 2018&ndash;2020</div>
+      <div class="ttl">The operating and KPI spine of a $1.75B organization</div>
+      <div class="hero-stat">
+        <span class="num">14 acquisitions, 1 reporting stack</span>
+        <span class="cap">integrated onto the financial planning, KPI infrastructure, and board reporting I owned, as Kaseya scaled from a $350M to a $1.75B valuation</span>
+      </div>
+      <p class="case-sum">Partnered with the C-suite through Kaseya's scale, owning financial planning, KPI infrastructure, scenario modeling, and capital-allocation analysis. Built the Tableau, SQL, and board reporting that leadership used to set portfolio and acquisition priorities.</p>
+    </div>
+
     <div class="case-group" id="hl-amc-group">
       <div class="case-group-head">
         <div class="cgh-co">SOL Consulting | Director, Strategy &amp; Client Delivery</div>
@@ -628,16 +643,6 @@
       </div>
     </div>
 
-    <div class="case" id="hl-kaseya">
-      <div class="co">Kaseya · Senior Manager, Strategic Finance &amp; Business Operations · 2018&ndash;2020</div>
-      <div class="ttl">The operating and KPI spine of a $1.75B organization</div>
-      <div class="hero-stat">
-        <span class="num">14 acquisitions, 1 reporting stack</span>
-        <span class="cap">integrated onto the financial planning, KPI infrastructure, and board reporting I owned, as Kaseya scaled from a $350M to a $1.75B valuation</span>
-      </div>
-      <p class="case-sum">Partnered with the C-suite through Kaseya's scale, owning financial planning, KPI infrastructure, scenario modeling, and capital-allocation analysis. Built the Tableau, SQL, and board reporting that leadership used to set portfolio and acquisition priorities.</p>
-    </div>
-
     <div class="case" id="hl-aarete">
       <div class="co">AArete · Consulting Manager, bluebird bio engagement · 2017&ndash;2018</div>
       <div class="ttl">Cost transformation, quality held</div>
@@ -665,6 +670,9 @@
   #cases #impactCards{grid-template-columns:repeat(3,1fr)}
   @media(max-width:760px){#cases #impactCards{grid-template-columns:1fr}}
   #cases .case .ttl{text-transform:uppercase}
+  #cases .case{min-width:0}
+  #cases .case .hero-stat .num{overflow-wrap:break-word}
+  #hl-kaseya .hero-stat .num{font-size:29px;letter-spacing:-.4px;white-space:normal}
   #cases .case-sum{color:var(--ink2);font-size:14.5px;line-height:1.62;margin-top:14px;max-width:680px}
   #cases .case-group{grid-column:1/-1;background:color-mix(in oklab,var(--panel) 55%,transparent);border:1px solid var(--line);border-radius:20px;padding:24px 24px 22px}
   #cases .case-group-head{margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid var(--line)}
