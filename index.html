@@ -433,7 +433,8 @@
     .rail-value .rv-accent{color:var(--accent-bright);font-weight:600}
     :root[data-theme="light"] .rail-value .rv-accent{color:var(--accent-deep)}
     /* title line: BOLD, brighter, readable, not faded grey mono */
-    .rail-role{color:var(--ink2);font-weight:600;font-size:11px;line-height:1.95;margin-top:16px;font-family:var(--mono);letter-spacing:.3px;max-width:238px}
+    .rail-role{color:var(--ink2);font-weight:600;font-size:11px;margin-top:16px;font-family:var(--mono);letter-spacing:.3px;max-width:238px;display:flex;flex-direction:column;gap:6px}
+    .rail-role b{display:block}
     .rail-role b{color:var(--ink);font-weight:700}
     nav .links{display:flex;margin:30px 0 0 0;flex-direction:column;align-items:flex-start;gap:14px;font-size:14px;position:relative;padding-left:16px}
     nav .links a{transition:color .15s ease,transform .18s cubic-bezier(.2,.9,.3,1)}
@@ -471,10 +472,9 @@
     <img class="rail-portrait" src="assets/kyle.jpg"
          srcset="assets/kyle.jpg 1x, assets/kyle@2x.jpg 2x"
          alt="Kyle Littlejohn" width="212" height="212" fetchpriority="high" decoding="async">
-    <span class="rail-status"><span class="rs-dot" aria-hidden="true"></span>Open to roles</span>
     <span class="rail-name">Kyle Littlejohn</span>
     <span class="rail-value">The operating layer between <span class="rv-accent">strategy and execution</span>.</span>
-    <span class="rail-role"><b>Chief of Staff</b> · <b>Strategy &amp; Operations</b> · <b>Program &amp; Project Management</b> · <b>Management Consulting</b></span>
+    <span class="rail-role"><b>Strategy &amp; Operations</b><b>Chief of Staff</b><b>Program &amp; Project Management</b><b>Management Consulting</b></span>
   </a>
   <span class="links">
     <span class="nav-indicator" aria-hidden="true"></span>
@@ -502,11 +502,11 @@
       <div class="kick" data-anim style="--d:0">Chief of Staff &amp; Strategy / Operations Leader</div>
       <h1 class="hero-name" data-anim style="--d:60">Kyle <span class="last">Littlejohn</span></h1>
       <p class="lede" data-anim style="--d:200">I turn ambiguous mandates into measured results, and I built a production AI operating system that multiplies how fast that happens.</p>
-      <p class="hero-status" data-anim style="--d:240"><span class="hs-dot" aria-hidden="true"></span><span class="hs-main">Currently open to <b>Chief of Staff, Strategy &amp; Operations, PMO, and Management Consulting roles at the Director level.</b></span><span class="hs-loc">New York, Remote, and open to Sydney and London.</span></p>
+      <p class="hero-status" data-anim style="--d:240"><span class="hs-dot" aria-hidden="true"></span><span class="hs-main">Currently open to <b>Strategy &amp; Operations, Chief of Staff, PMO, and Management Consulting roles at the Director level.</b></span><span class="hs-loc">New York, Remote, and open to Sydney and London.</span></p>
       <div class="cta" data-anim style="--d:280">
         <a class="btn primary" href="assets/Kyle-Littlejohn-Resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a>
-        <a class="btn ghost" href="#cases">Career &amp; experience</a>
-        <a class="btn ghost" href="#work">AI expertise</a>
+        <a class="btn primary" href="#cases">Career &amp; Experience</a>
+        <a class="btn primary" href="#work">AI Expertise</a>
         <a class="btn ghost" href="#contact">Contact</a>
       </div>
     </div>
@@ -528,11 +528,11 @@
   <div class="snap">
     <div class="snap-cell">
       <span class="snap-k">Experience</span>
-      <span class="snap-v">12+ years as an operator beside founders and the C-suite</span>
+      <span class="snap-v">12+ years as an operator beside Founders, Creators, and the C-suite</span>
     </div>
     <div class="snap-cell">
       <span class="snap-k">Open to</span>
-      <span class="snap-v">Chief of Staff · Strategy &amp; Operations · Program &amp; Project Management · Transformation · Management Consulting</span>
+      <span class="snap-v">Strategy &amp; Operations · Chief of Staff · Program &amp; Project Management · Transformation · Management Consulting</span>
     </div>
     <div class="snap-cell">
       <span class="snap-k">Industries</span>
@@ -595,6 +595,16 @@
       </div>
       <div class="case-group-grid">
 
+        <div class="case" id="hl-account">
+          <div class="co">Account Manager</div>
+          <div class="ttl">An account grown 7.5x, and the team behind it</div>
+          <div class="hero-stat">
+            <span class="num">$280K → $2.1M</span>
+            <span class="cap">annual account growth by expanding scope across renewal cycles, with a team of 8 consultants</span>
+          </div>
+          <p class="case-sum">Owned the AMC Networks engagement as the operating liaison between SOL Consulting leadership and AMC executives. Read priorities, shaped scope, and sustained executive trust across renewal cycles while setting the cadence for a team of 8.</p>
+        </div>
+
         <div class="case" id="hl-avod">
           <div class="co">Senior Program Manager, FAST / AVOD</div>
           <div class="ttl">The operating cadence across 16 business units</div>
@@ -613,16 +623,6 @@
             <span class="cap">growth in digital revenue, with the AMC+ launch a key driver</span>
           </div>
           <p class="case-sum">Led delivery on the AMC+ subscription launch across Product, Engineering, QA, and Marketing, and built out the AMC+ identity feature for both the launch and the ongoing website enhancements. Turned roadmap, engineering delivery, and go-to-market into one trackable plan, surfacing launch risks and dependency conflicts early.</p>
-        </div>
-
-        <div class="case" id="hl-account">
-          <div class="co">Account Manager</div>
-          <div class="ttl">An account grown 7.5x, and the team behind it</div>
-          <div class="hero-stat">
-            <span class="num">$280K → $2.1M</span>
-            <span class="cap">annual account growth by expanding scope across renewal cycles, with a team of 8 consultants</span>
-          </div>
-          <p class="case-sum">Owned the AMC Networks engagement as the operating liaison between SOL Consulting leadership and AMC executives. Read priorities, shaped scope, and sustained executive trust across renewal cycles while setting the cadence for a team of 8.</p>
         </div>
 
       </div>
