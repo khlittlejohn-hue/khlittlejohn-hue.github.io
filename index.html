@@ -786,8 +786,6 @@
   .now-card:hover{transform:translateY(-3px);border-color:color-mix(in oklab,var(--gold) 38%,var(--line));
     box-shadow:0 16px 40px -24px color-mix(in oklab,var(--gold) 60%,transparent)}
   .now-card:hover::before{transform:scaleX(1)}
-  .nc-tag{display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;
-    color:var(--gold-ink);margin-bottom:13px}
   .nc-ic{display:block;line-height:1;margin-bottom:13px;color:var(--gold-ink)}
   .now-card h3{font-family:var(--serif);font-size:19px;font-weight:560;line-height:1.2;margin:0 0 9px;color:var(--ink)}
   .now-card p{font-size:14.5px;line-height:1.62;color:var(--ink);margin:0}
@@ -1671,7 +1669,7 @@
   function card(r){
     var feat=r.name===FEAT;
     var lang=r.language?'<span class="gh-lang"><i style="background:'+(LANG[r.language]||'#5d6b7d')+'"></i>'+esc(r.language)+'</span>':(feat?'<span class="gh-lang"><i style="background:#d97757"></i>Claude Code</span>':'');
-    return '<a class="gh-card'+(feat?' feat':'')+'" href="'+r.html_url+'" target="_blank" rel="noopener">'+
+    return '<a class="gh-card'+(feat?' feat':'')+'" href="'+esc(r.html_url)+'" target="_blank" rel="noopener">'+
       '<div class="gh-card-top"><span class="gh-name">'+esc(r.name)+(feat?'<span class="pin">Flagship</span>':'')+'</span>'+
       (r.stargazers_count>0?'<span class="gh-star"><svg class="fi" width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> '+r.stargazers_count+'</span>':'')+'</div>'+
       '<p class="gh-desc">'+(esc((r.description||'').replace(/\s*—\s*/g,', '))||'·')+'</p>'+
