@@ -222,13 +222,13 @@
   #experience,#education,#approach,#contact{content-visibility:auto;contain-intrinsic-size:auto 600px}
 
   /* why */
-  .why{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .why{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;align-items:stretch}
   .why .c{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;transition:border-color .18s,transform .12s;
-    display:grid;grid-template-columns:56px 1fr;column-gap:16px;row-gap:13px;align-items:center}
+    display:flex;flex-direction:column;align-items:flex-start}
   .why .c:hover{border-color:color-mix(in oklab, var(--gold) 30%, var(--line));transform:translateY(-2px)}
-  .why .c .ic{grid-row:1 / span 2;grid-column:1;align-self:center;display:inline-flex;align-items:center;justify-content:center;width:58px;height:58px;border-radius:15px;color:var(--gold-ink);background:color-mix(in oklab,var(--gold) 13%,var(--panel2));border:1px solid color-mix(in oklab,var(--gold) 32%,var(--line));box-shadow:inset 0 1px 0 color-mix(in oklab,#fff 8%,transparent)}
-  .why .c b{grid-row:1;grid-column:2;font-size:16.5px;font-weight:600;line-height:1.3;align-self:end}
-  .why .c span{grid-row:2;grid-column:2;color:var(--ink2);font-size:14px;line-height:1.55;align-self:start}
+  .why .c .ic{display:inline-flex;align-items:center;justify-content:center;width:58px;height:58px;border-radius:15px;color:var(--gold-ink);background:color-mix(in oklab,var(--gold) 13%,var(--panel2));border:1px solid color-mix(in oklab,var(--gold) 32%,var(--line));box-shadow:inset 0 1px 0 color-mix(in oklab,#fff 8%,transparent);margin-bottom:16px}
+  .why .c b{width:100%;text-align:center;font-size:16.5px;font-weight:600;line-height:1.3;white-space:nowrap;margin-bottom:11px}
+  .why .c span{width:100%;color:var(--ink);font-size:14px;line-height:1.6}
 
   /* Industries credibility band: seamless marquee, edge-faded, pauses on hover */
   .industries{padding-top:14px;padding-bottom:14px}
@@ -264,8 +264,7 @@
   .proof .m{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 18px;text-align:center;transition:border-color .18s,transform .12s}
   .proof .m:hover{border-color:color-mix(in oklab, var(--gold) 30%, var(--line));transform:translateY(-2px)}
   .proof .m .big{font-size:36px;font-weight:600;letter-spacing:-1px;line-height:1;font-family:var(--serif);
-    background:linear-gradient(100deg,var(--grad-a),var(--grad-b));-webkit-background-clip:text;background-clip:text;color:transparent;
-    font-variant-numeric:tabular-nums}
+    color:var(--gold-ink);font-variant-numeric:tabular-nums}
   .proof .m .lbl{display:block;margin-top:10px;color:var(--ink2);font-size:13px;line-height:1.4}
 
   /* ===== Impact, Visualized: interactive filterable metric board ===== */
@@ -287,7 +286,7 @@
   .ic:hover{border-color:color-mix(in oklab, var(--gold) 38%, var(--line));transform:translateY(-3px);box-shadow:0 16px 34px -24px rgba(0,0,0,.6)}
   .ic:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
   .ic .ic-v{font-family:var(--serif);font-size:33px;font-weight:600;letter-spacing:-1px;line-height:1;font-variant-numeric:tabular-nums;
-    background:linear-gradient(100deg,var(--grad-a),var(--grad-b));-webkit-background-clip:text;background-clip:text;color:transparent}
+    color:var(--gold-ink)}
   .ic .ic-l{display:block;margin-top:9px;color:var(--ink2);font-size:12.5px;line-height:1.4}
   .ic .ic-src{display:flex;align-items:center;gap:5px;margin-top:11px;color:var(--ink3);font-size:10.5px;letter-spacing:.5px;
     text-transform:uppercase;font-family:var(--mono)}
@@ -319,9 +318,8 @@
   .case .ttl{font-family:var(--serif);font-size:20px;font-weight:600;letter-spacing:-.3px;margin:6px 0 16px;line-height:1.18}
   .case .hero-stat{display:flex;flex-direction:column;align-items:center;text-align:center;gap:7px;padding:20px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
   .case .hero-stat .num{font-family:var(--serif);font-size:44px;font-weight:700;letter-spacing:-1px;line-height:1;
-    background:linear-gradient(100deg,var(--grad-a),var(--grad-b));-webkit-background-clip:text;background-clip:text;color:transparent;
-    font-variant-numeric:tabular-nums;white-space:nowrap}
-  .case .hero-stat .cap{font-size:13px;color:var(--ink2);line-height:1.4;max-width:440px}
+    color:var(--gold-ink);font-variant-numeric:tabular-nums;white-space:nowrap}
+  .case .hero-stat .cap{font-size:14px;color:var(--ink);line-height:1.5;max-width:440px}
   .case .cs{margin-top:16px}
   .case .cs .row{display:flex;gap:10px;margin:11px 0}
   .case .cs .k{flex:0 0 76px;font-size:10.5px;font-weight:500;letter-spacing:.6px;text-transform:uppercase;color:var(--ink3);padding-top:2px;font-family:var(--mono)}
@@ -553,10 +551,9 @@
   <div class="why">
     <div class="c"><div class="ic"><svg class="fi" width="27" height="27" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div><b>Handed the hard problems</b><span>Founders and C-suite leaders give me the initiative no one else owns. I set the cadence, align people who don't report to me, and get it delivered.</span></div>
     <div class="c"><div class="ic"><svg class="fi" width="27" height="27" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div><b>AI-native, and proven</b><span>I designed and run a production AI operating system: 100+ specialists across 12 departments, with a human approving every decision that leaves it. I can build the system and then brief the board on it.</span></div>
-    <div class="c"><div class="ic"><svg class="fi" width="27" height="27" viewBox="0 0 24 24" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div><b>Specific, real outcomes</b><span>Kept a SaaS organization aligned as it scaled from a $350M to a $1.75B valuation. Grew an account from $280K to $2.1M. Compressed execution cycles by roughly 30% without direct authority. The record below documents each.</span></div>
+    <div class="c"><div class="ic"><svg class="fi" width="27" height="27" viewBox="0 0 24 24" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div><b>Specific, real outcomes</b><span>Kept a SaaS organization aligned through a $350M to $1.75B valuation, grew an account from $280K to $2.1M, and cut execution cycles by roughly 30% without direct authority. The record below documents each.</span></div>
   </div>
 </div></section>
-<style>#why .c b{text-transform:uppercase;letter-spacing:.4px}</style>
 
 <section class="industries reveal" aria-label="Industries"><div class="wrap">
   <p class="ind-eyebrow">Operating experience across</p>
@@ -579,7 +576,7 @@
 
 <section id="cases" class="reveal"><div class="wrap">
   <h2>Engagement Highlights</h2>
-  <p class="lead-p" style="margin-bottom:30px">6 engagements, and the number each one produced.</p>
+  <p class="lead-p" style="margin-bottom:30px">Selected highlights from the work, and the number each one produced.</p>
 
   <div class="cases">
 
@@ -587,17 +584,17 @@
       <div class="co">Kaseya · Senior Manager, Strategic Finance &amp; Business Operations · 2018&ndash;2020</div>
       <div class="ttl">The operating and KPI spine of a $1.75B organization</div>
       <div class="hero-stat">
-        <span class="num">14 acquisitions, 1 reporting stack</span>
-        <span class="cap">integrated onto the financial planning, KPI infrastructure, and board reporting I owned, as Kaseya scaled from a $350M to a $1.75B valuation</span>
+        <span class="num">$350M → $1.75B</span>
+        <span class="cap">valuation growth through 14 acquisitions and strategic expansion, integrated onto the financial planning, KPI infrastructure, and board reporting I owned</span>
       </div>
       <p class="case-sum">Partnered with the C-suite through Kaseya's scale, owning financial planning, KPI infrastructure, scenario modeling, and capital-allocation analysis. Built the Tableau, SQL, and board reporting that leadership used to set portfolio and acquisition priorities.</p>
     </div>
 
     <div class="case-group" id="hl-amc-group">
       <div class="case-group-head">
-        <div class="cgh-co">SOL Consulting | Director, Strategy &amp; Client Delivery</div>
-        <div class="cgh-ttl">AMC Networks Enterprise Transformation (2020&ndash;2026)</div>
-        <p class="cgh-sum">Led a single 6 year engagement spanning 3 concurrent leadership workstreams.</p>
+        <div class="cgh-co">SOL Consulting | Director, Strategy &amp; Client Delivery · 2020&ndash;2026</div>
+        <div class="cgh-ttl">AMC Networks Enterprise Transformation</div>
+        <p class="cgh-sum">Led a single 5+ year engagement spanning 3 concurrent leadership workstreams.</p>
       </div>
       <div class="case-group-grid">
 
@@ -612,7 +609,7 @@
         </div>
 
         <div class="case" id="hl-avod">
-          <div class="co">Senior Program Manager, FAST / AVOD</div>
+          <div class="co">Senior Program Manager</div>
           <div class="ttl">The operating cadence across 16 business units</div>
           <div class="hero-stat">
             <span class="num">~30%</span>
@@ -622,26 +619,26 @@
         </div>
 
         <div class="case" id="hl-amcplus">
-          <div class="co">Senior Technical Project Manager, Digital Transformation</div>
+          <div class="co">Senior Technical Project Manager</div>
           <div class="ttl">The AMC+ launch and identity feature</div>
           <div class="hero-stat">
             <span class="num">~65%</span>
             <span class="cap">growth in digital revenue, with the AMC+ launch a key driver</span>
           </div>
-          <p class="case-sum">Led delivery on the AMC+ subscription launch across Product, Engineering, QA, and Marketing, and built out the AMC+ identity feature for both the launch and the ongoing website enhancements. Turned roadmap, engineering delivery, and go-to-market into one trackable plan, surfacing launch risks and dependency conflicts early.</p>
+          <p class="case-sum">Led the digital transformation behind the AMC+ subscription launch across Product, Engineering, QA, and Marketing, and built out the AMC+ identity feature for both the launch and the ongoing website enhancements. Turned roadmap, engineering delivery, and go-to-market into one trackable plan, surfacing launch risks and dependency conflicts early.</p>
         </div>
 
       </div>
     </div>
 
     <div class="case" id="hl-aarete">
-      <div class="co">AArete · Consulting Manager, bluebird bio engagement · 2017&ndash;2018</div>
+      <div class="co">AArete · Consulting Manager · 2017&ndash;2018</div>
       <div class="ttl">Cost transformation, quality held</div>
       <div class="hero-stat">
         <span class="num">$1M+</span>
         <span class="cap">in annualized savings, SLA quality preserved</span>
       </div>
-      <p class="case-sum">Directed an operational transformation for a gene-therapy client across Procurement, Legal, HR, and Operations. Ran 5 initiatives spanning scoping, renegotiation, and redesign, delivering over $1M in annualized savings with service levels fully preserved.</p>
+      <p class="case-sum">Directed an operational transformation for gene-therapy company bluebird bio across Procurement, Legal, HR, and Operations. Ran 5 initiatives spanning scoping, renegotiation, and redesign, delivering over $1M in annualized savings with service levels fully preserved.</p>
     </div>
 
     <div class="case" id="hl-optimity">
@@ -660,7 +657,6 @@
   #cases .hl-impact-label{font-family:var(--mono);font-size:11px;letter-spacing:1.8px;text-transform:uppercase;color:var(--gold-ink);font-weight:700;margin:28px 0 14px}
   #cases #impactCards{grid-template-columns:repeat(3,1fr)}
   @media(max-width:760px){#cases #impactCards{grid-template-columns:1fr}}
-  #cases .case .ttl{text-transform:uppercase}
   #cases .case{min-width:0}
   #hl-kaseya{grid-column:1/-1;display:grid;grid-template-columns:1.1fr 1.4fr;gap:32px;align-items:center;padding:28px 32px}
   #hl-kaseya .co,#hl-kaseya .ttl{grid-column:1/-1}
@@ -670,13 +666,14 @@
   @media(max-width:760px){#hl-kaseya{grid-template-columns:1fr}#hl-kaseya .hero-stat{text-align:center;align-items:center}}
   #cases .case .hero-stat .num{overflow-wrap:break-word}
   #hl-kaseya .hero-stat .num{font-size:29px;letter-spacing:-.4px;white-space:normal}
-  #cases .case-sum{color:var(--ink2);font-size:14.5px;line-height:1.62;margin-top:14px;max-width:680px}
+  #cases .case-sum{color:var(--ink);font-size:15.5px;line-height:1.65;margin-top:14px;max-width:680px}
   #cases .case-group{grid-column:1/-1;background:color-mix(in oklab,var(--panel) 55%,transparent);border:1px solid var(--line);border-radius:20px;padding:24px 24px 22px}
   #cases .case-group-head{margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid var(--line)}
   #cases .cgh-co{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold-ink);font-weight:700}
   #cases .cgh-ttl{font-family:var(--serif);font-size:20px;font-weight:600;letter-spacing:-.2px;margin-top:6px}
-  #cases .cgh-sum{color:var(--ink2);font-size:14px;margin-top:6px}
+  #cases .cgh-sum{color:var(--ink);font-size:14.5px;margin-top:6px}
   #cases .case-group-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+  #cases .case-group .co,#cases .case-group .ttl{text-align:center}
   #cases .case-group .case{margin:0;min-width:0}
   #cases .case-group .hero-stat .num{font-size:26px;letter-spacing:-.5px}
   @media(max-width:900px){#cases .case-group-grid{grid-template-columns:1fr}}
