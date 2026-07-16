@@ -671,6 +671,12 @@
   @media(max-width:760px){#cases #impactCards{grid-template-columns:1fr}}
   #cases .case .ttl{text-transform:uppercase}
   #cases .case{min-width:0}
+  #hl-kaseya{grid-column:1/-1;display:grid;grid-template-columns:1.1fr 1.4fr;gap:32px;align-items:center;padding:28px 32px}
+  #hl-kaseya .co,#hl-kaseya .ttl{grid-column:1/-1}
+  #hl-kaseya .hero-stat{border:none;padding:0;text-align:left;align-items:flex-start}
+  #hl-kaseya .hero-stat .num{font-size:36px}
+  #hl-kaseya .case-sum{margin-top:0}
+  @media(max-width:760px){#hl-kaseya{grid-template-columns:1fr}#hl-kaseya .hero-stat{text-align:center;align-items:center}}
   #cases .case .hero-stat .num{overflow-wrap:break-word}
   #hl-kaseya .hero-stat .num{font-size:29px;letter-spacing:-.4px;white-space:normal}
   #cases .case-sum{color:var(--ink2);font-size:14.5px;line-height:1.62;margin-top:14px;max-width:680px}
