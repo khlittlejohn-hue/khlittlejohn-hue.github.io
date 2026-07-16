@@ -211,6 +211,8 @@
   h2{font-size:31px;text-transform:uppercase;letter-spacing:.2px;color:var(--ink);font-weight:800;font-family:var(--sans);margin-bottom:28px;display:flex;align-items:center;gap:14px;line-height:1.1}
   h2::before{content:"";flex:0 0 auto;width:38px;height:4px;border-radius:2px;background:var(--gold)}
   .lead-p{font-size:18px;color:var(--ink);max-width:none}
+  /* shared monoline (Feather) icon base — swaps native emoji for a consistent line-icon system */
+  .fi{fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;display:inline-block;vertical-align:middle;flex:0 0 auto}
   /* below-the-fold render skipping for snappy scroll */
   #experience,#education,#approach,#contact{content-visibility:auto;contain-intrinsic-size:auto 600px}
 
@@ -219,7 +221,7 @@
   .why .c{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;transition:border-color .18s,transform .12s;
     display:grid;grid-template-columns:56px 1fr;column-gap:16px;row-gap:13px;align-items:center}
   .why .c:hover{border-color:color-mix(in oklab, var(--gold) 30%, var(--line));transform:translateY(-2px)}
-  .why .c .ic{grid-row:1 / span 2;grid-column:1;align-self:center;display:inline-flex;align-items:center;justify-content:center;width:58px;height:58px;border-radius:15px;font-size:28px;background:color-mix(in oklab,var(--gold) 13%,var(--panel2));border:1px solid color-mix(in oklab,var(--gold) 32%,var(--line));box-shadow:inset 0 1px 0 color-mix(in oklab,#fff 8%,transparent)}
+  .why .c .ic{grid-row:1 / span 2;grid-column:1;align-self:center;display:inline-flex;align-items:center;justify-content:center;width:58px;height:58px;border-radius:15px;color:var(--gold-ink);background:color-mix(in oklab,var(--gold) 13%,var(--panel2));border:1px solid color-mix(in oklab,var(--gold) 32%,var(--line));box-shadow:inset 0 1px 0 color-mix(in oklab,#fff 8%,transparent)}
   .why .c b{grid-row:1;grid-column:2;font-size:16.5px;font-weight:600;line-height:1.3;align-self:end}
   .why .c span{grid-row:2;grid-column:2;color:var(--ink2);font-size:14px;line-height:1.55;align-self:start}
 
@@ -304,7 +306,7 @@
   @media(prefers-reduced-motion:reduce){.ic-bar{transition:none;transform:scaleY(1)} .ic{transition:border-color .18s}}
 
   /* cases */
-  .cases{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .cases{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
   .case{background:var(--card);border:1px solid var(--line);border-radius:18px;
     padding:24px 24px 26px;display:flex;flex-direction:column;transition:border-color .18s,transform .14s,box-shadow .18s}
   .case:hover{border-color:color-mix(in oklab, var(--gold) 30%, var(--line));transform:translateY(-3px);box-shadow:0 18px 40px -26px rgba(0,0,0,.6)}
@@ -406,6 +408,7 @@
     #progress{left:288px;width:calc(100% - 288px)}
     nav{position:fixed;left:0;top:0;bottom:0;height:100vh;width:288px;border-bottom:none;border-right:1px solid var(--line);
       background:linear-gradient(180deg, color-mix(in oklab,var(--accent) 6%,var(--panel2)), var(--panel2) 44%);backdrop-filter:none}
+    .wrap{max-width:min(1100px, calc(100vw - 288px - 80px))}
     nav .wrap{flex-direction:column;align-items:center;height:100%;gap:0;padding:48px 28px 36px;overflow-y:auto;max-width:none}
     nav .brand{flex-direction:column;align-items:center;text-align:center;gap:0;width:100%}
     /* portrait: BIG, centered, double refined ring + ambient glow */
@@ -552,9 +555,9 @@
 <section id="why" class="reveal"><div class="wrap">
   <h2>Why Work With Me</h2>
   <div class="why">
-    <div class="c"><div class="ic">🎯</div><b>Handed the hard problems</b><span>Founders and C-suite leaders give me the initiative no one else owns. I set the cadence, align people who don't report to me, and get it delivered.</span></div>
-    <div class="c"><div class="ic">⚙️</div><b>AI-native, and proven</b><span>I designed and run a production AI operating system: 100+ specialists across 12 departments, with a human approving every decision that leaves it. I can build the system and then brief the board on it.</span></div>
-    <div class="c"><div class="ic">📈</div><b>Specific, real outcomes</b><span>Kept a SaaS organization aligned as it scaled from a $350M to a $1.75B valuation. Grew an account from $280K to $2.1M. Compressed execution cycles by roughly 30% without direct authority. The record below documents each.</span></div>
+    <div class="c"><div class="ic"><svg class="fi" width="27" height="27" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div><b>Handed the hard problems</b><span>Founders and C-suite leaders give me the initiative no one else owns. I set the cadence, align people who don't report to me, and get it delivered.</span></div>
+    <div class="c"><div class="ic"><svg class="fi" width="27" height="27" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div><b>AI-native, and proven</b><span>I designed and run a production AI operating system: 100+ specialists across 12 departments, with a human approving every decision that leaves it. I can build the system and then brief the board on it.</span></div>
+    <div class="c"><div class="ic"><svg class="fi" width="27" height="27" viewBox="0 0 24 24" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div><b>Specific, real outcomes</b><span>Kept a SaaS organization aligned as it scaled from a $350M to a $1.75B valuation. Grew an account from $280K to $2.1M. Compressed execution cycles by roughly 30% without direct authority. The record below documents each.</span></div>
   </div>
 </div></section>
 <style>#why .c b{text-transform:uppercase;letter-spacing:.4px}</style>
@@ -668,8 +671,9 @@
   #cases .cgh-co{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold-ink);font-weight:700}
   #cases .cgh-ttl{font-family:var(--serif);font-size:20px;font-weight:600;letter-spacing:-.2px;margin-top:6px}
   #cases .cgh-sum{color:var(--ink2);font-size:14px;margin-top:6px}
-  #cases .case-group-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-  #cases .case-group .case{margin:0}
+  #cases .case-group-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+  #cases .case-group .case{margin:0;min-width:0}
+  #cases .case-group .hero-stat .num{font-size:26px;letter-spacing:-.5px}
   @media(max-width:900px){#cases .case-group-grid{grid-template-columns:1fr}}
 </style>
 
@@ -794,7 +798,7 @@
   .now-card:hover::before{transform:scaleX(1)}
   .nc-tag{display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;
     color:var(--gold-ink);margin-bottom:13px}
-  .nc-ic{font-size:22px;line-height:1;margin-bottom:13px}
+  .nc-ic{display:block;line-height:1;margin-bottom:13px;color:var(--gold-ink)}
   .now-card h3{font-family:var(--serif);font-size:19px;font-weight:560;line-height:1.2;margin:0 0 9px;color:var(--ink)}
   .now-card p{font-size:14.5px;line-height:1.62;color:var(--ink2);margin:0}
   .nc-meta{margin-top:auto;padding-top:16px;font-family:var(--mono);font-size:11.5px;color:var(--ink3);
@@ -821,35 +825,35 @@
   <div class="now-grid">
     <article class="now-card">
       <span class="nc-tag">Lane</span>
-      <span class="nc-ic" aria-hidden="true">🎯</span>
+      <span class="nc-ic" aria-hidden="true"><svg class="fi" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span>
       <h3>Chief of Staff</h3>
       <p>The operator a CEO or COO hands the ambiguous mandate to. I run the operating cadence and OKRs, prepare the board and QBR materials, and drive the cross-functional initiatives no one else owns. Done in direct partnership with the C-suite of a $1.75B organization.</p>
     </article>
 
     <article class="now-card">
       <span class="nc-tag">Lane</span>
-      <span class="nc-ic" aria-hidden="true">📊</span>
+      <span class="nc-ic" aria-hidden="true"><svg class="fi" width="24" height="24" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span>
       <h3>Strategy &amp; Operations</h3>
       <p>Turning ambiguous executive questions into funded, measured plans. I build the scenario and capital-allocation models behind the decision, stand up the KPI infrastructure, and hold teams to the targets. Hands-on in SQL, Tableau, and Looker, not just the deck.</p>
     </article>
 
     <article class="now-card">
       <span class="nc-tag">Lane</span>
-      <span class="nc-ic" aria-hidden="true">🗂️</span>
+      <span class="nc-ic" aria-hidden="true"><svg class="fi" width="24" height="24" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></span>
       <h3>Program &amp; Project Management</h3>
       <p>Complex cross-functional programs run end to end, with integrated plans, governance, and dependency and risk tracking that move work from mandate to measured delivery. Proven across 14 acquisitions at Kaseya and a 16-business-unit portfolio at AMC Networks.</p>
     </article>
 
     <article class="now-card">
       <span class="nc-tag">Lane</span>
-      <span class="nc-ic" aria-hidden="true">🧭</span>
+      <span class="nc-ic" aria-hidden="true"><svg class="fi" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></span>
       <h3>Management Consulting</h3>
       <p>Engagement leadership and client delivery. I frame the problem, align the sponsors, and run the multi-year engagement that turns a client mandate into measurable outcomes. Grew the AMC Networks account from $280K to $2.1M and led a biotech transformation to $1M+ in savings.</p>
     </article>
 
     <article class="now-card now-ai">
       <span class="nc-tag">Not a 5th lane</span>
-      <span class="nc-ic" aria-hidden="true">⚙️</span>
+      <span class="nc-ic" aria-hidden="true"><svg class="fi" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span>
       <h3>AI, put to work inside real operations</h3>
       <p>AI is the multiplier inside all 4 lanes, not a separate one. The proof is the 100+ specialist operating system I built and run, with a human approving every decision that leaves it.</p>
       <a class="nc-link" href="#work">See the system below →</a>
@@ -893,7 +897,7 @@
   </div>
   <p class="skills-certs">Certifications &nbsp;·&nbsp; Professional Scrum Master I &nbsp;·&nbsp; Google Project Management &nbsp;·&nbsp; Generative AI for Project Managers &nbsp;·&nbsp; AI Foundations for Business</p>
   <div class="resume-actions" style="margin-top:24px">
-    <a class="btn primary" href="assets/Kyle-Littlejohn-Resume.pdf" target="_blank" rel="noopener">📄 Open Resume</a>
+    <a class="btn primary" href="assets/Kyle-Littlejohn-Resume.pdf" target="_blank" rel="noopener"><svg class="fi" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>Open Resume</a>
   </div>
 </div></section>
 <style>
@@ -1082,7 +1086,7 @@
   .gh-card.feat .gh-name{color:var(--gold-ink)}
   .gh-name .pin{font-size:9.5px;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:var(--gold-ink);font-family:var(--mono);
     border:1px solid var(--flag-line);border-radius:6px;padding:2px 7px;margin-left:8px;vertical-align:middle}
-  .gh-star{font-size:13px;color:var(--ink2);font-variant-numeric:tabular-nums;white-space:nowrap;font-family:var(--mono)}
+  .gh-star{display:inline-flex;align-items:center;gap:4px;font-size:13px;color:var(--ink2);font-variant-numeric:tabular-nums;white-space:nowrap;font-family:var(--mono)}
   .gh-desc{color:var(--ink2);font-size:14px;line-height:1.5;margin:10px 0 14px;flex:1}
   .gh-foot{display:flex;align-items:center;gap:16px;font-size:11.5px;color:var(--ink3);font-family:var(--mono)}
   .gh-foot .gh-lang{display:inline-flex;align-items:center;gap:6px}
@@ -1308,7 +1312,7 @@
   .bcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;
     box-shadow:inset 0 1px 0 color-mix(in oklab,#fff 6%,transparent);transition:border-color .18s,transform .12s;display:flex;flex-direction:column}
   .bcard:hover{border-color:color-mix(in oklab,var(--gold) 32%,var(--line));transform:translateY(-3px)}
-  .bcard .bic{font-size:26px;display:block;margin-bottom:11px;line-height:1}
+  .bcard .bic{display:block;margin-bottom:11px;line-height:1;color:var(--gold-ink)}
   .bcard b{font-family:var(--serif);font-size:20px;font-weight:600;display:block;letter-spacing:-.2px}
   .bfeat{margin-top:auto;display:inline-flex;align-items:center;gap:7px;padding-top:14px;
     font-weight:700;color:var(--ink);font-size:13px;letter-spacing:.2px}
@@ -1324,22 +1328,22 @@
   <p class="lead-p" style="margin-bottom:24px">What I do when I'm not running someone's operating cadence.</p>
   <div class="beyond-grid">
     <div class="bcard">
-      <span class="bic">🏃</span>
+      <span class="bic"><svg class="fi" width="25" height="25" viewBox="0 0 24 24" aria-hidden="true"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span>
       <b>Endurance Athlete</b>
       <p>An endurance athlete across Hyrox, road marathons, and ultras, with 25+ races completed and more on the calendar.</p>
-      <span class="bfeat"><span class="star">★</span> Featured on OutSports</span>
+      <span class="bfeat"><span class="star"><svg class="fi" width="13" height="13" viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span> Featured on OutSports</span>
     </div>
     <div class="bcard">
-      <span class="bic">🌍</span>
+      <span class="bic"><svg class="fi" width="25" height="25" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
       <b>Travel Fanatic</b>
       <p>50+ countries and counting, with a disciplined approach to making the most of limited time away from work.</p>
-      <a class="bfeat" href="https://www.cntraveler.com/story/how-to-hack-your-companys-vacation-policy" target="_blank" rel="noopener"><span class="star">★</span> Featured in Condé Nast Traveler ↗</a>
+      <a class="bfeat" href="https://www.cntraveler.com/story/how-to-hack-your-companys-vacation-policy" target="_blank" rel="noopener"><span class="star"><svg class="fi" width="13" height="13" viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span> Featured in Condé Nast Traveler ↗</a>
     </div>
     <div class="bcard">
-      <span class="bic">🍳</span>
+      <span class="bic"><svg class="fi" width="25" height="25" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></span>
       <b>Foodie</b>
       <p>A dedicated home cook, continually exploring new cuisines and techniques.</p>
-      <span class="bfeat"><span class="star">★</span> Featured on Food Network's <i>Must Love Food</i></span>
+      <span class="bfeat"><span class="star"><svg class="fi" width="13" height="13" viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span> Featured on Food Network's <i>Must Love Food</i></span>
     </div>
   </div>
 </div></section>
@@ -1361,7 +1365,7 @@
       <span class="res-arr">Open GitHub →</span>
     </a>
     <a class="res-card" href="assets/Kyle-Littlejohn-Resume.pdf" target="_blank" rel="noopener">
-      <span class="res-ic">📄</span>
+      <span class="res-ic"><svg class="fi" width="17" height="17" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></span>
       <b>Resume</b>
       <span class="res-d">The full detail on every role, as a PDF.</span>
       <span class="res-arr">Open Resume →</span>
@@ -1679,7 +1683,7 @@
     var lang=r.language?'<span class="gh-lang"><i style="background:'+(LANG[r.language]||'#5d6b7d')+'"></i>'+esc(r.language)+'</span>':(feat?'<span class="gh-lang"><i style="background:#d97757"></i>Claude Code</span>':'');
     return '<a class="gh-card'+(feat?' feat':'')+'" href="'+r.html_url+'" target="_blank" rel="noopener">'+
       '<div class="gh-card-top"><span class="gh-name">'+esc(r.name)+(feat?'<span class="pin">Flagship</span>':'')+'</span>'+
-      (r.stargazers_count>0?'<span class="gh-star">★ '+r.stargazers_count+'</span>':'')+'</div>'+
+      (r.stargazers_count>0?'<span class="gh-star"><svg class="fi" width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> '+r.stargazers_count+'</span>':'')+'</div>'+
       '<p class="gh-desc">'+(esc((r.description||'').replace(/\s*—\s*/g,', '))||'·')+'</p>'+
       '<div class="gh-foot">'+lang+'<span class="gh-upd">updated '+ago(r.pushed_at)+'</span></div></a>';
   }
@@ -1810,16 +1814,16 @@
      show-someone moment.
      ═══════════════════════════════════════════════════════════════════════ -->
 <canvas id="constellation" aria-hidden="true"></canvas>
-<a id="constellationKey" href="#work" aria-label="About the background animation: my AI operating system, 100 plus specialists across 12 departments, a human on every decision. See the labeled map in the AI section."><span class="pulse" aria-hidden="true"></span><span>this is my <b>AI office</b>, live · 100+ specialists · 12 departments · one human approves · <b>see the</b> &nbsp;<b>map ↓</b></span></a>
+<a id="constellationKey" href="#work" aria-label="About the background animation: my AI operating system, 100 plus specialists across 12 departments, a human on every decision. See the labeled map in the AI section."><span class="pulse" aria-hidden="true"></span><span><b>100+ specialists</b> · 12 departments · human-approved · <b>see the system ↓</b></span></a>
 <style id="fable-wow-css">
   #constellation{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:0;
     transition:opacity 1.1s ease}
   #constellation.on{opacity:1}
   .btn{will-change:transform}
   #constellationKey{position:fixed;right:18px;bottom:16px;z-index:4;display:flex;align-items:center;
-    gap:8px;background:color-mix(in oklab,var(--bg) 82%,transparent);backdrop-filter:blur(8px);
-    border:1px solid color-mix(in oklab,var(--gold) 35%,var(--line));border-radius:999px;
-    padding:8px 14px;font-family:var(--mono);font-size:11px;letter-spacing:.4px;color:var(--ink2);
+    gap:7px;background:color-mix(in oklab,var(--bg) 86%,transparent);backdrop-filter:blur(8px);
+    border:1px solid color-mix(in oklab,var(--gold) 26%,var(--line));border-radius:999px;
+    padding:7px 13px;font-family:var(--mono);font-size:10.5px;letter-spacing:.35px;color:var(--ink3);
     text-decoration:none;transition:opacity .5s ease,border-color .2s;opacity:0}
   #constellationKey b{color:var(--gold-ink);font-weight:600}
   #constellationKey .pulse{width:8px;height:8px;border-radius:50%;background:var(--gold);
@@ -1902,7 +1906,20 @@
     var t=now-T0, boot=skipBoot?1:Math.min(1,t/BOOT), amb=TH.light?.5:1;
     var sf=Math.max(.32,1-(window.pageYOffset/(H*1.25))); amb*=sf;   // fade over content, stay visible
     var ck=document.getElementById("constellationKey");
-    if(ck)ck.style.opacity=(boot>=1?Math.max(0,(sf-.32)/.68):0).toFixed(2);
+    if(ck){
+      // Operator leads, the AI office demonstrates: keep this badge fully hidden through the
+      // operator-first sections (hero, Why Work With Me, Engagement Highlights) and only fade it
+      // in as the visitor nears the AI content it points at (Skills & Tools / AI Expertise, #work).
+      var op=0;
+      if(boot>=1){
+        var aiSec=document.getElementById("work");
+        if(aiSec){
+          var topW=aiSec.getBoundingClientRect().top;              // px from viewport top to #work
+          op=Math.max(0,Math.min(1,(H*1.6-topW)/(H*1.2)));         // 0 until #work is within ~1.6 vh, full by ~0.4 vh
+        }
+      }
+      ck.style.opacity=op.toFixed(2);
+    }
     ctx.clearRect(0,0,W,H);
     var settled=boot>=1;
     if(settled&&!booted){booted=true;}
