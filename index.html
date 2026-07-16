@@ -584,34 +584,45 @@
 
   <div class="cases">
 
-    <div class="case" id="hl-avod">
-      <div class="co">AMC Networks, via SOL Consulting · Senior Program Manager, FAST / AVOD · 2020&ndash;2026</div>
-      <div class="ttl">The operating cadence across 16 business units</div>
-      <div class="hero-stat">
-        <span class="num">~30%</span>
-        <span class="cap">faster execution cycles, with no direct authority</span>
+    <div class="case-group" id="hl-amc-group">
+      <div class="case-group-head">
+        <div class="cgh-co">SOL Consulting | Director, Strategy &amp; Client Delivery</div>
+        <div class="cgh-ttl">AMC Networks Enterprise Transformation (2020&ndash;2026)</div>
+        <p class="cgh-sum">Led a single 6 year engagement spanning 3 concurrent leadership workstreams.</p>
       </div>
-      <p class="case-sum">Ran the operating cadence and governance across the FAST and AVOD portfolio: 16 business units, 12 external partners, and 32 digital channels. Stood up a single source of truth for status, risk, and decisions, and prepared the executive and Steering Committee materials behind it.</p>
-    </div>
+      <div class="case-group-grid">
 
-    <div class="case" id="hl-amcplus">
-      <div class="co">AMC Networks, via SOL Consulting · Senior Technical Project Manager, Digital Transformation · 2020&ndash;2026</div>
-      <div class="ttl">The AMC+ launch and identity feature</div>
-      <div class="hero-stat">
-        <span class="num">~65%</span>
-        <span class="cap">growth in digital revenue, with the AMC+ launch a key driver</span>
-      </div>
-      <p class="case-sum">Led delivery on the AMC+ subscription launch across Product, Engineering, QA, and Marketing, and built out the AMC+ identity feature for both the launch and the ongoing website enhancements. Turned roadmap, engineering delivery, and go-to-market into one trackable plan, surfacing launch risks and dependency conflicts early.</p>
-    </div>
+        <div class="case" id="hl-avod">
+          <div class="co">Senior Program Manager, FAST / AVOD</div>
+          <div class="ttl">The operating cadence across 16 business units</div>
+          <div class="hero-stat">
+            <span class="num">~30%</span>
+            <span class="cap">faster execution cycles, with no direct authority</span>
+          </div>
+          <p class="case-sum">Ran the operating cadence and governance across the FAST and AVOD portfolio: 16 business units, 12 external partners, and 32 digital channels. Stood up a single source of truth for status, risk, and decisions, and prepared the executive and Steering Committee materials behind it.</p>
+        </div>
 
-    <div class="case" id="hl-account">
-      <div class="co">AMC Networks, via SOL Consulting · Account Manager · 2020&ndash;2026</div>
-      <div class="ttl">An account grown 7.5x, and the team behind it</div>
-      <div class="hero-stat">
-        <span class="num">$280K → $2.1M</span>
-        <span class="cap">annual account growth by expanding scope across renewal cycles, with a team of 8 consultants</span>
+        <div class="case" id="hl-amcplus">
+          <div class="co">Senior Technical Project Manager, Digital Transformation</div>
+          <div class="ttl">The AMC+ launch and identity feature</div>
+          <div class="hero-stat">
+            <span class="num">~65%</span>
+            <span class="cap">growth in digital revenue, with the AMC+ launch a key driver</span>
+          </div>
+          <p class="case-sum">Led delivery on the AMC+ subscription launch across Product, Engineering, QA, and Marketing, and built out the AMC+ identity feature for both the launch and the ongoing website enhancements. Turned roadmap, engineering delivery, and go-to-market into one trackable plan, surfacing launch risks and dependency conflicts early.</p>
+        </div>
+
+        <div class="case" id="hl-account">
+          <div class="co">Account Manager</div>
+          <div class="ttl">An account grown 7.5x, and the team behind it</div>
+          <div class="hero-stat">
+            <span class="num">$280K → $2.1M</span>
+            <span class="cap">annual account growth by expanding scope across renewal cycles, with a team of 8 consultants</span>
+          </div>
+          <p class="case-sum">Owned the AMC Networks engagement as the operating liaison between SOL Consulting leadership and AMC executives. Read priorities, shaped scope, and sustained executive trust across renewal cycles while setting the cadence for a team of 8.</p>
+        </div>
+
       </div>
-      <p class="case-sum">Owned the AMC Networks engagement as the operating liaison between SOL Consulting leadership and AMC executives. Read priorities, shaped scope, and sustained executive trust across renewal cycles while setting the cadence for a team of 8.</p>
     </div>
 
     <div class="case" id="hl-kaseya">
@@ -652,6 +663,14 @@
   @media(max-width:760px){#cases #impactCards{grid-template-columns:1fr}}
   #cases .case .ttl{text-transform:uppercase}
   #cases .case-sum{color:var(--ink2);font-size:14.5px;line-height:1.62;margin-top:14px;max-width:680px}
+  #cases .case-group{grid-column:1/-1;background:color-mix(in oklab,var(--panel) 55%,transparent);border:1px solid var(--line);border-radius:20px;padding:24px 24px 22px}
+  #cases .case-group-head{margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+  #cases .cgh-co{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold-ink);font-weight:700}
+  #cases .cgh-ttl{font-family:var(--serif);font-size:20px;font-weight:600;letter-spacing:-.2px;margin-top:6px}
+  #cases .cgh-sum{color:var(--ink2);font-size:14px;margin-top:6px}
+  #cases .case-group-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  #cases .case-group .case{margin:0}
+  @media(max-width:900px){#cases .case-group-grid{grid-template-columns:1fr}}
 </style>
 
 <!-- ===== Career Arc - interactive scroll-revealed timeline ===== -->
@@ -951,6 +970,7 @@
 
 <section id="work" class="reveal"><div class="wrap">
   <h2>AI Expertise &amp; Examples</h2>
+  <p class="lead-p" style="margin-bottom:30px;text-align:center">12+ years building the operating systems other organizations run on. Naturally, I built one for my own.</p>
   <div class="flag">
     <h3>AI, put to work inside real operations</h3>
     <p>I bring AI directly into the operating work, rather than only the conversation around it. At AMC Networks, I built AI-assisted reporting that turned raw status into decision-ready narratives. Beyond that, I designed and run a production operating system on Claude that manages my own strategy, operations, and reporting, with <b>100+ specialists across 12 departments</b>, a 14-stage quality pipeline, and a human on every decision that leaves it.</p>
