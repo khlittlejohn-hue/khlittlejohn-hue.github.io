@@ -176,7 +176,7 @@
   .tag-full{max-width:none;width:100%;text-align:center}
   .tag .grad{background:linear-gradient(100deg,var(--accent),var(--accent-bright));-webkit-background-clip:text;background-clip:text;color:transparent}
   :root[data-theme="light"] .tag .grad{background:linear-gradient(100deg,var(--accent-deep),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
-  .lede{font-size:18px;color:var(--ink2);max-width:660px;margin-inline:auto}
+  .lede{font-size:18px;color:var(--ink2);max-width:660px;margin-inline:auto;text-align:center}
   .lede b{color:var(--ink);font-weight:500}
   .cta{display:flex;gap:11px;flex-wrap:wrap;margin-top:30px}
   .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 19px;border-radius:11px;font-size:14px;font-weight:500;
@@ -502,25 +502,20 @@
     <div class="hero-main">
       <div class="kick" data-anim style="--d:0">Chief of Staff &amp; Strategy / Operations Leader</div>
       <h1 class="hero-name" data-anim style="--d:60">Kyle <span class="last">Littlejohn</span></h1>
-      <p class="lede" data-anim style="--d:200">I turn ambiguous mandates into measured results, and I built a production AI operating system that multiplies how fast that happens.</p>
-      <p class="hero-status" data-anim style="--d:240"><span class="hs-dot" aria-hidden="true"></span><span class="hs-main">Currently open to <b>Strategy &amp; Operations, Chief of Staff, PMO, and Management Consulting roles at the Director level.</b></span><span class="hs-loc">New York, Remote, and open to Sydney and London.</span></p>
-      <div class="cta" data-anim style="--d:280">
-        <a class="btn primary" href="assets/Kyle-Littlejohn-Resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a>
-        <a class="btn primary" href="#cases">Career &amp; Experience</a>
-        <a class="btn primary" href="#work">AI Expertise</a>
-        <a class="btn ghost" href="#contact">Contact</a>
+      <p class="lede" data-anim style="--d:200">I turn ambiguous mandates into measured results, and I built a production AI operating system that multiplies how fast that happens. 12+ years beside founders and the C-suite, and 100+ specialists helping me do it faster.</p>
+      <div class="cta hero-cta" data-anim style="--d:280">
+        <a class="btn hb" href="assets/Kyle-Littlejohn-Resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a>
+        <a class="btn hb" href="#cases">Career &amp; Experience</a>
+        <a class="btn hb" href="#work">AI Expertise</a>
+        <a class="btn hb" href="#contact">Contact</a>
       </div>
     </div>
   </div>
 </div></header>
 <style>
-  .hero-status{display:inline-flex;align-items:center;gap:9px;flex-wrap:wrap;justify-content:center;margin:22px auto 0;max-width:720px;
-    font-size:14.5px;color:var(--ink2);line-height:1.55;font-family:var(--sans)}
-  .hero-status b{color:var(--ink);font-weight:600}
-  .hero-status .hs-main{flex:0 1 auto}
-  .hero-status .hs-loc{flex:1 0 100%;text-align:center}
-  .hero-status .hs-dot{flex:0 0 auto;width:9px;height:9px;border-radius:50%;background:var(--green);
-    box-shadow:0 0 0 3px color-mix(in oklab,var(--green) 22%,transparent)}
+  .hero-cta{margin-top:26px}
+  .btn.hb{background:var(--bg);color:var(--ink);border-color:var(--line);font-weight:500}
+  .btn.hb:hover{font-weight:700;border-color:color-mix(in oklab, var(--gold) 45%, var(--line))}
 </style>
 
 <main id="content">
