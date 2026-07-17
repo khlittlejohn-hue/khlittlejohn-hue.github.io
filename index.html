@@ -6,10 +6,10 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>Kyle Littlejohn · Chief of Staff & Strategy / Operations Leader, Director-Level</title>
+<title>Kyle Littlejohn · Chief of Staff &amp; Strategy / Operations Leader, Director-Level</title>
 <meta name="description" content="Kyle Littlejohn, Chief of Staff and Strategy / Operations leader. 12+ years building the operating layer for founders and the C-suite across SaaS, media, finance, biotech, and healthcare, now AI-native. Director-level operating leader.">
 <meta property="og:site_name" content="Kyle Littlejohn">
-<meta property="og:title" content="Kyle Littlejohn · Chief of Staff & Strategy / Operations Leader, Director-Level">
+<meta property="og:title" content="Kyle Littlejohn · Chief of Staff &amp; Strategy / Operations Leader, Director-Level">
 <meta property="og:description" content="Chief of Staff and Strategy / Operations leader. 12+ years operating beside founders and the C-suite across SaaS, media, finance, biotech, and healthcare, now AI-native. Director-level operating leader.">
 <meta property="og:image" content="https://kylelittlejohn.com/assets/website-card-100.png">
 <meta property="og:image:width" content="1200">
@@ -22,7 +22,7 @@
 <meta name="theme-color" content="#0c0b0e" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#f6f3ec" media="(prefers-color-scheme: light)">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Kyle Littlejohn · Chief of Staff & Strategy / Operations Leader, Director-Level">
+<meta name="twitter:title" content="Kyle Littlejohn · Chief of Staff &amp; Strategy / Operations Leader, Director-Level">
 <meta name="twitter:description" content="Chief of Staff and Strategy / Operations leader. 12+ years operating beside founders and the C-suite across SaaS, media, finance, biotech, and healthcare, now AI-native. Director-level operating leader.">
 <meta name="twitter:image" content="https://kylelittlejohn.com/assets/website-card-100.png">
 <meta name="twitter:image:alt" content="Kyle Littlejohn, Chief of Staff and Strategy / Operations leader. Turns executive ambiguity into shipped outcomes; built the AI operating system that multiplies how fast he does it.">
@@ -122,9 +122,6 @@
 
   /* atmosphere: aurora wash + film grain */
   #aurora{display:none}
-  #spotlight{display:none}
-  @media(prefers-reduced-motion:reduce){#spotlight{display:none}}
-  @media(max-width:760px){#spotlight{display:none}}
   #grain{position:fixed;inset:0;pointer-events:none;z-index:1;opacity:var(--grain-op);mix-blend-mode:var(--grain-blend)}
   /* blueprint grid surface (Linear aesthetic), masked to fade at the edges */
   #grid{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.55;
@@ -134,7 +131,7 @@
     background-size:46px 46px;
     -webkit-mask-image:radial-gradient(135% 100% at 64% -5%, #000 32%, transparent 80%);
     mask-image:radial-gradient(135% 100% at 64% -5%, #000 32%, transparent 80%)}
-  header,section,footer,nav,.cmdk-hint{position:relative;z-index:2}
+  header,section,footer,nav{position:relative;z-index:2}
 
   /* scroll progress */
   #progress{position:fixed;top:0;left:0;height:2px;width:100%;transform:scaleX(0);transform-origin:0 50%;
@@ -185,24 +182,6 @@
   /* command-center hero: asymmetric two-column, live status panel fills the right */
   .hero-grid{display:grid;grid-template-columns:1fr;gap:28px;align-items:start}
   @media(min-width:900px){ .hero-grid{grid-template-columns:1fr;justify-items:center;text-align:center} .hero-main{max-width:940px} .cta{justify-content:center} .lede{text-align:left;max-width:none} }
-  .hero-panel{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px 20px 18px;
-    box-shadow:inset 0 1px 0 color-mix(in oklab,#fff 9%,transparent), 0 28px 64px -44px rgba(0,0,0,.75)}
-  :root[data-theme="light"] .hero-panel{box-shadow:inset 0 1px 0 #fff, 0 26px 60px -46px rgba(60,50,20,.35)}
-  .hp-top{display:flex;align-items:center;gap:9px;margin-bottom:16px}
-  .hp-dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:hpPulse 2.4s ease-out infinite}
-  @keyframes hpPulse{0%{box-shadow:0 0 0 0 color-mix(in oklab,var(--green) 55%,transparent)}70%{box-shadow:0 0 0 7px transparent}100%{box-shadow:0 0 0 0 transparent}}
-  @media(prefers-reduced-motion:reduce){.hp-dot{animation:none}}
-  .hp-title{font-family:var(--serif);font-size:15.5px;font-weight:600}
-  .hp-live{margin-left:auto;font-family:var(--mono);font-size:9.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--green);border:1px solid color-mix(in oklab,var(--green) 35%,var(--line));border-radius:999px;padding:2px 8px}
-  .hp-rows{display:flex;flex-direction:column}
-  .hp-row{display:flex;gap:12px;align-items:baseline;border-top:1px solid var(--line);padding:11px 0}
-  .hp-row:first-child{border-top:none;padding-top:0}
-  .hp-row:last-child{padding-bottom:0}
-  .hp-k{flex:0 0 82px;font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.7px;color:var(--ink3);padding-top:1px}
-  .hp-v{font-size:13.5px;color:var(--ink);font-weight:500;line-height:1.4}
-  .hp-v .tick{font-variant-numeric:tabular-nums}
-  .hp-cta{display:inline-block;margin-top:17px;font-family:var(--mono);font-size:12px;color:var(--gold-ink);text-decoration:none}
-  .hp-cta:hover{text-decoration:underline}
   /* subtle "lit from within" highlight on feature cards (Linear / Vercel) */
   .why .c,.help a,.proof .m,.case,.pcard,.gh-card,.edu-card,.flag{box-shadow:inset 0 1px 0 color-mix(in oklab,#fff 6%,transparent)}
   :root[data-theme="light"] .why .c,:root[data-theme="light"] .help a,:root[data-theme="light"] .proof .m,:root[data-theme="light"] .case,:root[data-theme="light"] .pcard,:root[data-theme="light"] .gh-card,:root[data-theme="light"] .edu-card,:root[data-theme="light"] .flag{box-shadow:inset 0 1px 0 #fff}
@@ -212,7 +191,7 @@
   h2{font-size:31px;text-transform:uppercase;letter-spacing:.2px;color:var(--ink);font-weight:800;font-family:var(--sans);margin-bottom:28px;display:flex;align-items:center;gap:14px;line-height:1.1}
   h2::before{content:"";flex:0 0 auto;width:38px;height:4px;border-radius:2px;background:var(--gold)}
   .lead-p{font-size:18px;color:var(--ink);max-width:none}
-  /* shared monoline (Feather) icon base — swaps native emoji for a consistent line-icon system */
+  /* shared monoline (Feather) icon base: swaps native emoji for a consistent line-icon system */
   .fi{fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;display:inline-block;vertical-align:middle;flex:0 0 auto}
   /* below-the-fold render skipping for snappy scroll */
   #experience,#education,#approach,#contact{content-visibility:auto;contain-intrinsic-size:auto 600px}
@@ -244,66 +223,8 @@
     .ind-marquee{-webkit-mask-image:none;mask-image:none}}
   @media(max-width:760px){.ind-item{font-size:18px;padding:0 20px}.ind-item::after{margin-left:20px}}
 
-  /* help / intent cards */
-  .help{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:4px}
-  .help a{display:flex;flex-direction:column;gap:10px;background:var(--card);border:1px solid var(--line);
-    border-radius:16px;padding:22px 22px 20px;text-decoration:none;color:var(--ink);
-    transition:border-color .18s,transform .14s,box-shadow .18s}
-  .help a:hover{border-color:var(--gold);transform:translateY(-4px);box-shadow:0 16px 38px -22px color-mix(in oklab, var(--gold) 55%, transparent)}
-  .help .hic{font-size:23px}
-  .help .ht{font-size:16px;font-weight:600;letter-spacing:-.2px}
-  .help .hd{color:var(--ink2);font-size:13.5px;line-height:1.5;flex:1}
-  .help .harrow{color:var(--gold-ink);font-size:12.5px;font-weight:500;font-family:var(--mono)}
 
-  /* proof strip */
-  .proof{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-  .proof .m{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 18px;text-align:center;transition:border-color .18s,transform .12s}
-  .proof .m:hover{border-color:color-mix(in oklab, var(--gold) 30%, var(--line));transform:translateY(-2px)}
-  .proof .m .big{font-size:36px;font-weight:600;letter-spacing:-1px;line-height:1;font-family:var(--serif);
-    color:var(--gold-ink);font-variant-numeric:tabular-nums}
-  .proof .m .lbl{display:block;margin-top:10px;color:var(--ink2);font-size:13px;line-height:1.4}
 
-  /* ===== Impact, Visualized: interactive filterable metric board ===== */
-  .impact{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:26px 26px 28px;overflow:hidden}
-  .impact-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:20px}
-  .impact-head .ih-t{font-family:var(--serif);font-size:21px;font-weight:600;letter-spacing:-.3px;line-height:1.2}
-  .impact-head .ih-s{color:var(--ink2);font-size:13.5px;margin-top:4px;max-width:440px;line-height:1.45}
-  .impact-filters{display:flex;gap:8px;flex-wrap:wrap}
-  .impact-filters .ifb{background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:12.5px;font-weight:500;
-    color:var(--ink2);cursor:pointer;transition:color .15s,border-color .15s,background .15s;font-family:var(--mono);letter-spacing:.2px}
-  .impact-filters .ifb:hover{color:var(--ink);border-color:color-mix(in oklab, var(--gold) 35%, var(--line))}
-  .impact-filters .ifb[aria-pressed="true"]{background:var(--gold);color:var(--gold-fill-ink);border-color:var(--gold)}
-  .impact-filters .ifb:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
-  .impact-board{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;align-items:stretch}
-  .impact-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-  .ic{position:relative;display:flex;flex-direction:column;justify-content:space-between;text-decoration:none;color:inherit;
-    background:var(--panel2);border:1px solid var(--line);border-radius:15px;padding:17px 17px 15px;min-height:118px;
-    transition:opacity .35s ease,transform .35s cubic-bezier(.2,.7,.3,1),border-color .18s,box-shadow .2s}
-  .ic:hover{border-color:color-mix(in oklab, var(--gold) 38%, var(--line));transform:translateY(-3px);box-shadow:0 16px 34px -24px rgba(0,0,0,.6)}
-  .ic:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
-  .ic .ic-v{font-family:var(--serif);font-size:33px;font-weight:600;letter-spacing:-1px;line-height:1;font-variant-numeric:tabular-nums;
-    color:var(--gold-ink)}
-  .ic .ic-l{display:block;margin-top:9px;color:var(--ink2);font-size:12.5px;line-height:1.4}
-  .ic .ic-src{display:flex;align-items:center;gap:5px;margin-top:11px;color:var(--ink3);font-size:10.5px;letter-spacing:.5px;
-    text-transform:uppercase;font-family:var(--mono)}
-  .ic .ic-src .ic-arr{color:var(--gold-ink);opacity:0;transform:translateX(-3px);transition:opacity .15s,transform .15s}
-  .ic:hover .ic-arr,.ic:focus-visible .ic-arr{opacity:1;transform:none}
-  .ic[data-dim="1"]{opacity:.16;transform:scale(.97);pointer-events:none;filter:grayscale(.4)}
-  /* growth trajectory chart */
-  .impact-chart{background:var(--panel2);border:1px solid var(--line);border-radius:15px;padding:18px 18px 14px;display:flex;flex-direction:column}
-  .impact-chart .chh{font-size:10.5px;letter-spacing:.6px;text-transform:uppercase;color:var(--ink3);font-family:var(--mono);margin-bottom:2px}
-  .impact-chart .chs{font-family:var(--serif);font-size:16px;font-weight:600;letter-spacing:-.2px;margin-bottom:12px}
-  .impact-chart .chs b{background:linear-gradient(100deg,var(--grad-a),var(--grad-b));-webkit-background-clip:text;background-clip:text;color:transparent}
-  .impact-chart svg{width:100%;height:auto;display:block;overflow:visible}
-  .ic-bar{transition:transform .9s cubic-bezier(.2,.8,.25,1);transform:scaleY(0);transform-origin:bottom}
-  .impact-chart.lit .ic-bar{transform:scaleY(1)}
-  .ic-bar-g{cursor:default}
-  .ic-bar-g:hover .ic-barlbl,.ic-bar-g:focus-visible .ic-barlbl{opacity:1}
-  .ic-barlbl{opacity:0;transition:opacity .15s}
-  .ic-bar-g:focus-visible{outline:none}
-  .ic-bar-g:focus-visible .ic-bar{filter:drop-shadow(0 0 0 2px var(--gold))}
-  .impact-note{margin-top:16px;color:var(--ink3);font-size:11.5px;font-family:var(--mono);letter-spacing:.2px}
-  @media(prefers-reduced-motion:reduce){.ic-bar{transition:none;transform:scaleY(1)} .ic{transition:border-color .18s}}
 
   /* cases */
   .cases{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
@@ -321,9 +242,6 @@
   .case .cs .k{flex:0 0 76px;font-size:10.5px;font-weight:500;letter-spacing:.6px;text-transform:uppercase;color:var(--ink3);padding-top:2px;font-family:var(--mono)}
   .case .cs .v{font-size:14px;color:var(--ink2);line-height:1.5}
   .case .cs .v b{color:var(--ink);font-weight:600}
-  .case .cta-row{margin-top:auto;padding-top:18px}
-  .case a.mini{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:500;color:var(--gold-ink);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .15s;font-family:var(--mono)}
-  .case a.mini:hover{border-color:var(--gold)}
   .case.flagship{border-color:var(--flag-line);background:var(--card-flag)}
   .case.flagship .co{color:var(--gold-ink)}
 
@@ -336,27 +254,11 @@
   .flag .stat b{display:block;font-family:var(--serif);font-size:24px;color:var(--gold-ink);font-weight:600;line-height:1}
   .flag .stat span{font-size:11px;color:var(--ink3);text-transform:uppercase;letter-spacing:.6px;font-family:var(--mono);margin-top:4px;display:block}
 
-  /* experience tabs */
-  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
-  .tab{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:9px 15px;font-size:13.5px;font-weight:500;color:var(--ink2);cursor:pointer;transition:color .15s,border-color .15s;font-family:var(--mono)}
-  .tab:hover{color:var(--ink);border-color:color-mix(in oklab, var(--gold) 35%, var(--line))}
-  .tab.on{background:var(--gold);color:var(--gold-fill-ink);border-color:var(--gold)}
-  .lane{display:none}
-  .lane.on{display:block;animation:fade .3s ease}
-  @keyframes fade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
-  .lane .pos{font-family:var(--serif);font-size:19px;color:var(--ink);max-width:730px;margin-bottom:16px;font-weight:500;letter-spacing:-.2px;line-height:1.35}
-  .lane ul{list-style:none} .lane li{position:relative;padding-left:24px;margin:10px 0;color:var(--ink2);font-size:14.5px;max-width:730px}
-  .lane li::before{content:"▸";position:absolute;left:0;color:var(--gold-ink)}
-  .lane li b{color:var(--ink);font-weight:600}
-  .lane .roles{margin-top:16px;color:var(--ink3);font-size:12.5px;font-family:var(--mono)}
   .resume-actions{display:flex;gap:11px;flex-wrap:wrap;margin-top:24px}
-  .resume-frame{margin-top:18px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--panel2)}
-  .resume-frame object{width:100%;height:760px;display:block;border:0}
 
   /* education + approach */
   .edu b{font-family:var(--serif);font-size:19px;font-weight:600} .edu .co{color:var(--blue);font-size:14px;font-weight:500;font-family:var(--mono)} .edu .meta{color:var(--ink3);font-size:12.5px;margin:4px 0 8px;font-family:var(--mono)}
   .edu p{color:var(--ink2);font-size:14.5px;max-width:560px;margin-top:6px}
-  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
   .pcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;transition:border-color .18s,transform .12s}
   .pcard:hover{border-color:color-mix(in oklab, var(--gold) 28%, var(--line));transform:translateY(-2px)}
   .pcard b{display:block;margin-bottom:6px;font-weight:600;font-family:var(--serif);font-size:16px} .pcard span{color:var(--ink2);font-size:14px}
@@ -380,18 +282,14 @@
 
   @media(max-width:820px){
     .hero-name{font-size:46px} .tag{font-size:22px} .why,.help{grid-template-columns:1fr}
-    .grid2{grid-template-columns:1fr} .proof{grid-template-columns:1fr 1fr} .cases{grid-template-columns:1fr}
-    .impact-board{grid-template-columns:1fr} .impact{padding:22px 18px 24px}
+    .cases{grid-template-columns:1fr}
     nav .links{display:none}
-  }
-  @media(max-width:460px){
-    .impact-cards{grid-template-columns:1fr} .ic{min-height:0}
   }
 
   /* Clean print / save-as-PDF: recruiters print profiles. Strip chrome, ink-light, gold kept for accents. */
   @media print{
     :root,:root[data-theme="light"]{--bg:#fff;--panel:#fff;--line:#d8d2c4;--ink:#000;--ink2:#333;--ink3:#666;--gold:#9a6f06;--gold-ink:#9a6f06;--gold-fill-ink:#fff}
-    #aurora,#spotlight,#grain,nav,.skip-link,#cmdkOpen,#themeToggle{display:none!important}
+    #aurora,#grain,nav,.skip-link,#cmdkOpen,#themeToggle{display:none!important}
     body{background:#fff!important;color:#000!important}
     a{color:#000!important;text-decoration:none}
     section,.reveal{opacity:1!important;transform:none!important;break-inside:avoid;page-break-inside:avoid}
@@ -459,7 +357,6 @@
 <a class="skip-link" href="#content">Skip to content</a>
 <div id="grid" aria-hidden="true"></div>
 <div id="aurora" aria-hidden="true"></div>
-<div id="spotlight" aria-hidden="true"></div>
 <svg id="grain" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><filter id="grainf"><feTurbulence type="fractalNoise" baseFrequency="0.82" numOctaves="2" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#grainf)"/></svg>
 <div id="progress" aria-hidden="true"></div>
 
@@ -585,7 +482,7 @@
       <div class="ttl">The operating and KPI spine of a $1.75B organization</div>
       <div class="hero-stat">
         <span class="num">$350M → $1.75B</span>
-        <span class="cap">valuation growth through 14 acquisitions and strategic expansion, integrated onto the financial planning, KPI infrastructure, and board reporting I owned</span>
+        <span class="cap">valuation growth through 14 acquisitions and strategic expansion, integrated into the financial planning, KPI infrastructure, and board reporting I owned</span>
       </div>
       <p class="case-sum">Partnered with the C-suite through Kaseya's scale, owning financial planning, KPI infrastructure, scenario modeling, and capital-allocation analysis. Built the Tableau, SQL, and board reporting that leadership used to set portfolio and acquisition priorities.</p>
     </div>
@@ -654,9 +551,6 @@
   </div>
 </div></section>
 <style>
-  #cases .hl-impact-label{font-family:var(--mono);font-size:11px;letter-spacing:1.8px;text-transform:uppercase;color:var(--gold-ink);font-weight:700;margin:28px 0 14px}
-  #cases #impactCards{grid-template-columns:repeat(3,1fr)}
-  @media(max-width:760px){#cases #impactCards{grid-template-columns:1fr}}
   #cases .case{min-width:0}
   #hl-kaseya{grid-column:1/-1;display:grid;grid-template-columns:1.1fr 1.4fr;gap:32px;align-items:center;padding:28px 32px}
   #hl-kaseya .co,#hl-kaseya .ttl{grid-column:1/-1}
@@ -770,16 +664,8 @@
 <!-- ===== Now: forward-looking, what Kyle is building right now ===== -->
 <style>
   /* ===== Now / What I'm building ===== */
-  #now .now-head{display:flex;align-items:baseline;flex-wrap:wrap;gap:12px}
   #now .now-lead{max-width:none;margin:14px 0 30px}
   .now-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-  .now-roles{grid-column:1/-1;background:var(--card-flag);border-color:var(--flag-line)}
-  .now-roles::before{transform:scaleX(1)}
-  .now-roles h3{font-size:22px}
-  .nc-lanes{margin-top:15px;display:flex;flex-wrap:wrap;gap:8px}
-  .nc-lanes span{font-family:var(--mono);font-size:11.5px;color:var(--gold-ink);
-    border:1px solid color-mix(in oklab,var(--gold) 38%,var(--line));border-radius:999px;padding:5px 12px;
-    background:color-mix(in oklab,var(--gold) 6%,transparent)}
   .now-card{position:relative;display:flex;flex-direction:column;background:var(--card);
     border:1px solid var(--line);border-radius:16px;padding:24px 22px;
     transition:transform .25s cubic-bezier(.2,.7,.3,1),border-color .25s,box-shadow .25s;overflow:hidden}
@@ -792,9 +678,6 @@
   .nc-ic{display:block;line-height:1;margin-bottom:13px;color:var(--gold-ink)}
   .now-card h3{font-family:var(--serif);font-size:19px;font-weight:560;line-height:1.2;margin:0 0 9px;color:var(--ink)}
   .now-card p{font-size:14.5px;line-height:1.62;color:var(--ink);margin:0}
-  .nc-meta{margin-top:auto;padding-top:16px;font-family:var(--mono);font-size:11.5px;color:var(--ink3);
-    display:flex;align-items:center;gap:7px}
-  .nc-meta b{color:var(--ink2);font-weight:500}
   .nc-link{margin-top:auto;padding-top:16px;font-family:var(--mono);font-size:12.5px;color:var(--gold-ink);text-decoration:none}
   .nc-link:hover{text-decoration:underline}
   .now-ai{background:var(--card-flag);border-color:var(--flag-line)}
@@ -917,23 +800,14 @@
     background:var(--panel);border:2px solid color-mix(in oklab,var(--gold) 60%,var(--line));
     box-shadow:0 0 0 4px var(--bg);transition:border-color .3s,box-shadow .3s,transform .3s;z-index:1}
   @media(min-width:760px){.arc-dot{left:7px}}
-  .arc-flag .arc-dot{border-color:var(--gold);background:color-mix(in oklab,var(--gold) 22%,var(--panel))}
   .arc-now .arc-dot{border-color:var(--gold);background:var(--gold);box-shadow:0 0 0 4px var(--bg),0 0 16px -2px color-mix(in oklab,var(--gold) 70%,transparent)}
   .arc-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 22px;
     box-shadow:inset 0 1px 0 color-mix(in oklab,#fff 6%,transparent);transition:border-color .25s,transform .25s,box-shadow .25s}
   :root[data-theme="light"] .arc-card{box-shadow:inset 0 1px 0 #fff}
   .arc-step:hover .arc-card{border-color:color-mix(in oklab,var(--gold) 30%,var(--line));transform:translateY(-2px)}
   .arc-step:hover .arc-dot{transform:scale(1.12)}
-  .arc-flag .arc-card{background:var(--card-flag);border-color:var(--flag-line)}
-  .arc-era{display:inline-block;font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:1.4px;
-    text-transform:uppercase;color:var(--gold-ink);margin-bottom:9px}
   .arc-co{font-family:var(--serif);font-size:22px;font-weight:600;letter-spacing:-.4px;line-height:1.1;margin-bottom:7px}
-  .arc-via{font-family:var(--mono);font-size:12px;font-weight:400;color:var(--ink3);letter-spacing:0;text-transform:none}
   .arc-role{color:var(--ink);font-size:14.5px;line-height:1.5;margin-bottom:10px}
-  .arc-win{color:var(--ink);font-size:15px;line-height:1.6}
-  .arc-win b{color:var(--ink);font-weight:600}
-  .arc-cta{display:inline-block;margin-top:14px;font-family:var(--mono);font-size:12.5px;color:var(--gold-ink);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .15s}
-  .arc-cta:hover{border-color:var(--gold)}
   /* staged scroll reveal - each step slides + fades in turn */
   .js .arc-step{opacity:0;transform:translateY(22px)}
   .js .arc.lit .arc-step{opacity:1;transform:none;transition:opacity .55s ease,transform .55s cubic-bezier(.2,.7,.3,1)}
@@ -982,7 +856,7 @@
   </div>
 
   <h3 class="sm-label">The Executive Office, by team</h3>
-  <p class="sm-intro">A coordinated team of 100+ specialists across 12 departments, with a human on every decision. Hover or tap a team to see what it does.</p>
+  <p class="sm-intro">Explore how it's organized: hover or tap a department below to see what it does.</p>
 <style>
   /* ===== Interactive system map ===== */
   .sysmap{margin-top:20px;display:grid;grid-template-columns:1.15fr .85fr;gap:20px;align-items:stretch}
@@ -1288,18 +1162,6 @@
 
 
 <style>
-  .edu-grid{display:grid;grid-template-columns:1fr;gap:18px}
-  @media(min-width:820px){.edu-grid{grid-template-columns:.82fr 1.18fr;gap:30px;align-items:start}}
-  .edu-card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px;box-shadow:inset 0 1px 0 color-mix(in oklab,#fff 7%,transparent)}
-  .edu-degree{font-family:var(--serif);font-size:27px;font-weight:600;letter-spacing:-.5px;line-height:1.05;background:linear-gradient(100deg,var(--grad-a),var(--grad-b));-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:12px}
-  .edu-card b{font-family:var(--serif);font-size:18px;font-weight:600;display:block}
-  .edu-card .edu-meta{color:var(--ink3);font-size:12px;margin-top:6px;font-family:var(--mono)}
-  .edu-minor{margin-top:18px;padding-top:15px;border-top:1px solid var(--line);color:var(--ink2);font-size:12.5px;font-family:var(--mono);line-height:1.5}
-  .edu-note p{color:var(--ink2);font-size:16px;line-height:1.62;max-width:660px}
-  .edu-note p b{color:var(--ink);font-weight:500}
-  .edu-note p+p{margin-top:16px}
-</style>
-<style>
   .beyond-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
   .bcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;
     box-shadow:inset 0 1px 0 color-mix(in oklab,#fff 6%,transparent);transition:border-color .18s,transform .12s;display:flex;flex-direction:column}
@@ -1582,83 +1444,6 @@
 })();
 </script>
 <script>
-/* ===== count-up-on-scroll ===== */
-(function(){
-  var nums=[].slice.call(document.querySelectorAll('.proof .big[data-count]'));
-  if(!nums.length) return;
-  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  function fmt(n,pre,suf,dec){ return (pre||'')+n.toFixed(dec)+(suf||''); }
-  function finalText(t){ return fmt(parseFloat(t.dataset.count), t.dataset.prefix, t.dataset.suffix, parseInt(t.dataset.dec||'0',10)); }
-  if(reduce || !('IntersectionObserver' in window) || !('requestAnimationFrame' in window)){
-    nums.forEach(function(t){ t.textContent=finalText(t); }); return;
-  }
-  function run(t){
-    var target=parseFloat(t.dataset.count), pre=t.dataset.prefix, suf=t.dataset.suffix, dec=parseInt(t.dataset.dec||'0',10);
-    var dur=1100, start=null;
-    function step(ts){
-      if(start===null) start=ts;
-      var p=Math.min((ts-start)/dur,1);
-      var eased=1-Math.pow(1-p,3);
-      t.textContent=fmt(target*eased,pre,suf,dec);
-      if(p<1) requestAnimationFrame(step); else t.textContent=finalText(t);
-    }
-    requestAnimationFrame(step);
-  }
-  var io=new IntersectionObserver(function(es){
-    es.forEach(function(en){ if(en.isIntersecting){ run(en.target); io.unobserve(en.target); } });
-  },{threshold:.5});
-  nums.forEach(function(t){ io.observe(t); });
-})();
-</script>
-<script>
-/* ===== Impact, Visualized: count-up + filter + chart reveal ===== */
-(function(){
-  var board=document.getElementById('impactCards'); if(!board) return;
-  var chart=document.getElementById('impactChart');
-  var cards=[].slice.call(board.querySelectorAll('.ic[data-count]'));
-  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  function fmt(n,pre,suf,dec){return (pre||'')+n.toFixed(dec)+(suf||'');}
-  function finalText(c){return fmt(parseFloat(c.dataset.count),c.dataset.prefix,c.dataset.suffix,parseInt(c.dataset.dec||'0',10));}
-
-  /* count-up (mirrors the proof-strip easing) */
-  function run(c){
-    var v=c.querySelector('.ic-v'); if(!v) return;
-    var target=parseFloat(c.dataset.count),pre=c.dataset.prefix,suf=c.dataset.suffix,dec=parseInt(c.dataset.dec||'0',10);
-    var dur=1100,start=null;
-    function step(ts){ if(start===null)start=ts;
-      var p=Math.min((ts-start)/dur,1),e=1-Math.pow(1-p,3);
-      v.textContent=fmt(target*e,pre,suf,dec);
-      if(p<1)requestAnimationFrame(step); else v.textContent=finalText(c);
-    }
-    requestAnimationFrame(step);
-  }
-  if(reduce||!('IntersectionObserver' in window)||!('requestAnimationFrame' in window)){
-    cards.forEach(function(c){var v=c.querySelector('.ic-v'); if(v)v.textContent=finalText(c);});
-    if(chart)chart.classList.add('lit');
-  }else{
-    var io=new IntersectionObserver(function(es){
-      es.forEach(function(en){ if(en.isIntersecting){ run(en.target); io.unobserve(en.target); } });
-    },{threshold:.5});
-    cards.forEach(function(c){ io.observe(c); });
-    if(chart){
-      var cio=new IntersectionObserver(function(es){
-        es.forEach(function(en){ if(en.isIntersecting){ chart.classList.add('lit'); cio.disconnect(); } });
-      },{threshold:.35});
-      cio.observe(chart);
-    }
-  }
-
-  /* filter */
-  var btns=[].slice.call(document.querySelectorAll('.impact-filters .ifb'));
-  function applyFilter(f){
-    cards.forEach(function(c){ c.setAttribute('data-dim', (f==='all'||c.dataset.cat===f)?'0':'1'); });
-    if(chart) chart.style.display=(f==='all'||chart.dataset.cat===f)?'':'none';
-    btns.forEach(function(b){ b.setAttribute('aria-pressed', b.dataset.filter===f?'true':'false'); });
-  }
-  btns.forEach(function(b){ b.addEventListener('click', function(){ applyFilter(b.dataset.filter); }); });
-})();
-</script>
-<script>
 /* ===== live GitHub showcase (with 1h localStorage cache) ===== */
 (function(){
   var grid=document.getElementById('ghGrid'); if(!grid) return;
@@ -1783,25 +1568,16 @@
     .catch(function(){});
 })();
 </script>
-<script>
-/* gold spotlight follows the cursor */
-(function(){
-  var s=document.getElementById('spotlight'); if(!s)return;
-  addEventListener('pointermove',function(e){
-    s.style.setProperty('--mx',e.clientX+'px'); s.style.setProperty('--my',e.clientY+'px');
-  },{passive:true});
-})();
-</script>
 <!-- ═══════════════════════════════════════════════════════════════════════
-     THE CONSTELLATION — signature boot sequence + ambient system field
+     THE CONSTELLATION: signature boot sequence + ambient system field
      (added 2026-07-12, Fable pass). Pure presentation: adds ZERO text, edits
      ZERO existing markup. On first load per session, ~110 points assemble out
-     of the dark into a lattice — 12 department-colored nodes around a gold
-     human core — fire packet streaks, then settle into a permanent
+     of the dark into a lattice, 12 department-colored nodes around a gold
+     human core, fire packet streaks, then settle into a permanent
      whisper-subtle ambient field with a slow human-approval heartbeat:
      the site's thesis (100+ specialists · 12 departments · a human on every
      decision) experienced before it's read. Reduced-motion → static faint
-     frame, no sweep, no packets. Mobile keeps the boot — that's the
+     frame, no sweep, no packets. Mobile keeps the boot, that's the
      show-someone moment.
      ═══════════════════════════════════════════════════════════════════════ -->
 <canvas id="constellation" aria-hidden="true"></canvas>
@@ -1932,13 +1708,13 @@
       ctx.globalAlpha=(n.dept?alpha*2.6:alpha*1.5)*amb;
       ctx.fillStyle=n.dept?n.c:TH.gold;
       ctx.beginPath();ctx.arc(n.x+ox,n.y+oy,n.s,0,7);ctx.fill();}
-    // BOOT TRAILS — assembly streaks
+    // BOOT TRAILS: assembly streaks
     if(!settled&&!skipBoot){ctx.lineWidth=1.1;
       for(i=0;i<N;i++){var tn=nodes[i],pe=ease(Math.max(0,boot-.06)),
         pxx=tn.sx+(tn.tx-tn.sx)*pe, pyy=tn.sy+(tn.ty-tn.sy)*pe;
         ctx.globalAlpha=.30*boot*amb; ctx.strokeStyle=tn.dept?tn.c:TH.gold;
         ctx.beginPath();ctx.moveTo(pxx+ox,pyy+oy);ctx.lineTo(tn.x+ox,tn.y+oy);ctx.stroke();}}
-    // COMMAND BURSTS — ring blast + department sparks
+    // COMMAND BURSTS: ring blast + department sparks
     for(i=bursts.length-1;i>=0;i--){var bu=bursts[i],bq=(now-bu.t0)/850;
       if(bq>=1){bursts.splice(i,1);continue;}
       var be=ease(bq);
@@ -1975,7 +1751,7 @@
   cv.classList.add("on");
   requestAnimationFrame(frame);   // reduced-motion path renders one static frame
 
-  // magnetic CTAs — tiny pull toward the cursor, spring back (desktop only)
+  // magnetic CTAs: tiny pull toward the cursor, spring back (desktop only)
   if(!reduce&&!mobile){
     document.querySelectorAll(".btn").forEach(function(b){
       b.addEventListener("pointermove",function(e){var r=b.getBoundingClientRect(),
