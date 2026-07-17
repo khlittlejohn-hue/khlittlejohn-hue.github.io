@@ -223,7 +223,7 @@
     display:flex;flex-direction:column;align-items:flex-start}
   .why .c:hover{border-color:color-mix(in oklab, var(--gold) 30%, var(--line));transform:translateY(-2px)}
   .why .c .ic{display:inline-flex;align-items:center;justify-content:center;width:58px;height:58px;border-radius:15px;color:var(--gold-ink);background:color-mix(in oklab,var(--gold) 13%,var(--panel2));border:1px solid color-mix(in oklab,var(--gold) 32%,var(--line));box-shadow:inset 0 1px 0 color-mix(in oklab,#fff 8%,transparent);margin-bottom:16px}
-  .why .c b{width:100%;text-align:center;font-size:16.5px;font-weight:600;line-height:1.3;white-space:nowrap;margin-bottom:11px}
+  .why .c b{width:100%;font-size:16.5px;font-weight:600;line-height:1.3;margin-bottom:11px}
   .why .c span{width:100%;color:var(--ink);font-size:14px;line-height:1.6}
 
   /* Industries credibility band: seamless marquee, edge-faded, pauses on hover */
@@ -496,7 +496,7 @@
     <div class="hero-main">
       <div class="kick" data-anim style="--d:0">Chief of Staff &amp; Strategy / Operations Leader</div>
       <h1 class="hero-name" data-anim style="--d:60">Kyle <span class="last">Littlejohn</span></h1>
-      <p class="lede" data-anim style="--d:200">I turn ambiguous mandates into measured results, and I built a production AI operating system that multiplies how fast that happens. 12+ years beside founders and the C-suite, and 100+ specialists helping me do it faster.</p>
+      <p class="lede" data-anim style="--d:200">I turn ambiguous mandates into measured results, and I built a production AI operating system that multiplies how fast that happens: 100+ specialists helping me do it faster.</p>
       <div class="cta hero-cta" data-anim style="--d:280">
         <a class="btn hb" href="assets/Kyle-Littlejohn-Resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a>
         <a class="btn hb" href="#cases">Career &amp; Experience</a>
@@ -657,11 +657,10 @@
   #hl-kaseya{grid-column:1/-1;display:grid;grid-template-columns:1.1fr 1.4fr;gap:32px;align-items:center;padding:28px 32px}
   #hl-kaseya .co,#hl-kaseya .ttl{grid-column:1/-1}
   #hl-kaseya .hero-stat{border:none;padding:0;text-align:left;align-items:flex-start}
-  #hl-kaseya .hero-stat .num{font-size:36px}
+  #hl-kaseya .hero-stat .num{font-size:29px;letter-spacing:-.4px;white-space:normal}
   #hl-kaseya .case-sum{margin-top:0}
   @media(max-width:760px){#hl-kaseya{grid-template-columns:1fr}#hl-kaseya .hero-stat{text-align:center;align-items:center}}
   #cases .case .hero-stat .num{overflow-wrap:break-word}
-  #hl-kaseya .hero-stat .num{font-size:29px;letter-spacing:-.4px;white-space:normal}
   #cases .case-sum{color:var(--ink);font-size:15.5px;line-height:1.65;margin-top:14px;max-width:680px}
   #cases .case-group{grid-column:1/-1;background:color-mix(in oklab,var(--panel) 55%,transparent);border:1px solid var(--line);border-radius:20px;padding:24px 24px 22px}
   #cases .case-group-head{margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid var(--line)}
@@ -669,7 +668,6 @@
   #cases .cgh-ttl{font-family:var(--serif);font-size:20px;font-weight:600;letter-spacing:-.2px;margin-top:6px}
   #cases .cgh-sum{color:var(--ink);font-size:14.5px;margin-top:6px}
   #cases .case-group-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
-  #cases .case-group .co,#cases .case-group .ttl{text-align:center}
   #cases .case-group .case{margin:0;min-width:0}
   #cases .case-group .hero-stat .num{font-size:26px;letter-spacing:-.5px}
   @media(max-width:900px){#cases .case-group-grid{grid-template-columns:1fr}}
@@ -748,8 +746,9 @@
     <span class="arc-edu-date">2010–2014</span>
   </div>
   <style>
-    .arc-edu{display:flex;align-items:baseline;flex-wrap:wrap;gap:6px 20px;margin-top:26px;
+    .arc-edu{display:flex;align-items:baseline;flex-wrap:wrap;gap:6px 20px;margin-top:26px;margin-left:50px;
       padding:18px 22px;border:1px solid var(--line);border-radius:16px;background:var(--card)}
+    @media(min-width:760px){.arc-edu{margin-left:58px}}
     :root[data-theme="light"] .arc-edu{box-shadow:inset 0 1px 0 #fff}
     .arc-edu-label{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
       color:var(--gold-ink);flex:0 0 100%}
@@ -808,7 +807,7 @@
 </style>
 <section id="now" class="reveal"><div class="wrap">
   <h2>What I'm Looking For</h2>
-  <p class="lead-p now-lead">12+ years in, I know exactly what I'm best at: the hard, cross-functional problem a senior leader needs owned end to end. I'm looking for the role where that is the whole job &mdash; these 5 fit cleanly.</p>
+  <p class="lead-p now-lead">I know exactly what I'm best at: the hard, cross-functional problem a senior leader needs owned end to end. I'm looking for the role where that is the whole job, and these 5 fit cleanly.</p>
 
   <div class="now-grid">
     <article class="now-card">
@@ -838,7 +837,7 @@
     <article class="now-card now-ai">
       <span class="nc-ic" aria-hidden="true"><svg class="fi" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span>
       <h3>AI Specialist</h3>
-      <p>The operator who builds AI into the operation, not just talks about it. I designed and run a production system of 100+ specialists across 12 departments, with a human approving every decision that leaves it &mdash; proof I can lead AI adoption and governance, not just use the tools.</p>
+      <p>The operator who builds AI into the operation, not just talks about it. I designed and run a production system of 100+ specialists across 12 departments, with a human approving every decision that leaves it, proof I can lead AI adoption and governance, not just use the tools.</p>
       <a class="nc-link" href="#work">See the system below →</a>
     </article>
   </div>
