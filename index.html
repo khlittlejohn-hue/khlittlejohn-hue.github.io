@@ -402,6 +402,7 @@
   /* ===== desktop side rail ===== */
   /* rail availability pill + value line: hidden by default, surfaced in the desktop rail */
   .rail-value{display:none}
+  .rail-years{display:none}
   @media(min-width:640px){
     body{padding-left:288px}
     #progress{left:288px;width:calc(100% - 288px)}
@@ -422,6 +423,8 @@
                  0 22px 52px -16px color-mix(in oklab,var(--accent) 60%,transparent);
       margin-bottom:24px}
     nav .rail-name{font-size:31px;font-weight:700;letter-spacing:-.8px;line-height:1.0;color:var(--ink)}
+    .rail-years{display:block;margin-top:9px;font-family:var(--mono);font-size:11px;font-weight:600;
+      letter-spacing:1.2px;text-transform:uppercase;color:var(--gold-ink)}
     /* one-line value hook under the name: the rail now sells, not just labels */
     .rail-value{display:block;margin-top:12px;font-family:var(--serif);font-size:14.5px;font-weight:500;
       line-height:1.42;color:var(--ink);max-width:232px}
@@ -445,7 +448,7 @@
     .kbd-pill kbd{display:inline}
   }
   @media(max-width:639px){
-    .rail-role,.rail-contact,.rail-value{display:none}
+    .rail-role,.rail-contact,.rail-value,.rail-years{display:none}
     nav .nav-tools{margin-left:auto}
   }
   /* on desktop, the rail carries the identity; the hero leads with the value prop */
@@ -468,6 +471,7 @@
          srcset="assets/kyle.jpg 1x, assets/kyle@2x.jpg 2x"
          alt="Kyle Littlejohn" width="212" height="212" fetchpriority="high" decoding="async">
     <span class="rail-name">Kyle Littlejohn</span>
+    <span class="rail-years">12+ Years</span>
     <span class="rail-value">The operating layer between <span class="rv-accent">strategy and execution</span>.</span>
     <span class="rail-role"><b>Strategy &amp; Operations</b><b>Chief of Staff</b><b>Program &amp; Project Management</b><b>Management Consulting</b></span>
   </a>
@@ -494,7 +498,7 @@
   <p class="tag tag-full" data-anim style="--d:120">The operating layer between <span class="grad">strategy and execution</span></p>
   <div class="hero-grid">
     <div class="hero-main">
-      <div class="kick" data-anim style="--d:0">Chief of Staff &amp; Strategy / Operations Leader</div>
+      <div class="kick" data-anim style="--d:0">Chief of Staff &amp; Strategy / Operations Leader &middot; 12+ Years</div>
       <h1 class="hero-name" data-anim style="--d:60">Kyle <span class="last">Littlejohn</span></h1>
       <p class="lede" data-anim style="--d:200">I turn ambiguous mandates into measured results, and I built a production AI operating system that multiplies how fast that happens: 100+ specialists helping me do it faster.</p>
       <div class="cta hero-cta" data-anim style="--d:280">
