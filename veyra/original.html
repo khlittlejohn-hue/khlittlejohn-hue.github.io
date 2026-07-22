@@ -1,0 +1,1310 @@
+<!-- NOT-A-REVIEW-ARTIFACT -->
+<meta charset="utf-8">
+<title>Hilly Ride Sheet — 2h30 Long-Run Substitute</title>
+<style>
+:root{
+  --ink:#12161c; --ink-2:#1b212a; --ink-3:#252d38;
+  --paper:#eef1ee; --paper-2:#e2e7e1; --paper-3:#d3dad2;
+  --text:#eef1f4; --text-dim:#93a0ac; --hair:#2a3239;
+  --accent:#7fa8c9; --accent-ink:#0d141a;
+  --climb:#d9542d; --descent:#3f9c8f; --fuel:#e3a62f; --good:#5fb37c;
+  --now:#e8c34a; --now-ink:#14110a;
+  --bg:var(--ink); --bg-2:var(--ink-2); --bg-3:var(--ink-3);
+  --fg:var(--text); --fg-dim:var(--text-dim); --hairline:var(--hair);
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: light){
+  :root{ --bg:var(--paper); --bg-2:#e6eae5; --bg-3:var(--paper-3);
+    --fg:#181d17; --fg-dim:#59645c; --hairline:#c4cdc2; --accent-ink:#eef4f8;
+    color-scheme: light; }
+}
+:root[data-theme="dark"]{ --bg:var(--ink); --bg-2:var(--ink-2); --bg-3:var(--ink-3);
+  --fg:var(--text); --fg-dim:var(--text-dim); --hairline:var(--hair); --accent-ink:#0d141a; color-scheme: dark; }
+:root[data-theme="light"]{ --bg:var(--paper); --bg-2:#e6eae5; --bg-3:var(--paper-3);
+  --fg:#181d17; --fg-dim:#59645c; --hairline:#c4cdc2; --accent-ink:#eef4f8; color-scheme: light; }
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg); color:var(--fg);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  -webkit-font-smoothing:antialiased; min-height:100vh; padding-bottom:64px;
+}
+.mono{ font-family:ui-monospace,"SF Mono","Cascadia Code",Menlo,Consolas,"Roboto Mono",monospace;
+  font-variant-numeric:tabular-nums; font-feature-settings:"tnum" 1; }
+a{color:inherit}
+button{font-family:inherit}
+
+/* ── Sticky header ── */
+.hdr{ position:sticky; top:0; z-index:20;
+  background:color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter:blur(10px) saturate(1.1); border-bottom:1px solid var(--hairline);
+  padding:12px 16px 12px; }
+.hdr-top{display:flex; align-items:baseline; justify-content:space-between; gap:12px}
+.hdr-title{ font-size:14px; font-weight:800; letter-spacing:.04em; text-transform:uppercase;
+  color:var(--fg-dim); text-wrap:balance; }
+.hdr-total{font-size:11px; color:var(--fg-dim); text-align:right}
+
+.timer-box{margin-top:10px}
+.timer-setup{display:flex; align-items:center; gap:9px; flex-wrap:wrap}
+.timer-setup-lbl{font-size:11.5px; color:var(--fg-dim); flex:1 1 100%; line-height:1.3}
+.offset-input{ width:58px; padding:8px 6px; border-radius:9px; border:1px solid var(--hairline);
+  background:var(--bg-2); color:var(--fg); font-size:16px; text-align:center; }
+.offset-input:focus-visible{outline:2px solid var(--accent); outline-offset:1px}
+.start-btn{ background:var(--accent); color:var(--accent-ink); border:none; border-radius:10px;
+  padding:10px 18px; font-weight:800; font-size:13.5px; cursor:pointer; white-space:nowrap; }
+.start-btn:focus-visible{outline:2px solid var(--fg); outline-offset:2px}
+.timer-running{display:flex; align-items:center; gap:10px; flex-wrap:wrap}
+.timer-display{font-size:28px; font-weight:800; letter-spacing:.01em; min-width:98px}
+.timer-running.paused .timer-display{color:var(--fg-dim)}
+.timer-btn{ background:var(--bg-2); border:1px solid var(--hairline); color:var(--fg);
+  border-radius:10px; padding:9px 15px; font-weight:700; font-size:12.5px; cursor:pointer; }
+.timer-btn:hover{border-color:var(--fg-dim)}
+.timer-btn:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+.timer-btn.ghost{padding:9px 11px; color:var(--fg-dim); font-size:14px}
+.timer-btn.done-btn{background:var(--good); color:var(--now-ink); border-color:var(--good); margin-left:auto}
+
+.now-next{ margin-top:10px; display:flex; gap:14px; flex-wrap:wrap; font-size:12px; color:var(--fg-dim); }
+.now-next b{color:var(--fg); font-weight:800}
+.now-next .arrow{color:var(--fg-dim)}
+.voice-toggle{display:flex; align-items:center; gap:6px; margin-left:auto; font-size:11.5px; color:var(--fg-dim); cursor:pointer; user-select:none}
+.voice-toggle input{accent-color:var(--now)}
+
+.hdr-count-row{display:flex; align-items:baseline; justify-content:space-between; margin-top:11px}
+.hdr-count{font-size:13px; color:var(--fg-dim)}
+.hdr-count b{color:var(--fg); font-weight:800; font-size:15px}
+.progress-track{ margin-top:6px; height:7px; border-radius:99px; background:var(--bg-3);
+  overflow:hidden; border:1px solid var(--hairline); }
+.progress-fill{ height:100%; width:0%; border-radius:99px;
+  background:linear-gradient(90deg, var(--accent), var(--good)); transition:width .35s ease; }
+@media (prefers-reduced-motion:reduce){ .progress-fill{transition:none} }
+
+/* ── Profile chart + biker track ── */
+.profile-wrap{padding:10px 16px 0; overflow-x:auto}
+.profile-svg{display:block; width:100%; height:64px; min-width:520px}
+.profile-caption{ display:flex; justify-content:space-between; font-size:10px; color:var(--fg-dim);
+  text-transform:uppercase; letter-spacing:.06em; margin-top:2px; min-width:520px; }
+.biker-wrap{padding:8px 16px 6px; overflow-x:auto}
+.biker-track{position:relative; height:34px; min-width:520px; border-top:1px dashed var(--hairline)}
+.biker-fig{position:absolute; top:-16px; left:0%; width:30px; height:30px; transition:left .6s ease; will-change:left}
+@media (prefers-reduced-motion:reduce){ .biker-fig{transition:none} }
+
+/* ── Layout ── */
+main{max-width:640px; margin:0 auto; padding:6px 14px 0}
+.section{margin-top:22px}
+.section-hdr{ display:flex; align-items:center; gap:10px; padding:0 6px 8px;
+  border-bottom:1px solid var(--hairline); margin-bottom:8px; }
+.section-rail{width:9px; height:9px; border-radius:50%; flex-shrink:0}
+.rail-neutral{background:var(--accent)} .rail-climb{background:var(--climb)}
+.rail-mp{background:linear-gradient(90deg, var(--climb), var(--descent))}
+.section-name{ font-size:13px; font-weight:800; text-transform:uppercase; letter-spacing:.06em; text-wrap:balance; }
+.section-goal{font-size:11.5px; color:var(--fg-dim); font-weight:600; text-transform:none; letter-spacing:0}
+.section-badge{ font-size:10px; font-weight:900; color:var(--now-ink); background:var(--good);
+  padding:2px 7px; border-radius:6px; letter-spacing:.04em; display:none; }
+.section-badge.show{display:inline-block}
+.section-meta{margin-left:auto; font-size:11px; color:var(--fg-dim)}
+.section-toggle{ background:none; border:none; color:var(--fg-dim); font-size:15px;
+  cursor:pointer; padding:2px 4px; margin-left:4px; line-height:1; }
+.section-toggle:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+.section-body{ }
+.collapse-controls{ display:flex; gap:8px; padding:8px 14px 0; max-width:640px; margin:0 auto; }
+.collapse-controls button{ font-size:11.5px; font-weight:700; color:var(--fg-dim);
+  background:none; border:1px solid var(--hairline); border-radius:8px; padding:6px 11px; cursor:pointer; }
+.collapse-controls button:hover{color:var(--fg); border-color:var(--fg-dim)}
+.section-note{ font-size:12px; color:var(--fg-dim); padding:0 6px 10px; margin-top:-4px; line-height:1.5; }
+
+/* pre-workout tips + energy question (setup screen only) */
+.setup-tips{ margin-top:12px; padding:12px 14px; border-radius:12px; background:var(--bg-2);
+  border:1px solid var(--hairline); }
+.setup-tips-hdr{font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:.05em; color:var(--fg-dim); margin-bottom:7px}
+.setup-tips ul{margin:0; padding-left:18px; font-size:12.5px; line-height:1.6; color:var(--fg)}
+.energy-q{ margin-top:10px; padding:12px 14px; border-radius:12px; background:color-mix(in srgb, var(--fuel) 12%, var(--bg));
+  border:1px dashed color-mix(in srgb, var(--fuel) 55%, var(--hairline)); display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+.energy-q-lbl{font-size:12.5px; font-weight:700; flex:1 1 auto}
+.energy-q button{ padding:7px 14px; border-radius:8px; border:1px solid var(--hairline); background:var(--bg-3);
+  color:var(--fg); font-weight:700; font-size:12px; cursor:pointer; }
+.energy-q button.on{background:var(--fuel); color:var(--accent-ink); border-color:var(--fuel)}
+.energy-q input{width:50px; padding:6px; border-radius:7px; border:1px solid var(--hairline); background:var(--bg-3); color:var(--fg); text-align:center; display:none}
+.energy-q input.show{display:inline-block}
+
+.row{ position:relative; display:flex; align-items:center; gap:12px; padding:11px 8px;
+  border-radius:10px; cursor:pointer; border:1px solid transparent;
+  -webkit-tap-highlight-color:transparent; user-select:none; }
+.row:hover{background:var(--bg-2)} .row:active{background:var(--bg-3)}
+.row:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+.chk{ width:26px; height:26px; border-radius:8px; flex-shrink:0; border:2px solid var(--hairline);
+  background:var(--bg-2); display:flex; align-items:center; justify-content:center;
+  font-size:14px; font-weight:900; color:transparent; }
+.row.climb .chk{border-color:color-mix(in srgb, var(--climb) 55%, var(--hairline))}
+.row.descent .chk{border-color:color-mix(in srgb, var(--descent) 55%, var(--hairline))}
+.row.checked .chk{background:var(--good); border-color:var(--good); color:var(--accent-ink)}
+.row.checked .chk::after{content:"✓"}
+.row-body{flex:1; min-width:0}
+.row-line1{display:flex; align-items:baseline; gap:7px; flex-wrap:wrap}
+.row-label{font-size:14px; font-weight:650}
+.row-pos{font-size:10.5px; font-weight:800; padding:1px 6px; border-radius:5px; background:var(--bg-3); color:var(--fg-dim)}
+.row-pos.standing{color:var(--climb)}
+.row-time{font-size:12px; color:var(--fg-dim)}
+.row-dur{font-size:11px; color:var(--fg-dim); font-weight:700}
+.row-line2{display:flex; gap:10px; flex-wrap:wrap; margin-top:2px}
+.tag{ font-size:11px; padding:2px 7px; border-radius:6px; font-weight:700;
+  background:var(--bg-2); color:var(--fg-dim); white-space:nowrap; }
+.tag.cad{color:var(--accent)}
+.tag.zone{color:var(--now); font-weight:800}
+.row.checked .row-label{color:var(--fg-dim); text-decoration:line-through; text-decoration-color:var(--hairline)}
+.row.checked .row-line2{opacity:.55}
+
+@keyframes curPulse{ 0%,100%{box-shadow:0 0 0 0 color-mix(in srgb, var(--now) 55%, transparent)}
+  50%{box-shadow:0 0 0 7px color-mix(in srgb, var(--now) 0%, transparent)} }
+.row.current, .fuel.current{ border-color:var(--now) !important;
+  background:color-mix(in srgb, var(--now) 22%, var(--bg)) !important;
+  animation:curPulse 2s ease-in-out infinite; }
+@media (prefers-reduced-motion:reduce){ .row.current, .fuel.current{animation:none} }
+.row.current::after, .fuel.current::after{
+  content:"NOW"; position:absolute; right:8px; top:7px; font-size:9px; font-weight:900;
+  letter-spacing:.07em; color:var(--now-ink); background:var(--now); padding:2px 6px; border-radius:5px; }
+
+.fuel{ position:relative; display:flex; align-items:center; gap:12px; padding:12px 12px; margin:6px 0 2px;
+  border-radius:12px; cursor:pointer; border:1.5px dashed color-mix(in srgb, var(--fuel) 65%, var(--hairline));
+  background:color-mix(in srgb, var(--fuel) 12%, var(--bg));
+  -webkit-tap-highlight-color:transparent; user-select:none; }
+.fuel:focus-visible{outline:2px solid var(--fuel); outline-offset:2px}
+.fuel .chk{border-color:var(--fuel); background:transparent}
+.fuel.checked{background:color-mix(in srgb, var(--fuel) 5%, var(--bg))}
+.fuel.checked .chk{background:var(--fuel); color:var(--accent-ink)}
+.fuel.checked .chk::after{content:"✓"}
+.fuel-icon{font-size:18px; line-height:1}
+.fuel-body{flex:1}
+.fuel-label{font-size:13px; font-weight:800; color:var(--fuel)}
+.fuel.checked .fuel-label{text-decoration:line-through}
+.fuel-sub{font-size:11.5px; color:var(--fg-dim); margin-top:1px}
+
+/* modal (section-transition + GU confirm) */
+.modal-overlay{position:fixed; inset:0; background:rgba(0,0,0,.55); backdrop-filter:blur(3px);
+  display:none; align-items:center; justify-content:center; z-index:100; padding:20px}
+.modal-overlay.show{display:flex}
+.modal-card{ background:var(--bg-2); border:2px solid var(--now); border-radius:18px; padding:28px 24px;
+  max-width:380px; width:100%; text-align:center; box-shadow:0 20px 60px rgba(0,0,0,.4); }
+.modal-card.fuel-modal{border-color:var(--fuel)}
+.modal-icon{font-size:38px; margin-bottom:6px}
+.modal-kicker{font-size:11px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--fg-dim)}
+.modal-title{font-size:23px; font-weight:800; margin-top:4px; text-wrap:balance}
+.modal-meta{font-size:13px; color:var(--fg-dim); margin-top:8px; line-height:1.5}
+.modal-confirm{ margin-top:20px; width:100%; padding:15px; border-radius:12px; border:none;
+  background:var(--now); color:var(--now-ink); font-weight:800; font-size:15px; cursor:pointer; }
+.modal-card.fuel-modal .modal-confirm{background:var(--fuel); color:var(--accent-ink)}
+.modal-confirm:focus-visible{outline:2px solid var(--fg); outline-offset:2px}
+
+/* non-blocking advance-notice card — see HTML comment above for why this replaced
+   the old blocking confirm modal for section/GU transitions */
+.warn-card{ position:fixed; right:14px; bottom:84px; z-index:90; max-width:250px;
+  background:var(--bg-2); border:2px solid var(--now); border-radius:14px; padding:13px 15px;
+  box-shadow:0 12px 32px rgba(0,0,0,.35);
+  opacity:0; pointer-events:none; transform:translateX(10px);
+  transition:opacity .25s ease, transform .25s ease; }
+.warn-card.show{opacity:1; pointer-events:auto; transform:translateX(0)}
+.warn-card.fuel{border-color:var(--fuel)}
+@media (prefers-reduced-motion:reduce){ .warn-card{transition:none} }
+.warn-close{ position:absolute; top:6px; right:8px; background:none; border:none;
+  color:var(--fg-dim); font-size:13px; cursor:pointer; padding:5px; line-height:1; }
+.warn-close:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+.warn-kicker{font-size:10px; font-weight:800; letter-spacing:.07em; text-transform:uppercase; color:var(--fg-dim); padding-right:16px}
+.warn-title{font-size:16px; font-weight:800; margin-top:3px}
+.warn-meta{font-size:11.5px; color:var(--fg-dim); margin-top:5px; line-height:1.5}
+
+/* workout-done summary panel */
+.done-panel{ display:none; margin:18px 14px 0; padding:18px; border-radius:14px;
+  background:var(--bg-2); border:1px solid var(--hairline); }
+.done-panel.show{display:block}
+.done-panel h3{margin:0 0 4px; font-size:15px}
+.done-panel p{margin:0 0 14px; font-size:12px; color:var(--fg-dim); line-height:1.5}
+.done-grid{display:grid; grid-template-columns:1fr 1fr; gap:9px}
+.done-fld{display:flex; flex-direction:column; gap:4px}
+.done-fld label{font-size:10.5px; font-weight:700; color:var(--fg-dim); text-transform:uppercase; letter-spacing:.04em}
+.done-fld input, .done-fld textarea{ background:var(--bg-3); border:1px solid var(--hairline); color:var(--fg);
+  border-radius:8px; padding:8px 9px; font-size:14px; font-family:inherit; }
+.done-fld textarea{grid-column:1/-1; min-height:56px; resize:vertical}
+.done-actions{display:flex; gap:9px; margin-top:14px; flex-wrap:wrap}
+.done-actions button{ flex:1 1 auto; padding:11px 14px; border-radius:10px; border:1px solid var(--hairline);
+  background:var(--bg-3); color:var(--fg); font-weight:700; font-size:13px; cursor:pointer; }
+.done-actions button.primary{background:var(--good); color:var(--now-ink); border-color:var(--good)}
+.recap-list{ list-style:none; margin:0 0 14px; padding:0; max-height:180px; overflow-y:auto;
+  border:1px solid var(--hairline); border-radius:10px; }
+.recap-list li{ display:flex; justify-content:space-between; gap:8px; padding:7px 11px; font-size:12.5px;
+  border-bottom:1px solid var(--hairline); }
+.recap-list li:last-child{border-bottom:none}
+.recap-list li.done{color:var(--good)}
+.recap-list li.missed{color:var(--fg-dim); opacity:.65}
+.good-job{margin-top:14px; text-align:center; font-weight:800; font-size:14px; color:var(--now)}
+.locked-banner{display:none; margin:18px 14px 0; padding:14px 16px; border-radius:12px;
+  background:color-mix(in srgb, var(--good) 16%, var(--bg)); border:1px solid color-mix(in srgb, var(--good) 45%, var(--hairline));
+  font-size:13px; font-weight:700; color:var(--good)}
+.locked-banner.show{display:block}
+
+/* IG export overlay */
+.ig-overlay{position:fixed; inset:0; background:rgba(0,0,0,.75); display:none; align-items:center;
+  justify-content:center; z-index:110; padding:16px; overflow-y:auto}
+.ig-overlay.show{display:flex}
+.ig-panel{background:var(--bg-2); border-radius:16px; padding:18px; max-width:360px; width:100%; text-align:center}
+.ig-canvas-wrap{ width:100%; aspect-ratio:9/16; background:#0b0d12; border-radius:14px; overflow:hidden; margin-bottom:14px; }
+#igCanvas{width:100%; height:100%; display:block}
+.ig-actions{display:flex; gap:9px}
+.ig-actions button{flex:1; padding:12px; border-radius:10px; border:1px solid var(--hairline); background:var(--bg-3); color:var(--fg); font-weight:700; cursor:pointer}
+.ig-actions button.primary{background:var(--accent); color:var(--accent-ink); border-color:var(--accent)}
+
+.foot{ max-width:640px; margin:26px auto 0; padding:14px 14px 0; border-top:1px solid var(--hairline);
+  display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap; }
+.foot-note{font-size:11px; color:var(--fg-dim); line-height:1.5}
+.reset-btn{ font-size:12px; font-weight:700; color:var(--fg-dim); background:none; border:1px solid var(--hairline);
+  border-radius:8px; padding:7px 11px; cursor:pointer; flex-shrink:0; }
+.reset-btn:hover{color:var(--fg); border-color:var(--fg-dim)}
+.reset-btn:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+
+.done-banner{ display:none; margin:18px 14px 0; padding:16px; border-radius:12px;
+  background:color-mix(in srgb, var(--good) 16%, var(--bg)); border:1px solid color-mix(in srgb, var(--good) 45%, var(--hairline));
+  text-align:center; font-weight:800; font-size:14px; color:var(--good); }
+.done-banner.show{display:block}
+</style>
+
+<div class="hdr">
+  <div class="hdr-top">
+    <div class="hdr-title">Hilly Ride Sheet · Sat 7/18</div>
+    <div class="hdr-total mono">2:30:00<br>planned</div>
+  </div>
+
+  <div class="timer-box">
+    <div class="timer-setup" id="timerSetup">
+      <span class="timer-setup-lbl">Already in (min) — set it to match where you really are, then start</span>
+      <input type="number" id="offsetInput" class="offset-input mono" value="0" min="0" max="150" inputmode="numeric" aria-label="Minutes already in">
+      <button class="start-btn" id="startBtn">▶ Start</button>
+      <div class="setup-tips">
+        <div class="setup-tips-hdr">Before you start</div>
+        <ul>
+          <li>Don't go out too strong — this ramps up and ends intense. Save your matches for the second half.</li>
+          <li>The two Climb Sets are your hill-running stimulus — stand, drop cadence, really load your legs.</li>
+          <li>The Rolling-Hills block in the middle is sustained marathon effort, not a sprint — settle in.</li>
+          <li>Fuel before you feel like you need it — the GU cues are placed early on purpose.</li>
+        </ul>
+      </div>
+      <div class="energy-q" id="energyQ" style="display:none">
+        <span class="energy-q-lbl">This is over 90 min — will you use an energy source (GU/gel)?</span>
+        <button id="energyYes">Yes</button>
+        <button id="energyNo" class="on">No</button>
+        <input type="number" id="energyCount" min="1" max="10" placeholder="#">
+      </div>
+    </div>
+    <div class="timer-running" id="timerRunning" style="display:none">
+      <div class="timer-display mono" id="timerDisplay">0:00</div>
+      <button class="timer-btn" id="pauseBtn">Pause</button>
+      <button class="timer-btn ghost" id="restartTimerBtn" title="Reset timer / re-set start minute">↺</button>
+      <label class="voice-toggle"><input type="checkbox" id="voiceToggle" checked> Voice cues</label>
+      <button class="timer-btn done-btn" id="workoutDoneBtn">End Workout</button>
+    </div>
+    <div class="now-next" id="nowNext" style="display:none">
+      <span>Now: <b id="nowLabel">—</b></span>
+      <span class="arrow">→</span>
+      <span>Next: <b id="nextLabel">—</b></span>
+    </div>
+  </div>
+
+  <div class="hdr-count-row">
+    <div class="hdr-count"><b id="count">0</b> / <span id="total">34</span> done</div>
+  </div>
+  <div class="progress-track"><div class="progress-fill" id="fill"></div></div>
+</div>
+
+<div class="profile-wrap">
+  <svg class="profile-svg" id="profile" viewBox="0 0 1000 100" preserveAspectRatio="none"></svg>
+  <div class="profile-caption"><span>0:00</span><span>climb 1</span><span>rolling MP</span><span>climb 2</span><span>2:30:00</span></div>
+</div>
+<div class="biker-wrap">
+  <div class="biker-track" id="bikerTrack">
+    <svg class="biker-fig" id="bikerFig" viewBox="0 0 60 60" style="left:0%">
+      <circle cx="16" cy="42" r="10" fill="none" stroke="#2b2f36" stroke-width="3.4"/>
+      <circle cx="46" cy="42" r="10" fill="none" stroke="#2b2f36" stroke-width="3.4"/>
+      <path d="M16 42 L28 24 L38 24 L46 42 M28 24 L24 42 M28 24 L34 16" fill="none" stroke="#3a4048" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+      <path d="M22 42 L16 42" stroke="#3a4048" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="33" cy="10" r="6.5" fill="#f2d3b3"/>
+      <path d="M27 8 Q28 1 34 2 Q40 3 39.5 10 Q39.5 6 33 6 Q28 6 27 8Z" fill="#6b4423"/>
+      <path d="M22 24 Q30 15 39 18 L34 24 Z" fill="#e3574b"/>
+    </svg>
+  </div>
+</div>
+
+<div class="done-banner" id="doneBanner">Full course complete. Cool down, get fluids in, go pack for London. 🏁</div>
+<div class="locked-banner" id="lockedBanner">✓ Workout saved — checklist locked. Use "Export recap" below or the reset button to start fresh.</div>
+
+<div class="collapse-controls">
+  <button id="collapseAllBtn">Collapse all</button>
+  <button id="expandAllBtn">Expand all</button>
+</div>
+<main id="main"></main>
+
+<div class="done-panel" id="donePanel">
+  <h3 id="doneHeadline">🎉 Workout Complete!</h3>
+  <p>Whatever your bike computer / watch shows at the end — matching a real Peloton/SoulCycle summary screen. Everything here is optional except time.</p>
+  <div class="done-grid">
+    <div class="done-fld"><label>Total time (min)</label><input type="number" step="1" id="sumTime" inputmode="numeric"></div>
+    <div class="done-fld"><label>Distance (mi)</label><input type="number" step="0.1" id="sumDistance" inputmode="decimal"></div>
+    <div class="done-fld"><label>Avg cadence (rpm)</label><input type="number" id="sumCadence" inputmode="numeric"></div>
+    <div class="done-fld"><label>Max cadence (rpm)</label><input type="number" id="sumMaxCadence" inputmode="numeric"></div>
+    <div class="done-fld"><label>Avg power (watts)</label><input type="number" id="sumPower" inputmode="numeric"></div>
+    <div class="done-fld"><label>Max power (watts)</label><input type="number" id="sumMaxPower" inputmode="numeric"></div>
+    <div class="done-fld"><label>Avg heart rate (bpm)</label><input type="number" id="sumHR" inputmode="numeric"></div>
+    <div class="done-fld"><label>Calories</label><input type="number" id="sumCalories" inputmode="numeric"></div>
+    <div class="done-fld"><label>Effort (1-10)</label><input type="number" min="1" max="10" id="sumEffort" inputmode="numeric"></div>
+    <div class="done-fld"><label>Notes (for AI to read later)</label><textarea id="sumNotes" placeholder="How it felt, anything worth remembering"></textarea></div>
+  </div>
+  <div class="setup-tips-hdr" style="margin-top:14px">Recap</div>
+  <ul class="recap-list" id="recapList"></ul>
+  <div class="done-actions">
+    <button class="primary" id="saveLockBtn">Save workout</button>
+    <button id="exportJsonBtn">Download data (.json)</button>
+    <button id="copyJsonBtn">Copy summary</button>
+  </div>
+
+  <div class="setup-tips-hdr" style="margin-top:16px">Instagram story recap</div>
+  <div class="done-fld" style="margin-bottom:10px">
+    <label>Watermark ("Powered by...")</label>
+    <input type="text" id="sumWatermark" placeholder="Powered by [your app name]" value="Powered by Kyle's Cardio App">
+  </div>
+  <div class="done-actions">
+    <button class="primary" id="exportIgBtn">Export recap (Instagram)</button>
+  </div>
+
+  <div class="setup-tips-hdr" style="margin-top:16px">History (this device)</div>
+  <div id="historyList" style="font-size:12.5px; color:var(--fg-dim); margin-bottom:10px">No saved workouts yet.</div>
+  <div class="done-actions">
+    <button id="exportCsvOneBtn">Export this workout (.csv)</button>
+    <button id="exportCsvAllBtn">Export all history (.csv)</button>
+  </div>
+  <div class="good-job">Good job! 🎉</div>
+</div>
+
+<div class="modal-overlay" id="stopConfirmOverlay">
+  <div class="modal-card">
+    <div class="modal-icon">⏹️</div>
+    <div class="modal-kicker">END WORKOUT</div>
+    <div class="modal-title">Stop this workout now?</div>
+    <div class="modal-meta">Your timer will stop and the summary panel opens so you can save your stats.</div>
+    <div style="display:flex; gap:10px; margin-top:20px">
+      <button class="modal-confirm" id="stopNoBtn" style="background:var(--bg-3); color:var(--fg)">No, keep going</button>
+      <button class="modal-confirm" id="stopYesBtn">Yes, end it</button>
+    </div>
+  </div>
+</div>
+
+<div class="foot">
+  <div class="foot-note">Taps save automatically —<br>close this tab anytime, progress stays.</div>
+  <button class="reset-btn" id="resetBtn">Reset all</button>
+</div>
+
+<!-- Non-blocking advance-notice card (Kyle 2026-07-18: the old blocking confirm modal
+     was contributing to the "dashboard is lagging" feel — replaced with this: fires
+     BEFORE the boundary (30s ahead for sections, 15s for GU), never requires a tap,
+     auto-dismisses on its own. The actual checkmark/highlight transition still happens
+     automatically and separately, right at the real boundary, via autoCheckPast /
+     updateCurrentAuto — this card is purely a heads-up. -->
+<div class="warn-card" id="warnCard">
+  <button class="warn-close" id="warnClose" aria-label="Dismiss">✕</button>
+  <div class="warn-kicker" id="warnKicker">UPCOMING</div>
+  <div class="warn-title" id="warnTitle">—</div>
+  <div class="warn-meta" id="warnMeta">—</div>
+</div>
+
+<div class="ig-overlay" id="igOverlay">
+  <div class="ig-panel">
+    <div class="ig-canvas-wrap"><canvas id="igCanvas" width="540" height="960"></canvas></div>
+    <div class="ig-actions">
+      <button id="igCloseBtn">Close</button>
+      <button class="primary" id="igDownloadBtn">Download PNG</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Single source of truth: every checkable item + its position on the course ──
+const SECTIONS = [
+  { name:"Warm-up", rail:"neutral", goal:"Ease in — raise heart rate, loosen the legs. Nothing hard yet.", note:"Flat, easing in.", items:[
+    { t0:0, t1:15, label:"Warm-up", pos:"Seated", res:"2-3", cad:"85-95", terrain:"Flat", zone:"1-2" }
+  ]},
+  { name:"Aerobic Base 1", rail:"neutral", goal:"Recovery / aerobic engine — easy, conversational, save your legs.", note:"Flat / rolling — Z2, talkable.", items:[
+    { t0:15, t1:45, label:"Aerobic base", pos:"Seated", res:"3-4", cad:"85-95", terrain:"Flat/rolling", zone:"2" },
+    { fuel:true, t:45, n:1, sub:"Take it now — right before the climbs start." }
+  ]},
+  { name:"Climb Set 1", rail:"climb", goal:"Grind standing climbs — load quads/glutes the way a real hill would.", note:"4× climb/descent. Standing, low cadence, grinding a real hill.", items:[
+    { t0:45, t1:48, label:"Climb 1", pos:"Standing", res:"7-8", cad:"55-65", terrain:"Climb", climb:true, zone:"4-5" },
+    { t0:48, t1:49, label:"Descent 1", pos:"Seated", res:"1-2", cad:"100-110", terrain:"Descent", descent:true, zone:"1-2" },
+    { t0:49, t1:52, label:"Climb 2", pos:"Standing", res:"7-8", cad:"55-65", terrain:"Climb", climb:true, zone:"4-5" },
+    { t0:52, t1:53, label:"Descent 2", pos:"Seated", res:"1-2", cad:"100-110", terrain:"Descent", descent:true, zone:"1-2" },
+    { t0:53, t1:56, label:"Climb 3", pos:"Standing", res:"7-8", cad:"55-65", terrain:"Climb", climb:true, zone:"4-5" },
+    { t0:56, t1:57, label:"Descent 3", pos:"Seated", res:"1-2", cad:"100-110", terrain:"Descent", descent:true, zone:"1-2" },
+    { t0:57, t1:60, label:"Climb 4", pos:"Standing", res:"7-8", cad:"55-65", terrain:"Climb", climb:true, zone:"4-5" },
+    { t0:60, t1:61, label:"Descent 4", pos:"Seated", res:"1-2", cad:"100-110", terrain:"Descent", descent:true, zone:"1-2" }
+  ]},
+  { name:"Aerobic Base 2", rail:"neutral", goal:"Recovery — let the legs come back before the next hard block.", note:"Flat / rolling — Z2.", items:[
+    { t0:61, t1:76, label:"Aerobic base", pos:"Seated", res:"3-4", cad:"85-95", terrain:"Flat/rolling", zone:"2" },
+    { fuel:true, t:76, n:2, sub:"Take it now — right before the rolling-hills block." }
+  ]},
+  { name:"MP-Simulation — Rolling Hills", rail:"mp", goal:"Sustained marathon-effort rolling hills — hard but controlled, never a sprint.", note:"6× hard/easy. Marathon effort over rolling terrain — never flat, never a max grind.", items:[
+    { t0:76, t1:80, label:"Hard 1", pos:"Seated/mixed", res:"6-7", cad:"75-85", terrain:"Rolling hill", climb:true, zone:"3-4" },
+    { t0:80, t1:81, label:"Easy 1", pos:"Seated", res:"3", cad:"90-95", terrain:"Flat recovery", zone:"2" },
+    { t0:81, t1:85, label:"Hard 2", pos:"Seated/mixed", res:"6-7", cad:"75-85", terrain:"Rolling hill", climb:true, zone:"3-4" },
+    { t0:85, t1:86, label:"Easy 2", pos:"Seated", res:"3", cad:"90-95", terrain:"Flat recovery", zone:"2" },
+    { t0:86, t1:90, label:"Hard 3", pos:"Seated/mixed", res:"6-7", cad:"75-85", terrain:"Rolling hill", climb:true, zone:"3-4" },
+    { t0:90, t1:91, label:"Easy 3", pos:"Seated", res:"3", cad:"90-95", terrain:"Flat recovery", zone:"2" },
+    { t0:91, t1:95, label:"Hard 4", pos:"Seated/mixed", res:"6-7", cad:"75-85", terrain:"Rolling hill", climb:true, zone:"3-4" },
+    { t0:95, t1:96, label:"Easy 4", pos:"Seated", res:"3", cad:"90-95", terrain:"Flat recovery", zone:"2" },
+    { t0:96, t1:100, label:"Hard 5", pos:"Seated/mixed", res:"6-7", cad:"75-85", terrain:"Rolling hill", climb:true, zone:"3-4" },
+    { t0:100, t1:101, label:"Easy 5", pos:"Seated", res:"3", cad:"90-95", terrain:"Flat recovery", zone:"2" },
+    { t0:101, t1:105, label:"Hard 6", pos:"Seated/mixed", res:"6-7", cad:"75-85", terrain:"Rolling hill", climb:true, zone:"3-4" },
+    { t0:105, t1:106, label:"Easy 6", pos:"Seated", res:"3", cad:"90-95", terrain:"Flat recovery", zone:"2" }
+  ]},
+  { name:"Aerobic Base 3", rail:"neutral", goal:"Recovery — this is the longest easy block for a reason. Bank it before the final push.", note:"Flat / rolling — Z2.", items:[
+    { t0:106, t1:126, label:"Aerobic base", pos:"Seated", res:"3-4", cad:"85-95", terrain:"Flat/rolling", zone:"2" },
+    { fuel:true, t:126, n:3, sub:"Take it now — right before the final climbs." }
+  ]},
+  { name:"Climb Set 2", rail:"climb", goal:"Final climbs on tired legs — this is where the long run gets earned.", note:"3× climb/descent. Final push, legs already tired.", items:[
+    { t0:126, t1:129, label:"Climb 1", pos:"Standing", res:"7-8", cad:"55-65", terrain:"Climb", climb:true, zone:"4-5" },
+    { t0:129, t1:130, label:"Descent 1", pos:"Seated", res:"1-2", cad:"100-110", terrain:"Descent", descent:true, zone:"1-2" },
+    { t0:130, t1:133, label:"Climb 2", pos:"Standing", res:"7-8", cad:"55-65", terrain:"Climb", climb:true, zone:"4-5" },
+    { t0:133, t1:134, label:"Descent 2", pos:"Seated", res:"1-2", cad:"100-110", terrain:"Descent", descent:true, zone:"1-2" },
+    { t0:134, t1:137, label:"Climb 3", pos:"Standing", res:"7-8", cad:"55-65", terrain:"Climb", climb:true, zone:"4-5" },
+    { t0:137, t1:138, label:"Descent 3", pos:"Seated", res:"1-2", cad:"100-110", terrain:"Descent", descent:true, zone:"1-2" }
+  ]},
+  { name:"Cool-down", rail:"neutral", goal:"Recovery — bring the effort back down easy, let the legs unwind.", note:"Rolling out to the finish.", items:[
+    { t0:138, t1:150, label:"Cool-down", pos:"Seated", res:"1-2", cad:"70-80 ↓", terrain:"Flat, easing down", zone:"1" }
+  ]}
+];
+
+function fmtClock(min){
+  const h = Math.floor(min/60), m = Math.round(min%60);
+  if(h>0) return h+":"+String(m).padStart(2,"0")+":00";
+  return "0:"+String(m).padStart(2,"0")+":00";
+}
+
+// v2 keys — Kyle 2026-07-18: guaranteed clean slate (timer at 0:00, nothing pre-checked)
+// no matter what earlier test/preview sessions did, so his real ride starts from scratch.
+const KEY = "hillride_2026-07-18_checklist_v2";
+const TKEY = "hillride_2026-07-18_timer_v2";
+const SKEY = "hillride_2026-07-18_summary_v2";
+function loadState(){ try{ return JSON.parse(localStorage.getItem(KEY)) || {}; }catch(e){ return {}; } }
+function saveState(s){ try{ localStorage.setItem(KEY, JSON.stringify(s)); }catch(e){} }
+let state = loadState();
+let locked = false;
+
+function rowId(sec,idx){ return "s"+sec+"i"+idx; }
+
+const main = document.getElementById("main");
+let totalItems = 0;
+const ITEMS = []; // {el, id, t0, t1, label, isFuel, meta}
+const SECTION_GROUPS = []; // {badgeEl, bodyEl, toggleEl, itemIds:[...], si}
+const itemSectionIdx = {}; // item id -> section index, for auto-expand/collapse
+
+SECTIONS.forEach(function(sec, si){
+  const wrap = document.createElement("div");
+  wrap.className = "section";
+
+  const hdr = document.createElement("div");
+  hdr.className = "section-hdr";
+  const railClass = sec.rail === "climb" ? "rail-climb" : sec.rail === "mp" ? "rail-mp" : "rail-neutral";
+  hdr.innerHTML = '<span class="section-rail '+railClass+'"></span>'
+    + '<span class="section-name">'+sec.name+'</span>'
+    + '<span class="section-badge" id="secbadge'+si+'">✓ DONE</span>'
+    + '<span class="section-meta mono">'+fmtClock(sec.items[0].t0 !== undefined ? sec.items[0].t0 : sec.items[0].t)+'</span>'
+    + '<button class="section-toggle" data-si="'+si+'" title="Collapse/expand this section">▾</button>';
+  wrap.appendChild(hdr);
+
+  // Kyle 2026-07-18: collapsible sections — everything except the header lives in its
+  // own body wrapper so a section can hide/show as one unit. Checking (autoCheckPast)
+  // keeps happening underneath regardless of collapsed state — collapsing is purely
+  // visual, never gates the actual tracking logic.
+  const bodyWrap = document.createElement("div");
+  bodyWrap.className = "section-body";
+  wrap.appendChild(bodyWrap);
+
+  if(sec.goal){
+    const goalEl = document.createElement("div");
+    goalEl.className = "section-note section-goal";
+    goalEl.textContent = "GOAL — " + sec.goal;
+    bodyWrap.appendChild(goalEl);
+  }
+  const groupIds = [];
+  SECTION_GROUPS.push({badgeEl:hdr.querySelector(".section-badge"), bodyEl:bodyWrap, toggleEl:hdr.querySelector(".section-toggle"), itemIds:groupIds, si:si});
+
+  if(sec.note){
+    const note = document.createElement("div");
+    note.className = "section-note";
+    note.textContent = sec.note;
+    bodyWrap.appendChild(note);
+  }
+
+  sec.items.forEach(function(it, ii){
+    const id = rowId(si, ii);
+    totalItems++;
+    itemSectionIdx[id] = si;
+
+    if(it.fuel){
+      const el = document.createElement("div");
+      el.className = "fuel" + (state[id] ? " checked" : "");
+      el.tabIndex = 0;
+      el.setAttribute("role","checkbox");
+      el.setAttribute("aria-checked", state[id] ? "true" : "false");
+      el.innerHTML = '<span class="chk"></span>'
+        + '<span class="fuel-icon">⚡</span>'
+        + '<span class="fuel-body">'
+        +   '<div class="fuel-label">GU gel #'+it.n+' · '+fmtClock(it.t)+'</div>'
+        +   '<div class="fuel-sub">'+it.sub+'</div>'
+        + '</span>';
+      bodyWrap.appendChild(el);
+      ITEMS.push({el:el, id:id, t0:it.t-2, t1:it.t, label:"GU gel #"+it.n, isFuel:true, meta:it.sub});
+      groupIds.push(id);
+      el.addEventListener("click", function(){ toggle(id, el); });
+      el.addEventListener("keydown", function(e){ if(e.key===" "||e.key==="Enter"){ e.preventDefault(); toggle(id, el); } });
+      return;
+    }
+
+    const dur = Math.round(it.t1-it.t0);
+    const el = document.createElement("div");
+    const cls = ["row"];
+    if(it.climb) cls.push("climb");
+    if(it.descent) cls.push("descent");
+    if(state[id]) cls.push("checked");
+    el.className = cls.join(" ");
+    el.tabIndex = 0;
+    el.setAttribute("role","checkbox");
+    el.setAttribute("aria-checked", state[id] ? "true" : "false");
+    el.innerHTML = '<span class="chk"></span>'
+      + '<span class="row-body">'
+      +   '<div class="row-line1"><span class="row-label">'+it.label+'</span>'
+      +     '<span class="row-pos'+(it.pos==="Standing"?" standing":"")+'">'+it.pos+'</span>'
+      +     '<span class="row-time mono">'+fmtClock(it.t0)+'–'+fmtClock(it.t1)+'</span>'
+      +     '<span class="row-dur mono">'+dur+'m</span></div>'
+      +   '<div class="row-line2">'
+      +     '<span class="tag zone">Zone '+it.zone+'</span>'
+      +     '<span class="tag">res '+it.res+'</span>'
+      +     '<span class="tag cad mono">'+it.cad+' rpm</span>'
+      +     '<span class="tag">'+it.terrain+'</span>'
+      +   '</div>'
+      + '</span>';
+    bodyWrap.appendChild(el);
+    ITEMS.push({el:el, id:id, t0:it.t0, t1:it.t1, label:it.label, isFuel:false, isClimbOrHard:!!it.climb, zone:it.zone,
+      meta: fmtClock(it.t0)+'–'+fmtClock(it.t1)+' · '+dur+'m · '+it.pos+' · Zone '+it.zone+' · res '+it.res+' · '+it.cad+' rpm'});
+    groupIds.push(id);
+    el.addEventListener("click", function(){ toggle(id, el); });
+    el.addEventListener("keydown", function(e){ if(e.key===" "||e.key==="Enter"){ e.preventDefault(); toggle(id, el); } });
+  });
+
+  main.appendChild(wrap);
+});
+
+// ── Collapse/expand — manual per-section toggle, global collapse-all/expand-all, and
+// automatic behavior: only the CURRENT section is expanded by default; when the
+// current item moves into a new section, the old one collapses and the new one
+// expands. A manual tap always works regardless of the auto behavior. ──
+function setSectionCollapsed(si, collapsed){
+  const g = SECTION_GROUPS[si]; if(!g) return;
+  g.bodyEl.style.display = collapsed ? "none" : "";
+  g.toggleEl.classList.toggle("collapsed", collapsed);
+  g.toggleEl.textContent = collapsed ? "▸" : "▾";
+}
+function collapseAllSections(){ SECTION_GROUPS.forEach(function(g){ setSectionCollapsed(g.si, true); }); }
+function expandAllSections(){ SECTION_GROUPS.forEach(function(g){ setSectionCollapsed(g.si, false); }); }
+function expandOnlySection(si){
+  SECTION_GROUPS.forEach(function(g){ setSectionCollapsed(g.si, g.si !== si); });
+}
+SECTION_GROUPS.forEach(function(g){
+  g.toggleEl.addEventListener("click", function(){
+    setSectionCollapsed(g.si, g.bodyEl.style.display !== "none");
+  });
+});
+document.getElementById("collapseAllBtn").addEventListener("click", collapseAllSections);
+document.getElementById("expandAllBtn").addEventListener("click", expandAllSections);
+// Baseline before Start: everything collapsed (Kyle: "when they start the workout,
+// everything flaps [collapses]. That should be the base.")
+collapseAllSections();
+
+document.getElementById("total").textContent = totalItems;
+const TOTAL_MIN = ITEMS[ITEMS.length-1].t1;
+
+function toggle(id, el){
+  if(locked) return;
+  state[id] = !state[id];
+  saveState(state);
+  el.classList.toggle("checked", !!state[id]);
+  el.setAttribute("aria-checked", state[id] ? "true" : "false");
+  updateProgress();
+}
+function checkItem(it){
+  if(!it || state[it.id]) return;
+  state[it.id] = true; saveState(state);
+  it.el.classList.add("checked"); it.el.setAttribute("aria-checked","true");
+  updateProgress();
+}
+
+function updateProgress(){
+  const done = Object.keys(state).filter(function(k){ return state[k]; }).length;
+  document.getElementById("count").textContent = done;
+  document.getElementById("fill").style.width = (totalItems ? (done/totalItems*100) : 0) + "%";
+  document.getElementById("doneBanner").classList.toggle("show", done >= totalItems && totalItems > 0);
+  updateSectionBadges();
+}
+function updateSectionBadges(){
+  SECTION_GROUPS.forEach(function(g){
+    const allDone = g.itemIds.length>0 && g.itemIds.every(function(id){ return !!state[id]; });
+    if(g.badgeEl) g.badgeEl.classList.toggle("show", allDone);
+  });
+}
+updateProgress();
+
+document.getElementById("resetBtn").addEventListener("click", function(){
+  if(!confirm("Reset everything — checklist, timer, and workout summary?")) return;
+  state = {}; saveState(state);
+  ITEMS.forEach(function(r){ r.el.classList.remove("checked","current"); r.el.setAttribute("aria-checked","false"); });
+  updateProgress();
+  saveTimer(null); timer=null;
+  if(tickHandle){ clearInterval(tickHandle); tickHandle=null; }
+  lastConfirmedId = null; warnedIds.clear(); countdownScheduled.clear(); halfwaySpoken = false; autoCompleted = false;
+  clearTimeout(warnDismissTimer); warnCard.classList.remove("show");
+  timerSetupEl.style.display="flex"; timerRunningEl.style.display="none";
+  document.getElementById("offsetInput").value="0";
+  locked = false;
+  document.getElementById("lockedBanner").classList.remove("show");
+  document.getElementById("donePanel").classList.remove("show");
+  localStorage.removeItem(SKEY);
+  updateProfileMarker(0); updateBiker(0);
+  collapseAllSections();
+});
+
+// ── Elevation-style profile — hardcoded hex (not CSS var()): Safari can fail to
+// resolve custom properties inside SVG stop-color/stroke attributes, which is why
+// this chart rendered blank on Kyle's phone the first time. ──
+let profileX = null;
+function buildProfile(){
+  const pts = [];
+  SECTIONS.forEach(function(sec){
+    sec.items.forEach(function(it){
+      if(it.fuel) return;
+      const r = parseFloat(String(it.res).split("-")[0]) || 2;
+      pts.push([it.t0, r]); pts.push([it.t1, r]);
+    });
+  });
+  const W = 1000, H = 100, PAD = 4, maxT = TOTAL_MIN, maxR = 9;
+  function x(t){ return (t/maxT) * W; }
+  function y(r){ return H - PAD - ((r/maxR) * (H - PAD*2)); }
+  profileX = x;
+  let d = "M " + x(pts[0][0]) + " " + y(pts[0][1]);
+  for(let i=1;i<pts.length;i++){ d += " L " + x(pts[i][0]) + " " + y(pts[i][1]); }
+  const areaD = d + " L " + W + " " + H + " L 0 " + H + " Z";
+  const svg = document.getElementById("profile");
+  svg.innerHTML =
+    '<defs><linearGradient id="pg" x1="0" y1="0" x2="0" y2="1">'
+    + '<stop offset="0%" stop-color="#7fa8c9" stop-opacity="0.45"></stop>'
+    + '<stop offset="100%" stop-color="#7fa8c9" stop-opacity="0.03"></stop>'
+    + '</linearGradient></defs>'
+    + '<path d="'+areaD+'" fill="url(#pg)" stroke="none"></path>'
+    + '<path d="'+d+'" fill="none" stroke="#7fa8c9" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"></path>'
+    + '<line id="posMarker" x1="0" y1="0" x2="0" y2="'+H+'" stroke="#e8c34a" stroke-width="2" stroke-dasharray="3,3" style="display:none"></line>'
+    + '<circle id="posDot" cx="0" cy="6" r="4.5" fill="#e8c34a" style="display:none"></circle>';
+}
+buildProfile();
+
+function updateProfileMarker(min){
+  const marker = document.getElementById("posMarker"), dot = document.getElementById("posDot");
+  if(!marker || !profileX) return;
+  if(min<=0){ marker.style.display="none"; dot.style.display="none"; return; }
+  const xx = profileX(Math.min(min, TOTAL_MIN));
+  marker.setAttribute("x1", xx); marker.setAttribute("x2", xx); marker.style.display="block";
+  dot.setAttribute("cx", xx); dot.style.display="block";
+}
+function updateBiker(min){
+  const pct = Math.max(0, Math.min(100, (min/TOTAL_MIN)*100));
+  document.getElementById("bikerFig").style.left = "calc(" + pct + "% - 15px)";
+}
+
+// ── Live timer + confirm-modal section tracking ──
+function loadTimer(){ try{ return JSON.parse(localStorage.getItem(TKEY)); }catch(e){ return null; } }
+function saveTimer(s){ try{ if(s) localStorage.setItem(TKEY, JSON.stringify(s)); else localStorage.removeItem(TKEY); }catch(e){} }
+let timer = loadTimer();
+let tickHandle = null;
+let lastConfirmedId = null; // the item currently shown as .current
+let autoCompleted = false;
+let audioCtx = null;
+
+function ensureAudio(){
+  try{
+    if(!audioCtx) audioCtx = new (window.AudioContext||window.webkitAudioContext)();
+    if(audioCtx && audioCtx.state === "suspended") audioCtx.resume();
+  }catch(e){}
+}
+function beep(){
+  if(!audioCtx) return;
+  try{
+    const t0 = audioCtx.currentTime;
+    [[880,0,0.34],[1046.5,0.16,0.5]].forEach(function(cfg){
+      const osc = audioCtx.createOscillator(), gain = audioCtx.createGain();
+      osc.type = "sine"; osc.frequency.value = cfg[0];
+      gain.gain.setValueAtTime(0.0001, t0+cfg[1]);
+      gain.gain.exponentialRampToValueAtTime(0.24, t0+cfg[1]+0.02);
+      gain.gain.exponentialRampToValueAtTime(0.0001, t0+cfg[2]);
+      osc.connect(gain); gain.connect(audioCtx.destination);
+      osc.start(t0+cfg[1]); osc.stop(t0+cfg[2]+0.02);
+    });
+  }catch(e){}
+}
+
+function findCurrent(min){
+  let found = null;
+  for(let i=0;i<ITEMS.length;i++){
+    if(min >= ITEMS[i].t0 && min < ITEMS[i].t1) found = ITEMS[i]; // later match wins (fuel overrides its preceding row)
+  }
+  return found;
+}
+
+// Kyle 2026-07-18: "when we auto move on to the next segment based on time, it auto
+// checks the box above" — and "I just started the timer so it jumped to the right
+// section, have it also check all the boxes above." Checking is TIME-driven, not
+// dependent on tapping the confirm modal (that's just the acknowledgment ritual) — so
+// this sweep runs every tick and is the single source of truth for what's checked.
+function autoCheckPast(min){
+  ITEMS.forEach(function(it){
+    if(min >= it.t1 && !state[it.id]) checkItem(it);
+  });
+}
+
+const nowNextEl = document.getElementById("nowNext");
+const nowLabelEl = document.getElementById("nowLabel");
+const nextLabelEl = document.getElementById("nextLabel");
+function updateNowNextReadout(min){
+  const idx = ITEMS.findIndex(function(it){ return min >= it.t0 && min < it.t1; });
+  if(idx < 0){ nowNextEl.style.display = "none"; return; }
+  nowNextEl.style.display = "flex";
+  const cur = ITEMS[idx], nxt = ITEMS[idx+1];
+  nowLabelEl.textContent = cur.label + " (" + Math.round(cur.t1-cur.t0) + "m)";
+  nextLabelEl.textContent = nxt ? (nxt.label + " (" + Math.round(nxt.t1-nxt.t0) + "m)") : "Finish";
+}
+
+// ── Voice cues — REVISED 2026-07-18. Kyle: "these audio cues are... too often."
+// The old system spoke a motivational line on every climb/hard segment — too much.
+// New spec, entirely his own words:
+//   (1) ONE motivational line at the halfway point of the whole workout, that's it.
+//   (2) An early, simple heads-up ~30s/15s out: "Next segment in N seconds: {title}."
+//       No stat details — just enough to know what's coming.
+//   (3) A close-in countdown, ~10s before the boundary: "Next segment: {title}, {N}
+//       minutes long, begins in" — then "three" / "two" / "one" spoken so they land
+//       exactly 3/2/1 real seconds before the segment actually starts.
+let halfwaySpoken = false;
+function speak(text){
+  const toggle = document.getElementById("voiceToggle");
+  if(!toggle || !toggle.checked) return;
+  try{
+    if(!("speechSynthesis" in window)) return;
+    const u = new SpeechSynthesisUtterance(text);
+    u.rate = 1.0; u.pitch = 1.0; u.volume = 1.0;
+    window.speechSynthesis.speak(u);
+  }catch(e){}
+}
+
+// Kyle 2026-07-18: the actual checkmark/highlight transition is now fully automatic
+// and silent, right at the real boundary — no confirm tap needed (autoCheckPast above
+// handles the checkmark; this handles the highlight). The warn card below is a
+// SEPARATE, earlier heads-up — the two are intentionally decoupled.
+function updateCurrentAuto(min){
+  const target = findCurrent(min);
+  const targetId = target ? target.id : null;
+  if(targetId !== lastConfirmedId){
+    ITEMS.forEach(function(it){ it.el.classList.remove("current"); });
+    if(target){
+      target.el.classList.add("current");
+      target.el.scrollIntoView({block:"center", behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"});
+      // Kyle 2026-07-18: "once that section is done... it collapses. The next section
+      // opens up." The section containing the new current item auto-expands; every
+      // other section collapses (a manual tap still overrides at any time).
+      expandOnlySection(itemSectionIdx[target.id]);
+    }
+    lastConfirmedId = targetId;
+  }
+}
+
+// ── Non-blocking advance-notice card — replaces the old blocking confirm modal.
+// Kyle: "I think my current dashboard is lagging with the popups" — root cause was a
+// modal that appeared AT the boundary and required a tap. This fires BEFORE the
+// boundary (30s ahead for a section, 15s ahead for GU), never blocks, and auto-
+// dismisses on its own (~10s) with an X to close early. Timing is computed straight
+// off the same live elapsed clock (`min`, from tick()) driving everything else. ──
+const warnCard = document.getElementById("warnCard");
+const warnKicker = document.getElementById("warnKicker");
+const warnTitle = document.getElementById("warnTitle");
+const warnMeta = document.getElementById("warnMeta");
+const warnedIds = new Set();
+let warnDismissTimer = null;
+function showWarnCard(it){
+  const secondsOut = it.isFuel ? 15 : 30;
+  warnCard.classList.toggle("fuel", !!it.isFuel);
+  warnKicker.textContent = it.isFuel ? "FUEL COMING UP" : "UPCOMING";
+  warnTitle.textContent = it.isFuel ? "GU gel" : it.label;
+  warnMeta.textContent = it.meta;
+  warnCard.classList.add("show");
+  beep();
+  if(navigator.vibrate){ try{ navigator.vibrate([120,60,120]); }catch(e){} }
+  speak(it.isFuel ? ("Fuel in "+secondsOut+" seconds.") : ("Next segment in "+secondsOut+" seconds: "+it.label+"."));
+  clearTimeout(warnDismissTimer);
+  warnDismissTimer = setTimeout(function(){ warnCard.classList.remove("show"); }, 10000);
+}
+function checkHalfway(min){
+  if(halfwaySpoken || min < TOTAL_MIN/2) return;
+  halfwaySpoken = true;
+  speak("Halfway there. Strong work — keep pushing through the back half.");
+}
+// Kyle 2026-07-18: "if we go through the whole workout at full 2.5 hours, it auto
+// completes." Reaching the planned total is treated exactly like tapping End Workout
+// -> Yes: lock in anything time-completed, stop the timer, open the summary panel.
+function checkAutoComplete(min){
+  if(autoCompleted || min < TOTAL_MIN) return;
+  autoCompleted = true;
+  autoCheckPast(min);
+  if(timer && timer.running) pauseBtn.click();
+  openDonePanel(min);
+}
+// Close-in 3-2-1 countdown — regular section starts only (a GU cue isn't a timed
+// "segment" the same way, so it just gets the early heads-up above). Triggers ~10s
+// before the boundary; the preamble line has time to finish before "three" lands.
+// The three numbers are scheduled via setTimeout off real elapsed ms, computed fresh
+// at trigger time, so they land on the real clock rather than drifting with the
+// 1-second tick loop.
+const countdownScheduled = new Set();
+function scheduleCountdown(it, secondsRemaining){
+  const dur = Math.round(it.t1-it.t0);
+  beep(); // Kyle: "I really like the beep" — keep it on this cue too, not just the early heads-up
+  speak("Next segment: "+it.label+", "+dur+" minute"+(dur===1?"":"s")+" long, begins in");
+  [3,2,1].forEach(function(n){
+    const delayMs = Math.max(0, (secondsRemaining-n)*1000);
+    // Guard against a pause landing mid-countdown — a scheduled setTimeout fires on
+    // real wall-clock time regardless of the workout's own pause state, so without
+    // this check a paused ride could still hear a stale "three, two, one."
+    setTimeout(function(){ if(timer && timer.running) speak(String(n)); }, delayMs);
+  });
+}
+function checkCountdownTrigger(min){
+  const triggerMin = 10/60; // 10 seconds out
+  ITEMS.forEach(function(it){
+    if(it.isFuel || countdownScheduled.has(it.id)) return;
+    if(min >= (it.t0 - triggerMin) && min < it.t0){
+      countdownScheduled.add(it.id);
+      scheduleCountdown(it, (it.t0 - min) * 60);
+    }
+  });
+}
+document.getElementById("warnClose").addEventListener("click", function(){
+  clearTimeout(warnDismissTimer);
+  warnCard.classList.remove("show");
+});
+function checkUpcomingWarnings(min){
+  // Collect everything newly due this tick rather than showing each as found — a GU
+  // cue always sits exactly at a section boundary, so their warn-windows CAN overlap
+  // if the tab was backgrounded and several ticks catch up at once. Mark all of them
+  // warned (so none re-fire later) but only ever display one: the fuel cue wins if
+  // present (time-critical), else whichever is soonest.
+  const triggered = [];
+  ITEMS.forEach(function(it){
+    if(warnedIds.has(it.id)) return;
+    const cueTime = it.isFuel ? it.t1 : it.t0;
+    const warnMin = it.isFuel ? (15/60) : (30/60);
+    if(min >= (cueTime - warnMin) && min < cueTime){
+      warnedIds.add(it.id);
+      triggered.push(it);
+    }
+  });
+  if(!triggered.length) return;
+  const fuelOne = triggered.find(function(it){ return it.isFuel; });
+  const winner = fuelOne || triggered.reduce(function(a,b){
+    const ca = a.isFuel?a.t1:a.t0, cb = b.isFuel?b.t1:b.t0;
+    return cb<ca ? b : a;
+  });
+  showWarnCard(winner);
+}
+
+function fmtElapsed(totalMinFloat){
+  const totalSec = Math.max(0, Math.round(totalMinFloat*60));
+  const h = Math.floor(totalSec/3600), m = Math.floor((totalSec%3600)/60), s = totalSec%60;
+  const mm = String(m).padStart(2,"0"), ss = String(s).padStart(2,"0");
+  return h>0 ? (h+":"+mm+":"+ss) : (mm+":"+ss);
+}
+function currentElapsedMs(){
+  if(!timer) return 0;
+  return timer.running ? (timer.baseMs + (Date.now() - timer.startTs)) : timer.baseMs;
+}
+function tick(){
+  const min = currentElapsedMs()/60000;
+  document.getElementById("timerDisplay").textContent = fmtElapsed(min);
+  autoCheckPast(min);
+  updateCurrentAuto(min);
+  checkUpcomingWarnings(min);
+  checkCountdownTrigger(min);
+  checkHalfway(min);
+  checkAutoComplete(min);
+  updateProfileMarker(min);
+  updateBiker(min);
+  updateNowNextReadout(min);
+}
+
+const timerSetupEl = document.getElementById("timerSetup");
+const timerRunningEl = document.getElementById("timerRunning");
+const pauseBtn = document.getElementById("pauseBtn");
+
+function showRunningUI(){ timerSetupEl.style.display = "none"; timerRunningEl.style.display = "flex"; }
+
+// Kyle 2026-07-18: "before a long workout above 90 mins, ask will you be using an
+// energy source" — informational only for today's fixed course (the 3 GU cues are
+// already baked in); the answer rides along in the saved summary so a future
+// auto-generated course can size its fuel cues off it.
+let energySourceAnswer = { using:false, count:null };
+if(TOTAL_MIN > 90) document.getElementById("energyQ").style.display = "flex";
+document.getElementById("energyYes").addEventListener("click", function(){
+  energySourceAnswer.using = true;
+  document.getElementById("energyYes").classList.add("on");
+  document.getElementById("energyNo").classList.remove("on");
+  document.getElementById("energyCount").classList.add("show");
+});
+document.getElementById("energyNo").addEventListener("click", function(){
+  energySourceAnswer.using = false;
+  document.getElementById("energyNo").classList.add("on");
+  document.getElementById("energyYes").classList.remove("on");
+  document.getElementById("energyCount").classList.remove("show");
+});
+document.getElementById("energyCount").addEventListener("input", function(e){
+  energySourceAnswer.count = e.target.value || null;
+});
+
+document.getElementById("startBtn").addEventListener("click", function(){
+  ensureAudio();
+  const offsetMin = Math.max(0, Math.min(TOTAL_MIN, parseFloat(document.getElementById("offsetInput").value) || 0));
+  timer = { running:true, startTs: Date.now(), baseMs: offsetMin*60000 };
+  saveTimer(timer);
+  showRunningUI();
+  if(tickHandle) clearInterval(tickHandle);
+  tickHandle = setInterval(tick, 1000);
+  tick();
+});
+
+pauseBtn.addEventListener("click", function(){
+  ensureAudio();
+  if(!timer) return;
+  if(timer.running){
+    timer.baseMs = currentElapsedMs(); timer.running = false; timer.startTs = null;
+    if(tickHandle){ clearInterval(tickHandle); tickHandle=null; }
+    pauseBtn.textContent = "Resume"; timerRunningEl.classList.add("paused");
+  } else {
+    timer.running = true; timer.startTs = Date.now();
+    tickHandle = setInterval(tick, 1000);
+    pauseBtn.textContent = "Pause"; timerRunningEl.classList.remove("paused");
+  }
+  saveTimer(timer); tick();
+});
+
+document.getElementById("restartTimerBtn").addEventListener("click", function(){
+  if(!confirm("Reset the timer and re-enter your starting minute? Your checked-off items stay as they are.")) return;
+  if(tickHandle){ clearInterval(tickHandle); tickHandle=null; }
+  timer = null; saveTimer(null);
+  lastConfirmedId = null; warnedIds.clear(); countdownScheduled.clear(); halfwaySpoken = false; autoCompleted = false;
+  clearTimeout(warnDismissTimer); warnCard.classList.remove("show");
+  ITEMS.forEach(function(it){ it.el.classList.remove("current"); });
+  updateProfileMarker(0); updateBiker(0);
+  timerRunningEl.style.display = "none"; timerRunningEl.classList.remove("paused");
+  pauseBtn.textContent = "Pause";
+  timerSetupEl.style.display = "flex";
+  document.getElementById("offsetInput").value = "0";
+  collapseAllSections();
+});
+
+// Resume an in-progress ride across a reload / backgrounded tab.
+if(timer){
+  showRunningUI();
+  pauseBtn.textContent = timer.running ? "Pause" : "Resume";
+  timerRunningEl.classList.toggle("paused", !timer.running);
+  if(timer.running){ tickHandle = setInterval(tick, 1000); }
+  tick();
+}
+
+// ── Workout Done: lock + summary + export ──
+const donePanel = document.getElementById("donePanel");
+function loadSummary(){ try{ return JSON.parse(localStorage.getItem(SKEY)); }catch(e){ return null; } }
+function saveSummary(s){ try{ localStorage.setItem(SKEY, JSON.stringify(s)); }catch(e){} }
+
+// Kyle 2026-07-18: "a button to confirm you want to stop. If no, continues. If yes, it
+// brings up the stats box. Time should auto-populate with when it ended but overwritable.
+// Give a recap of all the segments it did and a note at the bottom saying good job."
+const stopConfirmOverlay = document.getElementById("stopConfirmOverlay");
+document.getElementById("workoutDoneBtn").addEventListener("click", function(){
+  stopConfirmOverlay.classList.add("show");
+});
+document.getElementById("stopNoBtn").addEventListener("click", function(){
+  stopConfirmOverlay.classList.remove("show"); // workout continues, nothing changes
+});
+document.getElementById("stopYesBtn").addEventListener("click", function(){
+  stopConfirmOverlay.classList.remove("show");
+  const min = currentElapsedMs()/60000;
+  autoCheckPast(min); // lock in anything time-completed right up to the stop moment
+  if(timer && timer.running) pauseBtn.click();
+  openDonePanel(min);
+});
+
+function buildRecapList(){
+  const ul = document.getElementById("recapList");
+  ul.innerHTML = "";
+  ITEMS.forEach(function(it){
+    const li = document.createElement("li");
+    const done = !!state[it.id];
+    li.className = done ? "done" : "missed";
+    li.innerHTML = "<span>"+(done?"✓ ":"— ")+it.label+"</span><span class=\"mono\">"+fmtClock(it.t0)+"</span>";
+    ul.appendChild(li);
+  });
+}
+
+function openDonePanel(min){
+  document.getElementById("sumTime").value = Math.round(min);
+  buildRecapList();
+  donePanel.classList.add("show");
+  donePanel.scrollIntoView({block:"start"});
+  const existing = loadSummary();
+  if(existing){
+    document.getElementById("sumDistance").value = existing.distance||"";
+    document.getElementById("sumCadence").value = existing.avgCadence||"";
+    document.getElementById("sumMaxCadence").value = existing.maxCadence||"";
+    document.getElementById("sumPower").value = existing.avgPower||"";
+    document.getElementById("sumMaxPower").value = existing.maxPower||"";
+    document.getElementById("sumHR").value = existing.avgHR||"";
+    document.getElementById("sumCalories").value = existing.calories||"";
+    document.getElementById("sumEffort").value = existing.effort||"";
+    document.getElementById("sumNotes").value = existing.notes||"";
+  }
+  renderHistoryList();
+}
+
+// Kyle 2026-07-19: fields matched to a real Peloton/SoulCycle end-of-ride screen —
+// avg AND max for cadence/power, not just averages (confirmed via research: Peloton's
+// summary shows average output, best/max output, average + best cadence).
+function buildSummary(){
+  const done = Object.keys(state).filter(function(k){ return state[k]; }).length;
+  const timeInput = parseFloat(document.getElementById("sumTime").value);
+  return {
+    date: "2026-07-18",
+    savedAt: null, // stamped when actually saved to history, not on every buildSummary() call
+    workout: "Hilly ride — long-run substitute (thunderstorm reroute)",
+    workoutType: "bike",
+    plannedTotalMin: TOTAL_MIN,
+    elapsedMin: !isNaN(timeInput) ? timeInput : Math.round((currentElapsedMs()/60000)*10)/10,
+    itemsDone: done,
+    itemsTotal: totalItems,
+    distance: document.getElementById("sumDistance").value || null,
+    avgCadence: document.getElementById("sumCadence").value || null,
+    maxCadence: document.getElementById("sumMaxCadence").value || null,
+    avgPower: document.getElementById("sumPower").value || null,
+    maxPower: document.getElementById("sumMaxPower").value || null,
+    avgHR: document.getElementById("sumHR").value || null,
+    calories: document.getElementById("sumCalories").value || null,
+    effort: document.getElementById("sumEffort").value || null,
+    notes: document.getElementById("sumNotes").value || "",
+    energySource: energySourceAnswer
+  };
+}
+
+// ── Local history (this device/browser only — no backend, no cross-device sync;
+// documented honestly as a limitation in the spec). Every Save appends one entry. ──
+const HISTORY_KEY = "cardio_app_history_v1";
+function loadHistory(){ try{ return JSON.parse(localStorage.getItem(HISTORY_KEY)) || []; }catch(e){ return []; } }
+function saveHistory(h){ try{ localStorage.setItem(HISTORY_KEY, JSON.stringify(h)); }catch(e){} }
+function renderHistoryList(){
+  const el = document.getElementById("historyList");
+  const hist = loadHistory();
+  if(!hist.length){ el.textContent = "No saved workouts yet."; return; }
+  el.innerHTML = hist.slice().reverse().map(function(h){
+    return "<div style='padding:6px 0;border-bottom:1px solid var(--hairline)'>"
+      + "<b style='color:var(--fg)'>"+ (h.savedAt||h.date) +"</b> — "+h.workout
+      + " · "+fmtElapsed(h.elapsedMin)+(h.distance?" · "+h.distance+" mi":"")+(h.effort?" · effort "+h.effort+"/10":"")
+      + "</div>";
+  }).join("");
+}
+function csvEscape(v){ if(v===null||v===undefined) return ""; const s=String(v); return /[",\n]/.test(s) ? '"'+s.replace(/"/g,'""')+'"' : s; }
+function summaryToCsv(rows){
+  const cols = ["savedAt","date","workout","elapsedMin","plannedTotalMin","itemsDone","itemsTotal","distance","avgCadence","maxCadence","avgPower","maxPower","avgHR","calories","effort","notes"];
+  const lines = [cols.join(",")];
+  rows.forEach(function(r){ lines.push(cols.map(function(c){ return csvEscape(r[c]); }).join(",")); });
+  return lines.join("\n");
+}
+function downloadText(text, filename, mime){
+  const blob = new Blob([text], {type:mime});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = filename;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+document.getElementById("exportCsvOneBtn").addEventListener("click", function(){
+  downloadText(summaryToCsv([buildSummary()]), "workout-2026-07-18.csv", "text/csv");
+});
+document.getElementById("exportCsvAllBtn").addEventListener("click", function(){
+  const hist = loadHistory();
+  if(!hist.length){ alert("No saved workout history yet — save a workout first."); return; }
+  downloadText(summaryToCsv(hist), "workout-history.csv", "text/csv");
+});
+
+// Kyle 2026-07-19: "when I hit end workout, save it all on my fitness dashboard
+// automatically... I actually lost a bunch of it because it didn't save." This tool
+// has no backend (it's a single browser page), so it cannot reach across to the real
+// exec-office Fitness dashboard directly. The honest bridge: every Save now ALSO
+// triggers a file download (kyle-cardio-log-{timestamp}.json) into ~/Downloads —
+// the same folder + naming convention the existing training-log autosync already
+// watches (auto_sync_workouts.sh -> ingest_cardio_log.py), which folds it into
+// data/cardio-workout-history.json and re-renders dashboard.html automatically on
+// the next Claude turn, with zero manual copy-paste. Local history (below) stays as
+// the on-device backup so nothing is lost even if that pipeline is ever offline.
+function downloadDashboardSync(summary){
+  const payload = { session: summary };
+  const fname = "kyle-cardio-log-" + Date.now() + ".json";
+  downloadText(JSON.stringify(payload, null, 2), fname, "application/json");
+}
+document.getElementById("saveLockBtn").addEventListener("click", function(){
+  const summary = buildSummary();
+  summary.savedAt = new Date().toISOString().replace("T"," ").slice(0,16);
+  saveSummary(summary);
+  const hist = loadHistory();
+  hist.push(summary);
+  saveHistory(hist);
+  renderHistoryList();
+  downloadDashboardSync(summary);
+  locked = true;
+  if(timer && timer.running){ pauseBtn.click(); }
+  document.getElementById("lockedBanner").classList.add("show");
+  alert("Saved. A sync file just downloaded to your Downloads folder — it feeds your real Fitness dashboard automatically (updates next time Claude runs, no copy-paste needed). Also saved locally in this device's history below.");
+});
+
+document.getElementById("exportJsonBtn").addEventListener("click", function(){
+  const summary = buildSummary();
+  const blob = new Blob([JSON.stringify(summary, null, 2)], {type:"application/json"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = "hilly-ride-2026-07-18.json";
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+});
+document.getElementById("copyJsonBtn").addEventListener("click", function(){
+  const summary = buildSummary();
+  navigator.clipboard.writeText(JSON.stringify(summary, null, 2)).then(function(){
+    alert("Copied — paste it back to Claude to log it in the marathon trainer.");
+  }).catch(function(){ alert("Copy failed — use Download instead."); });
+});
+
+// ── Instagram-story recap export (self-contained canvas render, no external libs) ──
+const igOverlay = document.getElementById("igOverlay");
+document.getElementById("exportIgBtn").addEventListener("click", function(){
+  drawIgCard();
+  igOverlay.classList.add("show");
+});
+document.getElementById("igCloseBtn").addEventListener("click", function(){ igOverlay.classList.remove("show"); });
+document.getElementById("igDownloadBtn").addEventListener("click", function(){
+  const canvas = document.getElementById("igCanvas");
+  const a = document.createElement("a");
+  a.href = canvas.toDataURL("image/png");
+  a.download = "hilly-ride-recap-2026-07-18.png";
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+});
+
+function drawIgCard(){
+  const summary = buildSummary();
+  const c = document.getElementById("igCanvas");
+  const ctx = c.getContext("2d");
+  const W = c.width, H = c.height;
+
+  // background
+  const bg = ctx.createLinearGradient(0,0,0,H);
+  bg.addColorStop(0, "#12161c"); bg.addColorStop(1, "#1b212a");
+  ctx.fillStyle = bg; ctx.fillRect(0,0,W,H);
+
+  // header
+  ctx.fillStyle = "#93a0ac";
+  ctx.font = "700 22px -apple-system, Segoe UI, Roboto, sans-serif";
+  ctx.textAlign = "left";
+  ctx.fillText("SATURDAY, JULY 18", 40, 90);
+  ctx.fillStyle = "#eef1f4";
+  ctx.font = "800 40px -apple-system, Segoe UI, Roboto, sans-serif";
+  ctx.fillText("Hilly Ride", 40, 140);
+  ctx.fillText("Long-Run Sub", 40, 190);
+
+  // hill profile silhouette
+  const px0=40, py0=280, pw=W-80, ph=140;
+  ctx.strokeStyle="#7fa8c9"; ctx.lineWidth=4; ctx.beginPath();
+  const shape=[[0,0.75],[0.1,0.55],[0.28,0.15],[0.3,0.75],[0.5,0.35],[0.68,0.15],[0.7,0.75],[1,0.55]];
+  shape.forEach(function(p,i){ const x=px0+p[0]*pw, y=py0+p[1]*ph; if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y); });
+  ctx.stroke();
+  ctx.lineTo(px0+pw, py0+ph); ctx.lineTo(px0, py0+ph); ctx.closePath();
+  const fillGrad = ctx.createLinearGradient(0,py0,0,py0+ph);
+  fillGrad.addColorStop(0,"rgba(127,168,201,.35)"); fillGrad.addColorStop(1,"rgba(127,168,201,.02)");
+  ctx.fillStyle = fillGrad; ctx.fill();
+
+  // Kyle 2026-07-19: "include time, distance, name of the workout... don't need any
+  // super details that only the user needs to know." Simplified to the two shareable
+  // numbers only — the rich stats (cadence/power/HR/calories) live in Save + CSV/JSON,
+  // not on the story graphic itself.
+  function stat(x,y,w,h,label,value){
+    ctx.fillStyle="#1e2530"; roundRect(ctx,x,y,w,h,16); ctx.fill();
+    ctx.fillStyle="#93a0ac"; ctx.font="700 15px -apple-system, Segoe UI, Roboto, sans-serif";
+    ctx.fillText(label.toUpperCase(), x+18, y+34);
+    ctx.fillStyle="#eef1f4"; ctx.font="800 34px -apple-system, Segoe UI, Roboto, sans-serif";
+    ctx.fillText(value, x+18, y+76);
+  }
+  const gy = 470, gh=110, gap=16, gw=(W-80-gap)/2;
+  stat(40, gy, gw, gh, "Time", fmtElapsed(summary.elapsedMin));
+  stat(40+gw+gap, gy, gw, gh, "Distance", (summary.distance? summary.distance+" mi" : "— mi"));
+
+  // translation sentence
+  const equivMi = summary.distance ? (parseFloat(summary.distance)).toFixed(0) : "~16";
+  const lines = wrapText(ctx, "2.5 hours of hill-simulation riding — climbs standing at 55-65 rpm, rolling marathon-pace efforts — banked the aerobic + muscular stimulus of a "+equivMi+"-mile long run, on a night running outside wasn't an option.", 40, W-80);
+  ctx.font="500 22px -apple-system, Segoe UI, Roboto, sans-serif"; ctx.fillStyle="#c7cfd6";
+  let ly = gy+gh+gap+60;
+  lines.forEach(function(l){ ctx.fillText(l, 40, ly); ly+=32; });
+
+  // closing line
+  ctx.font="800 26px -apple-system, Segoe UI, Roboto, sans-serif"; ctx.fillStyle="#e8c34a";
+  ctx.fillText("On track for the Sydney Marathon 🏁", 40, H-110);
+
+  // biker along the hill
+  drawMiniBiker(ctx, px0 + pw*0.72, py0+ph*0.15-14);
+
+  // watermark — Kyle: "put a logo tab at the bottom, like powered by [app name]. So
+  // that encourages people to post our app for free and promote it."
+  const watermark = (document.getElementById("sumWatermark").value || "").trim();
+  if(watermark){
+    ctx.textAlign = "center";
+    ctx.font="700 18px -apple-system, Segoe UI, Roboto, sans-serif"; ctx.fillStyle="#5f6b76";
+    ctx.fillText(watermark, W/2, H-40);
+    ctx.textAlign = "left";
+  }
+}
+function roundRect(ctx,x,y,w,h,r){
+  ctx.beginPath(); ctx.moveTo(x+r,y);
+  ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r);
+  ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath();
+}
+function wrapText(ctx,text,x,maxWidth){
+  ctx.font="500 22px -apple-system, Segoe UI, Roboto, sans-serif";
+  const words=text.split(" "); let line=""; const out=[];
+  words.forEach(function(w){
+    const test=line+w+" ";
+    if(ctx.measureText(test).width>maxWidth && line){ out.push(line); line=w+" "; } else { line=test; }
+  });
+  if(line) out.push(line);
+  return out;
+}
+function drawMiniBiker(ctx,x,y){
+  ctx.save(); ctx.translate(x,y); ctx.scale(1.3,1.3);
+  ctx.strokeStyle="#2b2f36"; ctx.lineWidth=3.4; ctx.beginPath(); ctx.arc(16,42,10,0,Math.PI*2); ctx.stroke();
+  ctx.beginPath(); ctx.arc(46,42,10,0,Math.PI*2); ctx.stroke();
+  ctx.strokeStyle="#3a4048"; ctx.lineWidth=3; ctx.lineJoin="round"; ctx.lineCap="round";
+  ctx.beginPath(); ctx.moveTo(16,42); ctx.lineTo(28,24); ctx.lineTo(38,24); ctx.lineTo(46,42);
+  ctx.moveTo(28,24); ctx.lineTo(24,42); ctx.moveTo(28,24); ctx.lineTo(34,16); ctx.stroke();
+  ctx.fillStyle="#f2d3b3"; ctx.beginPath(); ctx.arc(33,10,6.5,0,Math.PI*2); ctx.fill();
+  ctx.fillStyle="#6b4423"; ctx.beginPath(); ctx.moveTo(27,8); ctx.quadraticCurveTo(28,1,34,2); ctx.quadraticCurveTo(40,3,39.5,10);
+  ctx.quadraticCurveTo(39.5,6,33,6); ctx.quadraticCurveTo(28,6,27,8); ctx.closePath(); ctx.fill();
+  ctx.restore();
+}
+</script>
