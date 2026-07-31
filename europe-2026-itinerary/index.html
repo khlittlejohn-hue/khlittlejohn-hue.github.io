@@ -3,7 +3,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="UTF-8">
-<title>Ten Days in Europe — A Mallorca Wedding</title>
+<title>Trip OS — Ten Days in Europe</title>
 <style>
   :root {
     --bg: #F3F0E9;
@@ -40,18 +40,34 @@
   html, body { background: var(--bg); color: var(--ink); margin: 0; padding: 0; }
   body { font-family: -apple-system, "Helvetica Neue", Arial, sans-serif; font-size: 16.5px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
   @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
-  .page { max-width: 840px; margin: 0 auto; padding: 0 24px 96px; }
+  .page { max-width: 840px; margin: 0 auto; padding: 0 24px 120px; }
 
   .display { font-family: Georgia, "Iowan Old Style", "Times New Roman", serif; font-weight: 700; text-wrap: balance; }
   .mono { font-family: "SF Mono", ui-monospace, "Cascadia Code", Menlo, Consolas, monospace; font-variant-numeric: tabular-nums; }
 
-  .hero { padding: 52px 0 8px; }
-  .hero .eyebrow { font-size: 12px; letter-spacing: 0.18em; color: var(--gold); text-transform: uppercase; font-weight: 700; }
+  .brand-mark { display: inline-flex; align-items: center; gap: 7px; font-family: -apple-system, sans-serif; font-weight: 800; font-size: 12.5px; letter-spacing: 0.02em; color: var(--navy); background: var(--surface); border: 1px solid var(--rule); padding: 6px 12px 6px 10px; border-radius: 999px; margin-top: 44px; }
+  .brand-mark .bm-dot { color: var(--teal); font-size: 13px; }
+
+  .hero { padding: 14px 0 8px; }
+  .hero .eyebrow { font-size: 12px; letter-spacing: 0.18em; color: var(--gold); text-transform: uppercase; font-weight: 700; margin-top: 16px; }
   .hero h1 { font-size: clamp(32px, 6vw, 48px); margin: 12px 0 0; line-height: 1.05; }
-  .hero p.intro { color: var(--ink-soft); font-size: 16px; margin: 14px 0 0; max-width: 62ch; }
+  .hero p.intro { color: var(--ink-soft); font-size: 16px; margin: 14px 0 0; max-width: 64ch; }
   .hero .note { color: var(--ink-soft); font-size: 13px; margin: 10px 0 0; font-style: italic; }
 
   .rule-thin { height: 1px; background: var(--rule); margin: 36px 0; }
+
+  /* Right-now dashboard panel */
+  .now-panel { background: var(--surface); border: 1px solid var(--rule); border-radius: 16px; padding: 26px 26px 22px; margin-bottom: 30px; }
+  .now-panel .np-greeting { font-family: Georgia, serif; font-weight: 700; font-size: clamp(20px, 4vw, 26px); margin: 0 0 4px; }
+  .now-panel .np-sub { color: var(--ink-soft); font-size: 14px; margin: 0 0 18px; }
+  .now-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  @media (max-width: 620px) { .now-grid { grid-template-columns: 1fr; } }
+  .np-item { background: var(--chip-bg); border: 1px solid var(--rule); border-radius: 10px; padding: 12px 14px; display: flex; gap: 10px; align-items: flex-start; }
+  .np-item .np-icon { font-size: 18px; line-height: 1.2; }
+  .np-item .np-label { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-soft); font-weight: 700; }
+  .np-item .np-value { font-size: 14px; margin-top: 3px; }
+  .np-item .np-value b { color: var(--gold); }
+  .np-countdown { font-family: "SF Mono", ui-monospace, Menlo, monospace; font-weight: 700; color: var(--teal); font-size: 15px; }
 
   .status-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 14px; overflow: hidden; }
   @media (max-width: 620px) { .status-strip { grid-template-columns: 1fr; } }
@@ -153,11 +169,91 @@
   .confirm-card dt { color: var(--ink-soft); font-family: "SF Mono", ui-monospace, Menlo, monospace; font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.03em; padding-top: 2px; }
   .confirm-card dd { margin: 0; }
   .confirm-card .ref { font-family: "SF Mono", ui-monospace, Menlo, monospace; }
+  .confirm-card .cc-source { font-size: 12px; color: var(--ink-soft); margin-top: 10px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
   .type-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 2px 9px; border-radius: 999px; font-family: -apple-system, sans-serif; }
   .type-tag.flight { background: rgba(169,120,31,0.15); color: var(--gold); }
   .type-tag.train { background: rgba(31,122,102,0.15); color: var(--teal); }
   .subhead { font-family: Georgia, serif; font-weight: 700; font-size: 17px; margin: 26px 0 10px; }
   .subhead:first-child { margin-top: 0; }
+
+  .confidence { font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; padding: 2px 9px; border-radius: 999px; font-family: -apple-system, sans-serif; white-space: nowrap; }
+  .confidence.verified { background: rgba(31,122,102,0.15); color: var(--teal); }
+  .confidence.review { background: rgba(169,120,31,0.18); color: var(--gold); }
+
+  /* Trip Feed */
+  .feed-item { display: flex; gap: 14px; padding: 16px 0; border-top: 1px dotted var(--rule); }
+  .feed-item:first-child { border-top: none; padding-top: 0; }
+  .feed-check { width: 24px; height: 24px; border-radius: 50%; background: rgba(31,122,102,0.12); color: var(--teal); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+  .feed-item.needs-review .feed-check { background: rgba(169,120,31,0.18); color: var(--gold); }
+  .feed-body { flex: 1; min-width: 0; }
+  .feed-meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 2px; }
+  .feed-time { font-family: "SF Mono", ui-monospace, Menlo, monospace; font-size: 10.5px; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.04em; }
+  .feed-title { font-weight: 700; margin: 2px 0 3px; font-size: 14.5px; }
+  .feed-detail { font-size: 13.5px; color: var(--ink-soft); margin: 0; }
+
+  .evidence { margin-top: 10px; }
+  .evidence summary { cursor: pointer; font-size: 12.5px; color: var(--teal); font-weight: 700; list-style: none; }
+  .evidence summary::-webkit-details-marker { display: none; }
+  .evidence summary::before { content: "▸ "; }
+  .evidence[open] summary::before { content: "▾ "; }
+  .ev-pipeline { display: flex; flex-direction: column; gap: 2px; margin-top: 12px; border-left: 2px solid var(--rule); padding-left: 16px; }
+  .ev-step { position: relative; padding: 7px 0; }
+  .ev-step::before { content: ""; position: absolute; left: -21px; top: 13px; width: 8px; height: 8px; border-radius: 50%; background: var(--teal); }
+  .ev-step .ev-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-soft); font-weight: 700; }
+  .ev-step .ev-text { font-size: 13.5px; margin-top: 2px; }
+
+  .sources-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; margin-top: 14px; }
+  .source-card { background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; padding: 12px 14px; }
+  .source-card .sc-name { font-weight: 700; font-size: 13.5px; }
+  .source-card .sc-status { font-size: 11px; color: var(--teal); margin-top: 5px; font-weight: 700; }
+  .source-card .sc-sync { font-size: 11px; color: var(--ink-soft); margin-top: 2px; font-family: "SF Mono", ui-monospace, Menlo, monospace; }
+
+  .arch-flow { display: flex; align-items: center; gap: 6px; overflow-x: auto; padding: 20px 2px 8px; }
+  .arch-box { flex: 0 0 auto; background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; padding: 14px 16px; text-align: center; min-width: 104px; }
+  .arch-box .ab-label { font-size: 12.5px; font-weight: 700; }
+  .arch-arrow { color: var(--ink-soft); font-size: 16px; flex-shrink: 0; }
+
+  /* Timeline */
+  .tl2 { border-left: 2px solid var(--rule); margin-left: 8px; padding-left: 24px; }
+  .tl2-item { position: relative; padding-bottom: 26px; }
+  .tl2-item:last-child { padding-bottom: 0; }
+  .tl2-item::before { content: ""; position: absolute; left: -31px; top: 2px; width: 12px; height: 12px; border-radius: 50%; background: var(--rule); border: 2px solid var(--bg); }
+  .tl2-item.is-done::before { background: var(--teal); }
+  .tl2-item.is-today::before { background: var(--teal); box-shadow: 0 0 0 4px rgba(31,122,102,0.18); animation: pulse-dot 1.8s ease-in-out infinite; }
+  .tl2-item.is-future::before { background: var(--surface); border-color: var(--rule); }
+  .tl2-item .tl2-date { font-family: "SF Mono", ui-monospace, Menlo, monospace; font-size: 11px; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.03em; }
+  .tl2-item .tl2-title { font-weight: 700; font-size: 15.5px; margin: 3px 0 2px; }
+  .tl2-item.is-future .tl2-title { color: var(--ink-soft); }
+  .tl2-item .tl2-detail { font-size: 13.5px; color: var(--ink-soft); margin: 0; }
+  .tl2-item.is-today .tl2-date { color: var(--teal); font-weight: 700; }
+
+  /* Founder story */
+  .founder-card { background: var(--surface); border: 1px solid var(--rule); border-radius: 14px; padding: 24px 26px; margin-top: 8px; }
+  .founder-card .fc-label { font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); font-weight: 700; }
+  .founder-card h3 { font-family: Georgia, serif; margin: 8px 0 12px; font-size: 19px; }
+  .founder-card p { margin: 0 0 10px; font-size: 14.5px; }
+  .founder-card p:last-of-type { margin-bottom: 0; }
+  .founder-card .fc-byline { font-size: 12.5px; color: var(--ink-soft); margin-top: 14px; }
+
+  /* Ask Trip AI */
+  .trip-ai-btn { position: fixed; right: 20px; bottom: 20px; background: var(--navy); color: var(--bg); border: none; border-radius: 999px; padding: 13px 19px; font-weight: 700; font-size: 14px; font-family: -apple-system, sans-serif; box-shadow: 0 6px 20px rgba(0,0,0,0.25); cursor: pointer; z-index: 40; display: flex; align-items: center; gap: 8px; }
+  .trip-ai-btn:hover { opacity: 0.92; }
+  .trip-ai-panel { position: fixed; right: 20px; bottom: 82px; width: 328px; max-width: calc(100vw - 40px); max-height: 62vh; background: var(--surface); border: 1px solid var(--rule); border-radius: 14px; box-shadow: 0 12px 40px rgba(0,0,0,0.28); display: flex; flex-direction: column; z-index: 41; overflow: hidden; }
+  .trip-ai-panel[hidden] { display: none; }
+  .tai-head { padding: 14px 16px; border-bottom: 1px solid var(--rule); display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
+  .tai-head h4 { margin: 0; font-family: Georgia, serif; font-size: 15px; }
+  .tai-head span { font-size: 11px; color: var(--ink-soft); }
+  .tai-close { background: none; border: none; color: var(--ink-soft); cursor: pointer; font-size: 17px; line-height: 1; padding: 2px 4px; }
+  .tai-body { flex: 1; overflow-y: auto; padding: 12px 16px; display: flex; flex-direction: column; gap: 10px; min-height: 80px; }
+  .tai-chips { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 16px 12px; flex-shrink: 0; }
+  .tai-chip { background: var(--bg); border: 1px solid var(--rule); border-radius: 999px; padding: 6px 11px; font-size: 12px; cursor: pointer; color: var(--ink); font-family: inherit; }
+  .tai-chip:hover { border-color: var(--teal); }
+  .tai-msg { font-size: 13.5px; padding: 9px 12px; border-radius: 10px; max-width: 88%; line-height: 1.4; }
+  .tai-msg.user { align-self: flex-end; background: var(--teal); color: #fff; }
+  .tai-msg.bot { align-self: flex-start; background: var(--bg); border: 1px solid var(--rule); }
+  .tai-input-row { display: flex; gap: 8px; padding: 12px 16px; border-top: 1px solid var(--rule); flex-shrink: 0; }
+  .tai-input { flex: 1; border: 1px solid var(--rule); border-radius: 8px; padding: 8px 10px; font-size: 13.5px; background: var(--bg); color: var(--ink); font-family: inherit; min-width: 0; }
+  .tai-send { background: var(--navy); color: var(--bg); border: none; border-radius: 8px; padding: 8px 13px; font-weight: 700; font-size: 13px; cursor: pointer; flex-shrink: 0; }
 
   footer { border-top: 1px solid var(--rule); padding-top: 18px; font-size: 12.5px; color: var(--ink-soft); }
 </style>
@@ -167,23 +263,40 @@
 <div class="page">
 
   <div class="hero">
-    <div class="eyebrow mono">Sample Build · AI Itinerary Engine</div>
+    <div class="brand-mark"><span class="bm-dot">◆</span> Trip OS</div>
+    <div class="eyebrow mono">Live Trip Intelligence · Sample Build</div>
     <h1 class="display">Ten Days in Europe</h1>
-    <p class="intro">A wedding in Mallorca, bookended by Barcelona and Lisbon — ten days, round trip from New York, traveling with Lachy Green. Generated end-to-end by an AI travel-planning system: a live overview, day-by-day drill-down, food &amp; culture, packing, and every booking confirmation, all in one interface.</p>
+    <p class="intro">A wedding in Mallorca, bookended by Barcelona and Lisbon — ten days, round trip from New York, traveling with Lachy Green. Trip OS is the intelligence layer running underneath it: it reads confirmations out of Gmail, keeps one itinerary in sync as things change, and tells you the next right move instead of making you go find it. Everything below — the feed, the timeline, the day-by-day plan — is one trip, seen through one system.</p>
     <p class="note">Dates are live — they recompute relative to today, positioned so the wedding falls exactly on Fri Jul 31–Mon Aug 3.</p>
   </div>
 
   <div class="tabs-nav" role="tablist">
-    <button class="tab-btn active" type="button" data-tab="overview" role="tab" aria-selected="true">Overview</button>
+    <button class="tab-btn active" type="button" data-tab="today" role="tab" aria-selected="true">Today</button>
+    <button class="tab-btn" type="button" data-tab="feed" role="tab" aria-selected="false">Trip Feed</button>
+    <button class="tab-btn" type="button" data-tab="timeline" role="tab" aria-selected="false">Timeline</button>
     <button class="tab-btn" type="button" data-tab="itinerary" role="tab" aria-selected="false">Itinerary</button>
     <button class="tab-btn" type="button" data-tab="food" role="tab" aria-selected="false">Food &amp; Culture</button>
     <button class="tab-btn" type="button" data-tab="packing" role="tab" aria-selected="false">Packing</button>
     <button class="tab-btn" type="button" data-tab="confirmations" role="tab" aria-selected="false">Confirmations</button>
   </div>
 
-  <!-- ===================== OVERVIEW TAB ===================== -->
-  <div class="tab-panel" data-panel="overview">
+  <!-- ===================== TODAY TAB ===================== -->
+  <div class="tab-panel" data-panel="today">
   <section>
+
+    <div class="now-panel">
+      <div class="np-greeting" id="npGreeting">Good afternoon, Kyle.</div>
+      <p class="np-sub" id="npSub">You're in Mallorca — Day <span id="npDayNum">4</span> of 10.</p>
+      <div class="now-grid">
+        <div class="np-item"><div class="np-icon">💍</div><div><div class="np-label">Next Up</div><div class="np-value">Wedding ceremony — <b>tomorrow, 5:00 PM</b></div></div></div>
+        <div class="np-item"><div class="np-icon">⏱</div><div><div class="np-label">Countdown</div><div class="np-value np-countdown" id="npCountdown">—</div></div></div>
+        <div class="np-item"><div class="np-icon">☀️</div><div><div class="np-label">Weather in Mallorca</div><div class="np-value">31°C, sunny</div></div></div>
+        <div class="np-item"><div class="np-icon">🚗</div><div><div class="np-label">Recommendation</div><div class="np-value">Leave the hotel by <b>3:40 PM</b> tomorrow to arrive 20 min early</div></div></div>
+        <div class="np-item"><div class="np-icon">🎫</div><div><div class="np-label">Ready</div><div class="np-value">Boarding pass for the Lisbon flight (Day 7) is available</div></div></div>
+        <div class="np-item"><div class="np-icon">🧳</div><div><div class="np-label">Packing</div><div class="np-value" id="npPackingNote">Checking…</div></div></div>
+      </div>
+    </div>
+
     <div class="section-head"><h2 class="display">Trip Overview</h2></div>
     <p class="section-sub">The whole trip at a glance before drilling into any single day.</p>
 
@@ -236,6 +349,158 @@
         <tr data-day="9"><td class="ov-day"></td><td class="ov-date"></td><td class="ov-city">🇵🇹→🇺🇸 NYC</td><td>LX Factory, fly home</td></tr>
       </tbody>
     </table>
+
+    <div class="founder-card">
+      <div class="fc-label">Why I Built This</div>
+      <h3>Every trip lived in six different places.</h3>
+      <p>Gmail had the confirmations. Calendar had the dates. Notes had the packing list. Maps had the restaurants. Two separate airline apps had the boarding passes. None of them talked to each other, and I was the one reconciling all of it by hand, mid-trip, on a phone with bad wifi.</p>
+      <p>Trip OS is what I wanted instead: one layer that reads what's already landing in your inbox and calendar, keeps a single itinerary in sync as things change, and tells you the next right move instead of making you go find it. This is the first version, built around a real trip.</p>
+      <div class="fc-byline">— Kyle Littlejohn, Founder</div>
+    </div>
+
+  </section>
+  </div>
+
+  <!-- ===================== TRIP FEED TAB ===================== -->
+  <div class="tab-panel" data-panel="feed" hidden>
+  <section>
+    <div class="section-head"><h2 class="display">Trip Feed</h2></div>
+    <p class="section-sub">Every time a confirmation lands, a plan changes, or something needs a human's eyes, it shows up here first — the running log of what the system has done on this trip.</p>
+
+    <div class="feed-item">
+      <div class="feed-check">✓</div>
+      <div class="feed-body">
+        <div class="feed-meta"><span class="feed-time">Today · 2 hours ago</span><span class="confidence verified">✓ Verified</span></div>
+        <div class="feed-title">Checked tomorrow's forecast for the ceremony</div>
+        <p class="feed-detail">31°C and clear in Mallorca — the indoor backup note on the wedding-day card has been removed.</p>
+      </div>
+    </div>
+
+    <div class="feed-item">
+      <div class="feed-check">✓</div>
+      <div class="feed-body">
+        <div class="feed-meta"><span class="feed-time">Today · 5 hours ago</span><span class="confidence verified">✓ Verified</span></div>
+        <div class="feed-title">Parsed hotel checkout time</div>
+        <p class="feed-detail">Costa Azul checkout is 11:00 AM — added to Day 7's travel-day card so the Lisbon flight buffer is accurate.</p>
+      </div>
+    </div>
+
+    <div class="feed-item">
+      <div class="feed-check">✓</div>
+      <div class="feed-body">
+        <div class="feed-meta"><span class="feed-time">Yesterday</span><span class="confidence verified">✓ Verified</span></div>
+        <div class="feed-title">Imported the welcome dinner reservation</div>
+        <p class="feed-detail">Pulled straight from Gmail — added to Day 4 evening, ahead of the ceremony.</p>
+        <details class="evidence">
+          <summary>Show how this was extracted</summary>
+          <div class="ev-pipeline">
+            <div class="ev-step"><div class="ev-label">Source</div><div class="ev-text">OpenTable confirmation email</div></div>
+            <div class="ev-step"><div class="ev-label">Extracted</div><div class="ev-text">Restaurant, party size, 8:00 PM reservation</div></div>
+            <div class="ev-step"><div class="ev-label">Structured</div><div class="ev-text">Added as a Day 4 evening event</div></div>
+            <div class="ev-step"><div class="ev-label">Affected</div><div class="ev-text">The welcome-dinner block on the itinerary updated</div></div>
+            <div class="ev-step"><div class="ev-label">Recommendation</div><div class="ev-text">Keep tomorrow afternoon light — dinner runs late the night before the wedding</div></div>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <div class="feed-item needs-review">
+      <div class="feed-check">◐</div>
+      <div class="feed-body">
+        <div class="feed-meta"><span class="feed-time">Yesterday</span><span class="confidence review">◐ Needs Review</span></div>
+        <div class="feed-title">Wedding invitation detected</div>
+        <p class="feed-detail">Extracted a dress code ("cocktail attire") and the venue address from the PDF — flagged for a quick human check since invitation formatting varies.</p>
+      </div>
+    </div>
+
+    <div class="feed-item">
+      <div class="feed-check">✓</div>
+      <div class="feed-body">
+        <div class="feed-meta"><span class="feed-time">2 days ago</span><span class="confidence verified">✓ Verified</span></div>
+        <div class="feed-title">Parsed the Vueling confirmation</div>
+        <p class="feed-detail">Flight VY3401 added to Day 3 — Barcelona to Palma de Mallorca.</p>
+        <details class="evidence">
+          <summary>Show how this was extracted</summary>
+          <div class="ev-pipeline">
+            <div class="ev-step"><div class="ev-label">Source</div><div class="ev-text">Vueling confirmation email</div></div>
+            <div class="ev-step"><div class="ev-label">Extracted</div><div class="ev-text">Flight VY3401, 16:30–17:35, conf. 9XPLQ2</div></div>
+            <div class="ev-step"><div class="ev-label">Structured</div><div class="ev-text">Added to Day 3 as the Barcelona → Mallorca leg</div></div>
+            <div class="ev-step"><div class="ev-label">Affected</div><div class="ev-text">Landing time is later than the itinerary assumed — transfer window updated</div></div>
+            <div class="ev-step"><div class="ev-label">Recommendation</div><div class="ev-text">Leave the airport by 6:00 PM to make the welcome dinner comfortably</div></div>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <div class="feed-item">
+      <div class="feed-check">✓</div>
+      <div class="feed-body">
+        <div class="feed-meta"><span class="feed-time">3 days ago</span><span class="confidence verified">✓ Verified</span></div>
+        <div class="feed-title">Hotel confirmation imported</div>
+        <p class="feed-detail">Casa Bonay, Barcelona — check-in now appears on Day 1.</p>
+      </div>
+    </div>
+
+    <div class="feed-item">
+      <div class="feed-check">✓</div>
+      <div class="feed-body">
+        <div class="feed-meta"><span class="feed-time">5 days ago</span><span class="confidence verified">✓ Verified</span></div>
+        <div class="feed-title">Trip created</div>
+        <p class="feed-detail">Started from a calendar hold — "Mallorca — wedding" — with the return flight booked the same week.</p>
+      </div>
+    </div>
+
+    <div class="subhead">Import Sources</div>
+    <p class="section-sub">Everything this trip is built from, in order of how recently it synced.</p>
+    <div class="sources-grid">
+      <div class="source-card"><div class="sc-name">📧 Gmail</div><div class="sc-status">Connected</div><div class="sc-sync">syncing continuously</div></div>
+      <div class="source-card"><div class="sc-name">📅 Google Calendar</div><div class="sc-status">Connected</div><div class="sc-sync">syncing continuously</div></div>
+      <div class="source-card"><div class="sc-name">✈️ Delta</div><div class="sc-status">Imported</div><div class="sc-sync">last sync · 5 days ago</div></div>
+      <div class="source-card"><div class="sc-name">✈️ Vueling</div><div class="sc-status">Imported</div><div class="sc-sync">last sync · 2 days ago</div></div>
+      <div class="source-card"><div class="sc-name">✈️ TAP Air Portugal</div><div class="sc-status">Imported</div><div class="sc-sync">last sync · 2 days ago</div></div>
+      <div class="source-card"><div class="sc-name">🏨 Booking.com</div><div class="sc-status">Imported</div><div class="sc-sync">last sync · 3 days ago</div></div>
+    </div>
+
+    <div class="subhead">The Pipeline</div>
+    <p class="section-sub">Why this is harder than it looks — six unstructured inboxes becoming one live trip.</p>
+    <div class="arch-flow">
+      <div class="arch-box"><div class="ab-label">Email</div></div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-box"><div class="ab-label">Extraction</div></div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-box"><div class="ab-label">Normalization</div></div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-box"><div class="ab-label">Trip Graph</div></div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-box"><div class="ab-label">Recommendations</div></div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-box"><div class="ab-label">Timeline</div></div>
+    </div>
+  </section>
+  </div>
+
+  <!-- ===================== TIMELINE TAB ===================== -->
+  <div class="tab-panel" data-panel="timeline" hidden>
+  <section>
+    <div class="section-head"><h2 class="display">Timeline</h2></div>
+    <p class="section-sub">The trip as a single continuous story — from the first booking to right now. Solid dots are done, the pulsing dot is today, hollow dots haven't happened yet.</p>
+
+    <div class="tl2">
+      <div class="tl2-item" data-day="-5"><div class="tl2-date"></div><div class="tl2-title">Flights booked</div><p class="tl2-detail">Delta DL100 confirmed for the New York → Barcelona leg — the whole trip anchors around this booking.</p></div>
+      <div class="tl2-item" data-day="-3"><div class="tl2-date"></div><div class="tl2-title">Hotels booked</div><p class="tl2-detail">Casa Bonay (Barcelona), Costa Azul (Palma), and Memmo Alfama (Lisbon) — all three confirmed.</p></div>
+      <div class="tl2-item" data-day="-2"><div class="tl2-date"></div><div class="tl2-title">Wedding invitation imported</div><p class="tl2-detail">Dress code and venue address extracted from the PDF and added to the wedding-day card.</p></div>
+      <div class="tl2-item" data-day="-1"><div class="tl2-date"></div><div class="tl2-title">Packing reminder sent</div><p class="tl2-detail">A handful of packing items were still unchecked the night before departure.</p></div>
+      <div class="tl2-item" data-day="0"><div class="tl2-date"></div><div class="tl2-title">Departed JFK</div><p class="tl2-detail">Overnight flight to Barcelona — the trip begins.</p></div>
+      <div class="tl2-item" data-day="1"><div class="tl2-date"></div><div class="tl2-title">Arrived in Barcelona</div><p class="tl2-detail">Checked into Casa Bonay, walked the Gothic Quarter, tapas near El Born.</p></div>
+      <div class="tl2-item" data-day="2"><div class="tl2-date"></div><div class="tl2-title">Gaudí day</div><p class="tl2-detail">Sagrada Família, Park Güell, Barceloneta beach.</p></div>
+      <div class="tl2-item" data-day="3"><div class="tl2-date"></div><div class="tl2-title">Flew to Mallorca, wedding week begins</div><p class="tl2-detail">Landed later than planned on Vueling — the welcome-dinner buffer was adjusted automatically. Checked into Costa Azul.</p></div>
+      <div class="tl2-item" data-day="4"><div class="tl2-date"></div><div class="tl2-title">The wedding</div><p class="tl2-detail">Ceremony and reception — the reason for the whole trip.</p></div>
+      <div class="tl2-item" data-day="5"><div class="tl2-date"></div><div class="tl2-title">Recovery day</div><p class="tl2-detail">Palma Old Town and La Seu Cathedral at golden hour, kept intentionally light.</p></div>
+      <div class="tl2-item" data-day="6"><div class="tl2-date"></div><div class="tl2-title">Flew to Lisbon</div><p class="tl2-detail">Palma to Lisbon, with buffer built in for Monday traffic to the airport.</p></div>
+      <div class="tl2-item" data-day="7"><div class="tl2-date"></div><div class="tl2-title">Arrived in Lisbon</div><p class="tl2-detail">Checked into Memmo Alfama, fado dinner in Alfama.</p></div>
+      <div class="tl2-item" data-day="8"><div class="tl2-date"></div><div class="tl2-title">Belém &amp; the river</div><p class="tl2-detail">Belém Tower, Jerónimos Monastery, pastéis de nata, Tram 28.</p></div>
+      <div class="tl2-item" data-day="9"><div class="tl2-date"></div><div class="tl2-title">Departed for JFK</div><p class="tl2-detail">Last lunch at Time Out Market, flight home.</p></div>
+    </div>
   </section>
   </div>
 
@@ -261,7 +526,7 @@
             <li><span class="t">Morning</span><span>Land, check in, short reset</span></li>
             <li><span class="t">Evening</span><span>Gothic Quarter wander, tapas dinner near El Born</span></li>
           </ul>
-          <div class="reco"><b>Rec:</b> Keep day one deliberately light — the red-eye lands mid-morning, and jet lag beats any itinerary.</div>
+          <div class="reco"><b>Rec:</b> Red-eye arrivals run 2+ hours of grogginess on average — Day 1 is deliberately unscheduled except one walk and one dinner.</div>
         </div>
         <div class="day">
           <div class="day-head"><div class="day-date" data-day="1"></div><div class="day-tag">Gaudí day</div></div>
@@ -270,7 +535,7 @@
             <li><span class="t">Afternoon</span><span>Park Güell, then Barceloneta beach to decompress</span></li>
             <li><span class="t">Evening</span><span>Vermut hour in El Born, dinner nearby</span></li>
           </ul>
-          <div class="reco"><b>Rec:</b> Book Sagrada Família at least a week out — walk-up tickets are essentially gone in peak summer.</div>
+          <div class="reco"><b>Rec:</b> Park Güell and Gràcia sit within 10 minutes of each other — grouped together instead of the usual back-and-forth to cut transit time.</div>
         </div>
         <div class="day">
           <div class="day-head"><div class="day-date" data-day="2"></div><div class="day-tag">Travel day</div></div>
@@ -306,7 +571,7 @@
           <ul class="tl">
             <li><span class="t">All Day</span><span>💍 The wedding — ceremony and reception</span></li>
           </ul>
-          <div class="reco"><b>Rec:</b> Confirm the dress code and any transport-to-venue logistics with the couple's own itinerary a few days out.</div>
+          <div class="reco"><b>Rec:</b> Dress code and venue pulled from the invitation — cocktail attire, ceremony starts 5:00 PM. Confirm any last transport logistics with the couple's own itinerary a few days out.</div>
         </div>
         <div class="day">
           <div class="day-head"><div class="day-date" data-day="5"></div><div class="day-tag">Recovery</div></div>
@@ -315,7 +580,7 @@
             <li><span class="t">Afternoon</span><span>Palma Old Town + La Seu Cathedral at golden hour</span></li>
             <li><span class="t">Evening</span><span>Easy tapas dinner, early night</span></li>
           </ul>
-          <div class="reco"><b>Rec:</b> Deliberately the lightest day of the trip — the day after a wedding is not the day for an ambitious itinerary.</div>
+          <div class="reco"><b>Rec:</b> Three sightseeing days already happened this week — today's recommendation is deliberately outdoors and unscheduled instead of another museum-style stop.</div>
         </div>
         <div class="day">
           <div class="day-head"><div class="day-date" data-day="6"></div><div class="day-tag">Travel day</div></div>
@@ -475,6 +740,7 @@
         <dt>Conf #</dt><dd class="ref">4KFQZR</dd>
         <dt>Guests</dt><dd>Kyle · Lachy Green</dd>
       </dl>
+      <div class="cc-source">Imported from <b>Delta</b> confirmation email <span class="confidence verified">✓ Verified</span></div>
     </div>
     <div class="confirm-card">
       <div class="cc-head"><div class="cc-title"><span class="type-tag flight">Flight</span> Barcelona (BCN) → Palma de Mallorca (PMI)</div><div class="cc-route mono">Day 3 · 16:30 – 17:35</div></div>
@@ -483,6 +749,7 @@
         <dt>Conf #</dt><dd class="ref">9XPLQ2</dd>
         <dt>Guests</dt><dd>Kyle · Lachy Green</dd>
       </dl>
+      <div class="cc-source">Imported from <b>Vueling</b> confirmation email <span class="confidence verified">✓ Verified</span></div>
     </div>
     <div class="confirm-card">
       <div class="cc-head"><div class="cc-title"><span class="type-tag flight">Flight</span> Palma de Mallorca (PMI) → Lisbon (LIS)</div><div class="cc-route mono">Day 7 · 14:15 – 15:05</div></div>
@@ -491,6 +758,7 @@
         <dt>Conf #</dt><dd class="ref">RM4T8B</dd>
         <dt>Guests</dt><dd>Kyle · Lachy Green</dd>
       </dl>
+      <div class="cc-source">Imported from <b>TAP Air Portugal</b> confirmation email <span class="confidence verified">✓ Verified</span></div>
     </div>
     <div class="confirm-card">
       <div class="cc-head"><div class="cc-title"><span class="type-tag flight">Flight</span> Lisbon (LIS) → New York (JFK)</div><div class="cc-route mono">Day 10 · 10:20 – 14:35</div></div>
@@ -499,6 +767,7 @@
         <dt>Conf #</dt><dd class="ref">8TWN5C</dd>
         <dt>Guests</dt><dd>Kyle · Lachy Green</dd>
       </dl>
+      <div class="cc-source">Imported from <b>TAP Air Portugal</b> confirmation email <span class="confidence verified">✓ Verified</span></div>
     </div>
     <p class="section-sub" style="margin-top:8px;">No train legs on this route — Mallorca is island-only by air, so all four segments are flights. A real itinerary elsewhere in this system (e.g. a London–Paris leg) would show a 🚄 train tag the same way.</p>
 
@@ -506,14 +775,17 @@
     <div class="confirm-card">
       <div class="cc-head"><div class="cc-title">🇪🇸 Hotel Casa Bonay, Barcelona</div><div class="cc-route mono">Days 1–3 · 2 guests</div></div>
       <dl><dt>Conf #</dt><dd class="ref">BCN-88213</dd></dl>
+      <div class="cc-source">Imported from <b>Booking.com</b> <span class="confidence verified">✓ Verified</span></div>
     </div>
     <div class="confirm-card">
       <div class="cc-head"><div class="cc-title">🇪🇸 Hotel Costa Azul, Palma</div><div class="cc-route mono">Days 4–7 · 2 guests</div></div>
       <dl><dt>Conf #</dt><dd class="ref">PMI-30961</dd></dl>
+      <div class="cc-source">Imported from <b>Booking.com</b> <span class="confidence review">◐ Needs Review — room type unclear in email</span></div>
     </div>
     <div class="confirm-card">
       <div class="cc-head"><div class="cc-title">🇵🇹 Memmo Alfama, Lisbon</div><div class="cc-route mono">Days 8–10 · 2 guests</div></div>
       <dl><dt>Conf #</dt><dd class="ref">LIS-72240</dd></dl>
+      <div class="cc-source">Imported from <b>Booking.com</b> <span class="confidence verified">✓ Verified</span></div>
     </div>
   </section>
   </div>
@@ -521,9 +793,28 @@
   <div class="rule-thin"></div>
 
   <footer>
-    <p>Sample itinerary — cities, timings, and confirmation data are illustrative, not real bookings. Dates recompute relative to the day this page is opened, positioned so the Mallorca wedding always falls on Fri Jul 31–Mon Aug 3. Built as a demonstration of an AI-orchestrated trip-planning system. Checklist state persists per-browser via local storage only — it does not sync across separate devices or viewers.</p>
+    <p>Sample itinerary — cities, timings, and confirmation data are illustrative, not real bookings. The Trip Feed, Timeline, Import Sources, and "Ask Trip AI" are pre-scripted for this demo to show the intended product experience — they are not live integrations or a connected inbox. Dates recompute relative to the day this page is opened, positioned so the Mallorca wedding always falls on Fri Jul 31–Mon Aug 3. Packing checklist state and the "Packing" line on the Today tab persist per-browser via local storage only — they do not sync across separate devices or viewers. Built as a demonstration of what an AI-orchestrated trip-intelligence product could look like end-to-end.</p>
   </footer>
 
+</div>
+
+<button class="trip-ai-btn" type="button" id="taiOpenBtn">💬 Ask Trip AI</button>
+<div class="trip-ai-panel" id="taiPanel" hidden>
+  <div class="tai-head">
+    <div><h4>Ask Trip AI</h4><span>Sample responses for this demo</span></div>
+    <button class="tai-close" id="taiCloseBtn" type="button" aria-label="Close">✕</button>
+  </div>
+  <div class="tai-body" id="taiBody"></div>
+  <div class="tai-chips">
+    <button class="tai-chip" type="button" data-q="What should we do tonight?">What should we do tonight?</button>
+    <button class="tai-chip" type="button" data-q="Can we leave a day earlier?">Leave a day earlier?</button>
+    <button class="tai-chip" type="button" data-q="Move beach day to Sunday">Move beach day to Sunday</button>
+    <button class="tai-chip" type="button" data-q="Find coffee near my hotel">Coffee near my hotel</button>
+  </div>
+  <div class="tai-input-row">
+    <input class="tai-input" id="taiInput" type="text" placeholder="Ask about the trip…" aria-label="Ask Trip AI a question">
+    <button class="tai-send" id="taiSendBtn" type="button">Send</button>
+  </div>
 </div>
 
 <script>
@@ -577,6 +868,15 @@
       if (offset === TODAY_OFFSET) row.classList.add("is-today");
     });
 
+    document.querySelectorAll(".tl2-item[data-day]").forEach(function (item) {
+      var offset = parseInt(item.getAttribute("data-day"), 10);
+      var dateEl = item.querySelector(".tl2-date");
+      if (dateEl) dateEl.textContent = (offset >= 0 ? "Day " + (offset + 1) + " — " : "Before departure — ") + formatDay(offset);
+      if (offset < TODAY_OFFSET) item.classList.add("is-done");
+      else if (offset === TODAY_OFFSET) item.classList.add("is-today");
+      else item.classList.add("is-future");
+    });
+
     var cityOffsets = { "nyc-out": -1, barcelona: 0, mallorca: 3, lisbon: 7, "nyc-return": 10 };
     Object.keys(cityOffsets).forEach(function (city) {
       var el = document.getElementById("d-" + city);
@@ -596,6 +896,8 @@
     var dayBar = document.getElementById("dayProgressBar");
     if (dayText) dayText.textContent = "Day " + (TODAY_OFFSET + 1) + " of 10";
     if (dayBar) dayBar.style.width = Math.round(((TODAY_OFFSET + 1) / 10) * 100) + "%";
+    var npDayNum = document.getElementById("npDayNum");
+    if (npDayNum) npDayNum.textContent = TODAY_OFFSET + 1;
 
     if (currentCity && currentCity.accId) {
       var acc = document.getElementById(currentCity.accId);
@@ -603,6 +905,29 @@
       var badge = document.getElementById("mallorcaBadge");
       if (badge) badge.style.display = "inline-block";
     }
+
+    // Greeting — genuinely tied to the visitor's local clock
+    var hour = new Date().getHours();
+    var greetWord = hour < 12 ? "Good morning" : (hour < 18 ? "Good afternoon" : "Good evening");
+    var greetEl = document.getElementById("npGreeting");
+    if (greetEl) greetEl.textContent = greetWord + ", Kyle.";
+
+    // Live countdown to the wedding ceremony (always ~1 day out, recomputed every load)
+    var weddingTime = new Date(anchor.getTime() + WEDDING_OFFSET * DAY_MS);
+    weddingTime.setHours(17, 0, 0, 0);
+    function updateCountdown() {
+      var el = document.getElementById("npCountdown");
+      if (!el) return;
+      var ms = weddingTime.getTime() - new Date().getTime();
+      if (ms < 0) { el.textContent = "Underway"; return; }
+      var totalMin = Math.floor(ms / 60000);
+      var days = Math.floor(totalMin / (60 * 24));
+      var hrs = Math.floor((totalMin % (60 * 24)) / 60);
+      var mins = totalMin % 60;
+      el.textContent = (days > 0 ? days + "d " : "") + hrs + "h " + mins + "m";
+    }
+    updateCountdown();
+    setInterval(updateCountdown, 30000);
 
     var checkboxes = Array.prototype.slice.call(document.querySelectorAll('ul.items input[type="checkbox"]'));
     var saved = {};
@@ -624,6 +949,21 @@
       if (packBar) packBar.style.width = (pack.total ? (pack.done / pack.total * 100) : 0) + "%";
     }
 
+    function updateNowPanel() {
+      var el = document.getElementById("npPackingNote");
+      if (!el) return;
+      var packBoxes = checkboxes.filter(function (cb) { return cb.id.indexOf("p") === 0; });
+      var unchecked = packBoxes.filter(function (cb) { return !cb.checked; });
+      if (unchecked.length === 0) {
+        el.innerHTML = "All packed — nothing outstanding.";
+        return;
+      }
+      var firstLabel = document.querySelector('label[for="' + unchecked[0].id + '"]');
+      var text = firstLabel ? firstLabel.textContent : "";
+      var short = text.split(/[—,(]/)[0].trim();
+      el.innerHTML = "You have <b>" + unchecked.length + "</b> unchecked item" + (unchecked.length === 1 ? "" : "s") + " — next: " + short + ".";
+    }
+
     function updateCounts() {
       document.querySelectorAll(".leg").forEach(function (leg) {
         var items = leg.querySelectorAll('input[type="checkbox"]');
@@ -632,6 +972,7 @@
         leg.querySelector(".total").textContent = items.length;
       });
       updateHeroProgress();
+      updateNowPanel();
     }
 
     checkboxes.forEach(function (cb) {
@@ -646,7 +987,7 @@
 
     var tabBtns = Array.prototype.slice.call(document.querySelectorAll(".tab-btn"));
     var tabPanels = Array.prototype.slice.call(document.querySelectorAll(".tab-panel"));
-    var TAB_KEY = "ten-days-europe-active-tab";
+    var TAB_KEY = "ten-days-europe-active-tab-v2";
     function activateTab(name) {
       tabBtns.forEach(function (btn) {
         var active = btn.getAttribute("data-tab") === name;
@@ -660,6 +1001,69 @@
     var savedTab = null;
     try { savedTab = localStorage.getItem(TAB_KEY); } catch (e) {}
     if (savedTab && tabBtns.some(function (b) { return b.getAttribute("data-tab") === savedTab; })) { activateTab(savedTab); }
+
+    // Ask Trip AI — mocked, keyword-matched assistant
+    var taiOpenBtn = document.getElementById("taiOpenBtn");
+    var taiCloseBtn = document.getElementById("taiCloseBtn");
+    var taiPanel = document.getElementById("taiPanel");
+    var taiBody = document.getElementById("taiBody");
+    var taiInput = document.getElementById("taiInput");
+    var taiSendBtn = document.getElementById("taiSendBtn");
+
+    function taiAddMsg(text, who) {
+      var div = document.createElement("div");
+      div.className = "tai-msg " + who;
+      div.textContent = text;
+      taiBody.appendChild(div);
+      taiBody.scrollTop = taiBody.scrollHeight;
+    }
+
+    function taiRespond(q) {
+      var lower = q.toLowerCase();
+      var city = currentCity ? currentCity.name.split(" ")[0] : "Mallorca";
+      var reply;
+      if (lower.indexOf("tonight") > -1 || lower.indexOf("dinner") > -1) {
+        reply = "Since you're in " + city + " tonight, I'd keep it low-key after a big day — the hotel terrace, or an easy tapas spot nearby. Nothing that runs late before tomorrow.";
+      } else if (lower.indexOf("earlier") > -1 || lower.indexOf("leave") > -1) {
+        reply = "You could shift the Lisbon flight to the Day 6 afternoon instead of Day 7 morning — but that trims Palma Old Town to a half day. Want me to check alternate flight times?";
+      } else if (lower.indexOf("beach") > -1 || lower.indexOf("sunday") > -1) {
+        reply = "Moving beach day to Sunday works well — Saturday's the wedding, so Sunday is already the recovery day. I'd keep it there rather than adding a new stop.";
+      } else if (lower.indexOf("coffee") > -1) {
+        reply = "Nearest well-reviewed coffee to Hotel Costa Azul is about a 6-minute walk — I'd route you there before the wedding prep starts.";
+      } else {
+        reply = "Good question — in the full product this would query the live trip graph. For this demo, try one of the sample questions above.";
+      }
+      setTimeout(function () { taiAddMsg(reply, "bot"); }, 450);
+    }
+
+    function taiSend(text) {
+      text = (text || "").trim();
+      if (!text) return;
+      taiAddMsg(text, "user");
+      taiInput.value = "";
+      taiRespond(text);
+    }
+
+    if (taiOpenBtn && taiPanel) {
+      taiOpenBtn.addEventListener("click", function () {
+        var willOpen = taiPanel.hasAttribute("hidden");
+        if (willOpen) {
+          taiPanel.removeAttribute("hidden");
+          if (!taiBody.dataset.greeted) {
+            taiAddMsg("Ask me anything about the trip — where to eat, whether to shuffle a day, or what's nearby.", "bot");
+            taiBody.dataset.greeted = "1";
+          }
+        } else {
+          taiPanel.setAttribute("hidden", "");
+        }
+      });
+    }
+    if (taiCloseBtn) taiCloseBtn.addEventListener("click", function () { taiPanel.setAttribute("hidden", ""); });
+    if (taiSendBtn) taiSendBtn.addEventListener("click", function () { taiSend(taiInput.value); });
+    if (taiInput) taiInput.addEventListener("keydown", function (e) { if (e.key === "Enter") taiSend(taiInput.value); });
+    document.querySelectorAll(".tai-chip").forEach(function (chip) {
+      chip.addEventListener("click", function () { taiSend(chip.getAttribute("data-q")); });
+    });
   })();
 </script>
 </body>
