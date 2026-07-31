@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<title>Ten Days in Europe — A Mallorca Wedding</title>
+<style>
+  :root {
+    --bg: #F3F0E9;
+    --ink: #1B2131;
+    --ink-soft: #5B5F6E;
+    --surface: #FFFFFF;
+    --rule: #DDD7C9;
+    --gold: #A9781F;
+    --teal: #1F7A66;
+    --navy: #1B2131;
+    --chip-bg: #FFFFFF;
+    --shadow: 0 1px 0 rgba(27,33,49,0.06);
+  }
+  :root[data-theme="dark"] {
+    --bg: #10131E;
+    --ink: #ECEAE2;
+    --ink-soft: #9A9DB0;
+    --surface: #191D2C;
+    --rule: #2B3044;
+    --gold: #D4A24C;
+    --teal: #37B99C;
+    --navy: #ECEAE2;
+    --chip-bg: #212639;
+    --shadow: 0 1px 0 rgba(0,0,0,0.4);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #10131E; --ink: #ECEAE2; --ink-soft: #9A9DB0; --surface: #191D2C; --rule: #2B3044;
+      --gold: #D4A24C; --teal: #37B99C; --navy: #ECEAE2; --chip-bg: #212639; --shadow: 0 1px 0 rgba(0,0,0,0.4);
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html, body { background: var(--bg); color: var(--ink); margin: 0; padding: 0; }
+  body { font-family: -apple-system, "Helvetica Neue", Arial, sans-serif; font-size: 16.5px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+  .page { max-width: 840px; margin: 0 auto; padding: 0 24px 96px; }
+
+  .display { font-family: Georgia, "Iowan Old Style", "Times New Roman", serif; font-weight: 700; text-wrap: balance; }
+  .mono { font-family: "SF Mono", ui-monospace, "Cascadia Code", Menlo, Consolas, monospace; font-variant-numeric: tabular-nums; }
+
+  .hero { padding: 52px 0 8px; }
+  .hero .eyebrow { font-size: 12px; letter-spacing: 0.18em; color: var(--gold); text-transform: uppercase; font-weight: 700; }
+  .hero h1 { font-size: clamp(32px, 6vw, 48px); margin: 12px 0 0; line-height: 1.05; }
+  .hero p.intro { color: var(--ink-soft); font-size: 16px; margin: 14px 0 0; max-width: 62ch; }
+  .hero .note { color: var(--ink-soft); font-size: 13px; margin: 10px 0 0; font-style: italic; }
+
+  .rule-thin { height: 1px; background: var(--rule); margin: 36px 0; }
+
+  .status-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 14px; overflow: hidden; }
+  @media (max-width: 620px) { .status-strip { grid-template-columns: 1fr; } }
+  .status-cell { background: var(--surface); padding: 18px 20px; }
+  .status-cell .sc-label { display: flex; align-items: center; gap: 6px; font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); font-weight: 700; }
+  .status-cell .sc-value { font-family: Georgia, serif; font-weight: 700; font-size: 24px; margin-top: 6px; color: var(--navy); }
+  .status-cell .sc-bar { height: 5px; border-radius: 999px; background: var(--rule); margin-top: 10px; overflow: hidden; }
+  .status-cell .sc-bar-fill { height: 100%; background: var(--gold); border-radius: 999px; transition: width 0.4s ease; }
+  .live-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--teal); display: inline-block; animation: pulse-dot 1.8s ease-in-out infinite; }
+  @keyframes pulse-dot { 0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(31,122,102,0.5); } 50% { opacity: 0.6; box-shadow: 0 0 0 5px rgba(31,122,102,0); } }
+
+  .route-line { margin: 26px 0 0; }
+  .route-line svg { width: 100%; height: auto; display: block; }
+  .route-line .rl-label { font-family: -apple-system, sans-serif; font-size: 12.5px; font-weight: 700; fill: var(--ink); }
+  .route-line .rl-label.rl-muted { fill: var(--ink-soft); font-weight: 400; font-size: 11px; }
+  .route-line .rl-date { font-family: "SF Mono", ui-monospace, Menlo, monospace; font-size: 10px; fill: var(--ink-soft); }
+  .route-line .rl-line { stroke: var(--rule); stroke-width: 2; fill: none; }
+  .route-line .rl-dot { stroke: var(--surface); stroke-width: 3; }
+  .route-line .rl-current-ring { fill: none; stroke: var(--teal); stroke-width: 2; opacity: 0.6; animation: ring-pulse 1.8s ease-out infinite; transform-origin: center; }
+  @keyframes ring-pulse { 0% { r: 9; opacity: 0.7; } 100% { r: 17; opacity: 0; } }
+
+  .tabs-nav { display: flex; gap: 4px; margin: 34px 0 32px; border-bottom: 1px solid var(--rule); overflow-x: auto; }
+  .tab-btn { font-family: -apple-system, sans-serif; font-weight: 700; font-size: 14.5px; background: none; border: none; border-bottom: 2px solid transparent; color: var(--ink-soft); padding: 12px 14px 11px; margin-bottom: -1px; cursor: pointer; white-space: nowrap; }
+  .tab-btn:hover { color: var(--ink); }
+  .tab-btn.active { color: var(--navy); border-bottom-color: var(--gold); }
+  .tab-btn:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+  .tab-panel[hidden] { display: none; }
+
+  section { margin-bottom: 48px; }
+  .section-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 6px; }
+  .section-head h2 { font-size: clamp(22px, 4.5vw, 28px); margin: 0; }
+  .section-sub { color: var(--ink-soft); font-size: 15px; margin: 0 0 20px; max-width: 62ch; }
+
+  /* Overview timeline table */
+  .ov-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+  .ov-table th { text-align: left; font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); font-weight: 700; padding: 0 10px 8px 0; border-bottom: 1px solid var(--rule); }
+  .ov-table td { padding: 10px 10px 10px 0; border-bottom: 1px dotted var(--rule); font-size: 14.5px; vertical-align: top; }
+  .ov-table tr.is-today td { background: rgba(31,122,102,0.06); }
+  .ov-table .ov-day { font-family: Georgia, serif; font-weight: 700; white-space: nowrap; }
+  .ov-table .ov-city { white-space: nowrap; }
+  .ov-highlight-card { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 20px; }
+  @media (max-width: 620px) { .ov-highlight-card { grid-template-columns: 1fr; } }
+  .ov-highlight { background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; padding: 16px 18px; }
+  .ov-highlight .oh-label { font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); font-weight: 700; }
+  .ov-highlight h3 { font-family: Georgia, serif; margin: 6px 0 4px; font-size: 18px; }
+  .ov-highlight p { margin: 0; font-size: 13.5px; color: var(--ink-soft); }
+
+  .city-accordion { border: 1px solid var(--rule); border-radius: 14px; margin-bottom: 14px; background: var(--surface); overflow: hidden; box-shadow: var(--shadow); transition: border-color 0.2s ease; }
+  .city-accordion.is-current { border-color: var(--teal); border-width: 1.5px; }
+  .city-accordion summary { list-style: none; cursor: pointer; padding: 20px 22px; display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+  .city-accordion summary::-webkit-details-marker { display: none; }
+  .city-accordion summary::marker { content: ""; }
+  .city-accordion summary:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
+  .city-accordion summary:hover { background: var(--bg); }
+  .city-accordion .summary-main { display: flex; flex-direction: column; gap: 2px; }
+  .city-accordion .summary-title { font-family: Georgia, serif; font-weight: 700; font-size: clamp(20px, 4.5vw, 26px); display: flex; align-items: center; gap: 10px; }
+  .city-accordion .summary-sub { font-size: 12.5px; color: var(--ink-soft); font-family: "SF Mono", ui-monospace, Menlo, monospace; letter-spacing: 0.02em; }
+  .city-accordion .summary-arrow { font-family: monospace; color: var(--ink-soft); font-size: 16px; transition: transform 0.18s ease; flex-shrink: 0; }
+  .city-accordion[open] .summary-arrow { transform: rotate(180deg); }
+  .city-accordion .accordion-body { padding: 16px 22px 22px; border-top: 1px solid var(--rule); }
+  .now-badge, .wedding-badge { display: inline-block; color: #fff; font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 9px; border-radius: 999px; font-family: -apple-system, sans-serif; }
+  .now-badge { background: var(--teal); }
+  .wedding-badge { background: var(--gold); }
+
+  .day { background: var(--bg); border: 1px solid var(--rule); border-radius: 10px; padding: 16px 18px; margin-bottom: 10px; transition: border-color 0.2s ease, box-shadow 0.2s ease; }
+  .day.is-today { border-color: var(--teal); border-width: 1.5px; box-shadow: 0 0 0 3px rgba(31,122,102,0.1); }
+  .day.is-wedding { border-color: var(--gold); border-width: 1.5px; box-shadow: 0 0 0 3px rgba(169,120,31,0.12); }
+  .day-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .day-date { font-family: Georgia, serif; font-weight: 700; font-size: 16.5px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .day-tag { font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); font-weight: 700; }
+  .day ul.tl { list-style: none; margin: 10px 0 0; padding: 0; }
+  .day ul.tl li { display: flex; gap: 10px; padding: 6px 0; border-top: 1px dotted var(--rule); font-size: 14.5px; }
+  .day ul.tl li:first-child { border-top: none; }
+  .day ul.tl .t { font-family: "SF Mono", ui-monospace, Menlo, monospace; font-size: 11.5px; color: var(--ink-soft); white-space: nowrap; min-width: 92px; padding-top: 2px; text-transform: uppercase; }
+  .day .reco { margin: 10px 0 0; padding: 10px 13px; background: var(--surface); border-radius: 8px; font-size: 13.5px; color: var(--ink); }
+  .day .reco b { color: var(--gold); }
+
+  .leg { margin-bottom: 24px; }
+  .leg-head { display: flex; align-items: baseline; justify-content: space-between; border-bottom: 1px solid var(--rule); padding-bottom: 6px; margin-bottom: 10px; }
+  .leg-head h3 { font-family: Georgia, serif; font-weight: 700; font-size: 16px; margin: 0; }
+  .leg-count { font-size: 12px; color: var(--ink-soft); font-family: "SF Mono", ui-monospace, Menlo, monospace; }
+  ul.items { list-style: none; margin: 0; padding: 0; }
+  ul.items li { display: flex; align-items: flex-start; gap: 10px; padding: 7px 0; border-bottom: 1px dotted var(--rule); }
+  ul.items li:last-child { border-bottom: none; }
+  ul.items input[type="checkbox"] {
+    appearance: none; -webkit-appearance: none; width: 17px; height: 17px; border: 1.5px solid var(--ink-soft);
+    border-radius: 4px; margin: 2px 0 0; flex-shrink: 0; cursor: pointer; position: relative; transition: transform 0.15s ease;
+  }
+  ul.items input[type="checkbox"]:checked { background: var(--teal); border-color: var(--teal); transform: scale(1.08); }
+  ul.items input[type="checkbox"]:checked::after { content: ""; position: absolute; left: 5px; top: 1px; width: 4px; height: 8px; border: solid var(--surface); border-width: 0 2px 2px 0; transform: rotate(40deg); }
+  ul.items label { cursor: pointer; font-size: 14.5px; }
+  ul.items input[type="checkbox"]:checked + label { color: var(--ink-soft); text-decoration: line-through; text-decoration-color: var(--rule); }
+
+  .confirm-card { background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; padding: 16px 20px; margin-bottom: 12px; }
+  .confirm-card .cc-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .confirm-card .cc-title { font-family: Georgia, serif; font-weight: 700; font-size: 16px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .confirm-card .cc-route { font-size: 12.5px; color: var(--ink-soft); font-family: "SF Mono", ui-monospace, Menlo, monospace; }
+  .confirm-card dl { display: grid; grid-template-columns: auto 1fr; gap: 4px 14px; margin: 10px 0 0; font-size: 14px; }
+  .confirm-card dt { color: var(--ink-soft); font-family: "SF Mono", ui-monospace, Menlo, monospace; font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.03em; padding-top: 2px; }
+  .confirm-card dd { margin: 0; }
+  .confirm-card .ref { font-family: "SF Mono", ui-monospace, Menlo, monospace; }
+  .type-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 2px 9px; border-radius: 999px; font-family: -apple-system, sans-serif; }
+  .type-tag.flight { background: rgba(169,120,31,0.15); color: var(--gold); }
+  .type-tag.train { background: rgba(31,122,102,0.15); color: var(--teal); }
+  .subhead { font-family: Georgia, serif; font-weight: 700; font-size: 17px; margin: 26px 0 10px; }
+  .subhead:first-child { margin-top: 0; }
+
+  footer { border-top: 1px solid var(--rule); padding-top: 18px; font-size: 12.5px; color: var(--ink-soft); }
+</style>
+
+</head>
+<body>
+<div class="page">
+
+  <div class="hero">
+    <div class="eyebrow mono">Sample Build · AI Itinerary Engine</div>
+    <h1 class="display">Ten Days in Europe</h1>
+    <p class="intro">A wedding in Mallorca, bookended by Barcelona and Lisbon — ten days, round trip from New York, traveling with Lachy Green. Generated end-to-end by an AI travel-planning system: a live overview, day-by-day drill-down, food &amp; culture, packing, and every booking confirmation, all in one interface.</p>
+    <p class="note">Dates are live — they recompute relative to today, positioned so the wedding falls exactly on Fri Jul 31–Mon Aug 3.</p>
+  </div>
+
+  <div class="tabs-nav" role="tablist">
+    <button class="tab-btn active" type="button" data-tab="overview" role="tab" aria-selected="true">Overview</button>
+    <button class="tab-btn" type="button" data-tab="itinerary" role="tab" aria-selected="false">Itinerary</button>
+    <button class="tab-btn" type="button" data-tab="food" role="tab" aria-selected="false">Food &amp; Culture</button>
+    <button class="tab-btn" type="button" data-tab="packing" role="tab" aria-selected="false">Packing</button>
+    <button class="tab-btn" type="button" data-tab="confirmations" role="tab" aria-selected="false">Confirmations</button>
+  </div>
+
+  <!-- ===================== OVERVIEW TAB ===================== -->
+  <div class="tab-panel" data-panel="overview">
+  <section>
+    <div class="section-head"><h2 class="display">Trip Overview</h2></div>
+    <p class="section-sub">The whole trip at a glance before drilling into any single day.</p>
+
+    <div class="status-strip">
+      <div class="status-cell countdown">
+        <div class="sc-label"><span class="live-dot"></span>Currently In</div>
+        <div class="sc-value" id="currentLocationValue">—</div>
+      </div>
+      <div class="status-cell">
+        <div class="sc-label">Trip Day</div>
+        <div class="sc-value"><span id="dayProgressText">—</span></div>
+        <div class="sc-bar"><div class="sc-bar-fill" id="dayProgressBar" style="width:0%"></div></div>
+      </div>
+      <div class="status-cell">
+        <div class="sc-label">Packing Progress</div>
+        <div class="sc-value"><span id="packProgressText">0/22</span></div>
+        <div class="sc-bar"><div class="sc-bar-fill" id="packProgressBar" style="width:0%"></div></div>
+      </div>
+    </div>
+
+    <div class="route-line">
+      <svg viewBox="0 0 820 110" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Route: New York to Barcelona to Mallorca to Lisbon and back to New York">
+        <path class="rl-line" d="M 40 55 L 780 55"></path>
+        <g><circle class="rl-dot" cx="40" cy="55" r="6" fill="#9A9DB0"></circle><text class="rl-label rl-muted" x="40" y="27" text-anchor="middle">🇺🇸 NYC</text><text class="rl-date mono" x="40" y="90" text-anchor="middle" id="d-nyc-out"></text></g>
+        <g><circle class="rl-dot" cx="188" cy="55" r="8" fill="#A9781F"></circle><text class="rl-label" x="188" y="25" text-anchor="middle">🇪🇸 Barcelona</text><text class="rl-date mono" x="188" y="90" text-anchor="middle" id="d-barcelona"></text></g>
+        <g id="rl-mallorca-group"><circle class="rl-current-ring" cx="410" cy="55" r="9"></circle><circle class="rl-dot" cx="410" cy="55" r="9" fill="#1F7A66"></circle><text class="rl-label" x="410" y="25" text-anchor="middle">🇪🇸 Mallorca 💍</text><text class="rl-date mono" x="410" y="90" text-anchor="middle" id="d-mallorca"></text></g>
+        <g><circle class="rl-dot" cx="632" cy="55" r="8" fill="#A9781F"></circle><text class="rl-label" x="632" y="25" text-anchor="middle">🇵🇹 Lisbon</text><text class="rl-date mono" x="632" y="90" text-anchor="middle" id="d-lisbon"></text></g>
+        <g><circle class="rl-dot" cx="780" cy="55" r="6" fill="#9A9DB0"></circle><text class="rl-label rl-muted" x="780" y="27" text-anchor="middle">🇺🇸 NYC</text><text class="rl-date mono" x="780" y="90" text-anchor="middle" id="d-nyc-return"></text></g>
+      </svg>
+    </div>
+
+    <div class="ov-highlight-card">
+      <div class="ov-highlight"><div class="oh-label">The Occasion</div><h3>💍 The Wedding</h3><p>Saturday, Aug 1 — the reason for the whole trip, in the middle of four days in Mallorca.</p></div>
+      <div class="ov-highlight"><div class="oh-label">Before</div><h3>🇪🇸 Barcelona</h3><p>3 days — Gaudí, the Gothic Quarter, tapas, a short hop to Palma.</p></div>
+      <div class="ov-highlight"><div class="oh-label">After</div><h3>🇵🇹 Lisbon</h3><p>3 days — decompress with pastéis de nata, trams, and the Tagus river light.</p></div>
+    </div>
+
+    <table class="ov-table" id="ovTable">
+      <thead><tr><th>Day</th><th>Date</th><th>City</th><th>Highlight</th></tr></thead>
+      <tbody>
+        <tr data-day="0"><td class="ov-day"></td><td class="ov-date"></td><td class="ov-city">🇺🇸→🇪🇸 Barcelona</td><td>Arrive, Gothic Quarter, tapas dinner</td></tr>
+        <tr data-day="1"><td class="ov-day"></td><td class="ov-date"></td><td class="ov-city">🇪🇸 Barcelona</td><td>Sagrada Família, Park Güell, Barceloneta</td></tr>
+        <tr data-day="2"><td class="ov-day"></td><td class="ov-date"></td><td class="ov-city">🇪🇸→🇪🇸 Mallorca</td><td>La Boqueria market, then fly to Palma</td></tr>
+        <tr data-day="3"><td class="ov-day"></td><td class="ov-date"></td><td class="ov-city">🇪🇸 Mallorca</td><td>Arrive, check in, welcome dinner</td></tr>
+        <tr data-day="4"><td class="ov-day"></td><td class="ov-date"></td><td class="ov-city">🇪🇸 Mallorca</td><td>💍 The wedding</td></tr>
+        <tr data-day="5"><td class="ov-day"></td><td class="ov-date"></td><td class="ov-city">🇪🇸 Mallorca</td><td>Recovery day, Palma Old Town</td></tr>
+        <tr data-day="6"><td class="ov-day"></td><td class="ov-date"></td><td class="ov-city">🇪🇸→🇵🇹 Lisbon</td><td>Morning free, fly to Lisbon</td></tr>
+        <tr data-day="7"><td class="ov-day"></td><td class="ov-date"></td><td class="ov-city">🇵🇹 Lisbon</td><td>Alfama, fado dinner</td></tr>
+        <tr data-day="8"><td class="ov-day"></td><td class="ov-date"></td><td class="ov-city">🇵🇹 Lisbon</td><td>Belém Tower, Jerónimos, Tram 28</td></tr>
+        <tr data-day="9"><td class="ov-day"></td><td class="ov-date"></td><td class="ov-city">🇵🇹→🇺🇸 NYC</td><td>LX Factory, fly home</td></tr>
+      </tbody>
+    </table>
+  </section>
+  </div>
+
+  <!-- ===================== ITINERARY TAB ===================== -->
+  <div class="tab-panel" data-panel="itinerary" hidden>
+  <section>
+    <div class="section-head"><h2 class="display">Day by Day</h2></div>
+    <p class="section-sub">Three stops, each opened as its own drill-down. Today's day and the wedding day are both highlighted automatically.</p>
+
+    <details class="city-accordion">
+      <summary>
+        <div class="summary-main">
+          <div class="summary-title">🇪🇸 Barcelona</div>
+          <div class="summary-sub">Days 1–3 · Fly in from New York (JFK)</div>
+        </div>
+        <div class="summary-arrow">▾</div>
+      </summary>
+      <div class="accordion-body">
+        <div class="day">
+          <div class="day-head"><div class="day-date" data-day="0"></div><div class="day-tag">Arrival</div></div>
+          <ul class="tl">
+            <li><span class="t">Overnight</span><span>Fly JFK → Barcelona (BCN), red-eye departure</span></li>
+            <li><span class="t">Morning</span><span>Land, check in, short reset</span></li>
+            <li><span class="t">Evening</span><span>Gothic Quarter wander, tapas dinner near El Born</span></li>
+          </ul>
+          <div class="reco"><b>Rec:</b> Keep day one deliberately light — the red-eye lands mid-morning, and jet lag beats any itinerary.</div>
+        </div>
+        <div class="day">
+          <div class="day-head"><div class="day-date" data-day="1"></div><div class="day-tag">Gaudí day</div></div>
+          <ul class="tl">
+            <li><span class="t">Morning</span><span>Sagrada Família (book timed entry ahead — this sells out)</span></li>
+            <li><span class="t">Afternoon</span><span>Park Güell, then Barceloneta beach to decompress</span></li>
+            <li><span class="t">Evening</span><span>Vermut hour in El Born, dinner nearby</span></li>
+          </ul>
+          <div class="reco"><b>Rec:</b> Book Sagrada Família at least a week out — walk-up tickets are essentially gone in peak summer.</div>
+        </div>
+        <div class="day">
+          <div class="day-head"><div class="day-date" data-day="2"></div><div class="day-tag">Travel day</div></div>
+          <ul class="tl">
+            <li><span class="t">Morning</span><span>La Boqueria market, Passeig de Gràcia — Casa Batlló &amp; Casa Milà exteriors</span></li>
+            <li><span class="t">Afternoon</span><span>Fly Barcelona (BCN) → Palma de Mallorca (PMI)</span></li>
+            <li><span class="t">Evening</span><span>Land, transfer to the wedding hotel</span></li>
+          </ul>
+          <div class="reco"><b>Rec:</b> Keep the morning unstructured — a delayed short-hop flight is the one thing that could actually threaten the wedding arrival.</div>
+        </div>
+      </div>
+    </details>
+
+    <details class="city-accordion" id="acc-mallorca">
+      <summary>
+        <div class="summary-main">
+          <div class="summary-title">🇪🇸 Mallorca <span class="now-badge" id="mallorcaBadge" style="display:none;">Now</span></div>
+          <div class="summary-sub">Days 4–7 · The wedding · Fri Jul 31 – Mon Aug 3</div>
+        </div>
+        <div class="summary-arrow">▾</div>
+      </summary>
+      <div class="accordion-body">
+        <div class="day">
+          <div class="day-head"><div class="day-date" data-day="3"></div><div class="day-tag">Welcome</div></div>
+          <ul class="tl">
+            <li><span class="t">Afternoon</span><span>Arrive, check in, decompress</span></li>
+            <li><span class="t">Evening</span><span>Welcome dinner / rehearsal event</span></li>
+          </ul>
+          <div class="reco"><b>Rec:</b> This day is intentionally unscheduled apart from the welcome event — save the energy for tomorrow.</div>
+        </div>
+        <div class="day">
+          <div class="day-head"><div class="day-date" data-day="4"></div><div class="day-tag">The wedding</div></div>
+          <ul class="tl">
+            <li><span class="t">All Day</span><span>💍 The wedding — ceremony and reception</span></li>
+          </ul>
+          <div class="reco"><b>Rec:</b> Confirm the dress code and any transport-to-venue logistics with the couple's own itinerary a few days out.</div>
+        </div>
+        <div class="day">
+          <div class="day-head"><div class="day-date" data-day="5"></div><div class="day-tag">Recovery</div></div>
+          <ul class="tl">
+            <li><span class="t">Morning</span><span>Slow morning, beach or pool</span></li>
+            <li><span class="t">Afternoon</span><span>Palma Old Town + La Seu Cathedral at golden hour</span></li>
+            <li><span class="t">Evening</span><span>Easy tapas dinner, early night</span></li>
+          </ul>
+          <div class="reco"><b>Rec:</b> Deliberately the lightest day of the trip — the day after a wedding is not the day for an ambitious itinerary.</div>
+        </div>
+        <div class="day">
+          <div class="day-head"><div class="day-date" data-day="6"></div><div class="day-tag">Travel day</div></div>
+          <ul class="tl">
+            <li><span class="t">Morning</span><span>Free time — Palma waterfront or a last swim</span></li>
+            <li><span class="t">Afternoon</span><span>Fly Palma de Mallorca (PMI) → Lisbon (LIS)</span></li>
+          </ul>
+          <div class="reco"><b>Rec:</b> Build in real buffer before this flight — Old Town traffic to the airport on a summer Monday is unpredictable.</div>
+        </div>
+      </div>
+    </details>
+
+    <details class="city-accordion">
+      <summary>
+        <div class="summary-main">
+          <div class="summary-title">🇵🇹 Lisbon</div>
+          <div class="summary-sub">Days 8–10 · Flight from Mallorca, fly home</div>
+        </div>
+        <div class="summary-arrow">▾</div>
+      </summary>
+      <div class="accordion-body">
+        <div class="day">
+          <div class="day-head"><div class="day-date" data-day="7"></div><div class="day-tag">Arrival</div></div>
+          <ul class="tl">
+            <li><span class="t">Evening</span><span>Land, check in, Alfama district wander</span></li>
+            <li><span class="t">Night</span><span>Fado dinner in Alfama or Bairro Alto</span></li>
+          </ul>
+          <div class="reco"><b>Rec:</b> This is the deliberate wind-down leg — a genuinely different pace and country after a wedding week.</div>
+        </div>
+        <div class="day">
+          <div class="day-head"><div class="day-date" data-day="8"></div><div class="day-tag">Belém &amp; the river</div></div>
+          <ul class="tl">
+            <li><span class="t">Morning</span><span>Belém Tower + Jerónimos Monastery</span></li>
+            <li><span class="t">Afternoon</span><span>Pastéis de Belém (the original), then Tram 28 through the old city</span></li>
+            <li><span class="t">Evening</span><span>Bairro Alto for dinner and drinks</span></li>
+          </ul>
+          <div class="reco"><b>Rec:</b> Go to Pastéis de Belém before noon — the line wraps the block by early afternoon in summer.</div>
+        </div>
+        <div class="day">
+          <div class="day-head"><div class="day-date" data-day="9"></div><div class="day-tag">Depart</div></div>
+          <ul class="tl">
+            <li><span class="t">Morning</span><span>LX Factory or Time Out Market for a last lunch</span></li>
+            <li><span class="t">Afternoon</span><span>Fly Lisbon (LIS) → New York (JFK)</span></li>
+          </ul>
+        </div>
+      </div>
+    </details>
+  </section>
+  </div>
+
+  <!-- ===================== FOOD & CULTURE TAB ===================== -->
+  <div class="tab-panel" data-panel="food" hidden>
+  <section>
+    <div class="section-head"><h2 class="display">Food &amp; Culture</h2></div>
+    <p class="section-sub">A curated, checkable list per city — the dishes and cultural touchpoints worth deliberately seeking out.</p>
+
+    <div class="subhead">🇪🇸 Barcelona</div>
+    <div class="leg" data-leg="Barcelona Food">
+      <div class="leg-head"><h3>To Try</h3><span class="leg-count mono"><span class="done">0</span>/<span class="total">0</span></span></div>
+      <ul class="items">
+        <li><input type="checkbox" id="f1"><label for="f1">Pan con tomate — bread, tomato, olive oil, done properly it needs nothing else</label></li>
+        <li><input type="checkbox" id="f2"><label for="f2">Jamón ibérico, sliced to order at a proper counter</label></li>
+        <li><input type="checkbox" id="f3"><label for="f3">Patatas bravas — every bar has its own sauce, worth comparing</label></li>
+        <li><input type="checkbox" id="f4"><label for="f4">Crema catalana — the city's answer to crème brûlée</label></li>
+      </ul>
+    </div>
+
+    <div class="subhead">🇪🇸 Mallorca</div>
+    <div class="leg" data-leg="Mallorca Food">
+      <div class="leg-head"><h3>To Try</h3><span class="leg-count mono"><span class="done">0</span>/<span class="total">0</span></span></div>
+      <ul class="items">
+        <li><input type="checkbox" id="f5"><label for="f5">Sobrasada — the island's spiced, spreadable cured pork sausage</label></li>
+        <li><input type="checkbox" id="f6"><label for="f6">Pa amb oli — toasted bread, olive oil, tomato, whatever's on top</label></li>
+        <li><input type="checkbox" id="f7"><label for="f7">Tumbet — the Mallorcan ratatouille, baked potato/eggplant/pepper</label></li>
+        <li><input type="checkbox" id="f8"><label for="f8">Ensaimada — the famous spiral pastry, best fresh with coffee</label></li>
+      </ul>
+    </div>
+
+    <div class="subhead">🇵🇹 Lisbon</div>
+    <div class="leg" data-leg="Lisbon Food">
+      <div class="leg-head"><h3>To Try</h3><span class="leg-count mono"><span class="done">0</span>/<span class="total">0</span></span></div>
+      <ul class="items">
+        <li><input type="checkbox" id="f9"><label for="f9">Pastéis de nata — the original at Pastéis de Belém, warm with cinnamon</label></li>
+        <li><input type="checkbox" id="f10"><label for="f10">Bacalhau à brás — shredded salt cod, egg, and crispy potato</label></li>
+        <li><input type="checkbox" id="f11"><label for="f11">Grilled sardines — a summer staple, order them whole</label></li>
+        <li><input type="checkbox" id="f12"><label for="f12">Ginjinha — the cherry liqueur, served in a chocolate cup from a hole-in-the-wall bar</label></li>
+      </ul>
+    </div>
+  </section>
+  </div>
+
+  <!-- ===================== PACKING TAB ===================== -->
+  <div class="tab-panel" data-panel="packing" hidden>
+  <section>
+    <div class="section-head"><h2 class="display">Packing Checklist</h2></div>
+    <p class="section-sub">Built for three legs: two city stops and one wedding weekend, all in the same warm-summer climate band.</p>
+
+    <div class="leg" data-leg="Documents">
+      <div class="leg-head"><h3>Documents &amp; Money</h3><span class="leg-count mono"><span class="done">0</span>/<span class="total">0</span></span></div>
+      <ul class="items">
+        <li><input type="checkbox" id="p1"><label for="p1">Passport (valid 6+ months past return) + one photo copy stored separately</label></li>
+        <li><input type="checkbox" id="p2"><label for="p2">All flight confirmations saved offline</label></li>
+        <li><input type="checkbox" id="p3"><label for="p3">Euro cash for markets and small vendors</label></li>
+        <li><input type="checkbox" id="p4"><label for="p4">Travel insurance confirmation</label></li>
+        <li><input type="checkbox" id="p5"><label for="p5">Card issuers notified of Spain/Portugal travel</label></li>
+      </ul>
+    </div>
+
+    <div class="leg" data-leg="Wedding">
+      <div class="leg-head"><h3>The Wedding</h3><span class="leg-count mono"><span class="done">0</span>/<span class="total">0</span></span></div>
+      <ul class="items">
+        <li><input type="checkbox" id="p6"><label for="p6">Wedding outfit, pressed and hung in a garment bag</label></li>
+        <li><input type="checkbox" id="p7"><label for="p7">Dress shoes broken in — not brand new for a full day standing/dancing</label></li>
+        <li><input type="checkbox" id="p8"><label for="p8">A wrapped gift or confirmation of registry contribution</label></li>
+        <li><input type="checkbox" id="p9"><label for="p9">Backup outfit for the welcome dinner / rehearsal event</label></li>
+      </ul>
+    </div>
+
+    <div class="leg" data-leg="City + Beach">
+      <div class="leg-head"><h3>Barcelona &amp; Lisbon — City Layers</h3><span class="leg-count mono"><span class="done">0</span>/<span class="total">0</span></span></div>
+      <ul class="items">
+        <li><input type="checkbox" id="p10"><label for="p10">Comfortable walking shoes, broken in — both cities are genuinely on-foot heavy</label></li>
+        <li><input type="checkbox" id="p11"><label for="p11">Swimwear (2 — one always drying) for the Mallorca stretch</label></li>
+        <li><input type="checkbox" id="p12"><label for="p12">Reef-safe sunscreen SPF 30+</label></li>
+        <li><input type="checkbox" id="p13"><label for="p13">One smart-casual outfit for a nicer dinner in each city</label></li>
+        <li><input type="checkbox" id="p14"><label for="p14">A light layer for Lisbon evenings — noticeably cooler by the river after dark</label></li>
+      </ul>
+    </div>
+
+    <div class="leg" data-leg="Always Pack">
+      <div class="leg-head"><h3>Always Pack</h3><span class="leg-count mono"><span class="done">0</span>/<span class="total">0</span></span></div>
+      <ul class="items">
+        <li><input type="checkbox" id="p15"><label for="p15">EU plug adapter</label></li>
+        <li><input type="checkbox" id="p16"><label for="p16">Prescription meds + copy of prescriptions</label></li>
+        <li><input type="checkbox" id="p17"><label for="p17">Basic first-aid — ibuprofen, band-aids, motion sickness</label></li>
+        <li><input type="checkbox" id="p18"><label for="p18">Packing cubes to separate wedding clothes from everything else</label></li>
+        <li><input type="checkbox" id="p19"><label for="p19">EU-wide eSIM covering Spain and Portugal</label></li>
+        <li><input type="checkbox" id="p20"><label for="p20">Compact daypack for sightseeing days</label></li>
+        <li><input type="checkbox" id="p21"><label for="p21">Portable charger for long travel days</label></li>
+        <li><input type="checkbox" id="p22"><label for="p22">Contact lenses/solution or glasses backup</label></li>
+      </ul>
+    </div>
+  </section>
+  </div>
+
+  <!-- ===================== CONFIRMATIONS TAB ===================== -->
+  <div class="tab-panel" data-panel="confirmations" hidden>
+  <section>
+    <div class="section-head"><h2 class="display">Confirmations</h2></div>
+    <p class="section-sub">Sample data — every flight and hotel this itinerary assumes, with exact times, airport codes, and the reference numbers you'd need at a desk or a gate. Booked for 2 travelers: Kyle and Lachy Green.</p>
+
+    <div class="subhead" style="margin-top:0;">✈️ Flights</div>
+    <div class="confirm-card">
+      <div class="cc-head"><div class="cc-title"><span class="type-tag flight">Flight</span> New York (JFK) → Barcelona (BCN)</div><div class="cc-route mono">Day 1 · 22:10 – 11:35+1</div></div>
+      <dl>
+        <dt>Carrier</dt><dd>Delta <span class="ref">DL100</span></dd>
+        <dt>Conf #</dt><dd class="ref">4KFQZR</dd>
+        <dt>Guests</dt><dd>Kyle · Lachy Green</dd>
+      </dl>
+    </div>
+    <div class="confirm-card">
+      <div class="cc-head"><div class="cc-title"><span class="type-tag flight">Flight</span> Barcelona (BCN) → Palma de Mallorca (PMI)</div><div class="cc-route mono">Day 3 · 16:30 – 17:35</div></div>
+      <dl>
+        <dt>Carrier</dt><dd>Vueling <span class="ref">VY3401</span></dd>
+        <dt>Conf #</dt><dd class="ref">9XPLQ2</dd>
+        <dt>Guests</dt><dd>Kyle · Lachy Green</dd>
+      </dl>
+    </div>
+    <div class="confirm-card">
+      <div class="cc-head"><div class="cc-title"><span class="type-tag flight">Flight</span> Palma de Mallorca (PMI) → Lisbon (LIS)</div><div class="cc-route mono">Day 7 · 14:15 – 15:05</div></div>
+      <dl>
+        <dt>Carrier</dt><dd>TAP Air Portugal <span class="ref">TP1854</span></dd>
+        <dt>Conf #</dt><dd class="ref">RM4T8B</dd>
+        <dt>Guests</dt><dd>Kyle · Lachy Green</dd>
+      </dl>
+    </div>
+    <div class="confirm-card">
+      <div class="cc-head"><div class="cc-title"><span class="type-tag flight">Flight</span> Lisbon (LIS) → New York (JFK)</div><div class="cc-route mono">Day 10 · 10:20 – 14:35</div></div>
+      <dl>
+        <dt>Carrier</dt><dd>TAP Air Portugal <span class="ref">TP203</span></dd>
+        <dt>Conf #</dt><dd class="ref">8TWN5C</dd>
+        <dt>Guests</dt><dd>Kyle · Lachy Green</dd>
+      </dl>
+    </div>
+    <p class="section-sub" style="margin-top:8px;">No train legs on this route — Mallorca is island-only by air, so all four segments are flights. A real itinerary elsewhere in this system (e.g. a London–Paris leg) would show a 🚄 train tag the same way.</p>
+
+    <div class="subhead">🏨 Hotels</div>
+    <div class="confirm-card">
+      <div class="cc-head"><div class="cc-title">🇪🇸 Hotel Casa Bonay, Barcelona</div><div class="cc-route mono">Days 1–3 · 2 guests</div></div>
+      <dl><dt>Conf #</dt><dd class="ref">BCN-88213</dd></dl>
+    </div>
+    <div class="confirm-card">
+      <div class="cc-head"><div class="cc-title">🇪🇸 Hotel Costa Azul, Palma</div><div class="cc-route mono">Days 4–7 · 2 guests</div></div>
+      <dl><dt>Conf #</dt><dd class="ref">PMI-30961</dd></dl>
+    </div>
+    <div class="confirm-card">
+      <div class="cc-head"><div class="cc-title">🇵🇹 Memmo Alfama, Lisbon</div><div class="cc-route mono">Days 8–10 · 2 guests</div></div>
+      <dl><dt>Conf #</dt><dd class="ref">LIS-72240</dd></dl>
+    </div>
+  </section>
+  </div>
+
+  <div class="rule-thin"></div>
+
+  <footer>
+    <p>Sample itinerary — cities, timings, and confirmation data are illustrative, not real bookings. Dates recompute relative to the day this page is opened, positioned so the Mallorca wedding always falls on Fri Jul 31–Mon Aug 3. Built as a demonstration of an AI-orchestrated trip-planning system. Checklist state persists per-browser via local storage only — it does not sync across separate devices or viewers.</p>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    var STORAGE_KEY = "ten-days-europe-wedding-v1";
+    var DAY_MS = 24 * 60 * 60 * 1000;
+    var TODAY_OFFSET = 3; // Mallorca arrival day — Fri Jul 31, the real wedding-week start
+
+    var anchor = new Date(new Date().getTime() - TODAY_OFFSET * DAY_MS);
+    anchor.setHours(9, 0, 0, 0);
+
+    var WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    function formatDay(offset) {
+      var d = new Date(anchor.getTime() + offset * DAY_MS);
+      return WEEKDAYS[d.getDay()] + ", " + MONTHS[d.getMonth()] + " " + d.getDate();
+    }
+    function shortDate(offset) {
+      var d = new Date(anchor.getTime() + offset * DAY_MS);
+      return MONTHS[d.getMonth()] + " " + d.getDate();
+    }
+
+    var WEDDING_OFFSET = 4;
+
+    document.querySelectorAll(".day [data-day]").forEach(function (el) {
+      var offset = parseInt(el.getAttribute("data-day"), 10);
+      var label = document.createElement("span");
+      label.textContent = "Day " + (offset + 1) + " — " + formatDay(offset);
+      el.appendChild(label);
+      var dayCard = el.closest(".day");
+      if (offset === TODAY_OFFSET) {
+        dayCard.classList.add("is-today");
+        var badge = document.createElement("span");
+        badge.className = "now-badge";
+        badge.textContent = "Today";
+        el.appendChild(badge);
+      }
+      if (offset === WEDDING_OFFSET) {
+        dayCard.classList.add("is-wedding");
+        var wbadge = document.createElement("span");
+        wbadge.className = "wedding-badge";
+        wbadge.textContent = "Wedding";
+        el.appendChild(wbadge);
+      }
+    });
+
+    document.querySelectorAll("#ovTable tr[data-day]").forEach(function (row) {
+      var offset = parseInt(row.getAttribute("data-day"), 10);
+      row.querySelector(".ov-day").textContent = "Day " + (offset + 1);
+      row.querySelector(".ov-date").textContent = formatDay(offset);
+      if (offset === TODAY_OFFSET) row.classList.add("is-today");
+    });
+
+    var cityOffsets = { "nyc-out": -1, barcelona: 0, mallorca: 3, lisbon: 7, "nyc-return": 10 };
+    Object.keys(cityOffsets).forEach(function (city) {
+      var el = document.getElementById("d-" + city);
+      if (el) el.textContent = shortDate(cityOffsets[city]);
+    });
+
+    var CITY_RANGES = [
+      { name: "Barcelona 🇪🇸", start: 0, end: 2, accId: null },
+      { name: "Mallorca 🇪🇸", start: 3, end: 6, accId: "acc-mallorca" },
+      { name: "Lisbon 🇵🇹", start: 7, end: 9, accId: null }
+    ];
+    var currentCity = CITY_RANGES.filter(function (c) { return TODAY_OFFSET >= c.start && TODAY_OFFSET <= c.end; })[0];
+    var currentLocEl = document.getElementById("currentLocationValue");
+    if (currentLocEl && currentCity) currentLocEl.textContent = currentCity.name;
+
+    var dayText = document.getElementById("dayProgressText");
+    var dayBar = document.getElementById("dayProgressBar");
+    if (dayText) dayText.textContent = "Day " + (TODAY_OFFSET + 1) + " of 10";
+    if (dayBar) dayBar.style.width = Math.round(((TODAY_OFFSET + 1) / 10) * 100) + "%";
+
+    if (currentCity && currentCity.accId) {
+      var acc = document.getElementById(currentCity.accId);
+      if (acc) { acc.setAttribute("open", ""); acc.classList.add("is-current"); }
+      var badge = document.getElementById("mallorcaBadge");
+      if (badge) badge.style.display = "inline-block";
+    }
+
+    var checkboxes = Array.prototype.slice.call(document.querySelectorAll('ul.items input[type="checkbox"]'));
+    var saved = {};
+    try { saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}"); } catch (e) {}
+
+    function idsChecked(prefix) {
+      var total = 0, done = 0;
+      checkboxes.forEach(function (cb) {
+        if (cb.id.indexOf(prefix) === 0) { total++; if (cb.checked) done++; }
+      });
+      return { total: total, done: done };
+    }
+
+    function updateHeroProgress() {
+      var pack = idsChecked("p");
+      var packText = document.getElementById("packProgressText");
+      var packBar = document.getElementById("packProgressBar");
+      if (packText) packText.textContent = pack.done + "/" + pack.total;
+      if (packBar) packBar.style.width = (pack.total ? (pack.done / pack.total * 100) : 0) + "%";
+    }
+
+    function updateCounts() {
+      document.querySelectorAll(".leg").forEach(function (leg) {
+        var items = leg.querySelectorAll('input[type="checkbox"]');
+        var done = leg.querySelectorAll('input[type="checkbox"]:checked').length;
+        leg.querySelector(".done").textContent = done;
+        leg.querySelector(".total").textContent = items.length;
+      });
+      updateHeroProgress();
+    }
+
+    checkboxes.forEach(function (cb) {
+      if (saved[cb.id]) cb.checked = true;
+      cb.addEventListener("change", function () {
+        saved[cb.id] = cb.checked;
+        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(saved)); } catch (e) {}
+        updateCounts();
+      });
+    });
+    updateCounts();
+
+    var tabBtns = Array.prototype.slice.call(document.querySelectorAll(".tab-btn"));
+    var tabPanels = Array.prototype.slice.call(document.querySelectorAll(".tab-panel"));
+    var TAB_KEY = "ten-days-europe-active-tab";
+    function activateTab(name) {
+      tabBtns.forEach(function (btn) {
+        var active = btn.getAttribute("data-tab") === name;
+        btn.classList.toggle("active", active);
+        btn.setAttribute("aria-selected", active ? "true" : "false");
+      });
+      tabPanels.forEach(function (panel) { panel.hidden = panel.getAttribute("data-panel") !== name; });
+      try { localStorage.setItem(TAB_KEY, name); } catch (e) {}
+    }
+    tabBtns.forEach(function (btn) { btn.addEventListener("click", function () { activateTab(btn.getAttribute("data-tab")); }); });
+    var savedTab = null;
+    try { savedTab = localStorage.getItem(TAB_KEY); } catch (e) {}
+    if (savedTab && tabBtns.some(function (b) { return b.getAttribute("data-tab") === savedTab; })) { activateTab(savedTab); }
+  })();
+</script>
+</body>
+</html>
