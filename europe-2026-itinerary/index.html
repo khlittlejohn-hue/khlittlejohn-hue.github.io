@@ -53,7 +53,12 @@
   /* Command panel — the Today "app" experience */
   .command-panel { background: var(--surface); border: 1px solid var(--rule); border-radius: 16px; padding: 26px 26px 24px; margin-bottom: 30px; }
   .cmd-greeting { font-family: Georgia, serif; font-weight: 700; font-size: clamp(20px, 4vw, 26px); margin: 0 0 4px; }
-  .cmd-sub { color: var(--ink-soft); font-size: 14.5px; margin: 0 0 20px; }
+  .cmd-sub { color: var(--ink-soft); font-size: 14.5px; margin: 0 0 4px; }
+  .cmd-meta { color: var(--ink-soft); font-size: 12px; font-family: "SF Mono", ui-monospace, Menlo, monospace; margin: 0 0 20px; }
+  .cmd-recent { list-style: none; margin: 0; padding: 0; }
+  .cmd-recent li { font-size: 13.5px; color: var(--ink-soft); padding: 5px 0; }
+  .cmd-time { font-family: "SF Mono", ui-monospace, Menlo, monospace; font-size: 11.5px; }
+  .cmd-freshness { font-size: 11.5px; color: var(--ink-soft); margin: 8px 0 0; font-family: "SF Mono", ui-monospace, Menlo, monospace; }
   .cmd-loc { color: var(--ink); font-weight: 600; }
   .cmd-tag { color: var(--gold); font-weight: 700; }
   .cmd-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 22px; }
@@ -193,6 +198,7 @@
   .confirm-card .cc-actions { display: flex; align-items: center; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
   .confirm-card .cc-link { font-size: 12.5px; font-weight: 700; color: var(--teal); text-decoration: none; }
   .confirm-card .cc-link:hover { text-decoration: underline; }
+  .confirm-card .cc-meta { font-size: 11px; color: var(--ink-soft); margin-top: 6px; font-family: "SF Mono", ui-monospace, Menlo, monospace; }
   .status-pill { font-size: 10px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 3px 10px; border-radius: 999px; font-family: -apple-system, sans-serif; background: rgba(31,122,102,0.13); color: var(--teal); }
   .status-pill.pill-muted { background: var(--bg); color: var(--ink-soft); border: 1px solid var(--rule); }
   .type-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 2px 9px; border-radius: 999px; font-family: -apple-system, sans-serif; }
@@ -208,6 +214,7 @@
   .th-item.is-done { color: var(--ink-soft); }
   .th-item.is-today { color: var(--teal); font-weight: 700; }
   .th-item.is-upcoming { color: var(--ink-soft); }
+  .th-time { font-family: "SF Mono", ui-monospace, Menlo, monospace; font-size: 11.5px; color: var(--ink-soft); }
 
   .trip-notes { display: flex; flex-direction: column; gap: 12px; margin-top: 14px; }
   .note-item { background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; padding: 14px 16px; }
@@ -259,12 +266,14 @@
     <div class="command-panel">
       <div class="cmd-greeting" id="npGreeting">Good afternoon, Kyle.</div>
       <p class="cmd-sub"><span class="cmd-loc">🇪🇸 Mallorca</span> · Day <span id="npDayNum">4</span> of 10 · <span class="cmd-tag">Wedding tomorrow</span></p>
+      <p class="cmd-meta" id="npLastOpened"></p>
 
       <div class="cmd-grid">
         <div class="cmd-item"><div class="cmd-label">Local Time</div><div class="cmd-value" id="npLocalTime">—</div></div>
         <div class="cmd-item"><div class="cmd-label">Weather</div><div class="cmd-value">Sunny · 31°C</div></div>
         <div class="cmd-item"><div class="cmd-label">Next Event</div><div class="cmd-value">Wedding ceremony — tomorrow, 5:00 PM</div></div>
         <div class="cmd-item"><div class="cmd-label">Next Reservation</div><div class="cmd-value">Rehearsal dinner — tonight, 7:00 PM</div></div>
+        <div class="cmd-item"><div class="cmd-label">Next Flight</div><div class="cmd-value" id="npNextFlight">—</div></div>
       </div>
 
       <div class="cmd-subhead">Today's Plan</div>
@@ -282,6 +291,15 @@
         <li class="warn">⚠ Confirm room type on the Costa Azul booking</li>
         <li class="warn" id="npAttentionPacking">⚠ Checking packing…</li>
       </ul>
+
+      <div class="cmd-subhead">Recently</div>
+      <ul class="cmd-recent">
+        <li>✓ Checked into hotel <span class="cmd-time">· today</span></li>
+        <li>✓ Boarding pass saved <span class="cmd-time">· 3 days ago</span></li>
+        <li>✓ Viewed wedding venue details <span class="cmd-time">· 2 days ago</span></li>
+        <li>✓ Bookmarked a restaurant in Lisbon <span class="cmd-time">· 5 days ago</span></li>
+      </ul>
+      <p class="cmd-freshness" id="npFreshness">Updated just now</p>
 
       <div class="cmd-actions">
         <button type="button" class="cmd-btn" id="btnBoardingPass">View boarding pass</button>
@@ -490,10 +508,10 @@
     <div class="food-leg">
       <div class="leg-head"><h3>Things I Want to Try</h3><span class="leg-count mono">0 tried · 0 revisit</span></div>
       <ul class="items food-items">
-        <li><button type="button" class="food-toggle" id="f1" data-state="saved">Saved</button><span class="food-label">Pan con tomate — bread, tomato, olive oil, done properly it needs nothing else</span></li>
-        <li><button type="button" class="food-toggle" id="f2" data-state="saved">Saved</button><span class="food-label">Jamón ibérico, sliced to order at a proper counter</span></li>
+        <li><button type="button" class="food-toggle" id="f1" data-state="tried">Saved</button><span class="food-label">Pan con tomate — bread, tomato, olive oil, done properly it needs nothing else</span></li>
+        <li><button type="button" class="food-toggle" id="f2" data-state="tried">Saved</button><span class="food-label">Jamón ibérico, sliced to order at a proper counter</span></li>
         <li><button type="button" class="food-toggle" id="f3" data-state="saved">Saved</button><span class="food-label">Patatas bravas — every bar has its own sauce, worth comparing</span></li>
-        <li><button type="button" class="food-toggle" id="f4" data-state="saved">Saved</button><span class="food-label">Crema catalana — the city's answer to crème brûlée</span></li>
+        <li><button type="button" class="food-toggle" id="f4" data-state="revisit">Saved</button><span class="food-label">Crema catalana — the city's answer to crème brûlée</span></li>
       </ul>
     </div>
 
@@ -525,7 +543,7 @@
   <div class="tab-panel" data-panel="packing" hidden>
   <section>
     <div class="section-head"><h2 class="display">Packing Checklist</h2></div>
-    <p class="section-sub">Built for three legs: two city stops and one wedding weekend, all in the same warm-summer climate band.</p>
+    <p class="section-sub">Built for three legs: two city stops and one wedding weekend, all in the same warm-summer climate band. Synced 3 days ago.</p>
 
     <div class="pack-summary">
       <div><b id="packStillNeed">22</b>still need</div>
@@ -535,46 +553,46 @@
     <div class="leg" data-leg="Documents">
       <div class="leg-head"><h3>Documents &amp; Money</h3><span class="leg-count mono"><span class="done">0</span>/<span class="total">0</span></span></div>
       <ul class="items">
-        <li><input type="checkbox" id="p1"><label for="p1">Passport (valid 6+ months past return) + one photo copy stored separately</label></li>
-        <li><input type="checkbox" id="p2"><label for="p2">All flight confirmations saved offline</label></li>
-        <li><input type="checkbox" id="p3"><label for="p3">Euro cash for markets and small vendors</label></li>
-        <li><input type="checkbox" id="p4"><label for="p4">Travel insurance confirmation</label></li>
-        <li><input type="checkbox" id="p5"><label for="p5">Card issuers notified of Spain/Portugal travel</label></li>
+        <li><input type="checkbox" id="p1" checked><label for="p1">Passport (valid 6+ months past return) + one photo copy stored separately</label></li>
+        <li><input type="checkbox" id="p2" checked><label for="p2">All flight confirmations saved offline</label></li>
+        <li><input type="checkbox" id="p3" checked><label for="p3">Euro cash for markets and small vendors</label></li>
+        <li><input type="checkbox" id="p4" checked><label for="p4">Travel insurance confirmation</label></li>
+        <li><input type="checkbox" id="p5" checked><label for="p5">Card issuers notified of Spain/Portugal travel</label></li>
       </ul>
     </div>
 
     <div class="leg" data-leg="Wedding">
       <div class="leg-head"><h3>The Wedding</h3><span class="leg-count mono"><span class="done">0</span>/<span class="total">0</span></span></div>
       <ul class="items">
-        <li><input type="checkbox" id="p6"><label for="p6">Wedding outfit, pressed and hung in a garment bag</label></li>
-        <li><input type="checkbox" id="p7"><label for="p7">Dress shoes broken in — not brand new for a full day standing/dancing</label></li>
+        <li><input type="checkbox" id="p6" checked><label for="p6">Wedding outfit, pressed and hung in a garment bag</label></li>
+        <li><input type="checkbox" id="p7" checked><label for="p7">Dress shoes broken in — not brand new for a full day standing/dancing</label></li>
         <li><input type="checkbox" id="p8"><label for="p8">A wrapped gift or confirmation of registry contribution</label></li>
-        <li><input type="checkbox" id="p9"><label for="p9">Backup outfit for the rehearsal dinner</label></li>
+        <li><input type="checkbox" id="p9" checked><label for="p9">Backup outfit for the rehearsal dinner</label></li>
       </ul>
     </div>
 
     <div class="leg" data-leg="City + Beach">
       <div class="leg-head"><h3>Barcelona &amp; Lisbon — City Layers</h3><span class="leg-count mono"><span class="done">0</span>/<span class="total">0</span></span></div>
       <ul class="items">
-        <li><input type="checkbox" id="p10"><label for="p10">Comfortable walking shoes, broken in — both cities are genuinely on-foot heavy</label></li>
-        <li><input type="checkbox" id="p11"><label for="p11">Swimwear (2 — one always drying) for the Mallorca stretch</label></li>
-        <li><input type="checkbox" id="p12"><label for="p12">Reef-safe sunscreen SPF 30+</label></li>
-        <li><input type="checkbox" id="p13"><label for="p13">One smart-casual outfit for a nicer dinner in each city</label></li>
-        <li><input type="checkbox" id="p14"><label for="p14">A light layer for Lisbon evenings — noticeably cooler by the river after dark</label></li>
+        <li><input type="checkbox" id="p10" checked><label for="p10">Comfortable walking shoes, broken in — both cities are genuinely on-foot heavy</label></li>
+        <li><input type="checkbox" id="p11" checked><label for="p11">Swimwear (2 — one always drying) for the Mallorca stretch</label></li>
+        <li><input type="checkbox" id="p12" checked><label for="p12">Reef-safe sunscreen SPF 30+</label></li>
+        <li><input type="checkbox" id="p13" checked><label for="p13">One smart-casual outfit for a nicer dinner in each city</label></li>
+        <li><input type="checkbox" id="p14" checked><label for="p14">A light layer for Lisbon evenings — noticeably cooler by the river after dark</label></li>
       </ul>
     </div>
 
     <div class="leg" data-leg="Always Pack">
       <div class="leg-head"><h3>Always Pack</h3><span class="leg-count mono"><span class="done">0</span>/<span class="total">0</span></span></div>
       <ul class="items">
-        <li><input type="checkbox" id="p15"><label for="p15">EU plug adapter</label></li>
-        <li><input type="checkbox" id="p16"><label for="p16">Prescription meds + copy of prescriptions</label></li>
-        <li><input type="checkbox" id="p17"><label for="p17">Basic first-aid — ibuprofen, band-aids, motion sickness</label></li>
-        <li><input type="checkbox" id="p18"><label for="p18">Packing cubes to separate wedding clothes from everything else</label></li>
-        <li><input type="checkbox" id="p19"><label for="p19">EU-wide eSIM covering Spain and Portugal</label></li>
-        <li><input type="checkbox" id="p20"><label for="p20">Compact daypack for sightseeing days</label></li>
-        <li><input type="checkbox" id="p21"><label for="p21">Portable charger for long travel days</label></li>
-        <li><input type="checkbox" id="p22"><label for="p22">Contact lenses/solution or glasses backup</label></li>
+        <li><input type="checkbox" id="p15" checked><label for="p15">EU plug adapter</label></li>
+        <li><input type="checkbox" id="p16" checked><label for="p16">Prescription meds + copy of prescriptions</label></li>
+        <li><input type="checkbox" id="p17" checked><label for="p17">Basic first-aid — ibuprofen, band-aids, motion sickness</label></li>
+        <li><input type="checkbox" id="p18" checked><label for="p18">Packing cubes to separate wedding clothes from everything else</label></li>
+        <li><input type="checkbox" id="p19" checked><label for="p19">EU-wide eSIM covering Spain and Portugal</label></li>
+        <li><input type="checkbox" id="p20" checked><label for="p20">Compact daypack for sightseeing days</label></li>
+        <li><input type="checkbox" id="p21" checked><label for="p21">Portable charger for long travel days</label></li>
+        <li><input type="checkbox" id="p22" checked><label for="p22">Contact lenses/solution or glasses backup</label></li>
       </ul>
     </div>
   </section>
@@ -595,6 +613,7 @@
         <dt>Guests</dt><dd>Kyle Littlejohn · Lachy Green</dd>
       </dl>
       <div class="cc-actions"><span class="status-pill pill-muted">Completed</span><a class="cc-link" href="#" data-open-boarding="1">Open details</a></div>
+      <div class="cc-meta">Imported 5 days ago</div>
     </div>
     <div class="confirm-card">
       <div class="cc-head"><div class="cc-title"><span class="type-tag flight">Flight</span> Barcelona (BCN) → Palma de Mallorca (PMI)</div><div class="cc-route mono">Day 3 · 16:30 – 17:35</div></div>
@@ -604,6 +623,7 @@
         <dt>Guests</dt><dd>Kyle Littlejohn · Lachy Green</dd>
       </dl>
       <div class="cc-actions"><span class="status-pill pill-muted">Completed</span></div>
+      <div class="cc-meta">Imported 4 days ago</div>
     </div>
     <div class="confirm-card">
       <div class="cc-head"><div class="cc-title"><span class="type-tag flight">Flight</span> Palma de Mallorca (PMI) → Lisbon (LIS)</div><div class="cc-route mono">Day 7 · 14:15 – 15:05</div></div>
@@ -613,6 +633,7 @@
         <dt>Guests</dt><dd>Kyle Littlejohn · Lachy Green</dd>
       </dl>
       <div class="cc-actions"><span class="status-pill">Confirmed</span></div>
+      <div class="cc-meta">Imported 4 days ago</div>
     </div>
     <div class="confirm-card">
       <div class="cc-head"><div class="cc-title"><span class="type-tag flight">Flight</span> Lisbon (LIS) → New York (JFK)</div><div class="cc-route mono">Day 10 · 10:20 – 14:35</div></div>
@@ -622,6 +643,7 @@
         <dt>Guests</dt><dd>Kyle Littlejohn · Lachy Green</dd>
       </dl>
       <div class="cc-actions"><span class="status-pill">Confirmed</span></div>
+      <div class="cc-meta">Imported 4 days ago</div>
     </div>
 
     <div class="subhead">🏨 Hotels</div>
@@ -629,16 +651,19 @@
       <div class="cc-head"><div class="cc-title">🇪🇸 Hotel Casa Bonay, Barcelona</div><div class="cc-route mono">Days 1–3 · 2 guests</div></div>
       <dl><dt>Conf #</dt><dd class="ref">BCN-88213</dd><dt>Address</dt><dd>Carrer de Bailèn, 07 · Barcelona</dd></dl>
       <div class="cc-actions"><span class="status-pill pill-muted">Completed stay</span><a class="cc-link" href="https://www.google.com/maps/search/?api=1&amp;query=Hotel+Casa+Bonay+Barcelona" target="_blank" rel="noopener">Navigate</a></div>
+      <div class="cc-meta">Booked 6 days ago</div>
     </div>
     <div class="confirm-card">
       <div class="cc-head"><div class="cc-title">🇪🇸 Hotel Costa Azul, Palma</div><div class="cc-route mono">Days 4–7 · 2 guests</div></div>
       <dl><dt>Conf #</dt><dd class="ref">PMI-30961</dd><dt>Address</dt><dd>Carrer Sant Feliu, 08 · Palma de Mallorca</dd></dl>
       <div class="cc-actions"><span class="status-pill">Checked in today</span><a class="cc-link" href="https://www.google.com/maps/search/?api=1&amp;query=Hotel+Costa+Azul+Palma+de+Mallorca" target="_blank" rel="noopener">Navigate</a></div>
+      <div class="cc-meta">Updated yesterday</div>
     </div>
     <div class="confirm-card">
       <div class="cc-head"><div class="cc-title">🇵🇹 Memmo Alfama, Lisbon</div><div class="cc-route mono">Days 8–10 · 2 guests</div></div>
       <dl><dt>Conf #</dt><dd class="ref">LIS-72240</dd><dt>Address</dt><dd>Travessa das Merceeiras, 27 · Lisbon</dd></dl>
       <div class="cc-actions"><span class="status-pill">Confirmed</span><a class="cc-link" href="https://www.google.com/maps/search/?api=1&amp;query=Memmo+Alfama+Lisbon" target="_blank" rel="noopener">Navigate</a></div>
+      <div class="cc-meta">Booked 6 days ago</div>
     </div>
   </section>
   </div>
@@ -650,10 +675,10 @@
     <p class="section-sub">The trip, top to bottom.</p>
 
     <ul class="trip-history">
-      <li class="th-item is-done">✓ Flew NYC → Barcelona</li>
-      <li class="th-item is-done">✓ Explored the Gothic Quarter &amp; Sagrada Família</li>
-      <li class="th-item is-done">✓ Flew to Mallorca</li>
-      <li class="th-item is-today">● Wedding week begins</li>
+      <li class="th-item is-done">✓ Flew NYC → Barcelona <span class="th-time">· 3 days ago</span></li>
+      <li class="th-item is-done">✓ Explored the Gothic Quarter &amp; Sagrada Família <span class="th-time">· 2 days ago</span></li>
+      <li class="th-item is-done">✓ Flew to Mallorca <span class="th-time">· yesterday</span></li>
+      <li class="th-item is-today">● Wedding week begins <span class="th-time">· today</span></li>
       <li class="th-item is-upcoming">○ Attend the wedding</li>
       <li class="th-item is-upcoming">○ Recover in Palma</li>
       <li class="th-item is-upcoming">○ Fly to Lisbon</li>
@@ -665,6 +690,7 @@
     <div class="trip-notes">
       <div class="note-item"><div class="note-label">Best meal so far</div><div class="note-value">Jamón at a tiny counter near El Born, Barcelona.</div></div>
       <div class="note-item"><div class="note-label">Unexpected highlight</div><div class="note-value">Sagrada Família at golden hour — didn't expect the interior light to be that dramatic.</div></div>
+      <div class="note-item"><div class="note-label">Small hiccup</div><div class="note-value">The Costa Azul room only had European outlets, despite the listing — grabbed an adapter at BCN airport before we left.</div></div>
       <div class="note-item"><div class="note-label">Remember for next time</div><div class="note-value">Book Sagrada Família online at least a week out.</div></div>
     </div>
   </section>
@@ -797,6 +823,44 @@
     updateLocalTime();
     setInterval(updateLocalTime, 30000);
 
+    // Next flight — computed from the fixed trip offsets, not hardcoded
+    var NEXT_FLIGHT_OFFSET = 6; // Palma → Lisbon
+    var nextFlightEl = document.getElementById("npNextFlight");
+    if (nextFlightEl) {
+      var daysUntilFlight = NEXT_FLIGHT_OFFSET - TODAY_OFFSET;
+      nextFlightEl.textContent = "In " + daysUntilFlight + " day" + (daysUntilFlight === 1 ? "" : "s") + " · PMI → LIS";
+    }
+
+    // Last opened — genuinely read from this browser's previous visit
+    var LAST_OPEN_KEY = "ten-days-europe-last-opened-v1";
+    var lastOpenedEl = document.getElementById("npLastOpened");
+    if (lastOpenedEl) {
+      var lastOpenedText = "First visit";
+      try {
+        var prevOpened = localStorage.getItem(LAST_OPEN_KEY);
+        if (prevOpened) {
+          var diffMin = Math.floor((Date.now() - parseInt(prevOpened, 10)) / 60000);
+          if (diffMin < 1) lastOpenedText = "Last opened just now";
+          else if (diffMin < 60) lastOpenedText = "Last opened " + diffMin + " min ago";
+          else if (diffMin < 60 * 24) lastOpenedText = "Last opened " + Math.floor(diffMin / 60) + " hr ago";
+          else lastOpenedText = "Last opened " + Math.floor(diffMin / (60 * 24)) + " days ago";
+        }
+        localStorage.setItem(LAST_OPEN_KEY, String(Date.now()));
+      } catch (e) {}
+      lastOpenedEl.textContent = lastOpenedText;
+    }
+
+    // Freshness ticker — genuinely tied to how long this page has been open
+    var pageLoadTime = Date.now();
+    function updateFreshness() {
+      var el = document.getElementById("npFreshness");
+      if (!el) return;
+      var mins = Math.floor((Date.now() - pageLoadTime) / 60000);
+      el.textContent = "Updated " + (mins < 1 ? "just now" : mins + " min ago");
+    }
+    updateFreshness();
+    setInterval(updateFreshness, 30000);
+
     var checkboxes = Array.prototype.slice.call(document.querySelectorAll('ul.items input[type="checkbox"]'));
     var saved = {};
     try { saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}"); } catch (e) {}
@@ -852,7 +916,7 @@
     }
 
     checkboxes.forEach(function (cb) {
-      if (saved[cb.id]) cb.checked = true;
+      if (Object.prototype.hasOwnProperty.call(saved, cb.id)) cb.checked = saved[cb.id];
       cb.addEventListener("change", function () {
         saved[cb.id] = cb.checked;
         try { localStorage.setItem(STORAGE_KEY, JSON.stringify(saved)); } catch (e) {}
@@ -867,9 +931,11 @@
     var FOOD_CYCLE = ["saved", "tried", "revisit"];
     var FOOD_LABELS = { saved: "Saved", tried: "Tried", revisit: "Revisit" };
     var foodButtons = Array.prototype.slice.call(document.querySelectorAll(".food-toggle"));
+    var FOOD_DEFAULTS = {};
+    foodButtons.forEach(function (btn) { FOOD_DEFAULTS[btn.id] = btn.getAttribute("data-state") || "saved"; });
 
     function applyFoodState(btn) {
-      var st = foodStates[btn.id] || "saved";
+      var st = foodStates[btn.id] || FOOD_DEFAULTS[btn.id];
       btn.dataset.state = st;
       btn.textContent = FOOD_LABELS[st];
       btn.className = "food-toggle state-" + st;
@@ -958,10 +1024,11 @@
       var pack = packState();
       var pct = pack.total ? Math.round((pack.done / pack.total) * 100) : 0;
       if (pack.unchecked.length === 0) {
-        return "You're 100% packed. Nothing outstanding.\n\nThe wedding is tomorrow at 5:00 PM.";
+        return "You're fully packed — nothing outstanding. The wedding's tomorrow at 5, so you're in good shape.";
       }
-      var lines = pack.unchecked.slice(0, 3).map(function (cb) { return "□ " + shortLabel(cb); });
-      return "You're " + pct + "% packed.\n\nMissing:\n" + lines.join("\n") + "\n\nThe wedding is tomorrow at 5:00 PM.";
+      var names = pack.unchecked.slice(0, 3).map(shortLabel);
+      var list = names.length > 1 ? names.slice(0, -1).join(", ") + " and " + names[names.length - 1] : names[0];
+      return "You're " + pct + "% packed — just missing " + list + ". Worth sorting before tonight, since the wedding's tomorrow at 5.";
     }
 
     function openTai() {
@@ -978,17 +1045,17 @@
       if (lower.indexOf("forgetting") > -1 || lower.indexOf("packing") > -1 || lower.indexOf("packed") > -1) {
         reply = taiPackingAnswer();
       } else if (lower.indexOf("change") > -1 && lower.indexOf("plan") > -1) {
-        reply = "Today's fairly light — check-in and the rehearsal dinner at 7 are the only fixed points. Move things around as you like, just be back in time to get ready.";
+        reply = "Today's pretty open — check-in and the rehearsal dinner at 7 are the only two things that actually have to happen. Everything else can move.";
       } else if (lower.indexOf("what should i do") > -1) {
-        reply = "Check-in and unpacking are already on the books for this afternoon, then the rehearsal dinner at 7.\n\nIf you want something in between, Palma Old Town is an easy walk — La Seu Cathedral, coffee nearby, back by 6 to get ready.";
+        reply = "You have about three free hours before rehearsal dinner. I'd skip anything requiring a taxi today. Palma Old Town is a comfortable walk from the hotel, and you'll still be back with plenty of time to get ready.";
       } else if (lower.indexOf("eat") > -1 || lower.indexOf("dinner") > -1) {
-        reply = "You already have the rehearsal dinner tonight at 7:00 PM, so nothing else to book — just leave the hotel with a little buffer beforehand.";
+        reply = "Since your rehearsal dinner starts at 7:00 PM, I'd keep this evening simple and stay within walking distance of the hotel — no need to book anything else.";
       } else if (lower.indexOf("earlier") > -1 || lower.indexOf("leave") > -1) {
-        reply = "You could shift the Lisbon flight to the Day 6 afternoon instead of Day 7 morning, but that trims Palma Old Town to a half day. Want me to check alternate flight times?";
+        reply = "You could move the Lisbon flight to Day 6 afternoon instead of Day 7 morning, but that trims Palma Old Town down to a half day. Want me to check what else is available?";
       } else if (lower.indexOf("coffee") > -1) {
-        reply = "Nearest well-reviewed coffee to Hotel Costa Azul is about a 6-minute walk — good for the morning before things get busy.";
+        reply = "There's a good one about 6 minutes from Costa Azul on foot — an easy stop before things get busy.";
       } else {
-        reply = "Try one of the questions above, or ask about tonight, packing, or timing.";
+        reply = "Try one of the questions above, or ask me about tonight, packing, or timing.";
       }
       setTimeout(function () { taiAddMsg(reply, "bot"); }, 450);
     }
