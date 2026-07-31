@@ -54,11 +54,9 @@
   .command-panel { background: var(--surface); border: 1px solid var(--rule); border-radius: 16px; padding: 26px 26px 24px; margin-bottom: 30px; }
   .cmd-greeting { font-family: Georgia, serif; font-weight: 700; font-size: clamp(20px, 4vw, 26px); margin: 0 0 4px; }
   .cmd-sub { color: var(--ink-soft); font-size: 14.5px; margin: 0 0 4px; }
-  .cmd-meta { color: var(--ink-soft); font-size: 12px; font-family: "SF Mono", ui-monospace, Menlo, monospace; margin: 0 0 20px; }
   .cmd-recent { list-style: none; margin: 0; padding: 0; }
   .cmd-recent li { font-size: 13.5px; color: var(--ink-soft); padding: 5px 0; }
   .cmd-time { font-family: "SF Mono", ui-monospace, Menlo, monospace; font-size: 11.5px; }
-  .cmd-freshness { font-size: 11.5px; color: var(--ink-soft); margin: 8px 0 0; font-family: "SF Mono", ui-monospace, Menlo, monospace; }
   .cmd-loc { color: var(--ink); font-weight: 600; }
   .cmd-tag { color: var(--gold); font-weight: 700; }
   .cmd-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 22px; }
@@ -156,6 +154,7 @@
   .day ul.tl li { display: flex; gap: 10px; padding: 6px 0; border-top: 1px dotted var(--rule); font-size: 14.5px; }
   .day ul.tl li:first-child { border-top: none; }
   .day ul.tl .t { font-family: "SF Mono", ui-monospace, Menlo, monospace; font-size: 11.5px; color: var(--ink-soft); white-space: nowrap; min-width: 92px; padding-top: 2px; text-transform: uppercase; }
+  .tl-changed { text-decoration: line-through; color: var(--ink-soft); }
   .day .reco { margin: 10px 0 0; padding: 10px 13px; background: var(--surface); border-radius: 8px; font-size: 13.5px; color: var(--ink); }
   .day .reco b { color: var(--gold); }
 
@@ -185,6 +184,7 @@
   .food-toggle.state-saved { color: var(--ink-soft); }
   .food-toggle.state-tried { background: rgba(31,122,102,0.14); border-color: var(--teal); color: var(--teal); }
   .food-toggle.state-revisit { background: rgba(169,120,31,0.16); border-color: var(--gold); color: var(--gold); }
+  .food-toggle.state-skipped { color: var(--ink-soft); text-decoration: line-through; opacity: 0.7; }
   .food-label { font-size: 14.5px; }
 
   .confirm-card { background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; padding: 16px 20px; margin-bottom: 12px; }
@@ -198,7 +198,6 @@
   .confirm-card .cc-actions { display: flex; align-items: center; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
   .confirm-card .cc-link { font-size: 12.5px; font-weight: 700; color: var(--teal); text-decoration: none; }
   .confirm-card .cc-link:hover { text-decoration: underline; }
-  .confirm-card .cc-meta { font-size: 11px; color: var(--ink-soft); margin-top: 6px; font-family: "SF Mono", ui-monospace, Menlo, monospace; }
   .status-pill { font-size: 10px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 3px 10px; border-radius: 999px; font-family: -apple-system, sans-serif; background: rgba(31,122,102,0.13); color: var(--teal); }
   .status-pill.pill-muted { background: var(--bg); color: var(--ink-soft); border: 1px solid var(--rule); }
   .type-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 2px 9px; border-radius: 999px; font-family: -apple-system, sans-serif; }
@@ -266,7 +265,6 @@
     <div class="command-panel">
       <div class="cmd-greeting" id="npGreeting">Good afternoon, Kyle.</div>
       <p class="cmd-sub"><span class="cmd-loc">🇪🇸 Mallorca</span> · Day <span id="npDayNum">4</span> of 10 · <span class="cmd-tag">Wedding tomorrow</span></p>
-      <p class="cmd-meta" id="npLastOpened"></p>
 
       <div class="cmd-grid">
         <div class="cmd-item"><div class="cmd-label">Local Time</div><div class="cmd-value" id="npLocalTime">—</div></div>
@@ -288,7 +286,7 @@
       <ul class="cmd-attention">
         <li class="ok">✓ Flight checked in — Delta DL100</li>
         <li class="ok">✓ Hotel confirmed — Costa Azul</li>
-        <li class="warn">⚠ Confirm room type on the Costa Azul booking</li>
+        <li class="warn">⚠ Confirm room type on the Costa Azul booking — following up tomorrow morning</li>
         <li class="warn" id="npAttentionPacking">⚠ Checking packing…</li>
       </ul>
 
@@ -299,7 +297,6 @@
         <li>✓ Viewed wedding venue details <span class="cmd-time">· 2 days ago</span></li>
         <li>✓ Bookmarked a restaurant in Lisbon <span class="cmd-time">· 5 days ago</span></li>
       </ul>
-      <p class="cmd-freshness" id="npFreshness">Updated just now</p>
 
       <div class="cmd-actions">
         <button type="button" class="cmd-btn" id="btnBoardingPass">View boarding pass</button>
@@ -400,7 +397,7 @@
           <ul class="tl">
             <li><span class="t">Morning</span><span>Sagrada Família (book timed entry ahead — this sells out)</span></li>
             <li><span class="t">Afternoon</span><span>Park Güell, then Barceloneta beach to decompress</span></li>
-            <li><span class="t">Evening</span><span>Vermut hour in El Born, dinner nearby</span></li>
+            <li><span class="t">Evening</span><span class="tl-changed">Vermut hour in El Born, dinner nearby</span> — swapped for an early night, long day tomorrow</li>
           </ul>
           <div class="reco"><b>Rec:</b> Park Güell and Gràcia sit within 10 minutes of each other, so they're grouped together instead of the usual back-and-forth.</div>
         </div>
@@ -510,7 +507,7 @@
       <ul class="items food-items">
         <li><button type="button" class="food-toggle" id="f1" data-state="tried">Saved</button><span class="food-label">Pan con tomate — bread, tomato, olive oil, done properly it needs nothing else</span></li>
         <li><button type="button" class="food-toggle" id="f2" data-state="tried">Saved</button><span class="food-label">Jamón ibérico, sliced to order at a proper counter</span></li>
-        <li><button type="button" class="food-toggle" id="f3" data-state="saved">Saved</button><span class="food-label">Patatas bravas — every bar has its own sauce, worth comparing</span></li>
+        <li><button type="button" class="food-toggle" id="f3" data-state="skipped">Saved</button><span class="food-label">Patatas bravas — every bar has its own sauce, worth comparing</span></li>
         <li><button type="button" class="food-toggle" id="f4" data-state="revisit">Saved</button><span class="food-label">Crema catalana — the city's answer to crème brûlée</span></li>
       </ul>
     </div>
@@ -593,6 +590,7 @@
         <li><input type="checkbox" id="p20" checked><label for="p20">Compact daypack for sightseeing days</label></li>
         <li><input type="checkbox" id="p21" checked><label for="p21">Portable charger for long travel days</label></li>
         <li><input type="checkbox" id="p22" checked><label for="p22">Contact lenses/solution or glasses backup</label></li>
+        <li><input type="checkbox" id="p23" checked><label for="p23">Lint roller — added this after unpacking, wasn't on the original list</label></li>
       </ul>
     </div>
   </section>
@@ -613,7 +611,6 @@
         <dt>Guests</dt><dd>Kyle Littlejohn · Lachy Green</dd>
       </dl>
       <div class="cc-actions"><span class="status-pill pill-muted">Completed</span><a class="cc-link" href="#" data-open-boarding="1">Open details</a></div>
-      <div class="cc-meta">Imported 5 days ago</div>
     </div>
     <div class="confirm-card">
       <div class="cc-head"><div class="cc-title"><span class="type-tag flight">Flight</span> Barcelona (BCN) → Palma de Mallorca (PMI)</div><div class="cc-route mono">Day 3 · 16:30 – 17:35</div></div>
@@ -623,7 +620,6 @@
         <dt>Guests</dt><dd>Kyle Littlejohn · Lachy Green</dd>
       </dl>
       <div class="cc-actions"><span class="status-pill pill-muted">Completed</span></div>
-      <div class="cc-meta">Imported 4 days ago</div>
     </div>
     <div class="confirm-card">
       <div class="cc-head"><div class="cc-title"><span class="type-tag flight">Flight</span> Palma de Mallorca (PMI) → Lisbon (LIS)</div><div class="cc-route mono">Day 7 · 14:15 – 15:05</div></div>
@@ -633,7 +629,6 @@
         <dt>Guests</dt><dd>Kyle Littlejohn · Lachy Green</dd>
       </dl>
       <div class="cc-actions"><span class="status-pill">Confirmed</span></div>
-      <div class="cc-meta">Imported 4 days ago</div>
     </div>
     <div class="confirm-card">
       <div class="cc-head"><div class="cc-title"><span class="type-tag flight">Flight</span> Lisbon (LIS) → New York (JFK)</div><div class="cc-route mono">Day 10 · 10:20 – 14:35</div></div>
@@ -643,7 +638,6 @@
         <dt>Guests</dt><dd>Kyle Littlejohn · Lachy Green</dd>
       </dl>
       <div class="cc-actions"><span class="status-pill">Confirmed</span></div>
-      <div class="cc-meta">Imported 4 days ago</div>
     </div>
 
     <div class="subhead">🏨 Hotels</div>
@@ -651,19 +645,16 @@
       <div class="cc-head"><div class="cc-title">🇪🇸 Hotel Casa Bonay, Barcelona</div><div class="cc-route mono">Days 1–3 · 2 guests</div></div>
       <dl><dt>Conf #</dt><dd class="ref">BCN-88213</dd><dt>Address</dt><dd>Carrer de Bailèn, 07 · Barcelona</dd></dl>
       <div class="cc-actions"><span class="status-pill pill-muted">Completed stay</span><a class="cc-link" href="https://www.google.com/maps/search/?api=1&amp;query=Hotel+Casa+Bonay+Barcelona" target="_blank" rel="noopener">Navigate</a></div>
-      <div class="cc-meta">Booked 6 days ago</div>
     </div>
     <div class="confirm-card">
       <div class="cc-head"><div class="cc-title">🇪🇸 Hotel Costa Azul, Palma</div><div class="cc-route mono">Days 4–7 · 2 guests</div></div>
       <dl><dt>Conf #</dt><dd class="ref">PMI-30961</dd><dt>Address</dt><dd>Carrer Sant Feliu, 08 · Palma de Mallorca</dd></dl>
       <div class="cc-actions"><span class="status-pill">Checked in today</span><a class="cc-link" href="https://www.google.com/maps/search/?api=1&amp;query=Hotel+Costa+Azul+Palma+de+Mallorca" target="_blank" rel="noopener">Navigate</a></div>
-      <div class="cc-meta">Updated yesterday</div>
     </div>
     <div class="confirm-card">
       <div class="cc-head"><div class="cc-title">🇵🇹 Memmo Alfama, Lisbon</div><div class="cc-route mono">Days 8–10 · 2 guests</div></div>
       <dl><dt>Conf #</dt><dd class="ref">LIS-72240</dd><dt>Address</dt><dd>Travessa das Merceeiras, 27 · Lisbon</dd></dl>
       <div class="cc-actions"><span class="status-pill">Confirmed</span><a class="cc-link" href="https://www.google.com/maps/search/?api=1&amp;query=Memmo+Alfama+Lisbon" target="_blank" rel="noopener">Navigate</a></div>
-      <div class="cc-meta">Booked 6 days ago</div>
     </div>
   </section>
   </div>
@@ -691,6 +682,7 @@
       <div class="note-item"><div class="note-label">Best meal so far</div><div class="note-value">Jamón at a tiny counter near El Born, Barcelona.</div></div>
       <div class="note-item"><div class="note-label">Unexpected highlight</div><div class="note-value">Sagrada Família at golden hour — didn't expect the interior light to be that dramatic.</div></div>
       <div class="note-item"><div class="note-label">Small hiccup</div><div class="note-value">The Costa Azul room only had European outlets, despite the listing — grabbed an adapter at BCN airport before we left.</div></div>
+      <div class="note-item"><div class="note-label">Small hiccup</div><div class="note-value">Taxi from Palma airport took about 20 minutes longer than expected — traffic near the Old Town.</div></div>
       <div class="note-item"><div class="note-label">Remember for next time</div><div class="note-value">Book Sagrada Família online at least a week out.</div></div>
     </div>
   </section>
@@ -831,35 +823,6 @@
       nextFlightEl.textContent = "In " + daysUntilFlight + " day" + (daysUntilFlight === 1 ? "" : "s") + " · PMI → LIS";
     }
 
-    // Last opened — genuinely read from this browser's previous visit
-    var LAST_OPEN_KEY = "ten-days-europe-last-opened-v1";
-    var lastOpenedEl = document.getElementById("npLastOpened");
-    if (lastOpenedEl) {
-      var lastOpenedText = "First visit";
-      try {
-        var prevOpened = localStorage.getItem(LAST_OPEN_KEY);
-        if (prevOpened) {
-          var diffMin = Math.floor((Date.now() - parseInt(prevOpened, 10)) / 60000);
-          if (diffMin < 1) lastOpenedText = "Last opened just now";
-          else if (diffMin < 60) lastOpenedText = "Last opened " + diffMin + " min ago";
-          else if (diffMin < 60 * 24) lastOpenedText = "Last opened " + Math.floor(diffMin / 60) + " hr ago";
-          else lastOpenedText = "Last opened " + Math.floor(diffMin / (60 * 24)) + " days ago";
-        }
-        localStorage.setItem(LAST_OPEN_KEY, String(Date.now()));
-      } catch (e) {}
-      lastOpenedEl.textContent = lastOpenedText;
-    }
-
-    // Freshness ticker — genuinely tied to how long this page has been open
-    var pageLoadTime = Date.now();
-    function updateFreshness() {
-      var el = document.getElementById("npFreshness");
-      if (!el) return;
-      var mins = Math.floor((Date.now() - pageLoadTime) / 60000);
-      el.textContent = "Updated " + (mins < 1 ? "just now" : mins + " min ago");
-    }
-    updateFreshness();
-    setInterval(updateFreshness, 30000);
 
     var checkboxes = Array.prototype.slice.call(document.querySelectorAll('ul.items input[type="checkbox"]'));
     var saved = {};
@@ -928,8 +891,8 @@
     // Food tracking — three-state cycle: saved → tried → revisit
     var foodStates = {};
     try { foodStates = JSON.parse(localStorage.getItem(FOOD_KEY) || "{}"); } catch (e) {}
-    var FOOD_CYCLE = ["saved", "tried", "revisit"];
-    var FOOD_LABELS = { saved: "Saved", tried: "Tried", revisit: "Revisit" };
+    var FOOD_CYCLE = ["saved", "tried", "revisit", "skipped"];
+    var FOOD_LABELS = { saved: "Saved", tried: "Tried", revisit: "Revisit", skipped: "Skipped" };
     var foodButtons = Array.prototype.slice.call(document.querySelectorAll(".food-toggle"));
     var FOOD_DEFAULTS = {};
     foodButtons.forEach(function (btn) { FOOD_DEFAULTS[btn.id] = btn.getAttribute("data-state") || "saved"; });
