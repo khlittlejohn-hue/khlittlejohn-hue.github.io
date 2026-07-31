@@ -264,13 +264,13 @@
 
     <div class="command-panel">
       <div class="cmd-greeting" id="npGreeting">Good afternoon, Kyle.</div>
-      <p class="cmd-sub"><span class="cmd-loc">🇪🇸 Mallorca</span> · Day <span id="npDayNum">4</span> of 10 · <span class="cmd-tag">Wedding tomorrow</span></p>
+      <p class="cmd-sub"><span class="cmd-loc">🇪🇸 Mallorca</span> · Day <span id="npDayNum">4</span> of 10 · <span class="cmd-tag" id="npWeddingTag">Wedding tomorrow</span></p>
 
       <div class="cmd-grid">
         <div class="cmd-item"><div class="cmd-label">Local Time</div><div class="cmd-value" id="npLocalTime">—</div></div>
         <div class="cmd-item"><div class="cmd-label">Weather</div><div class="cmd-value">Sunny · 31°C</div></div>
-        <div class="cmd-item"><div class="cmd-label">Next Event</div><div class="cmd-value">Wedding ceremony — tomorrow, 5:00 PM</div></div>
-        <div class="cmd-item"><div class="cmd-label">Next Reservation</div><div class="cmd-value">Rehearsal dinner — tonight, 7:00 PM</div></div>
+        <div class="cmd-item"><div class="cmd-label">Next Event</div><div class="cmd-value" id="npNextEvent">Wedding ceremony — tomorrow, 5:00 PM</div></div>
+        <div class="cmd-item"><div class="cmd-label">Next Reservation</div><div class="cmd-value" id="npNextReservation">Rehearsal dinner — tonight, 7:00 PM</div></div>
         <div class="cmd-item"><div class="cmd-label">Next Flight</div><div class="cmd-value" id="npNextFlight">—</div></div>
       </div>
 
@@ -603,25 +603,25 @@
     <p class="section-sub">Every flight and hotel for this trip, in one place. Booked for 2: Kyle Littlejohn and Lachy Green.</p>
 
     <div class="subhead" style="margin-top:0;">✈️ Flights</div>
-    <div class="confirm-card">
+    <div class="confirm-card" data-day="0">
       <div class="cc-head"><div class="cc-title"><span class="type-tag flight">Flight</span> New York (JFK) → Barcelona (BCN)</div><div class="cc-route mono">Day 1 · 22:10 – 11:35+1</div></div>
       <dl>
         <dt>Carrier</dt><dd>Delta <span class="ref">DL100</span></dd>
         <dt>Conf #</dt><dd class="ref">4KFQZR</dd>
         <dt>Guests</dt><dd>Kyle Littlejohn · Lachy Green</dd>
       </dl>
-      <div class="cc-actions"><span class="status-pill pill-muted">Completed</span><a class="cc-link" href="#" data-open-boarding="1">Open details</a></div>
+      <div class="cc-actions"><span class="status-pill">Confirmed</span><a class="cc-link" href="#" data-open-boarding="1">Open details</a></div>
     </div>
-    <div class="confirm-card">
+    <div class="confirm-card" data-day="2">
       <div class="cc-head"><div class="cc-title"><span class="type-tag flight">Flight</span> Barcelona (BCN) → Palma de Mallorca (PMI)</div><div class="cc-route mono">Day 3 · 16:30 – 17:35</div></div>
       <dl>
         <dt>Carrier</dt><dd>Vueling <span class="ref">VY3401</span></dd>
         <dt>Conf #</dt><dd class="ref">9XPLQ2</dd>
         <dt>Guests</dt><dd>Kyle Littlejohn · Lachy Green</dd>
       </dl>
-      <div class="cc-actions"><span class="status-pill pill-muted">Completed</span></div>
+      <div class="cc-actions"><span class="status-pill">Confirmed</span></div>
     </div>
-    <div class="confirm-card">
+    <div class="confirm-card" data-day="6">
       <div class="cc-head"><div class="cc-title"><span class="type-tag flight">Flight</span> Palma de Mallorca (PMI) → Lisbon (LIS)</div><div class="cc-route mono">Day 7 · 14:15 – 15:05</div></div>
       <dl>
         <dt>Carrier</dt><dd>TAP Air Portugal <span class="ref">TP1854</span></dd>
@@ -630,7 +630,7 @@
       </dl>
       <div class="cc-actions"><span class="status-pill">Confirmed</span></div>
     </div>
-    <div class="confirm-card">
+    <div class="confirm-card" data-day="9">
       <div class="cc-head"><div class="cc-title"><span class="type-tag flight">Flight</span> Lisbon (LIS) → New York (JFK)</div><div class="cc-route mono">Day 10 · 10:20 – 14:35</div></div>
       <dl>
         <dt>Carrier</dt><dd>TAP Air Portugal <span class="ref">TP203</span></dd>
@@ -641,17 +641,17 @@
     </div>
 
     <div class="subhead">🏨 Hotels</div>
-    <div class="confirm-card">
+    <div class="confirm-card" data-day-start="0" data-day-end="2">
       <div class="cc-head"><div class="cc-title">🇪🇸 Hotel Casa Bonay, Barcelona</div><div class="cc-route mono">Days 1–3 · 2 guests</div></div>
       <dl><dt>Conf #</dt><dd class="ref">BCN-88213</dd><dt>Address</dt><dd>Carrer de Bailèn, 07 · Barcelona</dd></dl>
-      <div class="cc-actions"><span class="status-pill pill-muted">Completed stay</span><a class="cc-link" href="https://www.google.com/maps/search/?api=1&amp;query=Hotel+Casa+Bonay+Barcelona" target="_blank" rel="noopener">Navigate</a></div>
+      <div class="cc-actions"><span class="status-pill">Confirmed</span><a class="cc-link" href="https://www.google.com/maps/search/?api=1&amp;query=Hotel+Casa+Bonay+Barcelona" target="_blank" rel="noopener">Navigate</a></div>
     </div>
-    <div class="confirm-card">
+    <div class="confirm-card" data-day-start="3" data-day-end="6">
       <div class="cc-head"><div class="cc-title">🇪🇸 Hotel Costa Azul, Palma</div><div class="cc-route mono">Days 4–7 · 2 guests</div></div>
       <dl><dt>Conf #</dt><dd class="ref">PMI-30961</dd><dt>Address</dt><dd>Carrer Sant Feliu, 08 · Palma de Mallorca</dd></dl>
-      <div class="cc-actions"><span class="status-pill">Checked in today</span><a class="cc-link" href="https://www.google.com/maps/search/?api=1&amp;query=Hotel+Costa+Azul+Palma+de+Mallorca" target="_blank" rel="noopener">Navigate</a></div>
+      <div class="cc-actions"><span class="status-pill">Confirmed</span><a class="cc-link" href="https://www.google.com/maps/search/?api=1&amp;query=Hotel+Costa+Azul+Palma+de+Mallorca" target="_blank" rel="noopener">Navigate</a></div>
     </div>
-    <div class="confirm-card">
+    <div class="confirm-card" data-day-start="7" data-day-end="9">
       <div class="cc-head"><div class="cc-title">🇵🇹 Memmo Alfama, Lisbon</div><div class="cc-route mono">Days 8–10 · 2 guests</div></div>
       <dl><dt>Conf #</dt><dd class="ref">LIS-72240</dd><dt>Address</dt><dd>Travessa das Merceeiras, 27 · Lisbon</dd></dl>
       <div class="cc-actions"><span class="status-pill">Confirmed</span><a class="cc-link" href="https://www.google.com/maps/search/?api=1&amp;query=Memmo+Alfama+Lisbon" target="_blank" rel="noopener">Navigate</a></div>
@@ -665,17 +665,7 @@
     <div class="section-head"><h2 class="display">Timeline</h2></div>
     <p class="section-sub">The trip, top to bottom.</p>
 
-    <ul class="trip-history">
-      <li class="th-item is-done">✓ Flew NYC → Barcelona <span class="th-time">· 3 days ago</span></li>
-      <li class="th-item is-done">✓ Explored the Gothic Quarter &amp; Sagrada Família <span class="th-time">· 2 days ago</span></li>
-      <li class="th-item is-done">✓ Flew to Mallorca <span class="th-time">· yesterday</span></li>
-      <li class="th-item is-today">● Wedding week begins <span class="th-time">· today</span></li>
-      <li class="th-item is-upcoming">○ Attend the wedding</li>
-      <li class="th-item is-upcoming">○ Recover in Palma</li>
-      <li class="th-item is-upcoming">○ Fly to Lisbon</li>
-      <li class="th-item is-upcoming">○ Explore Lisbon</li>
-      <li class="th-item is-upcoming">○ Fly home</li>
-    </ul>
+    <ul class="trip-history" id="tripHistory"></ul>
 
     <div class="subhead">Trip Notes</div>
     <div class="trip-notes">
@@ -720,10 +710,18 @@
     var STORAGE_KEY = "ten-days-europe-wedding-v1";
     var FOOD_KEY = "ten-days-europe-food-state-v1";
     var DAY_MS = 24 * 60 * 60 * 1000;
-    var TODAY_OFFSET = 3; // Mallorca arrival day — Fri Jul 31, the real wedding-week start
 
-    var anchor = new Date(new Date().getTime() - TODAY_OFFSET * DAY_MS);
+    // Trip Day 1 is a fixed calendar date (Jul 28, 2026). "Today" is computed
+    // forward from it, so the trip genuinely advances day by day instead of
+    // freezing at one point — reopen this next week and it reflects that.
+    var TRIP_START = new Date(2026, 6, 28);
+    TRIP_START.setHours(0, 0, 0, 0);
+    var anchor = new Date(TRIP_START.getTime());
     anchor.setHours(9, 0, 0, 0);
+
+    var todayMidnight = new Date();
+    todayMidnight = new Date(todayMidnight.getFullYear(), todayMidnight.getMonth(), todayMidnight.getDate());
+    var TODAY_OFFSET = Math.round((todayMidnight.getTime() - TRIP_START.getTime()) / DAY_MS);
 
     var WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -734,6 +732,14 @@
     function shortDate(offset) {
       var d = new Date(anchor.getTime() + offset * DAY_MS);
       return MONTHS[d.getMonth()] + " " + d.getDate();
+    }
+    function relativeDayPhrase(offset) {
+      var diff = offset - TODAY_OFFSET;
+      if (diff === 0) return "today";
+      if (diff === 1) return "tomorrow";
+      if (diff === -1) return "yesterday";
+      if (diff > 1) return "in " + diff + " days";
+      return (-diff) + " days ago";
     }
 
     var WEDDING_OFFSET = 4;
@@ -788,6 +794,72 @@
     if (dayBar) dayBar.style.width = Math.round(((TODAY_OFFSET + 1) / 10) * 100) + "%";
     var npDayNum = document.getElementById("npDayNum");
     if (npDayNum) npDayNum.textContent = TODAY_OFFSET + 1;
+
+    // Wedding-relative phrasing — updates as the real day advances
+    var weddingTagEl = document.getElementById("npWeddingTag");
+    if (weddingTagEl) {
+      var wPhrase = relativeDayPhrase(WEDDING_OFFSET);
+      weddingTagEl.textContent = "Wedding " + wPhrase;
+    }
+    var nextEventEl = document.getElementById("npNextEvent");
+    if (nextEventEl) nextEventEl.textContent = "Wedding ceremony — " + relativeDayPhrase(WEDDING_OFFSET) + ", 5:00 PM";
+    var REHEARSAL_OFFSET = 3;
+    var nextResEl = document.getElementById("npNextReservation");
+    if (nextResEl) nextResEl.textContent = "Rehearsal dinner — " + relativeDayPhrase(REHEARSAL_OFFSET) + ", 7:00 PM";
+
+    // Reservation statuses — computed from each card's day(s) vs today, so
+    // tense stays correct as the trip actually progresses
+    document.querySelectorAll(".confirm-card[data-day]").forEach(function (card) {
+      var offset = parseInt(card.getAttribute("data-day"), 10);
+      var pill = card.querySelector(".status-pill");
+      if (!pill) return;
+      if (offset < TODAY_OFFSET) { pill.textContent = "Completed"; pill.className = "status-pill pill-muted"; }
+      else if (offset === TODAY_OFFSET) { pill.textContent = "Departing today"; pill.className = "status-pill"; }
+      else { pill.textContent = "Confirmed"; pill.className = "status-pill"; }
+    });
+    document.querySelectorAll(".confirm-card[data-day-start]").forEach(function (card) {
+      var start = parseInt(card.getAttribute("data-day-start"), 10);
+      var end = parseInt(card.getAttribute("data-day-end"), 10);
+      var pill = card.querySelector(".status-pill");
+      if (!pill) return;
+      if (TODAY_OFFSET < start) { pill.textContent = "Confirmed"; pill.className = "status-pill"; }
+      else if (TODAY_OFFSET > end) { pill.textContent = "Completed stay"; pill.className = "status-pill pill-muted"; }
+      else if (TODAY_OFFSET === start) { pill.textContent = "Checked in today"; pill.className = "status-pill"; }
+      else { pill.textContent = "Staying now"; pill.className = "status-pill"; }
+    });
+
+    // Timeline — rendered from data so tense (past/present/future) always
+    // matches how far the trip has actually progressed
+    var TIMELINE_ITEMS = [
+      { day: 0, past: "Flew NYC → Barcelona", present: "Flying to Barcelona today", future: "Fly NYC → Barcelona" },
+      { day: 1, past: "Explored the Gothic Quarter & Sagrada Família", present: "Exploring the Gothic Quarter & Sagrada Família today", future: "Explore the Gothic Quarter & Sagrada Família" },
+      { day: 2, past: "Flew to Mallorca", present: "Flying to Mallorca today", future: "Fly to Mallorca" },
+      { day: 3, past: "Wedding week began", present: "Wedding week begins", future: "Wedding week begins" },
+      { day: 4, past: "Attended the wedding", present: "Attending the wedding today", future: "Attend the wedding" },
+      { day: 5, past: "Recovered in Palma", present: "Recovering in Palma today", future: "Recover in Palma" },
+      { day: 6, past: "Flew to Lisbon", present: "Flying to Lisbon today", future: "Fly to Lisbon" },
+      { day: 8, past: "Explored Lisbon", present: "Exploring Lisbon today", future: "Explore Lisbon" },
+      { day: 9, past: "Flew home", present: "Flying home today", future: "Fly home" }
+    ];
+    var tripHistoryEl = document.getElementById("tripHistory");
+    if (tripHistoryEl) {
+      TIMELINE_ITEMS.forEach(function (item) {
+        var li = document.createElement("li");
+        var symbol, text, stateClass, showTime;
+        if (item.day < TODAY_OFFSET) { symbol = "✓"; text = item.past; stateClass = "is-done"; showTime = true; }
+        else if (item.day === TODAY_OFFSET) { symbol = "●"; text = item.present; stateClass = "is-today"; showTime = true; }
+        else { symbol = "○"; text = item.future; stateClass = "is-upcoming"; showTime = false; }
+        li.className = "th-item " + stateClass;
+        li.textContent = symbol + " " + text + " ";
+        if (showTime) {
+          var timeSpan = document.createElement("span");
+          timeSpan.className = "th-time";
+          timeSpan.textContent = "· " + relativeDayPhrase(item.day);
+          li.appendChild(timeSpan);
+        }
+        tripHistoryEl.appendChild(li);
+      });
+    }
 
     if (currentCity && currentCity.accId) {
       var acc = document.getElementById(currentCity.accId);
