@@ -1019,12 +1019,6 @@
     <div class="gh-card skeleton" aria-hidden="true"></div>
   </div>
   <p class="gh-note" id="ghNote">Live from the GitHub API · no tracking · falls back gracefully if GitHub is unreachable.</p>
-  <div class="build" style="margin-top:34px">
-    <h3 style="font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--ink3);font-weight:500;margin-bottom:16px;font-family:var(--mono)">Also building</h3>
-    <ul>
-      <li><b>Building With Claude</b>, content and guides on running an AI-first operating system, in development.</li>
-    </ul>
-  </div>
   <a class="gh-foot-cta" href="https://github.com/khlittlejohn-hue" target="_blank" rel="noopener">Explore my GitHub ↗</a>
 </div></section>
 <script>
@@ -1584,24 +1578,6 @@
   /* hover preview: the indicator glides to the link you point at, then settles back */
   links.forEach(function(a){ a.addEventListener('mouseenter',function(){ hovering=true; moveTo(a); }); });
   if(wrap) wrap.addEventListener('mouseleave',function(){ hovering=false; moveTo(activeEl); });
-})();
-</script>
-<script>
-/* hero "Last shipped" tile: real push time from the executive-office repo */
-(function(){
-  var el=document.getElementById('hpLastPush'); if(!el||!window.fetch) return;
-  function ago(d){var s=(Date.now()-new Date(d).getTime())/1000;
-    if(s<3600)return Math.max(1,Math.round(s/60))+'m ago';
-    if(s<86400)return Math.round(s/3600)+'h ago';
-    if(s<2592000)return Math.round(s/86400)+'d ago';
-    return Math.round(s/2592000)+'mo ago';}
-  function show(p){ el.innerHTML='executive-office · <span class="tick">'+ago(p)+'</span>'; }
-  try{var c=JSON.parse(localStorage.getItem('gh_repos_v1')||'null');
-    if(c&&c.d){var r=c.d.filter(function(x){return x.name==='executive-office';})[0]; if(r&&r.pushed_at) show(r.pushed_at);}}catch(e){}
-  fetch('https://api.github.com/repos/khlittlejohn-hue/executive-office')
-    .then(function(r){if(!r.ok)throw 0;return r.json();})
-    .then(function(r){ if(r&&r.pushed_at) show(r.pushed_at); })
-    .catch(function(){});
 })();
 </script>
 <!-- ═══════════════════════════════════════════════════════════════════════
