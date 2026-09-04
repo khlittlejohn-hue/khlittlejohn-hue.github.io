@@ -165,10 +165,11 @@
   .hero-name{font-family:var(--serif);font-size:74px;line-height:.96;letter-spacing:-2px;font-weight:600}
   .hero-name .last{color:var(--ink);-webkit-text-fill-color:var(--ink);background:none}
   .tag{font-size:32px;font-weight:600;letter-spacing:-.7px;margin:20px 0 18px;max-width:780px;line-height:1.18;font-family:var(--serif);color:var(--ink)}
-  /* full-width hero tagline: span the whole content width; body in ink, key phrase in accent blue */
+  /* full-width hero tagline: span the whole content width; body in ink, key phrase in solid accent gold
+     (solid, not gradient-clipped -- matches .rv-accent in the rail; gradient text retired as an AI tell) */
   .tag-full{max-width:none;width:100%;text-align:center}
-  .tag .grad{background:linear-gradient(100deg,var(--accent),var(--accent-bright));-webkit-background-clip:text;background-clip:text;color:transparent}
-  :root[data-theme="light"] .tag .grad{background:linear-gradient(100deg,var(--accent-deep),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .tag .grad{color:var(--accent-bright)}
+  :root[data-theme="light"] .tag .grad{color:var(--accent-deep)}
   .lede{font-size:18px;color:var(--ink);max-width:660px;margin-inline:auto;text-align:center}
   .lede b{color:var(--ink);font-weight:500}
   .cta{display:flex;gap:11px;flex-wrap:wrap;margin-top:30px}
@@ -370,7 +371,7 @@
     <span class="rail-name">Kyle Littlejohn</span>
     <span class="rail-years">12+ Years Experience</span>
     <span class="rail-value">The operating layer between <span class="rv-accent">strategy and execution</span>.</span>
-    <span class="rail-role"><b>Strategy &amp; Operations</b><b>Chief of Staff</b><b>Program &amp; Project Management</b><b>Management Consulting</b></span>
+    <span class="rail-role"><b>Strategy &amp; Operations</b><b>Chief of Staff</b><b>Program &amp; Project Management</b><b>AI Transformation</b></span>
   </a>
   <span class="links">
     <span class="nav-indicator" aria-hidden="true"></span>
@@ -423,7 +424,7 @@
     </div>
     <div class="snap-cell">
       <span class="snap-k">Open to</span>
-      <span class="snap-v">Strategy &amp; Operations · Chief of Staff · Program &amp; Project Management · Transformation · Management Consulting</span>
+      <span class="snap-v">Strategy &amp; Operations · Chief of Staff · Program &amp; Project Management · AI Transformation · Management Consulting</span>
     </div>
     <div class="snap-cell">
       <span class="snap-k">Industries</span>
@@ -733,7 +734,7 @@
 
     <article class="now-card now-ai">
       <span class="nc-ic" aria-hidden="true"><svg class="fi" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span>
-      <h3>AI Specialist</h3>
+      <h3>AI Transformation</h3>
       <p>The operator who builds AI into the operation, not just talks about it. I designed and run a production system of 100+ specialists across 12 departments, with a human approving every decision that leaves it, proof I can lead AI adoption and governance, not just use the tools.</p>
       <a class="nc-link" href="#work">See the system below →</a>
     </article>
