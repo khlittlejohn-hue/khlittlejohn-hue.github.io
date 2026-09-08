@@ -1,0 +1,310 @@
+/* ============================================================================
+   layouts/case-study.css
+
+   The case-study reading environment. Consumes tokens.css + base.css.
+
+   Typographic spec measured off the closest structural analog in the research
+   set: 17px/1.6 desktop, 15px/1.6 mobile, ~690px measure, zero keyframe
+   animation, all transitions inside the 250ms token ceiling.
+
+   The page must remain fully readable with JavaScript disabled and fully
+   skimmable in 20 seconds by heading alone. Nothing here gates content behind
+   scroll or interaction.
+   ============================================================================ */
+
+/* ---- HEADER -------------------------------------------------------------- */
+
+.cs-header {
+  padding-block: var(--space-2xl) var(--space-xl);
+  border-bottom: var(--hairline);
+}
+
+.cs-eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--gold);
+  display: block;
+  margin-bottom: var(--space-s);
+}
+
+.cs-title {
+  font-size: var(--step-5);
+  line-height: var(--lh-tight);
+  font-weight: 700;
+  letter-spacing: -0.028em;
+  max-width: 20ch;
+  margin-bottom: var(--space-m);
+}
+
+.cs-dek {
+  font-size: var(--step-1);
+  line-height: 1.5;
+  color: var(--ink-2);
+  max-width: 58ch;
+  text-wrap: pretty;
+}
+
+/* ---- ROLE / SCOPE / CONSTRAINT ------------------------------------------
+   Sits immediately under the header so a reader never has to infer what Kyle
+   personally owned. This module exists specifically to prevent the ambiguity
+   that makes a strong record read as borrowed credit.                     */
+
+.cs-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  gap: var(--grid-gutter);
+  padding-block: var(--space-xl);
+  border-bottom: var(--hairline);
+}
+
+.cs-fact {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+}
+
+.cs-fact dt {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.cs-fact dd {
+  margin: 0;
+  font-size: var(--step--1);
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+
+/* ---- BEATS ---------------------------------------------------------------
+   Each beat is a numbered section. The label carries the narrative position
+   (Diagnosis, Decision) which is what makes the page skimmable by heading. */
+
+.cs-beat { padding-block: var(--space-xl); border-bottom: var(--hairline); }
+.cs-beat:last-of-type { border-bottom: none; }
+
+.cs-beat-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--ink-3);
+  display: block;
+  margin-bottom: var(--space-2xs);
+}
+
+.cs-beat h2 {
+  font-size: var(--step-3);
+  max-width: 24ch;
+  margin-bottom: var(--space-s);
+}
+
+.cs-beat p { max-width: var(--measure); }
+.cs-beat > p + p { margin-top: var(--space-s); }
+
+.cs-beat ul {
+  max-width: var(--measure);
+  padding-left: 1.15rem;
+  margin-top: var(--space-s);
+}
+.cs-beat li { margin-block: var(--space-2xs); }
+.cs-beat li::marker { color: var(--gold); }
+
+/* A single emphasized line inside a beat. Used sparingly, for the sentence
+   the whole section exists to deliver. */
+.cs-turn {
+  font-family: var(--font-display);
+  font-variation-settings: var(--fraunces-display);
+  font-size: var(--step-2);
+  line-height: 1.3;
+  font-weight: 600;
+  color: var(--ink);
+  max-width: 34ch;
+  margin-block: var(--space-m);
+  padding-left: var(--space-m);
+  border-left: 2px solid var(--gold);
+}
+
+/* ---- CAUSAL CHAIN --------------------------------------------------------
+   For metrics that must never appear as orphan numbers. The figure lands at
+   the END of the chain, so the reader arrives at it already knowing what
+   produced it. This is what converts a claim into a reported result.      */
+
+.chain {
+  background: var(--surface);
+  border: var(--hairline);
+  border-radius: var(--radius-m);
+  padding: var(--space-m);
+  margin-block: var(--space-l);
+  max-width: var(--measure);
+}
+
+.chain-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--ink-3);
+  display: block;
+  margin-bottom: var(--space-s);
+}
+
+.chain ol { list-style: none; padding: 0; margin: 0; }
+
+.chain li {
+  position: relative;
+  margin: 0;
+  padding: var(--space-2xs) 0 var(--space-2xs) var(--space-l);
+  font-size: var(--step--1);
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+.chain li::before {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 0.95em;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--gold);
+}
+.chain li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 9px;
+  top: 1.6em;
+  bottom: -0.4em;
+  width: 1px;
+  background: var(--line-2);
+}
+.chain li strong { color: var(--ink); }
+
+.chain-scope {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  line-height: 1.45;
+  color: var(--ink-faint);
+  margin-top: var(--space-s);
+  padding-top: var(--space-s);
+  border-top: var(--hairline);
+}
+
+/* ---- ATTRIBUTION BOUNDARY ------------------------------------------------
+   Published, not hidden in a working note. Stating the limit up front reads
+   as precision; conceding it under questioning reads as caught.           */
+
+.cs-boundary {
+  background: var(--surface);
+  border: var(--hairline);
+  border-left: 2px solid var(--gold);
+  border-radius: 0 var(--radius-m) var(--radius-m) 0;
+  padding: var(--space-m);
+  margin-block: var(--space-l);
+  max-width: var(--measure);
+}
+.cs-boundary p { font-size: var(--step--1); line-height: 1.55; color: var(--ink-2); }
+.cs-boundary p + p { margin-top: var(--space-2xs); }
+.cs-boundary strong { color: var(--ink); }
+
+/* ---- INTEGRATION LIST ----------------------------------------------------
+   Two columns of short items. Reads as an inventory of an operating layer
+   rather than a bulleted paragraph.                                       */
+
+.cs-layer {
+  background: var(--surface);
+  border: var(--hairline);
+  border-radius: var(--radius-m);
+  padding: var(--space-m);
+  margin-block: var(--space-l);
+  max-width: var(--measure);
+}
+.cs-layer ul {
+  columns: 2;
+  column-gap: var(--space-l);
+  margin: 0;
+  padding-left: 1.1rem;
+}
+.cs-layer li {
+  font-size: var(--step--1);
+  margin-block: var(--space-3xs);
+  break-inside: avoid;
+  color: var(--ink-2);
+}
+@media (max-width: 620px) { .cs-layer ul { columns: 1; } }
+
+/* ---- FOOTER NAV ---------------------------------------------------------- */
+
+.cs-next {
+  padding-block: var(--space-xl);
+  border-top: var(--hairline);
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-m);
+  flex-wrap: wrap;
+}
+.cs-next a { text-decoration: none; display: flex; flex-direction: column; gap: var(--space-3xs); }
+.cs-next .lbl { font-family: var(--font-mono); font-size: 0.68rem;
+  letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--ink-3); }
+.cs-next .ttl { font-family: var(--font-display); font-size: var(--step-1); font-weight: 600; }
+.cs-next a:hover .ttl { color: var(--gold); }
+
+/* ---- MOBILE — deliberate subtraction, not reflow ------------------------- */
+
+@media (max-width: 760px) {
+  .cs-title { font-size: var(--step-4); max-width: none; }
+  .cs-beat h2 { max-width: none; }
+  .cs-turn { font-size: var(--step-1); max-width: none; padding-left: var(--space-s); }
+  .cs-header { padding-block: var(--space-xl) var(--space-l); }
+}
+
+/* ---- CREDENTIALS ---------------------------------------------------------
+   Restored 2026-09-07 from the production site: the four certifications and
+   the Conde Nast Traveler byline are external credibility signals, not the
+   resume-style content the redesign deliberately dropped.
+
+   Both are deliberately SUBORDINATE. Production rendered certifications as a
+   four-card grid, which gave them the same visual weight as a case study.
+   Here they are one quiet line under the degree they extend. The credential
+   should be findable by someone looking for it and invisible to someone who
+   is not.                                                                  */
+
+.creds {
+  margin-top: var(--space-m);
+  padding-top: var(--space-s);
+  border-top: var(--hairline);
+  font-size: var(--step--1);
+  line-height: 1.6;
+  color: var(--ink-2);
+  max-width: var(--measure);
+}
+
+.creds-label {
+  display: block;
+  margin-bottom: var(--space-3xs);
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* An earned byline, styled as a citation rather than a lifestyle badge.
+   Underline stays on the gold so the external link is unambiguous. */
+.byline {
+  color: var(--gold);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+.byline:hover { color: var(--gold-deep); }
+.byline:focus-visible { outline: var(--focus-ring); outline-offset: var(--focus-offset); }

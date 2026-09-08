@@ -1,0 +1,149 @@
+/* ============================================================================
+   components/metric.css
+
+   The metric object. This component exists to make Kyle's evidence standard
+   structural rather than editorial.
+
+   Kyle, 2026-09-07: "The problem is not numbers. The problem is orphan
+   numbers. Every number needs ownership, mechanism, context, and/or a
+   defensible baseline."
+
+   So the markup has no valid form without a mechanism line. A number alone
+   cannot be built with this component — that is the point.
+
+       <figure class="metric">
+         <div class="metric-value">$280K &rarr; $2.1M</div>
+         <figcaption class="metric-mechanism">
+           One client, five years. Owned the account and the operating cadence
+           across 16 business units, 12 partners, and 32 digital channels.
+         </figcaption>
+         <p class="metric-method">Account revenue, FY2021&ndash;FY2026.</p>
+       </figure>
+
+   NEVER animate the value. Verified absent across Stripe, Ramp and Sierra:
+   count-up animation adds showmanship to the claims that most need to look
+   sober, and delays a fact the reader wants instantly.
+   ============================================================================ */
+
+.metric {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+  padding: var(--space-m);
+  background: var(--surface);
+  border: var(--hairline);
+  border-radius: var(--radius-m);
+  position: relative;
+  isolation: isolate;
+  transition: border-color var(--dur-base) var(--ease-out),
+              transform var(--dur-base) var(--ease-out);
+}
+
+/* A hairline of accent along the top edge — the only ornament, and it reads
+   as instrumentation rather than decoration. */
+.metric::before {
+  content: "";
+  position: absolute;
+  inset-inline: var(--space-m);
+  top: 0;
+  height: 1px;
+  background: linear-gradient(90deg, var(--gold), transparent 72%);
+  opacity: 0.75;
+}
+
+/* Size is --step-3, not --step-4. Visual QA 2026-09-07 caught a long value
+   ("$280K -> $2.1M") overflowing its card in a 3-up grid and colliding with
+   the neighbouring card. Long values now wrap rather than escape: a metric
+   that breaks its container is worse than one that takes two lines. */
+.metric-value {
+  font-family: var(--font-display);
+  font-variation-settings: var(--fraunces-data);
+  font-size: var(--step-3);
+  line-height: 1.06;
+  font-weight: 700;
+  letter-spacing: -0.028em;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+  text-wrap: balance;
+  overflow-wrap: break-word;
+  max-width: 100%;
+}
+
+/* The load-bearing line. Ownership and mechanism live here.
+   If this is empty, the metric is not publishable. */
+.metric-mechanism {
+  font-size: var(--step--1);
+  line-height: 1.5;
+  color: var(--ink-2);
+  max-width: 46ch;
+}
+
+/* Period, sample, baseline. One sentence that converts a claim into a
+   reported result. */
+.metric-method {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  line-height: 1.45;
+  color: var(--ink-faint);
+  margin: 0;
+  padding-top: var(--space-3xs);
+}
+
+/* ---- Interactive variant -------------------------------------------------
+   Used only where a metric genuinely routes into the case study that proves
+   it. A metric that leads nowhere stays a <figure>, not a link. */
+
+a.metric,
+.metric--linked {
+  text-decoration: none;
+  cursor: pointer;
+}
+a.metric:hover,
+.metric--linked:hover {
+  border-color: var(--gold-line);
+  transform: translateY(-2px);
+}
+a.metric:focus-visible { outline: var(--focus-ring); outline-offset: var(--focus-offset); }
+
+a.metric .metric-cue {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--ink-3);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3xs);
+  transition: color var(--dur-fast) var(--ease-out),
+              gap var(--dur-fast) var(--ease-out);
+}
+a.metric:hover .metric-cue { color: var(--gold); gap: var(--space-2xs); }
+
+/* ---- Row -----------------------------------------------------------------
+   Metrics sit in a row of two or three. Never a wall — a metrics grid with
+   no case studies behind it is the failure mode observed on weaker sites. */
+
+.metric-row {
+  display: grid;
+  gap: var(--grid-gutter);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+}
+
+/* ---- Inline variant ------------------------------------------------------
+   For metrics welded into running prose, which is the preferred form inside
+   case studies. Carries emphasis without becoming a trophy. */
+
+.metric-inline {
+  font-family: var(--font-display);
+  font-variation-settings: var(--fraunces-data);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+  .metric-value { font-size: var(--step-2); }
+  .metric { padding: var(--space-s); }
+}

@@ -1,0 +1,410 @@
+/* ============================================================================
+   layouts/home.css — the conviction layer.
+
+   The homepage's job is NOT to summarize the case studies. They carry the
+   evidence. This page has to make Kyle understandable fast, and make someone
+   want to click through.
+
+   Every band is judged against one question: does this make the visitor
+   understand Kyle FASTER, or does it merely tell them MORE about him.
+   ============================================================================ */
+
+/* ---- HERO ---------------------------------------------------------------- */
+
+/* Areas rather than a nested grid: the headline needs the full page measure,
+   the portrait needs to sit beside the DECK (not the headline) on desktop and
+   above the eyebrow on mobile. One declaration handles both, and the portrait
+   stays a single <img> instead of a duplicated mobile copy. */
+.hero {
+  padding-block: var(--space-2xl) var(--space-xl);
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 3fr);
+  column-gap: var(--space-2xl);
+  grid-template-areas:
+    "eyebrow  eyebrow"
+    "title    title"
+    "body     portrait";
+  align-items: start;
+}
+
+.hero-eyebrow  { grid-area: eyebrow; }
+.hero-title    { grid-area: title; }
+.hero-body     { grid-area: body; }
+.hero-portrait { grid-area: portrait; }
+
+.hero-eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--gold);
+  display: block;
+  margin-bottom: var(--space-m);
+}
+
+/* The headline spans the full page measure rather than the 7fr column.
+   The old rule capped it at 16ch, which at the --step-6 ceiling computed to
+   roughly the column width itself — so the measure and the column constrained
+   it simultaneously and "infrastructure" took a line of its own. Given the
+   whole page to work with, balance splits this sentence into two near-equal
+   lines on its own; no <br> is needed and none should be added. */
+.hero-title {
+  font-size: clamp(2.59rem, 1.60rem + 4.35vw, 5.00rem);
+  line-height: 1.0;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  margin-bottom: var(--space-l);
+  max-width: none;
+  text-wrap: balance;
+}
+
+.hero-sub {
+  font-size: var(--step-1);
+  line-height: 1.45;
+  color: var(--ink-2);
+  max-width: 52ch;
+  text-wrap: pretty;
+}
+
+/* Portrait sized to what the 512px source can carry sharply. Deliberately
+   compact — a small, sharp, well-framed portrait reads more editorial than a
+   large soft one, and the slot grows if a hi-res portrait lands. It now sits
+   beside the DECK rather than the headline, so it reads as secondary to the
+   proposition instead of competing with it for the top line. */
+.hero-portrait {
+  width: 100%;
+  max-width: 200px;
+  aspect-ratio: 1;
+  border-radius: var(--radius-l);
+  border: 1px solid var(--gold-line);
+  object-fit: cover;
+  justify-self: end;
+}
+
+/* Two facts, one horizontal line. Industries used to live here and now lives
+   in the deck, so this row carries only what the deck does not say. Laid out
+   horizontally because a vertical sidebar stack is what left ~314px of dead
+   column underneath it. */
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-m) var(--space-xl);
+  margin: var(--space-l) 0 0;
+  padding-top: var(--space-s);
+  border-top: 1px solid var(--line-2);
+}
+.hero-meta div { display: flex; flex-direction: column; gap: 2px; }
+.hero-meta dt {
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.hero-meta dd {
+  margin: 0;
+  font-size: var(--step--1);
+  line-height: 1.4;
+  color: var(--ink-2);
+}
+.hero-meta dd strong { color: var(--ink); font-weight: 550; }
+
+.hero-cta { display: flex; gap: var(--space-s); flex-wrap: wrap; margin-top: var(--space-l); }
+
+.btn-primary, .btn-quiet {
+  font-size: var(--step-0);
+  padding: var(--space-2xs) var(--space-m);
+  border-radius: var(--radius-s);
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: background-color var(--dur-base) var(--ease-out),
+              border-color var(--dur-base) var(--ease-out),
+              color var(--dur-base) var(--ease-out);
+}
+.btn-primary { background: var(--gold); color: var(--gold-ink); font-weight: 550; }
+.btn-primary:hover { background: var(--gold-deep); }
+.btn-quiet { border-color: var(--line-2); color: var(--ink); }
+.btn-quiet:hover { border-color: var(--gold); color: var(--gold); }
+
+/* ---- PROOF STRIP ---------------------------------------------------------
+   Three claims, each carrying ownership and mechanism. Never animated,
+   never a bare number. Each routes into the study that proves it.        */
+
+.proof {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+  gap: var(--grid-gutter);
+}
+
+/* ---- METHOD ARC ----------------------------------------------------------
+   The through-line. Establishes that the AI work is the latest expression of
+   a long-running discipline rather than a career pivot.                   */
+
+.arc {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+  gap: var(--grid-gutter);
+  counter-reset: arcstep;
+}
+
+.arc-step {
+  position: relative;
+  padding-top: var(--space-m);
+  border-top: 2px solid var(--line-2);
+  transition: border-color var(--dur-base) var(--ease-out);
+}
+.arc-step:last-child { border-top-color: var(--gold); }
+
+.arc-when {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--ink-3);
+  display: block;
+  margin-bottom: var(--space-2xs);
+}
+.arc-what {
+  font-family: var(--font-display);
+  font-variation-settings: var(--fraunces-display);
+  font-size: var(--step-1);
+  font-weight: 600;
+  line-height: 1.25;
+  margin-bottom: var(--space-2xs);
+}
+.arc-note { font-size: var(--step--1); line-height: 1.5; color: var(--ink-2); }
+
+/* ---- CAPABILITIES -------------------------------------------------------- */
+
+.caps { display: flex; flex-direction: column; gap: var(--space-l); }
+
+.cap {
+  display: grid;
+  grid-template-columns: 3.5rem minmax(0, 1fr);
+  gap: var(--space-m);
+  align-items: start;
+  padding-bottom: var(--space-l);
+  border-bottom: var(--hairline);
+}
+.cap:last-child { border-bottom: none; padding-bottom: 0; }
+
+.cap-num {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  font-weight: 700;
+  color: var(--gold);
+  padding-top: 0.35em;
+}
+.cap h3 { font-size: var(--step-2); margin-bottom: var(--space-2xs); }
+.cap p { font-size: var(--step-0); color: var(--ink-2); max-width: 62ch; }
+
+@media (max-width: 620px) {
+  .cap { grid-template-columns: 1fr; gap: var(--space-2xs); }
+  .cap-num { padding-top: 0; }
+}
+
+/* ---- WORK CARDS ----------------------------------------------------------
+   Three studies, visually tiered. The card states the thesis and one owned
+   proof point, then stops. Its job is curiosity, not summary.            */
+
+.work { display: flex; flex-direction: column; gap: var(--space-m); }
+
+.work-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--space-m);
+  align-items: end;
+  padding: var(--space-l);
+  background: var(--surface);
+  border: var(--hairline);
+  border-radius: var(--radius-l);
+  text-decoration: none;
+  transition: border-color var(--dur-base) var(--ease-out),
+              transform var(--dur-base) var(--ease-out),
+              background-color var(--dur-base) var(--ease-out);
+}
+.work-card:hover {
+  border-color: var(--gold-line);
+  background: var(--surface-2);
+  transform: translateY(-2px);
+}
+.work-card:focus-visible { outline: var(--focus-ring); outline-offset: var(--focus-offset); }
+
+.work-meta {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--ink-3);
+  display: block;
+  margin-bottom: var(--space-2xs);
+}
+.work-card h3 { font-size: var(--step-3); max-width: 20ch; margin-bottom: var(--space-2xs); }
+.work-thesis { font-size: var(--step-0); color: var(--ink-2); max-width: 54ch; }
+
+.work-proof {
+  text-align: right;
+  white-space: nowrap;
+  font-family: var(--font-display);
+  font-variation-settings: var(--fraunces-data);
+  font-size: var(--step-2);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+.work-proof small {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-top: var(--space-3xs);
+  white-space: normal;
+  max-width: 14ch;
+  margin-left: auto;
+}
+
+@media (max-width: 760px) {
+  .work-card { grid-template-columns: 1fr; align-items: start; gap: var(--space-s); }
+  .work-proof { text-align: left; }
+  .work-proof small { margin-left: 0; }
+}
+
+/* ---- OPERATING SYSTEM TEASER --------------------------------------------- */
+
+.os-band {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--space-2xl);
+  align-items: center;
+}
+@media (max-width: 860px) { .os-band { grid-template-columns: 1fr; gap: var(--space-l); } }
+
+.os-stages { display: flex; flex-direction: column; gap: 0; }
+.os-stage {
+  position: relative;
+  padding: var(--space-xs) 0 var(--space-xs) var(--space-l);
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  color: var(--ink-2);
+  letter-spacing: 0.02em;
+}
+.os-stage::before {
+  content: "";
+  position: absolute;
+  left: 5px; top: 1.15em;
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1.5px solid var(--line-strong);
+}
+.os-stage:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 9px; top: 1.9em; bottom: -0.5em;
+  width: 1px; background: var(--line-2);
+}
+.os-stage--gate { color: var(--ink); }
+.os-stage--gate::before { background: var(--gold); border-color: var(--gold); }
+
+/* ---- CONTACT ------------------------------------------------------------- */
+
+.contact { text-align: center; padding-block: var(--space-2xl); }
+.contact h2 { font-size: var(--step-4); max-width: 22ch; margin-inline: auto; margin-bottom: var(--space-m); }
+.contact p { margin-inline: auto; color: var(--ink-2); }
+
+/* ---- RESPONSIVE ---------------------------------------------------------- */
+
+@media (max-width: 900px) {
+  /* Single column, and the portrait leads — the established mobile behaviour,
+     preserved. Re-declaring the areas is what hoists it above the eyebrow now
+     that the headline sits outside the body. */
+  .hero {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "portrait"
+      "eyebrow"
+      "title"
+      "body";
+    row-gap: 0;
+    padding-block: var(--space-xl) var(--space-l);
+  }
+  .hero-portrait { max-width: 132px; justify-self: start; margin-bottom: var(--space-m); }
+
+  /* Narrower measure needs a smaller headline, not the desktop size squeezed.
+     At the desktop ceiling this sentence broke to four lines here and stranded
+     "mandate" on its own — the same orphan defect this composition exists to
+     remove. Stepping down lets balance resolve it in three. */
+  .hero-title { font-size: clamp(2.10rem, 1.30rem + 3.60vw, 3.20rem); }
+
+  /* The meta row survives on mobile rather than being dropped: with Industries
+     gone it is two short facts, not a masthead, and "Based" is the first thing
+     a recruiter looks for. Label and value go inline here — stacked, the two
+     rows cost ~107px, which is real estate the CTA needs more. */
+  .hero-meta { gap: var(--space-2xs) var(--space-l); margin-top: var(--space-m); }
+  .hero-meta div { flex-direction: row; align-items: baseline; gap: var(--space-2xs); }
+  .hero-meta dd { font-size: 0.82rem; }
+}
+
+/* Smallest phones only. At 320px the mobile clamp still lands large enough to
+   strand "mandate" on its own line. One step down resolves it to three clean
+   lines. Scoped tightly so 360 and 390 — where the composition already works —
+   are untouched. */
+@media (max-width: 340px) {
+  .hero-title { font-size: 1.68rem; }
+}
+
+/* ---- ROUTING TEASERS -----------------------------------------------------
+   Compact entries into Thinking and About. These replaced full-height
+   placeholder bands: the homepage's job is to create a reason to go deeper,
+   not to contain the deeper content.                                      */
+
+.teasers {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+  gap: var(--grid-gutter);
+}
+
+.teaser {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+  padding: var(--space-l);
+  background: var(--surface);
+  border: var(--hairline);
+  border-radius: var(--radius-l);
+  text-decoration: none;
+  transition: border-color var(--dur-base) var(--ease-out),
+              background-color var(--dur-base) var(--ease-out),
+              transform var(--dur-base) var(--ease-out);
+}
+.teaser:hover {
+  border-color: var(--gold-line);
+  background: var(--surface-2);
+  transform: translateY(-2px);
+}
+.teaser:focus-visible { outline: var(--focus-ring); outline-offset: var(--focus-offset); }
+
+.teaser h3 { font-size: var(--step-2); max-width: 22ch; }
+.teaser p { font-size: var(--step--1); color: var(--ink-2); max-width: 46ch; }
+
+.teaser-cue {
+  margin-top: var(--space-2xs);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--ink-3);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3xs);
+  transition: color var(--dur-fast) var(--ease-out), gap var(--dur-fast) var(--ease-out);
+}
+.teaser:hover .teaser-cue { color: var(--gold); gap: var(--space-2xs); }

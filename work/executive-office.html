@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- No flash of wrong theme: set the theme attribute before first paint.
+     Ported verbatim from production index.html (main @ 17f135a). -->
+<script>
+  (function(){
+    try{
+      var stored=localStorage.getItem('theme');
+      /* dark is the brand default; only an explicit user toggle to light overrides it */
+      document.documentElement.dataset.theme=(stored==='light'||stored==='dark')?stored:'dark';
+    }catch(e){document.documentElement.dataset.theme='dark';}
+    document.documentElement.className='js';
+  })();
+</script>
+<title>Executive Office · Kyle Littlejohn</title>
+<meta name="description" content="An AI operating system that produces executive-grade work, rebuilt around the ways it failed. Automated quality gates, a human approval gate, and what it takes to trust the output.">
+<link rel="canonical" href="https://kylelittlejohn.com/work/executive-office.html">
+<meta name="author" content="Kyle Littlejohn">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#0c0b0e" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f6f3ec" media="(prefers-color-scheme: light)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20rx='13'%20fill='%230c0b0e'/%3E%3Crect%20x='1.5'%20y='1.5'%20width='61'%20height='61'%20rx='12'%20fill='none'%20stroke='%23f5c451'%20stroke-opacity='0.35'/%3E%3Ctext%20x='32'%20y='45'%20font-family='Georgia,serif'%20font-size='33'%20font-weight='700'%20fill='%23f5c451'%20text-anchor='middle'%3EKL%3C/text%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="https://kylelittlejohn.com/assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Kyle Littlejohn">
+<meta property="og:title" content="Executive Office · Kyle Littlejohn">
+<meta property="og:description" content="An AI operating system that produces executive-grade work, rebuilt around the ways it failed. Automated quality gates, a human approval gate, and what it takes to trust the output.">
+<meta property="og:image" content="https://kylelittlejohn.com/assets/website-card-100.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:alt" content="Kyle Littlejohn, Chief of Staff and Strategy / Operations leader. He turns executive ambiguity into shipped outcomes, and built the AI operating system that multiplies how fast he does it.">
+<meta property="og:url" content="https://kylelittlejohn.com/work/executive-office.html">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Executive Office · Kyle Littlejohn">
+<meta name="twitter:description" content="An AI operating system that produces executive-grade work, rebuilt around the ways it failed. Automated quality gates, a human approval gate, and what it takes to trust the output.">
+<meta name="twitter:image" content="https://kylelittlejohn.com/assets/website-card-100.png">
+<meta name="twitter:image:alt" content="Kyle Littlejohn, Chief of Staff and Strategy / Operations leader. He turns executive ambiguity into shipped outcomes, and built the AI operating system that multiplies how fast he does it.">
+<link rel="preconnect" href="https://fonts.bunny.net">
+<link rel="stylesheet" href="https://fonts.bunny.net/css?family=fraunces:400,500,600,700|geist:300,400,500,600,700|geist-mono:400,500&display=swap">
+<link rel="stylesheet" href="../assets/css/tokens.css">
+<link rel="stylesheet" href="../assets/css/base.css">
+<link rel="stylesheet" href="../assets/css/components/nav.css">
+<link rel="stylesheet" href="../assets/css/components/metric.css">
+<link rel="stylesheet" href="../assets/css/components/pipeline.css">
+<link rel="stylesheet" href="../assets/css/layouts/case-study.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<nav class="nav" aria-label="Primary">
+  <div class="page nav-inner">
+    <a class="nav-brand" href="../home.html">
+      <img src="../assets/kyle.jpg" alt="" width="30" height="30">
+      Kyle Littlejohn
+    </a>
+    <div class="nav-links">
+      <a href="../work/" aria-current="page">Work</a>
+      <a href="../operating-system.html">Operating System</a>
+      <a href="../thinking.html">Thinking</a>
+      <a href="../about.html">About</a>
+      <a class="nav-cta" href="../home.html#contact">Let's talk &rarr;</a>
+      <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle light and dark theme" aria-pressed="false">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<main id="main" class="page">
+
+  <header class="cs-header">
+    <span class="cs-eyebrow">Case Study 03 &middot; KLJ Ventures &middot; Current</span>
+    <h1 class="cs-title">I built an AI operating system that produces executive-grade work, then rebuilt it around the ways it failed.</h1>
+    <p class="cs-dek">I founded KLJ Ventures to help organizations adopt AI. Then I built the operating system that runs it, caught it fabricating, and re-architected it so the failure modes were caught and corrected rather than tolerated.</p>
+  </header>
+
+  <dl class="cs-facts">
+    <div class="cs-fact">
+      <dt>My role</dt>
+      <dd>Founder. I designed the architecture, built the system, and operate it daily. Every design decision, failure diagnosis and governance rule here is mine.</dd>
+    </div>
+    <div class="cs-fact">
+      <dt>Scope</dt>
+      <dd>14 functional domains, 120+ specialized agents, and a quality layer that enforces 150+ named checks on everything the careers pipeline produces before it reaches my review.</dd>
+    </div>
+    <div class="cs-fact">
+      <dt>Constraint</dt>
+      <dd>One person. Every output has to be good enough to put my name on, which means the system's failure modes are my reputation.</dd>
+    </div>
+  </dl>
+
+  <section class="cs-beat">
+    <span class="cs-beat-label">Context</span>
+    <h2>A company that needed more throughput than one person has</h2>
+    <p>KLJ Ventures exists to help organizations learn, adopt and operationalize AI. That means consulting delivery, product development and operating-system design, which is a lot of surface area for a firm with one employee. The obvious move was to use AI to expand what I could produce. The obvious move is also where most people stop, and it is why most of what gets called an AI workflow is really just a faster way to generate first drafts.</p>
+  </section>
+
+  <section class="cs-beat">
+    <span class="cs-beat-label">Problem</span>
+    <h2>Generation was never the bottleneck</h2>
+    <p>Getting an AI system to produce a resume, a research brief or a strategy document is not hard. Getting one to produce work you would sign your name to, repeatedly, without reading every word yourself, is a completely different problem.</p>
+    <p>The first version of the system produced a great deal of output. Some of it was excellent. Some of it was confidently, fluently wrong.</p>
+  </section>
+
+  <section class="cs-beat">
+    <span class="cs-beat-label">Diagnosis</span>
+    <h2>The constraint is trust, not capability</h2>
+    <p>An assistant that is right 90% of the time and gives no signal about which 10% is wrong does not save you 90% of the work. It costs you 100% of the review, because you have to check everything.</p>
+    <p>So the interesting engineering problem was never prompting. It was building the layer that catches known classes of error automatically, so the human gate at the end spends its attention on judgment rather than proofreading. That is the same problem as building any operating model: define what good looks like, inspect against it, and make the inspection cheap enough that it always happens.</p>
+  </section>
+
+  <section class="cs-beat">
+    <span class="cs-beat-label">Decision</span>
+    <h2>Treating fabrication as a defect, not a property</h2>
+    <p>The consequential call was how to categorize the failures.</p>
+    <p>The common framing is that language models hallucinate, that this is inherent, and that the mitigation is for the human to check the output carefully. That framing is comfortable and it is also an excuse for never fixing anything, because it locates the problem in the technology rather than in the system built around it.</p>
+    <p class="cs-turn">I decided to treat every fabrication as a bug.</p>
+    <p>Not an unfortunate characteristic to be tolerated, but a specific defect with a cause, a reproduction case, and a fix that could be encoded so the same class of error could not recur.</p>
+    <p>That single reframing is what turned a collection of prompts into an operating system, because it forced everything that followed: documented failures, a testing layer, approval gates, and a review architecture that assumes the system will be wrong and is designed to catch it.</p>
+  </section>
+
+  <section class="cs-beat">
+    <span class="cs-beat-label">What I built</span>
+    <h2>The loop that runs when something goes wrong</h2>
+    <div class="chain">
+      <span class="chain-label">Every failure runs this path</span>
+      <ol>
+        <li><strong>Observe.</strong> A failure surfaces in real use, usually because I catch something that should not have reached me.</li>
+        <li><strong>Document.</strong> It gets written up as a specific defect with its cause, not filed as a one-off mistake.</li>
+        <li><strong>Diagnose.</strong> I work out what class of error it belongs to, which is almost always broader than the instance.</li>
+        <li><strong>Encode.</strong> The fix becomes an automated check, wired into the run so it executes on every future output.</li>
+        <li><strong>Propagate.</strong> The rule is written into the agent instructions and the standing ruleset so the behaviour changes at the source, not just at the gate.</li>
+      </ol>
+    </div>
+    <p>Underneath the loop sits the design principle the whole architecture rests on: <strong>generation and evaluation are separated.</strong> No agent grades its own work. The thing that produces a draft is never the thing that decides whether the draft is good, and the reviewer is instructed to look for reasons to reject rather than reasons to approve.</p>
+    <p>That is not a preference about thoroughness. It is the same reason companies do not let people audit their own numbers. A system that evaluates its own reasoning is structurally exposed to the same assumptions that produced the error. Adding more review inside a single agent tends to produce more confident wrong answers rather than fewer.</p>
+    <p>Around that principle sits the rest of it: 14 functional domains, adversarial review on anything consequential, and a human approval gate everything passes through before it leaves. The agent count is the least interesting number here. What matters is that the system assumes it will fail, and is instrumented to catch itself when it does.</p>
+  </section>
+
+  <section class="cs-beat">
+    <span class="cs-beat-label">The system</span>
+    <h2>Six stages, and the one that matters is the loop back</h2>
+    <p>Below is the actual path work takes. Read it as a static diagram, or run it. The failure scenario is the interesting one, because the backward arrow is the part most AI diagrams leave out.</p>
+
+    <div class="pipeline" id="pipeline">
+      <div class="pl-bar">
+        <div class="pl-scenarios" role="group" aria-label="Scenario">
+          <button class="pl-scenario" type="button" data-scenario="clean" aria-pressed="true">Normal run</button>
+          <button class="pl-scenario" type="button" data-scenario="fail" aria-pressed="false">Something fails</button>
+        </div>
+        <div class="pl-transport">
+          <button class="pl-btn pl-btn--primary" type="button" id="plPlay">Play</button>
+          <button class="pl-btn" type="button" id="plReset">Start over</button>
+        </div>
+      </div>
+
+      <div class="pl-stages" role="tablist" aria-label="Pipeline stages">
+        <button class="pl-stage" role="tab" id="plTab0" aria-selected="true"  aria-controls="plPanel" tabindex="0" data-i="0"><span class="pl-stage-n">01</span><span class="pl-stage-name">Intake</span></button>
+        <button class="pl-stage" role="tab" id="plTab1" aria-selected="false" aria-controls="plPanel" tabindex="-1" data-i="1"><span class="pl-stage-n">02</span><span class="pl-stage-name">Routing</span></button>
+        <button class="pl-stage" role="tab" id="plTab2" aria-selected="false" aria-controls="plPanel" tabindex="-1" data-i="2"><span class="pl-stage-n">03</span><span class="pl-stage-name">Production</span></button>
+        <button class="pl-stage" role="tab" id="plTab3" aria-selected="false" aria-controls="plPanel" tabindex="-1" data-i="3"><span class="pl-stage-n">04</span><span class="pl-stage-name">Quality control</span></button>
+        <button class="pl-stage pl-stage--gate" role="tab" id="plTab4" aria-selected="false" aria-controls="plPanel" tabindex="-1" data-i="4"><span class="pl-stage-n">05</span><span class="pl-stage-name">Human review</span></button>
+        <button class="pl-stage" role="tab" id="plTab5" aria-selected="false" aria-controls="plPanel" tabindex="-1" data-i="5"><span class="pl-stage-n">06</span><span class="pl-stage-name">Output</span></button>
+      </div>
+
+      <div class="pl-panes">
+        <div class="pl-schematic" aria-hidden="true">
+          <div class="pl-node" data-node="0">Intake</div>
+          <div class="pl-node" data-node="1">Routing</div>
+          <div class="pl-node" data-node="2">Production</div>
+          <div class="pl-node" data-node="3">Quality control</div>
+          <div class="pl-loop" id="plLoop">&uarr; fails a gate, returns to Production</div>
+          <div class="pl-node" data-node="4">Human review</div>
+          <div class="pl-node" data-node="5">Output</div>
+        </div>
+        <div class="pl-narration" id="plPanel" role="tabpanel" aria-live="polite" tabindex="0">
+          <span class="pl-narration-label" id="plLabel">Stage 01 &middot; Intake</span>
+          <p class="pl-narration-text" id="plText">A request arrives and is classified by type, urgency and which domain owns it.</p>
+          <p class="pl-narration-sub" id="plSub">Nothing starts until the system knows what kind of work this is.</p>
+        </div>
+      </div>
+    </div>
+
+    <p>The human review stage is a real gate, not a formality. Nothing reaches anyone outside the system without passing it, and its job is judgment rather than proofreading, because the gates upstream have already caught the mechanical failures.</p>
+  </section>
+
+  <section class="cs-beat">
+    <span class="cs-beat-label">Result</span>
+    <h2>What the governance layer looks like now</h2>
+
+    <figure class="metric" style="max-width:var(--measure)">
+      <div class="metric-value">150+ automated gates</div>
+      <figcaption class="metric-mechanism">Automated checks that run before anything reaches my review. Each one exists because something failed once, was diagnosed, and was encoded so that class of error gets caught if it recurs.</figcaption>
+    </figure>
+
+    <p>That number is the clearest evidence I can offer, because it is not a measure of scale. It is a measure of how many times the system has been wrong, been caught, and been corrected at the architectural level rather than the individual output. Every gate is traceable to the specific failure that produced it and to the architectural change that followed, which is the part that matters: a correction that lives in a document gets forgotten, and a correction that lives in a gate does not.</p>
+  </section>
+
+  <section class="cs-beat">
+    <span class="cs-beat-label">Result</span>
+    <h2>What it produces</h2>
+    <p>Gates and rule captures are the engineering proof. The work product is the other half, and it is the half that matters to anyone who does not care how the system is built.</p>
+    <p>The clearest example is a strategic growth blueprint produced for a client, roughly 60 pages, with an accompanying executive briefing designed to be read in one sitting while remaining traceable back to the underlying analysis. Producing depth is not the hard part. Producing depth that stays usable is, and that compression is the same skill I was hired for at Kaseya, running on different machinery.</p>
+
+    <p>Work like that requires more than research and drafting. It requires classifying uncertainty so a reader can tell established fact from a company-reported figure from an open question, following the arithmetic to where it becomes a strategic implication, and closing on a decision agenda rather than a summary.</p>
+    <p class="cs-turn">A system that stops at synthesis produces a very good summary. Decision infrastructure has to get to the decision.</p>
+  </section>
+
+  <section class="cs-beat">
+    <span class="cs-beat-label">Result</span>
+    <h2>Two moments of judgment</h2>
+    <p>Two examples from that engagement, described without the client's figures or identity, because the reasoning is the transferable part.</p>
+    <p><strong>It refused a number that was in the client's favour.</strong> Leadership reported an acquisition cost low enough to be a headline. The system did not use it. It reconstructed the arithmetic, showed the figure was daily channel spend divided by daily signups, and labelled it a channel cost pending a definition of its denominator. In the same section, months where no data had been reported were drawn as a dashed line rather than a solid one, because inventing the shape of a trend nobody measured is the most common way a chart lies.</p>
+    <p><strong>It turned a revenue target into a strategic question.</strong> Rather than treating the number as a goal to be hit, the analysis laid out three compositions that would each reach it, and showed that each implied a different company, a different hiring plan, and a different story at the next financing. The fastest path and the strongest financing profile were not the same path. Naming that tension was the actual contribution.</p>
+    <p>None of that is a model being clever. All of it is a system built by someone who has sat in the room when a bad number went into a board deck.</p>
+    <div class="cs-boundary">
+      <p><strong>The client is not named, and no outcome is claimed.</strong> What is demonstrated here is the quality of the work produced, not that any recommendation was adopted or that any business result followed.</p>
+    </div>
+  </section>
+
+  <section class="cs-beat">
+    <span class="cs-beat-label">What I'd change now</span>
+    <h2>I trusted the model too much at the start</h2>
+    <p>The honest failure is at the beginning. I built the first version assuming good instructions would produce good output, and that review was a light final step rather than a structural component. That was wrong, and I found out the way you always find out, which is that something plausible and incorrect got far enough to matter.</p>
+    <p>What I would do differently is build the inspection layer first. Quality control is not something you add once you discover you need it. It is the part that determines whether the rest of the system is usable at all, and it belongs in the architecture from the first version.</p>
+    <p>That is the same conclusion I reached about operating cadence years earlier, in a company with no AI in it at all.</p>
+  </section>
+
+  <nav class="cs-next" aria-label="More work">
+    <a href="./amc-networks.html">
+      <span class="lbl">First case study</span>
+      <span class="ttl">AMC Networks &rarr;</span>
+    </a>
+    <a href="../home.html#contact">
+      <span class="lbl">Or</span>
+      <span class="ttl">Let's talk &rarr;</span>
+    </a>
+  </nav>
+
+</main>
+
+<script>
+/* Pipeline explainer. Play-driven, never autoplay, never scroll-triggered.
+   Respects prefers-reduced-motion by not running the timer at all — every
+   stage stays selectable and the schematic still highlights. */
+(function () {
+  var root = document.getElementById('pipeline');
+  if (!root) return;
+
+  var tabs   = Array.prototype.slice.call(root.querySelectorAll('.pl-stage'));
+  var nodes  = Array.prototype.slice.call(root.querySelectorAll('.pl-node'));
+  var loop   = document.getElementById('plLoop');
+  var label  = document.getElementById('plLabel');
+  var text   = document.getElementById('plText');
+  var sub    = document.getElementById('plSub');
+  var play   = document.getElementById('plPlay');
+  var reset  = document.getElementById('plReset');
+  var scenBtns = Array.prototype.slice.call(root.querySelectorAll('.pl-scenario'));
+
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var COPY = {
+    clean: [
+      ['Intake',          'A request arrives and is classified by type, urgency and which domain owns it.', 'Nothing starts until the system knows what kind of work this is.'],
+      ['Routing',         'It is routed to the domain that owns that work, and to the specific agents scoped to it.', '14 domains. Most requests touch two or three.'],
+      ['Production',      'A drafting agent produces the work. It is never the agent that will judge it.', 'Generation and evaluation are separated by design.'],
+      ['Quality control', '150+ named gates run automatically. Each one exists because something failed once.', 'Mechanical failures are caught here so the human does not spend attention on them.'],
+      ['Human review',    'I read it. This gate never gets automated away.', 'Judgment, not proofreading. The gates upstream already did the proofreading.'],
+      ['Output',          'The work leaves the system with a human having approved it.', 'Nothing reaches anyone outside without passing stage 05.']
+    ],
+    fail: [
+      ['Intake',          'A request arrives and is classified by type, urgency and which domain owns it.', 'Same start. The difference shows up at stage 04.'],
+      ['Routing',         'It is routed to the domain that owns that work, and to the specific agents scoped to it.', '14 domains. Most requests touch two or three.'],
+      ['Production',      'A drafting agent produces the work, and this time it fabricates a figure that looks plausible.', 'This is the failure mode that matters. It is fluent and it is wrong.'],
+      ['Quality control', 'A gate catches it. The claim does not trace to the canonical source, so the work is rejected.', 'It goes back to Production. It does not go forward to a human with a bad number in it.'],
+      ['Production',      'The work is corrected against the source and re-submitted.', 'The gate that caught this exists because this exact class of error happened once before.'],
+      ['Human review',    'I read the corrected work, and the failure never reached me as a decision.', 'That is the whole point. The system caught its own error before it cost anything.']
+    ]
+  };
+
+  var ORDER = { clean: [0,1,2,3,4,5], fail: [0,1,2,3,2,4] };
+
+  var scenario = 'clean';
+  var step = 0;
+  var timer = null;
+
+  function render() {
+    var seq = ORDER[scenario];
+    var stageIdx = seq[step];
+    var copy = COPY[scenario][step];
+    var isFailMoment = scenario === 'fail' && step === 3;
+    var loopVisible  = scenario === 'fail' && step >= 3 && step <= 4;
+
+    tabs.forEach(function (t, i) {
+      var on = i === stageIdx;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.tabIndex = on ? 0 : -1;
+      if (isFailMoment && i === 3) { t.setAttribute('data-state', 'failed'); }
+      else { t.removeAttribute('data-state'); }
+    });
+
+    nodes.forEach(function (n, i) {
+      n.removeAttribute('data-on'); n.removeAttribute('data-done'); n.removeAttribute('data-fail');
+      if (i === stageIdx) { n.setAttribute(isFailMoment && i === 3 ? 'data-fail' : 'data-on', 'true'); }
+      else if (seq.slice(0, step).indexOf(i) !== -1) { n.setAttribute('data-done', 'true'); }
+    });
+
+    loop.setAttribute('data-on', loopVisible ? 'true' : 'false');
+    label.textContent = 'Stage ' + ('0' + (stageIdx + 1)) + ' \u00B7 ' + copy[0];
+    text.textContent = copy[1];
+    sub.textContent = copy[2];
+  }
+
+  function stop() { if (timer) { clearInterval(timer); timer = null; } play.textContent = 'Play'; }
+
+  function start() {
+    if (timer) { stop(); return; }
+    if (step >= ORDER[scenario].length - 1) { step = 0; render(); }
+    play.textContent = 'Pause';
+    timer = setInterval(function () {
+      if (step >= ORDER[scenario].length - 1) { stop(); return; }
+      step++; render();
+    }, 2100);
+  }
+
+  play.addEventListener('click', function () {
+    if (reduce) { /* no timed animation; advance one stage per press */
+      step = (step + 1) % ORDER[scenario].length; render(); return;
+    }
+    start();
+  });
+  if (reduce) { play.textContent = 'Next stage'; }
+
+  reset.addEventListener('click', function () { stop(); step = 0; render(); });
+
+  scenBtns.forEach(function (b) {
+    b.addEventListener('click', function () {
+      stop();
+      scenario = b.getAttribute('data-scenario');
+      scenBtns.forEach(function (o) { o.setAttribute('aria-pressed', o === b ? 'true' : 'false'); });
+      step = 0; render();
+    });
+  });
+
+  tabs.forEach(function (t) {
+    t.addEventListener('click', function () {
+      stop();
+      var target = parseInt(t.getAttribute('data-i'), 10);
+      var seq = ORDER[scenario];
+      var found = seq.indexOf(target);
+      step = found === -1 ? 0 : found;
+      render();
+    });
+    t.addEventListener('keydown', function (e) {
+      var i = tabs.indexOf(t), next = null;
+      if (e.key === 'ArrowRight') next = (i + 1) % tabs.length;
+      if (e.key === 'ArrowLeft')  next = (i - 1 + tabs.length) % tabs.length;
+      if (e.key === 'Home') next = 0;
+      if (e.key === 'End')  next = tabs.length - 1;
+      if (next === null) return;
+      e.preventDefault(); tabs[next].focus(); tabs[next].click();
+    });
+  });
+
+  render();
+})();
+</script>
+
+<script>
+/* Theme toggle. Ported from production index.html (main @ 17f135a). */
+(function(){
+  var btn=document.getElementById('themeToggle'); if(!btn)return;
+  function sync(){var d=document.documentElement.dataset.theme==='light';btn.setAttribute('aria-pressed',String(d));}
+  sync();
+  btn.addEventListener('click',function(){
+    var cur=document.documentElement.dataset.theme==='light'?'light':'dark';
+    var next=cur==='light'?'dark':'light';
+    function apply(){document.documentElement.dataset.theme=next;try{localStorage.setItem('theme',next);}catch(e){}sync();}
+    if(document.startViewTransition && !matchMedia('(prefers-reduced-motion: reduce)').matches){document.startViewTransition(apply);}
+    else{apply();}
+  });
+})();
+</script>
+<!-- Analytics: the same GoatCounter property production has used since launch. Privacy-preserving, no cookies, no cross-site identifiers. -->
+<script data-goatcounter="https://khlittlejohn.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

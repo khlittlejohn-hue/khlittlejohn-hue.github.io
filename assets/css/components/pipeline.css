@@ -1,0 +1,253 @@
+/* ============================================================================
+   components/pipeline.css — the Executive Office pipeline explainer.
+
+   Design rules this component is built to obey:
+
+   1. The six stages are readable as a static diagram. A visitor who never
+      interacts still learns the pipeline by reading left to right. The chips
+      are the comprehension layer and must never be what degrades.
+   2. Play-driven, never scroll-triggered and never autoplay. The user opts
+      in. Nobody is trapped in an animation.
+   3. Chips are simultaneously progress indicator and navigation, so a
+      skeptical visitor can jump straight to the interesting part.
+   4. Real tablist semantics with arrow-key support. The reference
+      implementation this pattern came from omits them; ours does not.
+   5. Under reduced motion the animation does not run, but every stage stays
+      selectable and the schematic still highlights.
+   ============================================================================ */
+
+.pipeline {
+  border: var(--hairline);
+  border-radius: var(--radius-l);
+  background: var(--surface);
+  overflow: hidden;
+  margin-block: var(--space-l);
+}
+
+/* ---- Controls bar -------------------------------------------------------- */
+
+.pl-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-s);
+  padding: var(--space-s) var(--space-m);
+  border-bottom: var(--hairline);
+  background: var(--surface-2);
+  flex-wrap: wrap;
+}
+
+.pl-scenarios { display: flex; gap: var(--space-3xs); }
+
+.pl-scenario {
+  font: inherit;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  padding: var(--space-3xs) var(--space-2xs);
+  border: 1px solid var(--line-2);
+  border-radius: var(--radius-s);
+  background: transparent;
+  color: var(--ink-3);
+  cursor: pointer;
+  transition: color var(--dur-fast) var(--ease-out),
+              border-color var(--dur-fast) var(--ease-out);
+}
+.pl-scenario:hover { color: var(--ink); border-color: var(--line-strong); }
+.pl-scenario[aria-pressed="true"] {
+  color: var(--gold);
+  border-color: var(--gold-line);
+  background: var(--gold-wash);
+}
+
+.pl-transport { margin-left: auto; display: flex; gap: var(--space-2xs); }
+
+.pl-btn {
+  font: inherit;
+  font-size: var(--step--1);
+  padding: var(--space-3xs) var(--space-s);
+  border: 1px solid var(--line-2);
+  border-radius: var(--radius-s);
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  transition: border-color var(--dur-fast) var(--ease-out),
+              color var(--dur-fast) var(--ease-out);
+}
+.pl-btn:hover { border-color: var(--gold); color: var(--gold); }
+.pl-btn--primary { background: var(--gold); color: var(--gold-ink); border-color: var(--gold); font-weight: 550; }
+.pl-btn--primary:hover { background: var(--gold-deep); border-color: var(--gold-deep); color: var(--gold-ink); }
+
+/* ---- Stage chips: the comprehension layer -------------------------------- */
+
+.pl-stages {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 0;
+  border-bottom: var(--hairline);
+}
+
+.pl-stage {
+  position: relative;
+  font: inherit;
+  text-align: left;
+  padding: var(--space-m) var(--space-s);
+  background: transparent;
+  border: none;
+  border-right: 1px solid var(--line);
+  cursor: pointer;
+  color: var(--ink-3);
+  transition: background-color var(--dur-base) var(--ease-out),
+              color var(--dur-base) var(--ease-out);
+}
+.pl-stage:last-child { border-right: none; }
+.pl-stage:hover { background: var(--surface-2); color: var(--ink-2); }
+.pl-stage:focus-visible { outline: var(--focus-ring); outline-offset: -3px; }
+
+.pl-stage-n {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: var(--tracking-label);
+  color: var(--ink-faint);
+  margin-bottom: var(--space-3xs);
+}
+.pl-stage-name {
+  display: block;
+  font-size: var(--step--1);
+  line-height: 1.25;
+  font-weight: 500;
+}
+
+/* Active stage. The top rule is the progress signal. */
+.pl-stage[aria-selected="true"] {
+  background: var(--bg-sunk);
+  color: var(--ink);
+}
+.pl-stage[aria-selected="true"]::before {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 2px;
+  background: var(--gold);
+}
+
+/* The human gate is marked permanently, selected or not. Governance is the
+   differentiator, so it should read as different at a glance. */
+.pl-stage--gate .pl-stage-name { color: var(--ink); }
+.pl-stage--gate .pl-stage-n { color: var(--gold); }
+
+/* Stage that failed in the failure scenario. */
+.pl-stage[data-state="failed"] .pl-stage-name { color: var(--fail); }
+.pl-stage[data-state="failed"]::before { background: var(--fail); }
+
+/* ---- Panes --------------------------------------------------------------- */
+
+.pl-panes {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 4fr);
+  min-height: 15rem;
+}
+
+.pl-schematic {
+  padding: var(--space-m);
+  border-right: var(--hairline);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3xs);
+  justify-content: center;
+}
+
+.pl-node {
+  display: flex;
+  align-items: center;
+  gap: var(--space-s);
+  padding: var(--space-2xs) var(--space-2xs);
+  border-radius: var(--radius-s);
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--ink-faint);
+  transition: color var(--dur-base) var(--ease-out),
+              background-color var(--dur-base) var(--ease-out);
+}
+.pl-node::before {
+  content: "";
+  flex: none;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  border: 1.5px solid var(--line-strong);
+  transition: background-color var(--dur-base) var(--ease-out),
+              border-color var(--dur-base) var(--ease-out);
+}
+.pl-node[data-on="true"] { color: var(--ink); background: var(--gold-wash); }
+.pl-node[data-on="true"]::before { background: var(--gold); border-color: var(--gold); }
+.pl-node[data-done="true"] { color: var(--ink-2); }
+.pl-node[data-done="true"]::before { background: var(--line-strong); border-color: var(--line-strong); }
+.pl-node[data-fail="true"] { color: var(--fail); background: var(--fail-wash); }
+.pl-node[data-fail="true"]::before { background: var(--fail); border-color: var(--fail); }
+
+/* The loop-back. The most credible element in the diagram, because it proves
+   the system is designed to catch its own errors. Hidden until it fires. */
+.pl-loop {
+  margin: var(--space-3xs) 0 var(--space-3xs) 1.15rem;
+  padding-left: var(--space-s);
+  border-left: 2px solid var(--line-2);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--ink-faint);
+  opacity: 0;
+  transition: opacity var(--dur-slow) var(--ease-out),
+              color var(--dur-slow) var(--ease-out),
+              border-color var(--dur-slow) var(--ease-out);
+}
+.pl-loop[data-on="true"] { opacity: 1; color: var(--fail); border-left-color: var(--fail); }
+
+.pl-narration {
+  padding: var(--space-m);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+  justify-content: center;
+}
+.pl-narration-label {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.pl-narration-text {
+  font-size: var(--step-0);
+  line-height: 1.5;
+  color: var(--ink);
+  margin: 0;
+  max-width: 40ch;
+}
+.pl-narration-sub { font-size: var(--step--1); color: var(--ink-2); margin: 0; max-width: 42ch; }
+
+/* ---- Mobile -------------------------------------------------------------
+   Chips become a vertical list and are never dropped. The reference
+   implementation drops its chips and its narration at 375px, leaving the two
+   panes a non-technical reader can least interpret. Invert that: the
+   schematic pane is what goes, the comprehension layer stays.            */
+
+@media (max-width: 860px) {
+  .pl-stages { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .pl-stage { border-bottom: 1px solid var(--line); }
+  .pl-panes { grid-template-columns: 1fr; }
+  .pl-schematic { border-right: none; border-bottom: var(--hairline); }
+}
+
+@media (max-width: 560px) {
+  .pl-stages { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pl-bar { gap: var(--space-2xs); }
+  .pl-transport { margin-left: 0; width: 100%; }
+  .pl-btn { flex: 1; }
+  /* Schematic is the decoration; chips and narration are the story. */
+  .pl-schematic { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pl-node, .pl-loop, .pl-stage { transition: none; }
+}
