@@ -83,9 +83,9 @@
    reported result. */
 .metric-method {
   font-family: var(--font-mono);
-  font-size: 0.76rem;
+  font-size: var(--step--2);
   line-height: 1.45;
-  color: var(--ink-faint);
+  color: var(--ink-3);
   margin: 0;
   padding-top: var(--space-3xs);
 }
@@ -108,7 +108,7 @@ a.metric:focus-visible { outline: var(--focus-ring); outline-offset: var(--focus
 
 a.metric .metric-cue {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: var(--step--2);
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
   color: var(--ink-3);

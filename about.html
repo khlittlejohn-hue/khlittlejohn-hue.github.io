@@ -46,27 +46,7 @@
 <link rel="stylesheet" href="assets/css/base.css">
 <link rel="stylesheet" href="assets/css/components/nav.css">
 <link rel="stylesheet" href="assets/css/layouts/case-study.css">
-<style>
-  .ab-hero{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);
-    gap:var(--space-2xl);align-items:center;padding-block:var(--space-2xl) var(--space-l);
-    border-bottom:var(--hairline)}
-  .ab-hero h1{font-size:var(--step-5);max-width:15ch;margin-bottom:var(--space-m)}
-  .ab-hero .lead{max-width:52ch}
-  .ab-portrait{width:100%;max-width:230px;aspect-ratio:1;border-radius:var(--radius-l);
-    border:1px solid var(--gold-line);object-fit:cover;margin-left:auto}
-  .facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,11rem),1fr));
-    gap:var(--grid-gutter);padding-block:var(--space-l);border-bottom:var(--hairline)}
-  .fact b{display:block;font-family:var(--font-display);
-    font-variation-settings:var(--fraunces-data);font-size:var(--step-3);
-    font-weight:700;letter-spacing:-.025em;font-variant-numeric:tabular-nums}
-  .fact span{display:block;margin-top:var(--space-3xs);font-family:var(--font-mono);
-    font-size:.68rem;letter-spacing:var(--tracking-label);text-transform:uppercase;color:var(--ink-3)}
-  @media(max-width:820px){
-    .ab-hero{grid-template-columns:1fr;gap:var(--space-l)}
-    .ab-portrait{max-width:140px;margin-left:0;order:-1}
-    .ab-hero h1{font-size:var(--step-4);max-width:none}
-  }
-</style>
+<link rel="stylesheet" href="assets/css/layouts/editorial.css">
 </head>
 <body>
 
@@ -79,10 +59,12 @@
       Kyle Littlejohn
     </a>
     <div class="nav-links">
-      <a href="work/">Work</a>
-      <a href="operating-system.html">Operating System</a>
-      <a href="thinking.html">Thinking</a>
-      <a href="about.html" aria-current="page">About</a>
+      <div class="nav-sections">
+        <a href="work/">Work</a>
+        <a href="operating-system.html">Operating System</a>
+        <a href="thinking.html">Thinking</a>
+        <a href="about.html" aria-current="page">About</a>
+      </div>
       <a class="nav-cta" href="home.html#contact">Let's talk &rarr;</a>
       <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle light and dark theme" aria-pressed="false">
         <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
@@ -102,12 +84,12 @@
     <img class="ab-portrait" src="assets/kyle@2x.jpg" alt="Kyle Littlejohn" width="230" height="230">
   </header>
 
-  <div class="facts">
-    <div class="fact"><b>12+</b><span>years operating</span></div>
-    <div class="fact"><b>30+</b><span>endurance races</span></div>
-    <div class="fact"><b>50+</b><span>countries</span></div>
-    <div class="fact"><b>5</b><span>industries entered cold</span></div>
-  </div>
+  <p class="facts" aria-label="In numbers">
+    <span class="fact"><b>12+</b><span>years operating</span></span>
+    <span class="fact"><b>5</b><span>industries entered cold</span></span>
+    <span class="fact"><b>30+</b><span>endurance races</span></span>
+    <span class="fact"><b>50+</b><span>countries</span></span>
+  </p>
 
   <section class="cs-beat">
     <span class="cs-beat-label">The work</span>
@@ -142,6 +124,17 @@
     <h2>What I am looking for</h2>
     <p>A Chief of Staff or Strategy and Operations seat where the problems are genuinely ambiguous and the operating model is not yet built. I am most useful early, when the shape of the thing is still undecided, and I would rather build the infrastructure than inherit it.</p>
     <p>Based in New York, open to remote. <a href="home.html#contact">A 20-minute call</a> is the fastest way to work out whether I am useful to you.</p>
+  </section>
+
+  <section class="page-end">
+    <div>
+      <h2>If you have a mandate that needs an owner, let&rsquo;s talk.</h2>
+      <p>I am most useful early, when the shape of the thing is still undecided.</p>
+    </div>
+    <div class="end-actions">
+      <a class="btn-primary" href="home.html#contact">Let's talk</a>
+      <a class="btn-quiet" href="work/">See the work &rarr;</a>
+    </div>
   </section>
 
   <footer class="site-foot">

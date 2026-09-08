@@ -48,14 +48,16 @@
   flex-wrap: wrap;
   align-items: center;
 }
-.nav-links a {
+.nav-links a, .nav-sections a {
   font-size: var(--step--1);
   color: var(--ink-2);
   text-decoration: none;
   transition: color var(--dur-fast) var(--ease-out);
 }
-.nav-links a:hover,
-.nav-links a[aria-current] { color: var(--gold); }
+.nav-links a:hover, .nav-sections a:hover,
+.nav-links a[aria-current], .nav-sections a[aria-current] { color: var(--gold); }
+.nav-sections { display: contents; }
+.nav-sections a { text-decoration: none; transition: color var(--dur-fast) var(--ease-out); }
 
 .nav-cta {
   border: 1px solid var(--line-2);
@@ -67,8 +69,29 @@
 }
 .nav-cta:hover { border-color: var(--gold); color: var(--gold) !important; }
 
+/* ---- Mobile frame ------------------------------------------------------
+   Two rows, not three. Row one: brand, the CTA and the theme toggle. Row two:
+   the four section links on a single line. The bar is static on phones so the
+   reading viewport is not taxed on every scroll; the CTA is repeated at the
+   foot of every page, so nothing is lost. ~96px instead of 152px.          */
 @media (max-width: 700px) {
-  .nav-links { margin-left: 0; width: 100%; gap: var(--space-s); }
+  .nav { position: static; backdrop-filter: none; background: var(--bg); }
+  .nav-inner { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; column-gap: var(--space-xs); row-gap: var(--space-xs); align-items: center; }
+  .nav-brand { grid-column: 1; }
+  .nav-cta { grid-column: 2; grid-row: 1; margin: 0; }
+  .icon-btn { grid-column: 3; grid-row: 1; width: 34px; height: 34px; }
+  .nav-links { display: contents; }
+  .nav-links a:not(.nav-cta) { grid-row: 2; font-size: var(--step--1); }
+}
+@media (max-width: 700px) {
+  .nav-sections { grid-column: 1 / -1; grid-row: 2; display: flex; gap: var(--space-m); flex-wrap: wrap; }
+  .nav-brand { font-size: var(--step--1); }
+}
+@media (max-width: 360px) {
+  .nav-sections { gap: var(--space-s); }
+  .nav-sections a { font-size: var(--step--2); }
+  .nav-cta { padding-inline: var(--space-2xs); font-size: var(--step--2); }
+  .nav-inner { column-gap: var(--space-2xs); }
 }
 
 /* ---- Shared band heading, used on every page ----------------------------- */
@@ -92,6 +115,39 @@
 .site-foot .foot-links { margin-left: auto; display: flex; gap: var(--space-m); flex-wrap: wrap; }
 .site-foot .foot-note { max-width: 46ch; line-height: 1.5; }
 @media (max-width: 700px) { .site-foot .foot-links { margin-left: 0; } }
+
+/* ---- Page ending: the same closing move on every page ------------------
+   A short, confident line and the two routes: talk, or keep reading.      */
+.page-end {
+  border-top: var(--hairline);
+  padding-block: var(--space-2xl);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--space-l);
+  align-items: end;
+}
+.page-end h2 { font-size: var(--step-3); max-width: 22ch; }
+.page-end p { color: var(--ink-2); margin-top: var(--space-s); max-width: 48ch; }
+.page-end .end-actions { display: flex; gap: var(--space-s); flex-wrap: wrap; }
+@media (max-width: 760px) { .page-end { grid-template-columns: 1fr; align-items: start; padding-block: var(--space-xl); } }
+
+/* Buttons live here so every page can use them, not only home. */
+.btn-primary, .btn-quiet {
+  display: inline-block;
+  font-size: var(--step-0);
+  padding: var(--space-2xs) var(--space-m);
+  border-radius: var(--radius-s);
+  text-decoration: none;
+  border: 1px solid transparent;
+  line-height: 1.5;
+  transition: background-color var(--dur-base) var(--ease-out),
+              border-color var(--dur-base) var(--ease-out),
+              color var(--dur-base) var(--ease-out);
+}
+.btn-primary { background: var(--gold); color: var(--gold-ink); font-weight: 550; }
+.btn-primary:hover { background: var(--gold-deep); }
+.btn-quiet { border-color: var(--line-2); color: var(--ink); }
+.btn-quiet:hover { border-color: var(--gold); color: var(--gold); }
 
 /* ---- Theme toggle -------------------------------------------------------
    Ported from production index.html (main @ 17f135a) rather than reinvented.

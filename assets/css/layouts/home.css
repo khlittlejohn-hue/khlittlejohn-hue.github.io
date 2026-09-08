@@ -95,10 +95,10 @@
   padding-top: var(--space-s);
   border-top: 1px solid var(--line-2);
 }
-.hero-meta div { display: flex; flex-direction: column; gap: 2px; }
+.hero-meta div { display: flex; flex-direction: column; gap: 2px; min-width: 22ch; }
 .hero-meta dt {
   font-family: var(--font-mono);
-  font-size: 0.64rem;
+  font-size: var(--step--2);
   font-weight: 700;
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
@@ -114,20 +114,6 @@
 
 .hero-cta { display: flex; gap: var(--space-s); flex-wrap: wrap; margin-top: var(--space-l); }
 
-.btn-primary, .btn-quiet {
-  font-size: var(--step-0);
-  padding: var(--space-2xs) var(--space-m);
-  border-radius: var(--radius-s);
-  text-decoration: none;
-  border: 1px solid transparent;
-  transition: background-color var(--dur-base) var(--ease-out),
-              border-color var(--dur-base) var(--ease-out),
-              color var(--dur-base) var(--ease-out);
-}
-.btn-primary { background: var(--gold); color: var(--gold-ink); font-weight: 550; }
-.btn-primary:hover { background: var(--gold-deep); }
-.btn-quiet { border-color: var(--line-2); color: var(--ink); }
-.btn-quiet:hover { border-color: var(--gold); color: var(--gold); }
 
 /* ---- PROOF STRIP ---------------------------------------------------------
    Three claims, each carrying ownership and mechanism. Never animated,
@@ -135,9 +121,11 @@
 
 .proof {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--grid-gutter);
 }
+.proof .metric-cue { margin-top: auto; padding-top: var(--space-s); }
+@media (max-width: 700px) { .proof { grid-template-columns: 1fr; } }
 
 /* ---- METHOD ARC ----------------------------------------------------------
    The through-line. Establishes that the AI work is the latest expression of
@@ -145,7 +133,7 @@
 
 .arc {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--grid-gutter);
   counter-reset: arcstep;
 }
@@ -157,10 +145,16 @@
   transition: border-color var(--dur-base) var(--ease-out);
 }
 .arc-step:last-child { border-top-color: var(--gold); }
+a.arc-step { text-decoration: none; color: inherit; display: block; transition: border-color var(--dur-base) var(--ease-out); }
+a.arc-step:hover { border-top-color: var(--gold); }
+a.arc-step:hover .arc-what { color: var(--gold); }
+a.arc-step:focus-visible { outline: var(--focus-ring); outline-offset: 4px; border-radius: var(--radius-s); }
+.arc-step .infra { margin-bottom: var(--space-s); }
+@media (max-width: 700px) { .arc { grid-template-columns: 1fr; } }
 
 .arc-when {
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: var(--step--2);
   font-weight: 700;
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
@@ -236,7 +230,7 @@
 
 .work-meta {
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: var(--step--2);
   font-weight: 700;
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
@@ -260,7 +254,7 @@
 .work-proof small {
   display: block;
   font-family: var(--font-mono);
-  font-size: 0.66rem;
+  font-size: var(--step--2);
   font-weight: 500;
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
@@ -287,42 +281,47 @@
 }
 @media (max-width: 860px) { .os-band { grid-template-columns: 1fr; gap: var(--space-l); } }
 
-.os-stages { display: flex; flex-direction: column; gap: 0; }
+/* The same six-stage vocabulary as the Executive Office diagram, drawn as a
+   vertical flow. One diagram language across the site. */
+.os-flow { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
 .os-stage {
   position: relative;
+  display: grid;
+  grid-template-columns: 2.2rem minmax(0, 1fr);
+  column-gap: var(--space-s);
   padding: var(--space-xs) 0 var(--space-xs) var(--space-l);
-  font-family: var(--font-mono);
-  font-size: var(--step--1);
-  color: var(--ink-2);
-  letter-spacing: 0.02em;
+  border-left: 2px solid var(--line-2);
 }
 .os-stage::before {
-  content: "";
-  position: absolute;
-  left: 5px; top: 1.15em;
-  width: 9px; height: 9px;
-  border-radius: 50%;
-  background: var(--surface);
-  border: 1.5px solid var(--line-strong);
+  content: ""; position: absolute; left: -6px; top: 1.05rem;
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--bg-sunk); border: 2px solid var(--line-strong);
 }
-.os-stage:not(:last-child)::after {
-  content: "";
-  position: absolute;
-  left: 9px; top: 1.9em; bottom: -0.5em;
-  width: 1px; background: var(--line-2);
-}
-.os-stage--gate { color: var(--ink); }
+.os-stage:last-child { border-left-color: transparent; }
+.os-n { grid-row: 1 / span 2; font-family: var(--font-mono); font-size: var(--step--2); letter-spacing: var(--tracking-label); color: var(--ink-3); padding-top: 0.35em; }
+.os-name { font-family: var(--font-display); font-variation-settings: var(--fraunces-display); font-size: var(--step-1); font-weight: 600; line-height: 1.15; color: var(--ink-2); }
+.os-role { font-size: var(--step--1); color: var(--ink-3); margin-top: 2px; }
+.os-loop { grid-column: 2; font-family: var(--font-mono); font-size: var(--step--2); color: var(--fail); margin-top: var(--space-2xs); }
+.os-loop::before { content: "\2191  "; }
+.os-stage--gate .os-name { color: var(--ink); }
 .os-stage--gate::before { background: var(--gold); border-color: var(--gold); }
+.os-stage--gate .os-n { color: var(--gold); }
 
 /* ---- CONTACT ------------------------------------------------------------- */
 
 .contact { text-align: center; padding-block: var(--space-2xl); }
-.contact h2 { font-size: var(--step-4); max-width: 22ch; margin-inline: auto; margin-bottom: var(--space-m); }
+.contact h2 { font-size: var(--step-4); max-width: 26ch; margin-inline: auto; margin-bottom: var(--space-m); }
 .contact p { margin-inline: auto; color: var(--ink-2); }
+.contact .contact-sub { margin-bottom: var(--space-l); font-size: var(--step-1); line-height: 1.45; max-width: 44ch; text-wrap: pretty; }
 
 /* ---- RESPONSIVE ---------------------------------------------------------- */
 
-@media (max-width: 900px) {
+@media (max-width: 900px) and (min-width: 701px) {
+  .hero { column-gap: var(--space-xl); grid-template-columns: minmax(0, 1fr) 160px; }
+  .hero-portrait { max-width: 160px; }
+  .hero-title { font-size: clamp(2.10rem, 1.30rem + 3.60vw, 3.20rem); }
+}
+@media (max-width: 700px) {
   /* Single column, and the portrait leads — the established mobile behaviour,
      preserved. Re-declaring the areas is what hoists it above the eyebrow now
      that the headline sits outside the body. */
@@ -398,7 +397,7 @@
 .teaser-cue {
   margin-top: var(--space-2xs);
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: var(--step--2);
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
   color: var(--ink-3);

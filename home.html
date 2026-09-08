@@ -70,10 +70,12 @@
       Kyle Littlejohn
     </a>
     <div class="nav-links">
-      <a href="work/">Work</a>
-      <a href="operating-system.html">Operating System</a>
-      <a href="thinking.html">Thinking</a>
-      <a href="about.html">About</a>
+      <div class="nav-sections">
+        <a href="work/">Work</a>
+        <a href="operating-system.html">Operating System</a>
+        <a href="thinking.html">Thinking</a>
+        <a href="about.html">About</a>
+      </div>
       <a class="nav-cta" href="home.html#contact">Let's talk &rarr;</a>
       <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle light and dark theme" aria-pressed="false">
         <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
@@ -147,21 +149,24 @@
       <h2>One discipline, three decades of technology.</h2>
     </div>
     <div class="arc">
-      <div class="arc-step">
+      <a class="arc-step" href="work/kaseya.html">
+        <span class="infra" data-tier="1" aria-hidden="true"><i></i><i></i><i></i></span>
         <span class="arc-when">Kaseya &middot; 2018&ndash;2020</span>
         <div class="arc-what">Decision infrastructure</div>
         <p class="arc-note">Fourteen acquisitions onto one operating model, so leadership could compare a portfolio that changed shape constantly.</p>
-      </div>
-      <div class="arc-step">
+      </a>
+      <a class="arc-step" href="work/amc-networks.html">
+        <span class="infra" data-tier="2" aria-hidden="true"><i></i><i></i><i></i></span>
         <span class="arc-when">SOL Consulting &middot; AMC Networks &middot; 2020&ndash;2026</span>
         <div class="arc-what">Operating infrastructure</div>
         <p class="arc-note">A cadence and single source of truth that let 16 business units and 12 partners execute as one portfolio.</p>
-      </div>
-      <div class="arc-step">
+      </a>
+      <a class="arc-step" href="work/executive-office.html">
+        <span class="infra" data-tier="3" aria-hidden="true"><i></i><i></i><i></i></span>
         <span class="arc-when">KLJ Ventures &middot; Current</span>
         <div class="arc-what">AI operating infrastructure</div>
         <p class="arc-note">The same discipline applied to AI, so a system can produce work an executive would actually sign.</p>
-      </div>
+      </a>
     </div>
   </section>
 
@@ -240,14 +245,14 @@
         <p style="color:var(--ink-2);margin-bottom:var(--space-l)">So I built the layer that catches known classes of error automatically, and kept the human gate at the end for judgment. 120+ agents across 14 domains, and a quality layer that has grown one failure at a time.</p>
         <a class="btn-quiet" href="work/executive-office.html">How it works &rarr;</a>
       </div>
-      <div class="os-stages" aria-label="Pipeline stages">
-        <div class="os-stage">Intake</div>
-        <div class="os-stage">Routing</div>
-        <div class="os-stage">Production</div>
-        <div class="os-stage">Quality control &mdash; automated gates</div>
-        <div class="os-stage os-stage--gate">Human review &mdash; the final gate</div>
-        <div class="os-stage">Output</div>
-      </div>
+      <ol class="os-flow" aria-label="How work moves through the system">
+        <li class="os-stage"><span class="os-n">01</span><span class="os-name">Intake</span><span class="os-role">classify the request</span></li>
+        <li class="os-stage"><span class="os-n">02</span><span class="os-name">Routing</span><span class="os-role">assign the agents that own it</span></li>
+        <li class="os-stage"><span class="os-n">03</span><span class="os-name">Production</span><span class="os-role">draft, never self-graded</span></li>
+        <li class="os-stage os-stage--qc"><span class="os-n">04</span><span class="os-name">Quality control</span><span class="os-role">automated quality gates</span><span class="os-loop">fails a gate, returns to 03</span></li>
+        <li class="os-stage os-stage--gate"><span class="os-n">05</span><span class="os-name">Human review</span><span class="os-role">the gate that never gets automated</span></li>
+        <li class="os-stage"><span class="os-n">06</span><span class="os-name">Output</span><span class="os-role">work I have approved</span></li>
+      </ol>
     </div>
   </section>
 
@@ -273,7 +278,7 @@
   <!-- 9 · CONTACT --------------------------------------------------------- -->
   <section class="page contact band" id="contact">
     <h2>I build the decision infrastructure leadership teams run on.</h2>
-    <p style="margin-bottom:var(--space-l)">If that is the problem you have, a 20-minute call is the fastest way to find out whether I am useful.</p>
+    <p class="contact-sub">If that is the problem you have, a 20-minute call is the fastest way to find out whether I am useful.</p>
     <form class="cform" id="contactForm" novalidate>
       <div class="cform-row">
         <div>
