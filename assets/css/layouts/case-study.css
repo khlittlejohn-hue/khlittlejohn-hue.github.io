@@ -1,0 +1,433 @@
+/* ============================================================================
+   layouts/case-study.css
+
+   The case-study reading environment. Consumes tokens.css + base.css.
+
+   Typographic spec measured off the closest structural analog in the research
+   set: 17px/1.6 desktop, 15px/1.6 mobile, ~690px measure, zero keyframe
+   animation, all transitions inside the 250ms token ceiling.
+
+   The page must remain fully readable with JavaScript disabled and fully
+   skimmable in 20 seconds by heading alone. Nothing here gates content behind
+   scroll or interaction.
+   ============================================================================ */
+
+/* ---- READING FRAME -------------------------------------------------------
+   Text column + a sticky rail. The rail carries the beat index built from
+   the beat labels already on the page, so a reader always knows where they
+   are in the argument and can jump. Below 1024 the rail folds into a compact
+   inline index under the facts row, so the same orientation survives on a
+   phone without a fixed element.                                          */
+.cs-frame {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--rail-w);
+  column-gap: var(--space-2xl);
+  align-items: start;
+}
+.cs-body { min-width: 0; }
+.cs-rail { position: sticky; top: calc(var(--space-l) + 61px); padding-top: var(--space-xl); }
+.cs-rail-label { display: block; margin-bottom: var(--space-s); }
+.cs-index { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.cs-index a {
+  display: grid; grid-template-columns: 2.2rem minmax(0, 1fr); gap: var(--space-2xs);
+  padding: var(--space-2xs) 0;
+  border-left: 1px solid var(--line);
+  padding-left: var(--space-s);
+  margin-left: 0;
+  font-size: var(--step--1);
+  line-height: 1.35;
+  color: var(--ink-3);
+  text-decoration: none;
+  transition: color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
+}
+.cs-index a .n { font-family: var(--font-mono); font-size: var(--step--2); letter-spacing: var(--tracking-label); padding-top: 0.2em; }
+.cs-index a:hover { color: var(--ink); }
+.cs-index a[aria-current="true"] { color: var(--ink); border-left-color: var(--gold); }
+.cs-index a[aria-current="true"] .n { color: var(--gold); }
+.cs-rail-facts { margin-top: var(--space-l); padding-top: var(--space-m); border-top: var(--hairline); display: flex; flex-direction: column; gap: var(--space-2xs); }
+.cs-rail-facts span { font-size: var(--step--1); color: var(--ink-2); line-height: 1.4; }
+@media (max-width: 1023px) {
+  .cs-frame { grid-template-columns: 1fr; }
+  .cs-rail { order: -1; position: static; padding-top: var(--space-m); border-bottom: var(--hairline); padding-bottom: var(--space-m); }
+  .cs-index { flex-direction: row; flex-wrap: wrap; gap: var(--space-2xs) var(--space-m); }
+  .cs-index a { border-left: none; padding: 0; grid-template-columns: auto minmax(0, 1fr); }
+  .cs-rail-facts { display: none; }
+}
+
+/* ---- HEADER -------------------------------------------------------------- */
+.cs-eyebrow-row { display: flex; align-items: center; justify-content: space-between; gap: var(--space-m); flex-wrap: wrap; margin-bottom: var(--space-m); }
+.cs-eyebrow-row .cs-eyebrow { margin: 0; }
+
+.cs-header {
+  padding-block: var(--space-2xl) var(--space-xl);
+  border-bottom: var(--hairline);
+}
+
+.cs-eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--gold);
+  display: block;
+  margin-bottom: var(--space-s);
+}
+
+.cs-title {
+  font-size: var(--step-5);
+  line-height: var(--lh-tight);
+  font-weight: 700;
+  letter-spacing: -0.028em;
+  max-width: 22ch;
+  margin-bottom: var(--space-m);
+}
+
+.cs-dek {
+  font-size: var(--step-1);
+  line-height: 1.5;
+  color: var(--ink-2);
+  max-width: 58ch;
+  text-wrap: pretty;
+}
+
+/* ---- ROLE / SCOPE / CONSTRAINT ------------------------------------------
+   Sits immediately under the header so a reader never has to infer what Kyle
+   personally owned. This module exists specifically to prevent the ambiguity
+   that makes a strong record read as borrowed credit.                     */
+
+.cs-facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--grid-gutter);
+  padding-block: var(--space-xl);
+  border-bottom: var(--hairline);
+}
+
+.cs-fact {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+}
+
+.cs-fact dt {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  font-weight: 700;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.cs-fact dd {
+  margin: 0;
+  font-size: var(--step--1);
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+
+/* ---- BEATS ---------------------------------------------------------------
+   Each beat is a numbered section. The label carries the narrative position
+   (Diagnosis, Decision) which is what makes the page skimmable by heading. */
+
+.cs-beat { padding-block: var(--space-xl); border-bottom: var(--hairline); }
+.cs-beat:last-of-type { border-bottom: none; }
+
+.cs-beat-label {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  font-weight: 700;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--ink-3);
+  display: block;
+  margin-bottom: var(--space-2xs);
+}
+
+.cs-beat h2 {
+  font-size: var(--step-3);
+  max-width: 24ch;
+  margin-bottom: var(--space-s);
+}
+.cs-beat-label .n { color: var(--gold); margin-right: var(--space-2xs); }
+
+/* ---- Beat grammar ----------------------------------------------------------
+   Beats are not all the same kind of paragraph, so they do not all look the
+   same. The kind is declared on the section and drawn as a small mark in the
+   label and in the rail, so the shape of the argument is visible before it is
+   read.
+     context    — quiet: label + h2 + prose (the default)
+     decision   — a bracketed field: hairline frame, the call stated up front
+     mechanism  — the ledger: numbered rows (existing .cs-layer / lists)
+     result     — the sunk field with the metric objects
+     reflection — italic display lead, no rule                              */
+.cs-beat[data-kind="decision"] {
+  border-bottom: none;
+  padding: var(--space-xl) var(--space-l);
+  margin-block: var(--space-m);
+  border: 1px solid var(--line-2);
+  border-radius: var(--radius-m);
+  position: relative;
+}
+.cs-beat[data-kind="decision"]::before {
+  content: "Decision";
+  position: absolute; top: -0.6em; left: var(--space-l);
+  padding-inline: var(--space-2xs);
+  background: var(--bg);
+  font-family: var(--font-mono); font-size: var(--step--2); letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--gold);
+}
+.cs-beat[data-kind="decision"] .cs-beat-label { display: none; }
+.cs-beat[data-kind="decision"] h2 { font-style: italic; font-variation-settings: "SOFT" 60, "WONK" 1, "opsz" 72; }
+.cs-beat[data-kind="decision"] + .cs-beat { border-top: none; }
+.cs-beat[data-kind="mechanism"] h2 { max-width: none; }
+.cs-beat[data-kind="mechanism"] > ul { list-style: none; padding: 0; margin: 0; max-width: var(--measure); counter-reset: mech; }
+.cs-beat[data-kind="mechanism"] > ul > li { counter-increment: mech; display: grid; grid-template-columns: 2.2rem minmax(0, 1fr); gap: var(--space-s); padding-block: var(--space-s); border-top: var(--hairline); margin: 0; color: var(--ink-2); }
+.cs-beat[data-kind="mechanism"] > ul > li::before { content: counter(mech, decimal-leading-zero); font-family: var(--font-mono); font-size: var(--step--2); letter-spacing: var(--tracking-label); color: var(--gold); padding-top: 0.35em; }
+.cs-beat[data-kind="mechanism"] > ul > li:last-child { border-bottom: var(--hairline); }
+/* Result lists share the ledger grammar; each line is an outcome entry. */
+.cs-beat--result > ul { list-style: none; padding: 0; margin: 0; max-width: var(--measure); counter-reset: res; }
+.cs-beat--result > ul > li { counter-increment: res; display: grid; grid-template-columns: 2.2rem minmax(0, 1fr); gap: var(--space-s); padding-block: var(--space-s); border-top: var(--hairline); margin: 0; color: var(--ink); }
+.cs-beat--result > ul > li::before { content: counter(res, decimal-leading-zero); font-family: var(--font-mono); font-size: var(--step--2); letter-spacing: var(--tracking-label); color: var(--ink-3); padding-top: 0.35em; }
+.cs-beat--result > ul > li:last-child { border-bottom: var(--hairline); }
+.cs-beat[data-kind="reflection"] { border-bottom: none; }
+.cs-beat[data-kind="reflection"] h2 { font-style: italic; font-variation-settings: "SOFT" 80, "WONK" 1, "opsz" 72; color: var(--ink-2); }
+.cs-beat[data-kind="reflection"] > p:first-of-type { font-size: var(--step-1); line-height: 1.45; color: var(--ink); max-width: var(--measure-narrow); }
+/* kind glyphs in the rail */
+.cs-index a .k { width: 6px; height: 6px; border-radius: 50%; border: 1px solid var(--line-strong); margin-top: 0.55em; }
+.cs-index a[data-kind="decision"] .k { border-color: var(--gold); background: var(--gold); border-radius: 1px; }
+.cs-index a[data-kind="result"] .k { border-color: var(--gold); background: var(--gold); }
+.cs-index a[data-kind="mechanism"] .k { background: var(--line-strong); }
+.cs-index a { grid-template-columns: 2.2rem 6px minmax(0, 1fr); }
+.cs-rail-key { margin-top: var(--space-m); display: flex; flex-direction: column; gap: var(--space-3xs); }
+.cs-rail-key span { display: flex; align-items: center; gap: var(--space-2xs); font-size: var(--step--2); font-family: var(--font-mono); color: var(--ink-3); }
+.cs-rail-key .k { width: 6px; height: 6px; border-radius: 50%; border: 1px solid var(--line-strong); flex: none; }
+.cs-rail-key .k[data-kind="mechanism"] { background: var(--line-strong); }
+.cs-rail-key .k[data-kind="decision"] { background: var(--gold); border-color: var(--gold); border-radius: 1px; }
+.cs-rail-key .k[data-kind="result"] { background: var(--gold); border-color: var(--gold); }
+@media (max-width: 1023px) { .cs-index a { grid-template-columns: auto 6px minmax(0, 1fr); } .cs-rail-key { display: none; } }
+@media (max-width: 760px) { .cs-beat[data-kind="decision"] { padding: var(--space-l) var(--space-m); } .cs-beat[data-kind="decision"]::before { left: var(--space-m); } }
+/* Beats that carry the result get a sunk field so the page has a visible
+   change of register where the evidence lands. */
+.cs-beat--result { background: var(--bg-sunk); box-shadow: inset 0 0 0 1px var(--line); margin-inline: calc(-1 * var(--space-m)); padding-inline: var(--space-m); border-radius: var(--radius-m); border-bottom: none; }
+@media (max-width: 760px) { .cs-beat--result { margin-inline: calc(-1 * var(--page-pad)); padding-inline: var(--page-pad); border-radius: 0; } }
+.cs-beat--result + .cs-beat { border-top: var(--hairline); }
+/* Consecutive result beats read as one continuous field */
+.cs-beat--result + .cs-beat--result { border-top: var(--hairline); border-top-left-radius: 0; border-top-right-radius: 0; margin-top: 0; }
+.cs-beat--result:has(+ .cs-beat--result) { border-bottom-left-radius: 0; border-bottom-right-radius: 0; margin-bottom: 0; }
+
+.cs-beat p { max-width: var(--measure); }
+.cs-beat > p + p { margin-top: var(--space-s); }
+
+.cs-beat ul {
+  max-width: var(--measure);
+  padding-left: 1.15rem;
+  margin-top: var(--space-s);
+}
+.cs-beat li { margin-block: var(--space-2xs); }
+.cs-beat li::marker { color: var(--gold); }
+
+/* A single emphasized line inside a beat. Used sparingly, for the sentence
+   the whole section exists to deliver. */
+.cs-beat .cs-turn {
+  font-family: var(--font-display);
+  font-variation-settings: var(--fraunces-display);
+  font-size: var(--step-2);
+  line-height: 1.3;
+  font-weight: 600;
+  color: var(--ink);
+  max-width: var(--measure-quote);
+  margin-block: var(--space-l);
+  padding-left: var(--space-m);
+  border-left: 2px solid var(--gold);
+  text-wrap: balance;
+}
+
+.cs-beat .metric { margin-block: var(--space-l); max-width: var(--measure); }
+
+/* ---- CAUSAL CHAIN --------------------------------------------------------
+   For metrics that must never appear as orphan numbers. The figure lands at
+   the END of the chain, so the reader arrives at it already knowing what
+   produced it. This is what converts a claim into a reported result.      */
+
+.chain {
+  background: var(--surface);
+  border: var(--hairline);
+  border-radius: var(--radius-m);
+  padding: var(--space-m);
+  margin-block: var(--space-l);
+  max-width: var(--measure);
+}
+
+.chain-label {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  font-weight: 700;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--ink-3);
+  display: block;
+  margin-bottom: var(--space-s);
+}
+
+.chain ol { list-style: none; padding: 0; margin: 0; }
+
+.chain li {
+  position: relative;
+  margin: 0;
+  padding: var(--space-2xs) 0 var(--space-2xs) var(--space-l);
+  font-size: var(--step--1);
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+.chain li::before {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 0.95em;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--gold);
+}
+.chain li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 9px;
+  top: 1.6em;
+  bottom: -0.4em;
+  width: 1px;
+  background: var(--line-2);
+}
+.chain li strong { color: var(--ink); }
+
+.chain-scope {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  line-height: 1.45;
+  color: var(--ink-3);
+  margin-top: var(--space-s);
+  padding-top: var(--space-s);
+  border-top: var(--hairline);
+}
+
+/* ---- ATTRIBUTION BOUNDARY ------------------------------------------------
+   Published, not hidden in a working note. Stating the limit up front reads
+   as precision; conceding it under questioning reads as caught.           */
+
+.cs-boundary {
+  background: var(--surface);
+  border: var(--hairline);
+  border-left: 2px solid var(--gold);
+  border-radius: 0 var(--radius-m) var(--radius-m) 0;
+  padding: var(--space-m);
+  margin-block: var(--space-l);
+  max-width: var(--measure);
+}
+.cs-boundary p { font-size: var(--step--1); line-height: 1.55; color: var(--ink-2); }
+.cs-boundary p + p { margin-top: var(--space-2xs); }
+.cs-boundary strong { color: var(--ink); }
+
+/* ---- INTEGRATION LIST ----------------------------------------------------
+   Two columns of short items. Reads as an inventory of an operating layer
+   rather than a bulleted paragraph.                                       */
+
+.cs-layer {
+  background: var(--surface);
+  border: var(--hairline);
+  border-radius: var(--radius-m);
+  padding: var(--space-m);
+  margin-block: var(--space-l);
+  max-width: var(--measure);
+}
+.cs-layer ul {
+  columns: 2;
+  column-gap: var(--space-l);
+  margin: 0;
+  padding-left: 1.1rem;
+}
+.cs-layer li {
+  font-size: var(--step--1);
+  margin-block: var(--space-3xs);
+  break-inside: avoid;
+  color: var(--ink-2);
+}
+@media (max-width: 620px) { .cs-layer ul { columns: 1; } }
+
+/* ---- FOOTER NAV ---------------------------------------------------------- */
+
+.cs-next {
+  padding-block: var(--space-xl);
+  border-top: var(--hairline);
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-m);
+  flex-wrap: wrap;
+}
+.cs-next a { text-decoration: none; display: flex; flex-direction: column; gap: var(--space-3xs); }
+.cs-next .lbl { font-family: var(--font-mono); font-size: var(--step--2);
+  letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--ink-3); }
+.cs-next .ttl { font-family: var(--font-display); font-size: var(--step-1); font-weight: 600; }
+.cs-next a:hover .ttl { color: var(--gold); }
+
+/* ---- MOBILE — deliberate subtraction, not reflow ------------------------- */
+
+@media (max-width: 760px) {
+  .cs-facts { grid-template-columns: 1fr; }
+  .cs-title { font-size: clamp(1.9rem, 1.2rem + 3.4vw, 2.6rem); max-width: none; }
+  .cs-beat h2 { max-width: none; }
+  .cs-turn { font-size: var(--step-1); max-width: none; padding-left: var(--space-s); }
+  .cs-header { padding-block: var(--space-xl) var(--space-l); }
+}
+
+/* ---- CREDENTIALS ---------------------------------------------------------
+   Restored 2026-09-07 from the production site: the four certifications and
+   the Conde Nast Traveler byline are external credibility signals, not the
+   resume-style content the redesign deliberately dropped.
+
+   Both are deliberately SUBORDINATE. Production rendered certifications as a
+   four-card grid, which gave them the same visual weight as a case study.
+   Here they are one quiet line under the degree they extend. The credential
+   should be findable by someone looking for it and invisible to someone who
+   is not.                                                                  */
+
+.creds {
+  margin-top: var(--space-m);
+  padding-top: var(--space-s);
+  border-top: var(--hairline);
+  font-size: var(--step--1);
+  line-height: 1.6;
+  color: var(--ink-2);
+  max-width: var(--measure);
+}
+
+.creds-label {
+  display: block;
+  margin-bottom: var(--space-3xs);
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  font-weight: 700;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* An earned byline, styled as a citation rather than a lifestyle badge.
+   Underline stays on the gold so the external link is unambiguous. */
+.byline {
+  color: var(--gold);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+.byline:hover { color: var(--gold-deep); }
+.byline:focus-visible { outline: var(--focus-ring); outline-offset: var(--focus-offset); }
+
+/* ---- LIGHT-THEME INSTRUMENTATION CONTRAST -------------------------------
+   Beat numbers sit on the sunk result field, where gold measures 4.16:1 in
+   light theme. Sequence markers are instrumentation, not identity, so they
+   take --ink-2 (7.84:1) in light only. The beat label text, headings and
+   links keep gold. Dark theme untouched.                               */
+@media (prefers-color-scheme: light) {
+  .cs-beat--result .cs-beat-label .n { color: var(--ink-2); }
+}
+:root[data-theme="light"] .cs-beat--result .cs-beat-label .n { color: var(--ink-2); }

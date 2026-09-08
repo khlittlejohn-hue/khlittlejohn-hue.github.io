@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- No flash of wrong theme: set the theme attribute before first paint.
+     Ported verbatim from production index.html (main @ 17f135a). -->
+<script>
+  (function(){
+    try{
+      var stored=localStorage.getItem('theme');
+      /* dark is the brand default; only an explicit user toggle to light overrides it */
+      document.documentElement.dataset.theme=(stored==='light'||stored==='dark')?stored:'dark';
+    }catch(e){document.documentElement.dataset.theme='dark';}
+    document.documentElement.className='js';
+  })();
+</script>
+<title>AMC Networks · Kyle Littlejohn</title>
+<meta name="description" content="One client, five years. The operating model behind 16 business units, 12 external partners and 32 digital channels at AMC Networks.">
+<link rel="canonical" href="https://kylelittlejohn.com/work/amc-networks.html">
+<meta name="author" content="Kyle Littlejohn">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#0c0b0e" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f6f3ec" media="(prefers-color-scheme: light)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20rx='13'%20fill='%230c0b0e'/%3E%3Crect%20x='1.5'%20y='1.5'%20width='61'%20height='61'%20rx='12'%20fill='none'%20stroke='%23f5c451'%20stroke-opacity='0.35'/%3E%3Ctext%20x='32'%20y='45'%20font-family='Georgia,serif'%20font-size='33'%20font-weight='700'%20fill='%23f5c451'%20text-anchor='middle'%3EKL%3C/text%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="https://kylelittlejohn.com/assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Kyle Littlejohn">
+<meta property="og:title" content="AMC Networks · Kyle Littlejohn">
+<meta property="og:description" content="One client, five years. The operating model behind 16 business units, 12 external partners and 32 digital channels, and the account that grew 7.5x.">
+<meta property="og:image" content="https://kylelittlejohn.com/assets/website-card-100.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:alt" content="Kyle Littlejohn, Chief of Staff and Strategy / Operations leader. He turns executive ambiguity into shipped outcomes, and built the AI operating system that multiplies how fast he does it.">
+<meta property="og:url" content="https://kylelittlejohn.com/work/amc-networks.html">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AMC Networks · Kyle Littlejohn">
+<meta name="twitter:description" content="One client, five years. The operating model behind 16 business units, 12 external partners and 32 digital channels, and the account that grew 7.5x.">
+<meta name="twitter:image" content="https://kylelittlejohn.com/assets/website-card-100.png">
+<meta name="twitter:image:alt" content="Kyle Littlejohn, Chief of Staff and Strategy / Operations leader. He turns executive ambiguity into shipped outcomes, and built the AI operating system that multiplies how fast he does it.">
+<link rel="preconnect" href="https://fonts.bunny.net">
+<link rel="stylesheet" href="https://fonts.bunny.net/css?family=fraunces:400,500,600,700|geist:300,400,500,600,700|geist-mono:400,500&display=swap">
+<link rel="stylesheet" href="../assets/css/tokens.css">
+<link rel="stylesheet" href="../assets/css/base.css">
+<link rel="stylesheet" href="../assets/css/components/nav.css">
+<link rel="stylesheet" href="../assets/css/components/metric.css">
+<link rel="stylesheet" href="../assets/css/layouts/case-study.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<nav class="nav" aria-label="Primary">
+  <div class="page nav-inner">
+    <a class="nav-brand" href="../">
+      <img src="../assets/kyle.jpg" alt="" width="30" height="30">
+      Kyle Littlejohn
+    </a>
+    <div class="nav-links">
+      <div class="nav-sections">
+        <a href="../work/" aria-current="page">Work</a>
+        <a href="../operating-system.html">Operating System</a>
+        <a href="../thinking.html">Thinking</a>
+        <a href="../about.html">About</a>
+          <a href="../assets/Kyle-Littlejohn-Resume.pdf">Resume</a>
+      </div>
+      <a class="nav-cta" href="../index.html#contact">Let's talk &rarr;</a>
+      <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle light and dark theme" aria-pressed="false">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<main id="main" class="page">
+
+  <header class="cs-header">
+    <div class="cs-eyebrow-row"><span class="cs-eyebrow">Case Study 01 &middot; SOL Consulting &middot; 2020&ndash;2026</span><span class="infra-row" aria-label="Tier 2 of 3: Operating infrastructure"><span class="infra" data-tier="2"><i></i><i></i><i></i></span><span class="infra-name"><b>Operating infrastructure</b></span></span></div>
+    <h1 class="cs-title">One client. Five years. The operating model behind 16 business units.</h1>
+    <p class="cs-dek">AMC Networks was running a fast-growing FAST and AVOD portfolio on processes built for something smaller. I spent five years building the operating infrastructure that let it execute consistently, and grew the engagement 7.5x doing it.</p>
+  </header>
+
+  <dl class="cs-facts">
+    <div class="cs-fact">
+      <dt>My role</dt>
+      <dd>Director, Strategy &amp; Client Delivery at SOL Consulting, 2020 to 2026. At a boutique firm the Director runs the account and also carries delivery titles inside the client's org chart, so I held Account Manager on the engagement throughout while serving AMC as Senior Technical Project Manager and then Senior Program Manager. I owned the account and the operating cadence, and directly managed a team of program managers for 5+ years.</dd>
+    </div>
+    <div class="cs-fact">
+      <dt>Scope</dt>
+      <dd>16 business units, 12 external partners, 32 digital channels across News, Sports, Reality and Scripted. A delivery team of 8.</dd>
+    </div>
+    <div class="cs-fact">
+      <dt>Constraint</dt>
+      <dd>No direct authority over any of the 16 units. Senior leadership was measuring every proposed change by its implementation cost.</dd>
+    </div>
+  </dl>
+
+  <div class="cs-frame">
+    <div class="cs-body">
+
+  <section class="cs-beat" id="beat-01" data-kind="context">
+    <span class="cs-beat-label"><span class="n">01</span>Context</span>
+    <h2>A portfolio growing faster than its operating model</h2>
+    <p>AMC Networks was expanding its free ad-supported and ad-supported streaming portfolio quickly, adding channels, content categories and distribution partners across a broad set of business units. The strategy was working. The machinery underneath it had not been rebuilt to match.</p>
+  </section>
+
+  <section class="cs-beat" id="beat-02" data-kind="context">
+    <span class="cs-beat-label"><span class="n">02</span>Problem</span>
+    <h2>Coordination was consuming the capacity meant for execution</h2>
+    <p>Execution across the portfolio was fragmented. Teams were not communicating cohesively, reporting was outdated and inconsistently maintained, and there was no unified meeting structure across the work. Budget management was inconsistent. Campaigns were slipping.</p>
+    <p>The tooling had also stopped matching the scale of the work. Operational tracking ran largely through Excel, which had been adequate for a smaller portfolio and had quietly become a bottleneck for this one.</p>
+    <p>The practical cost was where people spent their time. Teams were reconciling information, chasing status across groups, and reacting to problems, rather than moving campaigns forward.</p>
+  </section>
+
+  <section class="cs-beat" id="beat-03" data-kind="context">
+    <span class="cs-beat-label"><span class="n">03</span>Diagnosis</span>
+    <h2>The problem was not the meetings or the spreadsheet</h2>
+    <p>The visible symptoms invited point solutions. Too many meetings, so run fewer. An outdated tool, so replace the tool. Campaigns slipping, so add status reporting.</p>
+    <p class="cs-turn">There was no operating system connecting planning, reporting, coordination, budget and execution.</p>
+    <p>Each of those existed in some form and none of them talked to the others. That diagnosis mattered because of what it predicted: fixing any single symptom would hold for a while and then decay, because the next addition to the portfolio would arrive without a defined way to absorb it. The organization did not need a better tool. It needed a way of operating that new work could plug into.</p>
+  </section>
+
+  <section class="cs-beat" id="beat-04" data-kind="mechanism">
+    <span class="cs-beat-label"><span class="n">04</span>What I did</span>
+    <h2>Built the operating infrastructure, in that order</h2>
+    <ul>
+      <li>Stood up a single source of truth for status, risk and decisions, so the question "where does this stand" had one answer instead of several.</li>
+      <li>Moved operational tracking off Excel and onto Airtable, which made that source of truth usable at portfolio scale rather than theoretical.</li>
+      <li>Established a standardized meeting cadence and governance rhythm across the 16 business units and 12 partners, with each forum owning a defined set of decisions.</li>
+      <li>Built the review structure that gave executives one view of the portfolio instead of assembled fragments.</li>
+      <li>Brought consistency to budget management across the work.</li>
+      <li>Introduced early risk and dependency escalation, so leadership saw problems while they were still cheap to fix.</li>
+    </ul>
+  </section>
+
+  <section class="cs-beat" id="beat-05" data-kind="context">
+    <span class="cs-beat-label"><span class="n">05</span>What I did</span>
+    <h2>Then put AI inside the reporting itself</h2>
+    <p>Once the cadence existed, the expensive part was no longer gathering status. It was turning status into something an executive could act on, which was still manual and still slow.</p>
+    <p>I built AI-assisted reporting into that workflow using ChatGPT and Microsoft Copilot, converting raw status into decision-ready leadership narratives and compressing the executive-prep time around each review.</p>
+    <p>This was work inside a large media organization, not a personal experiment. It is the same instinct that later produced the operating system I run today: the value is not in the model, it is in redesigning the workflow the model sits inside.</p>
+  </section>
+
+  <section class="cs-beat" id="beat-06" data-kind="decision">
+    <span class="cs-beat-label"><span class="n">06</span>Decision</span>
+    <h2>How to absorb new partners without a new process each time</h2>
+    <p>A significant part of the role was working with the executive team and the deal teams on the operational rollout of partner additions and the integration of new content sectors into the FAST portfolio, including national news, sports and digital-native content partners.</p>
+    <div class="cs-boundary">
+      <p><strong>Those were corporate decisions and I did not make them.</strong> My accountability was translating them into an executable rollout: the systems, coordination, reporting and cross-functional work required to make each addition actually function inside the business.</p>
+    </div>
+    <p>The judgment call sat one level underneath. Each new partner and each new sector could have been onboarded its own way, which is the path of least resistance and the reason fragmented organizations stay fragmented. I chose instead to define how additions would be incorporated into the existing operating model, so that the portfolio absorbed new work through one process rather than accumulating a separate one for every deal.</p>
+    <p>That decision is the reason the operating model survived the growth instead of being outgrown by it.</p>
+  </section>
+
+  <section class="cs-beat cs-beat--result" id="beat-07" data-kind="result">
+    <span class="cs-beat-label"><span class="n">07</span>Result</span>
+    <h2>What changed</h2>
+
+    <figure class="metric" style="max-width:var(--measure)">
+      <div class="metric-value">$280K &rarr; $2.1M</div>
+      <figcaption class="metric-mechanism">Annual engagement value. I owned the account and expanded scope across renewal cycles for 5 years, with a delivery team of 8.</figcaption>
+      <p class="metric-method">Engagement revenue, start of tenure to 2026.</p>
+    </figure>
+
+    <div class="chain">
+      <span class="chain-label">How the cycle time came down</span>
+      <ol>
+        <li>I redesigned the review cadence and stood up one source of truth for status, risk and open decisions.</li>
+        <li>Status, risks and open decisions surfaced <strong>earlier</strong>, while leadership still had cheap options.</li>
+        <li>Teams stopped reconciling information and waiting for the next available forum.</li>
+        <li>More campaigns moved through execution across <strong>16 business units</strong> and <strong>32 digital channels</strong>.</li>
+        <li>End-to-end campaign planning-to-execution cycle time fell roughly <strong>30%</strong>.</li>
+      </ol>
+      <p class="chain-scope">Campaign planning to execution, across 3 years as Program Manager on the portfolio.</p>
+    </div>
+
+    <ul>
+      <li>The portfolio ran on one operating model across 16 business units, 12 external partners and 32 digital channels, rather than a set of local ones.</li>
+      <li>New partners and content sectors were absorbed through a defined process instead of a bespoke rollout each time.</li>
+      <li>Executives worked from a single view of status, risk and decisions.</li>
+      <li>The client expanded the engagement 7.5x over 5 years, which is the clearest available measure of whether the work was worth what it cost.</li>
+    </ul>
+  </section>
+
+  <section class="cs-beat" id="beat-08" data-kind="reflection">
+    <span class="cs-beat-label"><span class="n">08</span>What I'd change now</span>
+    <h2>Cadence is infrastructure, not administration</h2>
+    <p>I would establish the unified reporting source, the standardized cadence, the operating structure and the early escalation mechanisms considerably earlier in the engagement.</p>
+    <p>The experience changed how I think about that work. Reporting and cadence are easy to treat as administrative layers you add once execution problems become visible. They are not. They are part of the operating infrastructure itself, and putting them in early is what makes risk visible while leadership still has good options. Every month you wait, the intervention gets more expensive and the problems get further along before anyone sees them.</p>
+    <p>That is the belief I have carried into everything I have built since.</p>
+  </section>
+
+    </div>
+
+    <aside class="cs-rail" aria-label="Sections of this case study">
+      <span class="mlabel cs-rail-label">In this study</span>
+      <ol class="cs-index">
+        <li><a href="#beat-01" data-kind="context"><span class="n">01</span><span class="k" aria-hidden="true"></span><span>Context</span></a></li>
+        <li><a href="#beat-02" data-kind="context"><span class="n">02</span><span class="k" aria-hidden="true"></span><span>Problem</span></a></li>
+        <li><a href="#beat-03" data-kind="context"><span class="n">03</span><span class="k" aria-hidden="true"></span><span>Diagnosis</span></a></li>
+        <li><a href="#beat-04" data-kind="mechanism"><span class="n">04</span><span class="k" aria-hidden="true"></span><span>What I did</span></a></li>
+        <li><a href="#beat-05" data-kind="context"><span class="n">05</span><span class="k" aria-hidden="true"></span><span>What I did</span></a></li>
+        <li><a href="#beat-06" data-kind="decision"><span class="n">06</span><span class="k" aria-hidden="true"></span><span>Decision</span></a></li>
+        <li><a href="#beat-07" data-kind="result"><span class="n">07</span><span class="k" aria-hidden="true"></span><span>Result</span></a></li>
+        <li><a href="#beat-08" data-kind="reflection"><span class="n">08</span><span class="k" aria-hidden="true"></span><span>What I'd change now</span></a></li>
+      </ol>
+      <div class="cs-rail-key" aria-hidden="true">
+        <span><span class="k" data-kind="mechanism"></span>what I built</span>
+        <span><span class="k" data-kind="decision"></span>the call</span>
+        <span><span class="k" data-kind="result"></span>evidence</span>
+      </div>
+    </aside>
+  </div>
+
+  <section class="page-end">
+    <div>
+      <h2>If you have a mandate that needs an owner, let&rsquo;s talk.</h2>
+      <p>A 20-minute call is the fastest way to find out whether I am useful.</p>
+    </div>
+    <div class="end-actions">
+      <a class="btn-primary" href="../index.html#contact">Let's talk</a>
+      <a class="btn-quiet" href="./kaseya.html">Next case study: Kaseya &rarr;</a>
+    </div>
+  </section>
+
+  <footer class="site-foot">
+    <span class="foot-note">Built and maintained by Kyle Littlejohn.</span>
+    <div class="foot-links">
+      <a href="../">Home</a>
+      <a href="./">Work</a>
+      <a href="../operating-system.html">Operating System</a>
+      <a href="../thinking.html">Thinking</a>
+      <a href="../about.html">About</a>
+      <a href="../index.html#contact">Contact</a>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+/* Beat index. Marks the beat currently in view; the index itself is static
+   HTML so orientation works with JavaScript disabled. */
+(function(){
+  var links=document.querySelectorAll('.cs-index a');if(!links.length||!('IntersectionObserver' in window))return;
+  var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a;});
+  var current=null;
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){if(current)current.removeAttribute('aria-current');current=map[e.target.id];if(current)current.setAttribute('aria-current','true');}});
+  },{rootMargin:'-20% 0px -60% 0px',threshold:0});
+  document.querySelectorAll('.cs-beat[id]').forEach(function(s){io.observe(s);});
+})();
+</script>
+<script>
+/* Theme toggle. Ported from production index.html (main @ 17f135a). */
+(function(){
+  var btn=document.getElementById('themeToggle'); if(!btn)return;
+  function sync(){var d=document.documentElement.dataset.theme==='light';btn.setAttribute('aria-pressed',String(d));}
+  sync();
+  btn.addEventListener('click',function(){
+    var cur=document.documentElement.dataset.theme==='light'?'light':'dark';
+    var next=cur==='light'?'dark':'light';
+    function apply(){document.documentElement.dataset.theme=next;try{localStorage.setItem('theme',next);}catch(e){}sync();}
+    if(document.startViewTransition && !matchMedia('(prefers-reduced-motion: reduce)').matches){document.startViewTransition(apply);}
+    else{apply();}
+  });
+})();
+</script>
+<!-- Analytics: the same GoatCounter property production has used since launch. Privacy-preserving, no cookies, no cross-site identifiers. -->
+<script data-goatcounter="https://khlittlejohn.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

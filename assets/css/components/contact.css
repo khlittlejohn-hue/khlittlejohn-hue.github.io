@@ -1,0 +1,108 @@
+/* ============================================================================
+   components/contact.css — the working contact form.
+
+   Restored 2026-09-07. The redesign had downgraded the primary conversion
+   path to a bare mailto: link, which drops every visitor who does not have a
+   desktop mail client configured. Production's FormSubmit mechanism is
+   restored; only the markup and styling are re-authored in this system's
+   language. The mailto stays underneath as an explicit fallback.
+
+   The form is deliberately quiet. It is the last thing on the page and it
+   should feel like a considered way to start a conversation, not a lead
+   capture widget.
+   ============================================================================ */
+
+.cform {
+  display: grid;
+  gap: var(--space-s);
+  max-width: 34rem;
+  margin-inline: auto;
+  margin-top: var(--space-l);
+  text-align: left;
+}
+
+/* Name and email share a row on desktop, stack on narrow. */
+.cform-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+  gap: var(--space-s);
+}
+
+.cform label {
+  display: block;
+  margin-bottom: var(--space-3xs);
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  font-weight: 700;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.cform input,
+.cform textarea {
+  width: 100%;
+  font-family: inherit;
+  font-size: var(--step-0);
+  line-height: 1.5;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line-2);
+  border-radius: var(--radius-s);
+  padding: var(--space-2xs) var(--space-xs);
+  transition: border-color var(--dur-fast) var(--ease-out);
+}
+
+.cform textarea { resize: vertical; min-height: 7rem; }
+
+.cform input:hover,
+.cform textarea:hover { border-color: var(--line-strong); }
+
+.cform input:focus-visible,
+.cform textarea:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+  border-color: var(--gold);
+}
+
+/* Only mark invalid AFTER the field has been interacted with, so an empty
+   untouched form is not aggressively red on arrival. */
+.cform input:not(:placeholder-shown):invalid,
+.cform textarea:not(:placeholder-shown):invalid { border-color: var(--danger, #C0552F); }
+
+.cform button { justify-self: start; cursor: pointer; }
+.cform button[disabled] { opacity: 0.55; cursor: progress; }
+
+/* The status line is a live region — screen readers hear the result rather
+   than only seeing it. Reserves its own row so the layout does not jump
+   when a message appears. */
+.cform-status {
+  min-height: 1.4em;
+  font-size: var(--step--1);
+  line-height: 1.4;
+  color: var(--ink-2);
+}
+.cform-status[data-state="ok"]   { color: var(--gold); }
+.cform-status[data-state="err"]  { color: var(--danger, #C0552F); }
+
+.cform-fallback {
+  font-size: var(--step--1);
+  color: var(--ink-3);
+}
+.cform-fallback a { color: var(--ink-2); }
+.cform-fallback a:hover { color: var(--gold); }
+
+/* The honeypot. Off-screen rather than display:none — some bots skip
+   display:none fields, which would defeat the point. */
+.cform-hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+@media (max-width: 620px) {
+  .cform { margin-top: var(--space-m); }
+  .cform button { justify-self: stretch; text-align: center; }
+}

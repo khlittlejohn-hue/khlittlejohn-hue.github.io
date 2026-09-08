@@ -1,0 +1,232 @@
+/* ============================================================================
+   base.css — reset, typographic defaults, layout primitives.
+   Consumes tokens.css. Declares no colours or sizes of its own.
+   ============================================================================ */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  line-height: var(--lh-body);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* ---- TYPOGRAPHY ---------------------------------------------------------- */
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-variation-settings: var(--fraunces-display);
+  font-weight: 600;
+  letter-spacing: var(--tracking-display);
+  line-height: var(--lh-snug);
+  text-wrap: balance;
+  margin: 0;
+}
+
+h1 { font-size: var(--step-5); line-height: var(--lh-tight); font-weight: 700; }
+h2 { font-size: var(--step-3); }
+h3 { font-size: var(--step-2); }
+h4 { font-size: var(--step-1); font-weight: 600; }
+
+/* The one big moment. Used once per page at most, and on most pages not at all. */
+.display-xl {
+  font-size: var(--step-6);
+  line-height: var(--lh-tight);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+p { margin: 0; max-width: var(--measure); }
+
+.lead {
+  font-size: var(--step-1);
+  line-height: 1.5;
+  color: var(--ink-2);
+  max-width: var(--measure-narrow);
+  text-wrap: pretty;
+}
+
+/* Long-form case-study prose gets more air than UI text. */
+.prose { max-width: var(--measure); line-height: var(--lh-loose); }
+.prose > * + * { margin-top: var(--space-s); }
+.prose h2 { margin-top: var(--space-xl); }
+.prose h3 { margin-top: var(--space-l); }
+
+/* Mono label / eyebrow. The instrumentation voice. */
+.label {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* Numerals must align wherever they stack. */
+.tabular, table, .metric-value { font-variant-numeric: tabular-nums; }
+
+strong, b { font-weight: 600; color: var(--ink); }
+small { font-size: var(--step--1); color: var(--ink-3); }
+
+/* ---- LINKS --------------------------------------------------------------- */
+
+a {
+  color: inherit;
+  text-decoration-color: var(--gold-line);
+  text-underline-offset: 0.22em;
+  text-decoration-thickness: 1px;
+  transition: text-decoration-color var(--dur-fast) var(--ease-out),
+              color var(--dur-fast) var(--ease-out);
+}
+a:hover { text-decoration-color: var(--gold); }
+
+/* ---- FOCUS — non-negotiable, applies to everything ----------------------- */
+
+:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+  border-radius: var(--radius-s);
+}
+:focus:not(:focus-visible) { outline: none; }
+
+.skip-link {
+  position: fixed;
+  top: -100px;
+  left: var(--space-s);
+  z-index: var(--z-overlay);
+  background: var(--gold);
+  color: var(--gold-ink);
+  padding: var(--space-2xs) var(--space-s);
+  border-radius: var(--radius-s);
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  transition: top var(--dur-fast) var(--ease-out);
+}
+.skip-link:focus { top: var(--space-s); }
+
+/* ---- MEDIA --------------------------------------------------------------- */
+
+img, svg, video, canvas { max-width: 100%; height: auto; display: block; }
+
+/* ---- LAYOUT PRIMITIVES --------------------------------------------------- */
+
+.page {
+  width: 100%;
+  max-width: var(--page-max);
+  margin-inline: auto;
+  padding-inline: var(--page-pad);
+}
+
+/* The 12-column editorial grid. Asymmetry comes from span choice. */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-cols), minmax(0, 1fr));
+  gap: var(--grid-gutter);
+}
+
+.span-3  { grid-column: span 3; }
+.span-4  { grid-column: span 4; }
+.span-5  { grid-column: span 5; }
+.span-6  { grid-column: span 6; }
+.span-7  { grid-column: span 7; }
+.span-8  { grid-column: span 8; }
+.span-12 { grid-column: span 12; }
+
+/* Below 900px the editorial grid collapses to a single column. Deliberate
+   subtraction, not reflow — see the responsive principles in the spec. */
+@media (max-width: 900px) {
+  .span-3, .span-4, .span-5, .span-6, .span-7, .span-8 { grid-column: span 12; }
+}
+
+/* Fixed-count rows. auto-fit stranded a third item beside an empty column
+   between ~460 and 810px; these collapse once, deliberately, to one column. */
+.row-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--grid-gutter); }
+.row-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--grid-gutter); }
+.row-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--grid-gutter); }
+@media (max-width: 700px) { .row-3, .row-2, .row-4 { grid-template-columns: 1fr; } }
+@media (min-width: 701px) and (max-width: 900px) { .row-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* Uppercase mono micro-label. One size, one tracking, one weight. */
+.mlabel {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  font-weight: 700;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* Vertical rhythm between major page bands. This token does most of the work
+   of making the page feel like a company site rather than a document. */
+.band { padding-block: var(--band-y); }
+.band + .band { border-top: var(--hairline); }
+.band--sunk { background: var(--bg-sunk); }
+
+/* Generic stack. Spacing comes from gap, never from child margins. */
+.stack { display: flex; flex-direction: column; gap: var(--space-s); }
+.stack--l { gap: var(--space-l); }
+.stack--xl { gap: var(--space-xl); }
+
+.cluster { display: flex; flex-wrap: wrap; gap: var(--space-xs); align-items: center; }
+
+/* Wide content never makes the page scroll sideways. */
+.scroll-x { overflow-x: auto; overscroll-behavior-x: contain; }
+
+/* ---- AMBIENT TEXTURE ----------------------------------------------------- */
+
+#grain {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-ambient);
+  pointer-events: none;
+  opacity: var(--grain-opacity);
+}
+
+/* ---- UTILITIES ----------------------------------------------------------- */
+
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media print {
+  body { background: #fff; color: #000; }
+  .band + .band { border-top: 1px solid #ccc; }
+  #grain, .skip-link { display: none; }
+}
+
+/* ---- The infrastructure mark --------------------------------------------
+   Three tiers, one argument: Decision → Operating → AI operating. The current
+   tier is gold, earlier tiers are drawn, later tiers are only outlined. It
+   appears on the home arc, on every work-index study and in every case-study
+   header, so three separate stories read as one thesis.                    */
+.infra { display: inline-flex; flex-direction: column-reverse; gap: 3px; width: 2.6rem; flex: none; }
+.infra i { display: block; height: 5px; border: 1px solid var(--line-strong); border-radius: 1px; background: transparent; }
+.infra[data-tier="1"] i:nth-child(1),
+.infra[data-tier="2"] i:nth-child(-n+2),
+.infra[data-tier="3"] i:nth-child(-n+3) { background: var(--line-strong); border-color: var(--line-strong); }
+.infra[data-tier="1"] i:nth-child(1),
+.infra[data-tier="2"] i:nth-child(2),
+.infra[data-tier="3"] i:nth-child(3) { background: var(--gold); border-color: var(--gold); }
+.infra-row { display: inline-flex; align-items: center; gap: var(--space-s); }
+.infra-name { font-family: var(--font-mono); font-size: var(--step--2); letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--ink-3); }
+.infra-name b { color: var(--gold); font-weight: 600; }

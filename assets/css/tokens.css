@@ -1,0 +1,247 @@
+/* ============================================================================
+   Kyle Littlejohn — Website 2.0
+   tokens.css — the single source of truth for the visual system.
+
+   Target: a boutique strategy/technology firm's site where the firm is one
+   person. Not a portfolio, not a resume, not a minimalist text document.
+
+   Nothing in this file styles a component. It only declares the system.
+   Components consume these tokens and never hardcode a value.
+   ============================================================================ */
+
+:root {
+  /* ---- TYPEFACES ---------------------------------------------------------
+     Fraunces is the signature. It is a variable serif with optical-size,
+     SOFT and WONK axes, which is why the display type can feel authored
+     rather than selected. Geist carries body; Geist Mono carries data,
+     eyebrows and anything that should read as instrumentation.           */
+  --font-display: "Fraunces", "Iowan Old Style", Georgia, serif;
+  --font-body: "Geist", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Fraunces axis settings. The display face gets slight wonk + soft so it
+     reads editorial rather than institutional. Data-adjacent display type
+     drops the wonk so numbers stay sober. */
+  --fraunces-display: "opsz" 120, "SOFT" 28, "WONK" 1;
+  --fraunces-data:    "opsz" 96,  "SOFT" 0,  "WONK" 0;
+
+  /* ---- TYPE SCALE --------------------------------------------------------
+     A confident editorial ramp. Display sizes are deliberately large — the
+     restraint lives in how rarely they are used, not in their size.
+     Fluid between 390px and 1440px viewports.                            */
+  --step--2: 0.72rem;                                      /* mono labels — the floor. Nothing readable goes below 11.5px */
+  --step--1: clamp(0.83rem, 0.80rem + 0.14vw, 0.90rem);   /* captions, meta */
+  --step-0:  clamp(1.00rem, 0.96rem + 0.19vw, 1.0625rem); /* body — 17px cap */
+  --step-1:  clamp(1.16rem, 1.09rem + 0.32vw, 1.33rem);   /* lead paragraph */
+  --step-2:  clamp(1.41rem, 1.28rem + 0.58vw, 1.78rem);   /* h3 */
+  --step-3:  clamp(1.73rem, 1.49rem + 1.05vw, 2.37rem);   /* h2 */
+  --step-4:  clamp(2.12rem, 1.71rem + 1.79vw, 3.16rem);   /* section display */
+  --step-5:  clamp(2.59rem, 1.92rem + 2.93vw, 4.21rem);   /* hero */
+  --step-6:  clamp(3.16rem, 2.10rem + 4.63vw, 5.61rem);   /* the one big moment */
+
+  --lh-tight: 1.08;   /* display */
+  --lh-snug:  1.22;   /* headings */
+  --lh-body:  1.6;    /* running text — holds at every breakpoint */
+  --lh-loose: 1.75;   /* long-form case study prose */
+
+  --tracking-display: -0.022em;
+  --tracking-body: 0;
+  --tracking-label: 0.11em;   /* uppercase mono labels */
+
+  /* Measure. Running text never exceeds this. */
+  --measure: 68ch;
+  --measure-narrow: 54ch;
+  --measure-quote: 34ch;   /* the one emphasized sentence in a beat */
+
+  /* ---- SPACING -----------------------------------------------------------
+     One modular scale. Applied via flex/grid gap, never per-element margin. */
+  --space-3xs: 0.25rem;
+  --space-2xs: 0.5rem;
+  --space-xs:  0.75rem;
+  --space-s:   1rem;
+  --space-m:   1.5rem;
+  --space-l:   2.25rem;
+  --space-xl:  3.5rem;
+  --space-2xl: 5.5rem;
+  --space-3xl: 8rem;
+
+  /* Vertical rhythm between major page bands. This single token is most of
+     what makes a page feel like a company site rather than a document.
+     Tuned down 2026-09-07 after visual QA: the previous 9rem ceiling stacked
+     with band padding and produced stretches of empty scroll on the homepage.
+     Density is doing some of the work now. */
+  --band-y: clamp(3.25rem, 2.25rem + 4vw, 6rem);
+
+  /* ---- GRID --------------------------------------------------------------
+     12 columns with a real gutter. Asymmetry is expressed by span choice,
+     not by ad-hoc margins.                                               */
+  --grid-cols: 12;
+  --grid-gutter: clamp(1rem, 0.6rem + 1.6vw, 2rem);
+  --page-max: 1240px;
+  --page-max-prose: 1120px;  /* case studies: text column + rail */
+  --rail-w: 15rem;           /* the case-study rail */
+  --page-pad: clamp(1.25rem, 0.7rem + 2.4vw, 3rem);
+
+  /* ---- COLOUR ------------------------------------------------------------
+     Warm near-black ground with a gold accent. Neutrals carry a deliberate
+     warm bias toward the accent so nothing reads as unconsidered grey.
+     Dark is the primary environment; light is fully designed, not inverted. */
+
+  /* Ground + surfaces */
+  --bg:            #0C0B0E;
+  --bg-sunk:       #08070A;
+  --surface:       #131218;
+  --surface-2:     #1A1922;
+  --surface-raised:#201F29;
+
+  /* Ink */
+  --ink:           #F3F0EA;
+  --ink-2:         #B9B3A9;
+  --ink-3:         #837D75;
+  /* --ink-faint is NOT a text colour. 2.4:1 on surface. Use it only for
+     non-semantic marks: inactive dots, connector lines, decorative rules.
+     Every readable string uses --ink-3 or stronger (4.6:1+). */
+  --ink-faint:     #57524C;
+
+  /* Lines */
+  --line:          #26242D;
+  --line-2:        #34313C;
+  --line-strong:   #46424F;
+
+  /* Accent — gold is canonical and must not drift to blue. */
+  --gold:          #F5C451;
+  --gold-deep:     #D9A32E;
+  --gold-ink:      #1B1610;   /* text on a gold fill */
+  --gold-wash:     color-mix(in oklab, var(--gold) 12%, transparent);
+  --gold-line:     color-mix(in oklab, var(--gold) 34%, transparent);
+
+  /* Secondary — used only for diagram states and data. Never decorative. */
+  --cyan:          #6FD8E8;
+  --violet:        #A78BFA;
+
+  /* Semantic — deliberately separate from the accent so "good" never reads
+     as "branded". Used by the pipeline's state machine. */
+  --ok:            #5FC79B;
+  --warn:          #E0AE5C;
+  --fail:          #F0837A;
+  --ok-wash:       color-mix(in oklab, var(--ok) 14%, transparent);
+  --warn-wash:     color-mix(in oklab, var(--warn) 14%, transparent);
+  --fail-wash:     color-mix(in oklab, var(--fail) 14%, transparent);
+
+  /* ---- MATERIAL ----------------------------------------------------------
+     Depth comes from hairlines and low-contrast surfaces, never heavy
+     shadow. One ambient texture, declared here, used once.              */
+  --radius-s: 6px;
+  --radius-m: 10px;
+  --radius-l: 16px;
+  --hairline: 1px solid var(--line);
+  --shadow-subtle: 0 1px 2px rgb(0 0 0 / 0.30);
+  --shadow-raised: 0 8px 28px -12px rgb(0 0 0 / 0.55);
+  --grain-opacity: 0.028;
+
+  /* ---- MOTION ------------------------------------------------------------
+     Hard ceiling of 250ms. Long-form content carries no keyframe animation.
+     These are the only durations permitted anywhere in the system.      */
+  --dur-instant: 100ms;
+  --dur-fast:    160ms;
+  --dur-base:    200ms;
+  --dur-slow:    250ms;
+  --ease-out:   cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-in-out:cubic-bezier(0.65, 0.05, 0.36, 1);
+
+  /* ---- FOCUS -------------------------------------------------------------
+     Non-negotiable. Every interactive element gets a visible focus state. */
+  --focus-ring: 2px solid var(--gold);
+  --focus-offset: 3px;
+
+  /* ---- LAYERS ------------------------------------------------------------ */
+  --z-ambient: 0;
+  --z-content: 2;
+  --z-sticky: 20;
+  --z-nav: 30;
+  --z-overlay: 60;
+}
+
+/* ---- LIGHT ENVIRONMENT ----------------------------------------------------
+   Designed, not inverted. Warm cream ground, deeper gold so the accent still
+   carries contrast on a light field.                                       */
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg:            #F6F3EC;
+    --bg-sunk:       #EDE9E0;
+    --surface:       #FFFFFF;
+    --surface-2:     #FAF8F3;
+    --surface-raised:#FFFFFF;
+
+    --ink:           #1B1916;
+    --ink-2:         #4A453E;
+    --ink-3:         #6B655D;
+    --ink-faint:     #9C948A;
+
+    --line:          #E2DCD0;
+    --line-2:        #D2CABB;
+    --line-strong:   #B9AF9E;
+
+    /* Light-theme gold darkened 2026-09-07 to clear WCAG AA. The previous
+       #B8850F measured 2.96:1 against the light ground where 4.5 is required,
+       a real failure that was invisible because every review capture was dark.
+       #90680C holds the brand hue (41.9deg) and saturation (85%) exactly and
+       only drops lightness 39% -> 30.6%, so it reads as the same gold. It
+       clears AA on the page ground (4.54), on surface (5.03) and on surface-2
+       (4.74). The dark-theme gold is unchanged at 12.06:1. */
+    --gold:          #90680C;
+    --gold-deep:     #6F5008;
+    --gold-ink:      #FFFFFF;
+
+    --cyan:          #17788C;
+    --violet:        #6D4FD0;
+    --ok:            #1B6248;
+    --warn:          #8A5300;
+    --fail:          #A32118;
+
+    --shadow-subtle: 0 1px 2px rgb(60 50 35 / 0.07);
+    --shadow-raised: 0 10px 30px -14px rgb(60 50 35 / 0.22);
+    --grain-opacity: 0.020;
+  }
+}
+
+/* Explicit theme overrides must win over the media query in BOTH directions.
+   The viewer's toggle stamps data-theme on the root element. */
+:root[data-theme="dark"] {
+  --bg:#0C0B0E; --bg-sunk:#08070A; --surface:#131218; --surface-2:#1A1922;
+  --surface-raised:#201F29;
+  --ink:#F3F0EA; --ink-2:#B9B3A9; --ink-3:#837D75; --ink-faint:#57524C;
+  --line:#26242D; --line-2:#34313C; --line-strong:#46424F;
+  --gold:#F5C451; --gold-deep:#D9A32E; --gold-ink:#1B1610;
+  --cyan:#6FD8E8; --violet:#A78BFA;
+  --ok:#5FC79B; --warn:#E0AE5C; --fail:#F0837A;
+  --shadow-subtle:0 1px 2px rgb(0 0 0 / 0.30);
+  --shadow-raised:0 8px 28px -12px rgb(0 0 0 / 0.55);
+  --grain-opacity:0.028;
+}
+
+:root[data-theme="light"] {
+  --bg:#F6F3EC; --bg-sunk:#EDE9E0; --surface:#FFFFFF; --surface-2:#FAF8F3;
+  --surface-raised:#FFFFFF;
+  --ink:#1B1916; --ink-2:#4A453E; --ink-3:#6B655D; --ink-faint:#9C948A;
+  --line:#E2DCD0; --line-2:#D2CABB; --line-strong:#B9AF9E;
+  --gold:#90680C; --gold-deep:#6F5008; --gold-ink:#FFFFFF;
+  --cyan:#17788C; --violet:#6D4FD0;
+  --ok:#1B6248; --warn:#8A5300; --fail:#A32118;
+  --shadow-subtle:0 1px 2px rgb(60 50 35 / 0.07);
+  --shadow-raised:0 10px 30px -14px rgb(60 50 35 / 0.22);
+  --grain-opacity:0.020;
+}
+
+/* ---- REDUCED MOTION -------------------------------------------------------
+   A first-class token path, not an afterthought. Durations collapse to zero
+   so every component inherits the behaviour without writing its own query.
+   Five of eight premium sites studied declare nothing here at all.        */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-instant: 0ms;
+    --dur-fast: 0ms;
+    --dur-base: 0ms;
+    --dur-slow: 0ms;
+  }
+}

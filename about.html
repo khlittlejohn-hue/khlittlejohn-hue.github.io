@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- No flash of wrong theme: set the theme attribute before first paint.
+     Ported verbatim from production index.html (main @ 17f135a). -->
+<script>
+  (function(){
+    try{
+      var stored=localStorage.getItem('theme');
+      /* dark is the brand default; only an explicit user toggle to light overrides it */
+      document.documentElement.dataset.theme=(stored==='light'||stored==='dark')?stored:'dark';
+    }catch(e){document.documentElement.dataset.theme='dark';}
+    document.documentElement.className='js';
+  })();
+</script>
+<title>About · Kyle Littlejohn</title>
+<meta name="description" content="Kyle Littlejohn — Strategy and Operations leader in New York. Marathons, Hyrox, 50+ countries, and a neuroscience degree that turned out to be relevant.">
+<link rel="canonical" href="https://kylelittlejohn.com/about.html">
+<meta name="author" content="Kyle Littlejohn">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#0c0b0e" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f6f3ec" media="(prefers-color-scheme: light)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20rx='13'%20fill='%230c0b0e'/%3E%3Crect%20x='1.5'%20y='1.5'%20width='61'%20height='61'%20rx='12'%20fill='none'%20stroke='%23f5c451'%20stroke-opacity='0.35'/%3E%3Ctext%20x='32'%20y='45'%20font-family='Georgia,serif'%20font-size='33'%20font-weight='700'%20fill='%23f5c451'%20text-anchor='middle'%3EKL%3C/text%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="https://kylelittlejohn.com/assets/apple-touch-icon.png">
+<meta property="og:site_name" content="Kyle Littlejohn">
+<meta property="og:title" content="About · Kyle Littlejohn">
+<meta property="og:description" content="Strategy and Operations leader in New York. Five industries entered cold, 30+ endurance races, 50+ countries, and a neuroscience degree that turned out to be relevant.">
+<meta property="og:image" content="https://kylelittlejohn.com/assets/website-card-100.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:alt" content="Kyle Littlejohn, Chief of Staff and Strategy / Operations leader. He turns executive ambiguity into shipped outcomes, and built the AI operating system that multiplies how fast he does it.">
+<meta property="og:url" content="https://kylelittlejohn.com/about.html">
+<meta property="og:type" content="profile">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="About · Kyle Littlejohn">
+<meta name="twitter:description" content="Strategy and Operations leader in New York. Five industries entered cold, 30+ endurance races, 50+ countries, and a neuroscience degree that turned out to be relevant.">
+<meta name="twitter:image" content="https://kylelittlejohn.com/assets/website-card-100.png">
+<meta name="twitter:image:alt" content="Kyle Littlejohn, Chief of Staff and Strategy / Operations leader. He turns executive ambiguity into shipped outcomes, and built the AI operating system that multiplies how fast he does it.">
+<link rel="preconnect" href="https://fonts.bunny.net">
+<link rel="stylesheet" href="https://fonts.bunny.net/css?family=fraunces:400,500,600,700|geist:300,400,500,600,700|geist-mono:400,500&display=swap">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/components/nav.css">
+<link rel="stylesheet" href="assets/css/layouts/case-study.css">
+<link rel="stylesheet" href="assets/css/layouts/editorial.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<nav class="nav" aria-label="Primary">
+  <div class="page nav-inner">
+    <a class="nav-brand" href="./">
+      <img src="assets/kyle.jpg" alt="" width="30" height="30">
+      Kyle Littlejohn
+    </a>
+    <div class="nav-links">
+      <div class="nav-sections">
+        <a href="work/">Work</a>
+        <a href="operating-system.html">Operating System</a>
+        <a href="thinking.html">Thinking</a>
+        <a href="about.html" aria-current="page">About</a>
+          <a href="assets/Kyle-Littlejohn-Resume.pdf">Resume</a>
+      </div>
+      <a class="nav-cta" href="index.html#contact">Let's talk &rarr;</a>
+      <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle light and dark theme" aria-pressed="false">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<main id="main" class="page">
+
+  <header class="ab-hero">
+    <div>
+      <h1>I am drawn to things that hold up under load.</h1>
+      <p class="lead">Organizations, systems, and occasionally my own legs. Strategy and Operations leader based in New York, currently running an AI systems consultancy I founded.</p>
+    </div>
+    <img class="ab-portrait" src="assets/kyle@2x.jpg" alt="Kyle Littlejohn" width="230" height="230">
+  </header>
+
+  <p class="facts" aria-label="In numbers">
+    <span class="fact"><b>12+</b><span>years operating</span></span>
+    <span class="fact"><b>5</b><span>industries entered cold</span></span>
+    <span class="fact"><b>30+</b><span>endurance races</span></span>
+    <span class="fact"><b>50+</b><span>countries</span></span>
+  </p>
+
+  <section class="cs-beat">
+    <span class="cs-beat-label">The work</span>
+    <h2>Five industries I knew nothing about</h2>
+    <p>Biotech, credit ratings, health insurance, infrastructure SaaS, streaming media. I walked into each of them without the domain and had to become useful quickly, which turns out to be most of the job when you are the person handed the thing nobody owns.</p>
+    <p>That pattern is not on my resume as a skill, but it is probably the most transferable thing I do. The method in <a href="operating-system.html">how I work</a> came out of needing something that survives contact with an industry I have never seen.</p>
+  </section>
+
+  <section class="cs-beat">
+    <span class="cs-beat-label">Outside it</span>
+    <h2>Marathons, Hyrox, and a long-running argument with my own pacing</h2>
+    <p>Thirty-plus endurance races. Marathons and Hyrox mostly, with the occasional ultra when I have lost perspective. Training is the one part of my life with a genuinely honest feedback loop, which is probably why I keep going back to it.</p>
+    <p>Fifty-plus countries, usually with a plan that survives about a day and a half. <a class="byline" href="https://www.cntraveler.com/story/how-to-hack-your-companys-vacation-policy" target="_blank" rel="noopener">Featured in Cond&eacute; Nast Traveler on getting more out of a limited vacation policy &#8599;</a></p>
+    <p>I cook seriously, which is the other place where a process either works or it does not and there is no arguing with the result.</p>
+  </section>
+
+  <section class="cs-beat">
+    <span class="cs-beat-label">Background</span>
+    <h2>A neuroscience degree that turned out to be relevant</h2>
+    <p>I studied neuroscience at William &amp; Mary with a minor in process management, which sounded like an odd pairing at the time and has aged better than expected. Both are the study of how a system takes in messy information and produces a decision.</p>
+
+    <!-- Formal credentials. Deliberately subordinate: a quiet line under the
+         degree it extends, not the card grid the old resume site used. -->
+    <p class="creds">
+      <span class="creds-label">Certifications</span>
+      Professional Scrum Master I &middot; Google Project Management &middot; Generative AI for Project Managers &middot; AI Foundations for Business
+    </p>
+  </section>
+
+  <section class="cs-beat">
+    <span class="cs-beat-label">Now</span>
+    <h2>What I am looking for</h2>
+    <p>A Chief of Staff or Strategy and Operations seat where the problems are genuinely ambiguous and the operating model is not yet built. I am most useful early, when the shape of the thing is still undecided, and I would rather build the infrastructure than inherit it.</p>
+    <p>Based in New York, open to remote. <a href="index.html#contact">A 20-minute call</a> is the fastest way to work out whether I am useful to you.</p>
+  </section>
+
+  <section class="page-end">
+    <div>
+      <h2>If you have a mandate that needs an owner, let&rsquo;s talk.</h2>
+      <p>I am most useful early, when the shape of the thing is still undecided.</p>
+    </div>
+    <div class="end-actions">
+      <a class="btn-primary" href="index.html#contact">Let's talk</a>
+      <a class="btn-quiet" href="work/">See the work &rarr;</a>
+    </div>
+  </section>
+
+  <footer class="site-foot">
+    <span class="foot-note">Built and maintained by Kyle Littlejohn.</span>
+    <div class="foot-links">
+      <a href="./">Home</a>
+      <a href="work/">Work</a>
+      <a href="operating-system.html">Operating System</a>
+      <a href="thinking.html">Thinking</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+  </footer>
+
+</main>
+<script>
+/* Theme toggle. Ported from production index.html (main @ 17f135a). */
+(function(){
+  var btn=document.getElementById('themeToggle'); if(!btn)return;
+  function sync(){var d=document.documentElement.dataset.theme==='light';btn.setAttribute('aria-pressed',String(d));}
+  sync();
+  btn.addEventListener('click',function(){
+    var cur=document.documentElement.dataset.theme==='light'?'light':'dark';
+    var next=cur==='light'?'dark':'light';
+    function apply(){document.documentElement.dataset.theme=next;try{localStorage.setItem('theme',next);}catch(e){}sync();}
+    if(document.startViewTransition && !matchMedia('(prefers-reduced-motion: reduce)').matches){document.startViewTransition(apply);}
+    else{apply();}
+  });
+})();
+</script>
+<!-- Analytics: the same GoatCounter property production has used since launch. Privacy-preserving, no cookies, no cross-site identifiers. -->
+<script data-goatcounter="https://khlittlejohn.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
