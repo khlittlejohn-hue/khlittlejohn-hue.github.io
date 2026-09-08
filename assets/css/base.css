@@ -70,7 +70,7 @@ p { margin: 0; max-width: var(--measure); }
 /* Mono label / eyebrow. The instrumentation voice. */
 .label {
   font-family: var(--font-mono);
-  font-size: var(--step--1);
+  font-size: var(--step--2);
   font-weight: 500;
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
@@ -153,6 +153,24 @@ img, svg, video, canvas { max-width: 100%; height: auto; display: block; }
   .span-3, .span-4, .span-5, .span-6, .span-7, .span-8 { grid-column: span 12; }
 }
 
+/* Fixed-count rows. auto-fit stranded a third item beside an empty column
+   between ~460 and 810px; these collapse once, deliberately, to one column. */
+.row-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--grid-gutter); }
+.row-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--grid-gutter); }
+.row-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--grid-gutter); }
+@media (max-width: 700px) { .row-3, .row-2, .row-4 { grid-template-columns: 1fr; } }
+@media (min-width: 701px) and (max-width: 900px) { .row-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* Uppercase mono micro-label. One size, one tracking, one weight. */
+.mlabel {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  font-weight: 700;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
 /* Vertical rhythm between major page bands. This token does most of the work
    of making the page feel like a company site rather than a document. */
 .band { padding-block: var(--band-y); }
@@ -195,3 +213,20 @@ img, svg, video, canvas { max-width: 100%; height: auto; display: block; }
   .band + .band { border-top: 1px solid #ccc; }
   #grain, .skip-link { display: none; }
 }
+
+/* ---- The infrastructure mark --------------------------------------------
+   Three tiers, one argument: Decision → Operating → AI operating. The current
+   tier is gold, earlier tiers are drawn, later tiers are only outlined. It
+   appears on the home arc, on every work-index study and in every case-study
+   header, so three separate stories read as one thesis.                    */
+.infra { display: inline-flex; flex-direction: column-reverse; gap: 3px; width: 2.6rem; flex: none; }
+.infra i { display: block; height: 5px; border: 1px solid var(--line-strong); border-radius: 1px; background: transparent; }
+.infra[data-tier="1"] i:nth-child(1),
+.infra[data-tier="2"] i:nth-child(-n+2),
+.infra[data-tier="3"] i:nth-child(-n+3) { background: var(--line-strong); border-color: var(--line-strong); }
+.infra[data-tier="1"] i:nth-child(1),
+.infra[data-tier="2"] i:nth-child(2),
+.infra[data-tier="3"] i:nth-child(3) { background: var(--gold); border-color: var(--gold); }
+.infra-row { display: inline-flex; align-items: center; gap: var(--space-s); }
+.infra-name { font-family: var(--font-mono); font-size: var(--step--2); letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--ink-3); }
+.infra-name b { color: var(--gold); font-weight: 600; }

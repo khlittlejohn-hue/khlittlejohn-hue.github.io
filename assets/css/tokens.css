@@ -29,6 +29,7 @@
      A confident editorial ramp. Display sizes are deliberately large — the
      restraint lives in how rarely they are used, not in their size.
      Fluid between 390px and 1440px viewports.                            */
+  --step--2: 0.72rem;                                      /* mono labels — the floor. Nothing readable goes below 11.5px */
   --step--1: clamp(0.83rem, 0.80rem + 0.14vw, 0.90rem);   /* captions, meta */
   --step-0:  clamp(1.00rem, 0.96rem + 0.19vw, 1.0625rem); /* body — 17px cap */
   --step-1:  clamp(1.16rem, 1.09rem + 0.32vw, 1.33rem);   /* lead paragraph */
@@ -50,6 +51,7 @@
   /* Measure. Running text never exceeds this. */
   --measure: 68ch;
   --measure-narrow: 54ch;
+  --measure-quote: 34ch;   /* the one emphasized sentence in a beat */
 
   /* ---- SPACING -----------------------------------------------------------
      One modular scale. Applied via flex/grid gap, never per-element margin. */
@@ -76,6 +78,8 @@
   --grid-cols: 12;
   --grid-gutter: clamp(1rem, 0.6rem + 1.6vw, 2rem);
   --page-max: 1240px;
+  --page-max-prose: 1120px;  /* case studies: text column + rail */
+  --rail-w: 15rem;           /* the case-study rail */
   --page-pad: clamp(1.25rem, 0.7rem + 2.4vw, 3rem);
 
   /* ---- COLOUR ------------------------------------------------------------
@@ -94,6 +98,9 @@
   --ink:           #F3F0EA;
   --ink-2:         #B9B3A9;
   --ink-3:         #837D75;
+  /* --ink-faint is NOT a text colour. 2.4:1 on surface. Use it only for
+     non-semantic marks: inactive dots, connector lines, decorative rules.
+     Every readable string uses --ink-3 or stronger (4.6:1+). */
   --ink-faint:     #57524C;
 
   /* Lines */
@@ -168,7 +175,7 @@
 
     --ink:           #1B1916;
     --ink-2:         #4A453E;
-    --ink-3:         #746D64;
+    --ink-3:         #6B655D;
     --ink-faint:     #9C948A;
 
     --line:          #E2DCD0;
@@ -216,7 +223,7 @@
 :root[data-theme="light"] {
   --bg:#F6F3EC; --bg-sunk:#EDE9E0; --surface:#FFFFFF; --surface-2:#FAF8F3;
   --surface-raised:#FFFFFF;
-  --ink:#1B1916; --ink-2:#4A453E; --ink-3:#746D64; --ink-faint:#9C948A;
+  --ink:#1B1916; --ink-2:#4A453E; --ink-3:#6B655D; --ink-faint:#9C948A;
   --line:#E2DCD0; --line-2:#D2CABB; --line-strong:#B9AF9E;
   --gold:#90680C; --gold-deep:#6F5008; --gold-ink:#FFFFFF;
   --cyan:#17788C; --violet:#6D4FD0;
