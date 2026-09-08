@@ -59,10 +59,12 @@
       Kyle Littlejohn
     </a>
     <div class="nav-links">
-      <a href="../work/" aria-current="page">Work</a>
-      <a href="../operating-system.html">Operating System</a>
-      <a href="../thinking.html">Thinking</a>
-      <a href="../about.html">About</a>
+      <div class="nav-sections">
+        <a href="../work/" aria-current="page">Work</a>
+        <a href="../operating-system.html">Operating System</a>
+        <a href="../thinking.html">Thinking</a>
+        <a href="../about.html">About</a>
+      </div>
       <a class="nav-cta" href="../home.html#contact">Let's talk &rarr;</a>
       <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle light and dark theme" aria-pressed="false">
         <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
@@ -75,7 +77,7 @@
 <main id="main" class="page">
 
   <header class="cs-header">
-    <span class="cs-eyebrow">Case Study 02 &middot; Kaseya &middot; 2018&ndash;2020</span>
+    <div class="cs-eyebrow-row"><span class="cs-eyebrow">Case Study 02 &middot; Kaseya &middot; 2018&ndash;2020</span><span class="infra-row" aria-label="Tier 1 of 3: Decision infrastructure"><span class="infra" data-tier="1"><i></i><i></i><i></i></span><span class="infra-name"><b>Decision infrastructure</b></span></span></div>
     <h1 class="cs-title">14 companies, one operating model.</h1>
     <p class="cs-dek">Kaseya was acquiring faster than it could absorb. I built the operating infrastructure that let the executive team understand and run a portfolio that changed shape every few months, and the analysis the executive team used in the review of one of the deals they did not proceed with.</p>
   </header>
@@ -95,29 +97,32 @@
     </div>
   </dl>
 
-  <section class="cs-beat">
-    <span class="cs-beat-label">Context</span>
+  <div class="cs-frame">
+    <div class="cs-body">
+
+  <section class="cs-beat" id="beat-01" data-kind="context">
+    <span class="cs-beat-label"><span class="n">01</span>Context</span>
     <h2>A roll-up moving faster than its instrumentation</h2>
     <p>Kaseya was executing an aggressive acquisition strategy under private equity ownership, buying companies and folding them into a consolidating IT management portfolio. In May 2019 it closed a $500M+ growth financing round from TPG and Insight Partners.</p>
     <p>The strategy was working. What it was outrunning was the executive team's ability to see what they now owned.</p>
   </section>
 
-  <section class="cs-beat">
-    <span class="cs-beat-label">Problem</span>
+  <section class="cs-beat" id="beat-02" data-kind="context">
+    <span class="cs-beat-label"><span class="n">02</span>Problem</span>
     <h2>Fourteen companies, fourteen versions of the truth</h2>
     <p>Every acquisition arrived with its own internal systems, its own KPI definitions, its own reporting structures, its own planning calendar, and its own conventions for what job titles and processes meant.</p>
     <p>Individually, none of that was a crisis. Collectively it meant leadership could not compare anything to anything. A KPI from one acquired company did not mean what the same KPI meant elsewhere. Departmental P&amp;Ls did not reconcile. Forecasts assembled from inconsistent inputs produced a number nobody fully trusted.</p>
     <p class="cs-turn">You cannot allocate capital across a portfolio you cannot compare.</p>
   </section>
 
-  <section class="cs-beat">
-    <span class="cs-beat-label">Mandate</span>
+  <section class="cs-beat" id="beat-03" data-kind="context">
+    <span class="cs-beat-label"><span class="n">03</span>Mandate</span>
     <h2>Give leadership one way to see the whole thing</h2>
     <p>I was brought in to Strategic Finance and Business Operations and worked directly with the C-suite through the scale-up, across budgets, forecasts, P&amp;Ls, KPIs, resource allocation and scenario analysis.</p>
   </section>
 
-  <section class="cs-beat">
-    <span class="cs-beat-label">Diagnosis</span>
+  <section class="cs-beat" id="beat-04" data-kind="context">
+    <span class="cs-beat-label"><span class="n">04</span>Diagnosis</span>
     <h2>The choice everyone frames wrongly</h2>
     <p>Roll-ups usually get framed as a speed question. Absorb acquisitions quickly and you destroy what you paid for. Leave them alone and you get a holding company with a shared logo.</p>
     <p>I did not think that was the real decision. The question was not <em>how much</em> to integrate, it was <em>which layer</em> to integrate.</p>
@@ -125,8 +130,8 @@
     <p>That framing is what made the work tractable. It also meant the integration never finished and never needed to. Each new acquisition plugged into an operating model that already existed.</p>
   </section>
 
-  <section class="cs-beat">
-    <span class="cs-beat-label">What I built</span>
+  <section class="cs-beat" id="beat-05" data-kind="mechanism">
+    <span class="cs-beat-label"><span class="n">05</span>What I built</span>
     <h2>The post-close operating layer</h2>
     <div class="cs-layer">
       <ul>
@@ -146,8 +151,8 @@
     <p>I also did the unglamorous work that makes the rest of it real. Departmental P&amp;Ls were cleaned up so leadership was reading from a consistent financial picture. Departmental actuals were aligned to budgets, which is what turned resource allocation from an argument into a decision. Quarterly forecast adjustments were worked through directly with the C-suite.</p>
   </section>
 
-  <section class="cs-beat">
-    <span class="cs-beat-label">Decision</span>
+  <section class="cs-beat" id="beat-06" data-kind="decision">
+    <span class="cs-beat-label"><span class="n">06</span>Decision</span>
     <h2>The acquisition that did not happen</h2>
     <p>The clearest test of whether decision infrastructure is working is not whether it produces reports. It is whether leadership ever does something different because of it.</p>
     <p>During one acquisition evaluation, I built and analyzed the underlying financial and operational picture: current and projected KPIs, the short and long-term benefits, the risks, and the expected operating implications of bringing the company in. I worked directly with the C-suite through that review.</p>
@@ -158,8 +163,8 @@
     <p>In a company that had completed 14 acquisitions, the ability to say no to the next one is not a small thing. It is the entire argument for building the infrastructure in the first place.</p>
   </section>
 
-  <section class="cs-beat">
-    <span class="cs-beat-label">Result</span>
+  <section class="cs-beat cs-beat--result" id="beat-07" data-kind="result">
+    <span class="cs-beat-label"><span class="n">07</span>Result</span>
     <h2>What the operating system produced</h2>
 
     <figure class="metric" style="max-width:var(--measure)">
@@ -182,26 +187,74 @@
     </div>
   </section>
 
-  <section class="cs-beat">
-    <span class="cs-beat-label">The lasting point</span>
+  <section class="cs-beat" id="beat-08" data-kind="reflection">
+    <span class="cs-beat-label"><span class="n">08</span>The lasting point</span>
     <h2>Integrate the layer, not the company</h2>
     <p>The thing I took from Kaseya is the framing, not the artifacts.</p>
     <p>Fourteen acquisitions is not a reporting problem, and treating it as one produces a company that can describe itself accurately and still cannot decide anything. What leadership needed was not more visibility. It was a common basis for comparison, which is a different thing and has to be built deliberately at the layer underneath the businesses rather than on top of them.</p>
     <p>Get that layer right and the portfolio can absorb almost anything. Get it wrong and every acquisition makes the company harder to run than the one before it.</p>
   </section>
 
-  <nav class="cs-next" aria-label="More work">
-    <a href="./executive-office.html">
-      <span class="lbl">Next case study</span>
-      <span class="ttl">Executive Office &rarr;</span>
-    </a>
-    <a href="../home.html#contact">
-      <span class="lbl">Or</span>
-      <span class="ttl">Let's talk &rarr;</span>
-    </a>
-  </nav>
+    </div>
+
+    <aside class="cs-rail" aria-label="Sections of this case study">
+      <span class="mlabel cs-rail-label">In this study</span>
+      <ol class="cs-index">
+        <li><a href="#beat-01" data-kind="context"><span class="n">01</span><span class="k" aria-hidden="true"></span><span>Context</span></a></li>
+        <li><a href="#beat-02" data-kind="context"><span class="n">02</span><span class="k" aria-hidden="true"></span><span>Problem</span></a></li>
+        <li><a href="#beat-03" data-kind="context"><span class="n">03</span><span class="k" aria-hidden="true"></span><span>Mandate</span></a></li>
+        <li><a href="#beat-04" data-kind="context"><span class="n">04</span><span class="k" aria-hidden="true"></span><span>Diagnosis</span></a></li>
+        <li><a href="#beat-05" data-kind="mechanism"><span class="n">05</span><span class="k" aria-hidden="true"></span><span>What I built</span></a></li>
+        <li><a href="#beat-06" data-kind="decision"><span class="n">06</span><span class="k" aria-hidden="true"></span><span>Decision</span></a></li>
+        <li><a href="#beat-07" data-kind="result"><span class="n">07</span><span class="k" aria-hidden="true"></span><span>Result</span></a></li>
+        <li><a href="#beat-08" data-kind="reflection"><span class="n">08</span><span class="k" aria-hidden="true"></span><span>The lasting point</span></a></li>
+      </ol>
+      <div class="cs-rail-key" aria-hidden="true">
+        <span><span class="k" data-kind="mechanism"></span>what I built</span>
+        <span><span class="k" data-kind="decision"></span>the call</span>
+        <span><span class="k" data-kind="result"></span>evidence</span>
+      </div>
+    </aside>
+  </div>
+
+  <section class="page-end">
+    <div>
+      <h2>If you have a mandate that needs an owner, let&rsquo;s talk.</h2>
+      <p>A 20-minute call is the fastest way to find out whether I am useful.</p>
+    </div>
+    <div class="end-actions">
+      <a class="btn-primary" href="../home.html#contact">Let's talk</a>
+      <a class="btn-quiet" href="./executive-office.html">Next case study: Executive Office &rarr;</a>
+    </div>
+  </section>
+
+  <footer class="site-foot">
+    <span class="foot-note">Built and maintained by Kyle Littlejohn.</span>
+    <div class="foot-links">
+      <a href="../home.html">Home</a>
+      <a href="./">Work</a>
+      <a href="../operating-system.html">Operating System</a>
+      <a href="../thinking.html">Thinking</a>
+      <a href="../about.html">About</a>
+      <a href="../home.html#contact">Contact</a>
+    </div>
+  </footer>
 
 </main>
+
+<script>
+/* Beat index. Marks the beat currently in view; the index itself is static
+   HTML so orientation works with JavaScript disabled. */
+(function(){
+  var links=document.querySelectorAll('.cs-index a');if(!links.length||!('IntersectionObserver' in window))return;
+  var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a;});
+  var current=null;
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){if(current)current.removeAttribute('aria-current');current=map[e.target.id];if(current)current.setAttribute('aria-current','true');}});
+  },{rootMargin:'-20% 0px -60% 0px',threshold:0});
+  document.querySelectorAll('.cs-beat[id]').forEach(function(s){io.observe(s);});
+})();
+</script>
 <script>
 /* Theme toggle. Ported from production index.html (main @ 17f135a). */
 (function(){
