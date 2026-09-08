@@ -421,3 +421,13 @@
 }
 .byline:hover { color: var(--gold-deep); }
 .byline:focus-visible { outline: var(--focus-ring); outline-offset: var(--focus-offset); }
+
+/* ---- LIGHT-THEME INSTRUMENTATION CONTRAST -------------------------------
+   Beat numbers sit on the sunk result field, where gold measures 4.16:1 in
+   light theme. Sequence markers are instrumentation, not identity, so they
+   take --ink-2 (7.84:1) in light only. The beat label text, headings and
+   links keep gold. Dark theme untouched.                               */
+@media (prefers-color-scheme: light) {
+  .cs-beat--result .cs-beat-label .n { color: var(--ink-2); }
+}
+:root[data-theme="light"] .cs-beat--result .cs-beat-label .n { color: var(--ink-2); }

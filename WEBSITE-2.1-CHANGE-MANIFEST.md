@@ -85,3 +85,14 @@ the `prefers-color-scheme` block and the `:root[data-theme="light"]` override.
 branch at 60,943 bytes and referenced by `srcset` on Home and About; both references
 resolve. The design working copy had imported text assets only. No action was required
 and no replacement was generated.
+
+## Sixth commit — light-theme instrumentation contrast
+
+| File | Change |
+|---|---|
+| `assets/css/layouts/home.css` | light-only override: `.band--sunk .os-stage--gate .os-n` -> `--ink-2` |
+| `assets/css/layouts/case-study.css` | light-only override: `.cs-beat--result .cs-beat-label .n` -> `--ink-2` |
+| `assets/css/components/pipeline.css` | light-only overrides: `.pl-rules dt` -> `--ink-2`; `.pl-scenario[aria-pressed="true"]` -> `--ink` |
+
+Additive only — no approved rule was edited. Gold tokens, `band--sunk`, dark theme and all
+identity gold are untouched.

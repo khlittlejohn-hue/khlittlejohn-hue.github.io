@@ -231,3 +231,16 @@
 @media (prefers-reduced-motion: reduce) {
   .pl-loop, .pl-stage { transition: none; }
 }
+
+/* ---- LIGHT-THEME INSTRUMENTATION CONTRAST -------------------------------
+   Governance labels sit on the sunk rules panel and the pressed scenario
+   button on its own gold wash; both measure ~4.16:1 in light theme at
+   10.9-11.5px. Locked gold is preserved; the labels take --ink-2 in light
+   only. The pressed button keeps its gold wash background and border, so
+   the selected state still reads as gold. Dark theme untouched.        */
+@media (prefers-color-scheme: light) {
+  .pl-rules dt { color: var(--ink-2); }
+  .pl-scenario[aria-pressed="true"] { color: var(--ink); }
+}
+:root[data-theme="light"] .pl-rules dt { color: var(--ink-2); }
+:root[data-theme="light"] .pl-scenario[aria-pressed="true"] { color: var(--ink); }

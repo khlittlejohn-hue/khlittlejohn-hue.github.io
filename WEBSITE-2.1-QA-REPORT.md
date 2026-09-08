@@ -116,3 +116,52 @@ URI. Correct parsing reports zero missing assets.
 Lighthouse and axe are not installed in this environment. Structural accessibility and
 contrast were verified directly by the methods above; a Lighthouse pass remains
 outstanding and is listed as a prerequisite in the launch handoff.
+
+---
+
+# Light-theme instrumentation contrast correction (Claude Code, 2026-09-08)
+
+An implementation-level accessibility correction, not a change to the approved design
+treatment. The sunk field, the locked gold token and dark theme are all unchanged.
+
+## Why the obvious fix was not possible
+Lightening `band--sunk` cannot work. Gold measures **4.54:1 on the page ground itself**,
+so any surface darker than the page scores lower. Reaching 4.60:1 would require the band
+to be *lighter* than the page it sits on, inverting the sunk field. The ceiling while it
+still reads as sunk is ~4.54 — no usable margin.
+
+The correction therefore changes the *usage*, not the token: the same pattern already
+applied to `--ink-faint`.
+
+## Before / after — light theme, on `band--sunk` (`#EDE9E0`)
+
+| Element | Before | After | Margin over AA |
+|---|---|---|---|
+| `.os-n` — Home Operating System band | 4.16:1 | **7.84:1** | +3.34 |
+| `.cs-beat--result .cs-beat-label .n` — AMC, Kaseya, EO result beats | 4.16:1 | **7.84:1** | +3.34 |
+| `.pl-rules dt` — Separation / Traceability / Authority | 4.16:1 | **7.84:1** | +3.34 |
+| `.pl-scenario[aria-pressed="true"]` — pressed scenario | 4.17:1 | **17.54:1** (pixel-measured) | +13.04 |
+
+Every override is scoped to light theme through both `@media (prefers-color-scheme: light)`
+and `:root[data-theme="light"]`, matching how `tokens.css` scopes its own palette.
+
+## Gold retained wherever it is identity, not instrumentation
+Headings, links, metric accents, the active tier of the infrastructure mark, the pressed
+scenario's gold wash and border, the human-gate node, and beat numbers on non-sunk beats.
+Verified visually: `03 MANDATE` on Kaseya remains gold, because it sits on the page ground
+at 4.54:1 and passes.
+
+## Verification after the correction
+- Contrast: 766 text elements per theme. **Dark 0 failures. Light 0 failures.**
+- Visual matrix: **112/112 states pass**, zero overflow, zero overflowing elements.
+- Links 114/0 broken · missing assets 0 · duplicate IDs 0 · accessibility PASS.
+- Claims validator PASS, 185 occurrences. Public-safety scan 0 findings.
+- Gold tokens confirmed byte-unchanged: 5 declarations across both themes.
+- Light-theme spot checks captured for Home, AMC and Kaseya.
+
+## Two measurement artifacts, investigated and dismissed
+The nav appeared to fail at 1.2–2.21:1 and the pressed scenario button at 1.2:1. Both sit
+on translucent layers — the nav's `color-mix` backdrop and the button's 12%-alpha gold
+wash — which defeats colour-based background resolution. Pixel sampling of the rendered
+output measures the nav at **8.57:1 light / 9.86:1 dark** and the pressed button at
+**17.54:1**. Neither is a defect.

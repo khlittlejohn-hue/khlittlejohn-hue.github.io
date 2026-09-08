@@ -407,3 +407,14 @@ a.arc-step:focus-visible { outline: var(--focus-ring); outline-offset: 4px; bord
   transition: color var(--dur-fast) var(--ease-out), gap var(--dur-fast) var(--ease-out);
 }
 .teaser:hover .teaser-cue { color: var(--gold); gap: var(--space-2xs); }
+
+/* ---- LIGHT-THEME INSTRUMENTATION CONTRAST -------------------------------
+   Gold on band--sunk measures 4.16:1 in light theme, below AA for these
+   11.5px labels. Gold is a locked token and the sunk field is an approved
+   treatment, so the correction is applied to the instrumentation only.
+   --ink-2 gives 7.84:1 on that field. Identity gold is untouched, and dark
+   theme is untouched because it already clears AA there.               */
+@media (prefers-color-scheme: light) {
+  .band--sunk .os-stage--gate .os-n { color: var(--ink-2); }
+}
+:root[data-theme="light"] .band--sunk .os-stage--gate .os-n { color: var(--ink-2); }
