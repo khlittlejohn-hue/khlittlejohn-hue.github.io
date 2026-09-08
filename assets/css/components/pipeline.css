@@ -17,6 +17,8 @@
    ============================================================================ */
 
 .pipeline {
+  /* Escapes the text column on desktop to sit across text + rail. */
+  width: calc(100% + var(--rail-w) + var(--space-2xl));
   border: var(--hairline);
   border-radius: var(--radius-l);
   background: var(--surface);
@@ -48,7 +50,9 @@
   border: 1px solid var(--line-2);
   border-radius: var(--radius-s);
   background: transparent;
-  color: var(--ink-3);
+  /* --ink-3 measured 4.27:1 here against the pipeline panel — below AA for
+     10.9px text, with no large-text exemption. --ink-2 clears it. */
+  color: var(--ink-2);
   cursor: pointer;
   transition: color var(--dur-fast) var(--ease-out),
               border-color var(--dur-fast) var(--ease-out);
@@ -78,176 +82,152 @@
 .pl-btn--primary { background: var(--gold); color: var(--gold-ink); border-color: var(--gold); font-weight: 550; }
 .pl-btn--primary:hover { background: var(--gold-deep); border-color: var(--gold-deep); color: var(--gold-ink); }
 
-/* ---- Stage chips: the comprehension layer -------------------------------- */
+/* ---- The flow --------------------------------------------------------------
+   Six stages in a row, each a tab. Connectors are drawn between them; the
+   return path from 04 to 03 lives in the second grid row and is only laid
+   out when it fires, so a clean run has no unexplained gap.              */
 
-.pl-stages {
+.pl-flow {
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: 0;
+  grid-template-rows: auto auto;
+  column-gap: var(--space-s);
+  padding: var(--space-l) var(--space-m) var(--space-m);
   border-bottom: var(--hairline);
+  position: relative;
 }
 
 .pl-stage {
+  grid-row: 1;
   position: relative;
   font: inherit;
   text-align: left;
-  padding: var(--space-m) var(--space-s);
+  padding: var(--space-m) 0 var(--space-s) 0;
   background: transparent;
   border: none;
-  border-right: 1px solid var(--line);
+  border-top: 2px solid var(--line-2);
   cursor: pointer;
   color: var(--ink-3);
-  transition: background-color var(--dur-base) var(--ease-out),
-              color var(--dur-base) var(--ease-out);
+  display: flex; flex-direction: column; gap: 2px;
+  transition: color var(--dur-base) var(--ease-out), border-color var(--dur-base) var(--ease-out);
 }
-.pl-stage:last-child { border-right: none; }
-.pl-stage:hover { background: var(--surface-2); color: var(--ink-2); }
-.pl-stage:focus-visible { outline: var(--focus-ring); outline-offset: -3px; }
-
-.pl-stage-n {
-  display: block;
-  font-family: var(--font-mono);
-  font-size: 0.62rem;
-  letter-spacing: var(--tracking-label);
-  color: var(--ink-faint);
-  margin-bottom: var(--space-3xs);
-}
-.pl-stage-name {
-  display: block;
-  font-size: var(--step--1);
-  line-height: 1.25;
-  font-weight: 500;
-}
-
-/* Active stage. The top rule is the progress signal. */
-.pl-stage[aria-selected="true"] {
-  background: var(--bg-sunk);
-  color: var(--ink);
-}
-.pl-stage[aria-selected="true"]::before {
+/* the node dot, sitting on the top rule */
+.pl-stage::before {
   content: "";
   position: absolute;
-  inset-inline: 0;
-  top: 0;
-  height: 2px;
-  background: var(--gold);
-}
-
-/* The human gate is marked permanently, selected or not. Governance is the
-   differentiator, so it should read as different at a glance. */
-.pl-stage--gate .pl-stage-name { color: var(--ink); }
-.pl-stage--gate .pl-stage-n { color: var(--gold); }
-
-/* Stage that failed in the failure scenario. */
-.pl-stage[data-state="failed"] .pl-stage-name { color: var(--fail); }
-.pl-stage[data-state="failed"]::before { background: var(--fail); }
-
-/* ---- Panes --------------------------------------------------------------- */
-
-.pl-panes {
-  display: grid;
-  grid-template-columns: minmax(0, 5fr) minmax(0, 4fr);
-  min-height: 15rem;
-}
-
-.pl-schematic {
-  padding: var(--space-m);
-  border-right: var(--hairline);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3xs);
-  justify-content: center;
-}
-
-.pl-node {
-  display: flex;
-  align-items: center;
-  gap: var(--space-s);
-  padding: var(--space-2xs) var(--space-2xs);
-  border-radius: var(--radius-s);
-  font-family: var(--font-mono);
-  font-size: 0.74rem;
-  color: var(--ink-faint);
-  transition: color var(--dur-base) var(--ease-out),
-              background-color var(--dur-base) var(--ease-out);
-}
-.pl-node::before {
-  content: "";
-  flex: none;
-  width: 8px; height: 8px;
+  left: 0; top: -6px;
+  width: 10px; height: 10px;
   border-radius: 50%;
-  border: 1.5px solid var(--line-strong);
-  transition: background-color var(--dur-base) var(--ease-out),
-              border-color var(--dur-base) var(--ease-out);
+  background: var(--surface);
+  border: 2px solid var(--line-strong);
+  transition: background-color var(--dur-base) var(--ease-out), border-color var(--dur-base) var(--ease-out);
 }
-.pl-node[data-on="true"] { color: var(--ink); background: var(--gold-wash); }
-.pl-node[data-on="true"]::before { background: var(--gold); border-color: var(--gold); }
-.pl-node[data-done="true"] { color: var(--ink-2); }
-.pl-node[data-done="true"]::before { background: var(--line-strong); border-color: var(--line-strong); }
-.pl-node[data-fail="true"] { color: var(--fail); background: var(--fail-wash); }
-.pl-node[data-fail="true"]::before { background: var(--fail); border-color: var(--fail); }
+/* the connector: the rule itself continues across the gap to the next node */
+.pl-stage:not(:nth-child(6))::after {
+  content: "";
+  position: absolute;
+  top: -2px; right: calc(-1 * var(--space-s)); width: var(--space-s); height: 2px;
+  background: var(--line-2);
+}
+.pl-stage:hover { color: var(--ink-2); }
+.pl-stage:focus-visible { outline: var(--focus-ring); outline-offset: 4px; }
 
-/* The loop-back. The most credible element in the diagram, because it proves
-   the system is designed to catch its own errors. Hidden until it fires. */
+.pl-stage-n { font-family: var(--font-mono); font-size: var(--step--2); letter-spacing: var(--tracking-label); color: var(--ink-3); }
+.pl-stage-name { font-family: var(--font-display); font-variation-settings: var(--fraunces-display); font-size: var(--step-1); line-height: 1.15; font-weight: 600; color: var(--ink-2); }
+.pl-stage-role { font-family: var(--font-mono); font-size: var(--step--2); letter-spacing: 0.04em; color: var(--ink-3); margin-top: var(--space-3xs); }
+
+.pl-stage[data-state="done"] { border-top-color: var(--line-strong); }
+.pl-stage[data-state="done"]::before { background: var(--line-strong); border-color: var(--line-strong); }
+.pl-stage[aria-selected="true"] { color: var(--ink); border-top-color: var(--gold); }
+.pl-stage[aria-selected="true"] .pl-stage-name { color: var(--ink); }
+.pl-stage[aria-selected="true"]::before { background: var(--gold); border-color: var(--gold); }
+.pl-stage[aria-selected="true"] .pl-stage-n { color: var(--gold); }
+
+/* The human gate is marked permanently. Governance is the differentiator. */
+.pl-stage--gate .pl-stage-name { color: var(--ink); }
+.pl-stage--gate::before { background: var(--gold-wash); border-color: var(--gold); }
+
+/* Failure at 04 */
+.pl-stage[data-state="failed"] { border-top-color: var(--fail); }
+.pl-stage[data-state="failed"]::before { background: var(--fail); border-color: var(--fail); }
+.pl-stage[data-state="failed"] .pl-stage-name, .pl-stage[data-state="failed"] .pl-stage-n { color: var(--fail); }
+
+/* The return path. Drawn as a bracket under 03–04 with the arrow landing on
+   Production. Hidden with display:none so it reserves nothing until it fires. */
 .pl-loop {
-  margin: var(--space-3xs) 0 var(--space-3xs) 1.15rem;
-  padding-left: var(--space-s);
-  border-left: 2px solid var(--line-2);
+  grid-row: 2; grid-column: 3 / 5;
+  display: none;
+  margin-top: var(--space-2xs);
+  padding: var(--space-s) var(--space-s) 0;
+  border: 2px solid var(--fail);
+  border-top: none;
+  border-radius: 0 0 var(--radius-m) var(--radius-m);
+  position: relative;
   font-family: var(--font-mono);
-  font-size: 0.68rem;
-  color: var(--ink-faint);
-  opacity: 0;
-  transition: opacity var(--dur-slow) var(--ease-out),
-              color var(--dur-slow) var(--ease-out),
-              border-color var(--dur-slow) var(--ease-out);
+  font-size: var(--step--2);
+  letter-spacing: 0.02em;
+  color: var(--fail);
+  text-align: center;
+  height: 2.2rem;
+  white-space: nowrap;
 }
-.pl-loop[data-on="true"] { opacity: 1; color: var(--fail); border-left-color: var(--fail); }
+.pl-loop::before { /* arrowhead pointing up into Production */
+  content: "";
+  position: absolute; left: -6px; top: -8px;
+  width: 0; height: 0;
+  border-left: 5px solid transparent; border-right: 5px solid transparent;
+  border-bottom: 8px solid var(--fail);
+}
+.pl-loop span { position: absolute; left: 50%; bottom: -0.65em; transform: translateX(-50%); background: var(--surface); padding-inline: var(--space-2xs); }
+.pl-loop[data-on="true"] { display: block; }
+
+/* ---- Rules strip: governance as a static fact, not a play-state -------- */
+.pl-rules { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-m); margin: 0; padding: var(--space-m); border-bottom: var(--hairline); background: var(--bg-sunk); }
+.pl-rules div { display: flex; flex-direction: column; gap: var(--space-3xs); }
+.pl-rules dt { font-family: var(--font-mono); font-size: var(--step--2); letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--gold); }
+.pl-rules dd { margin: 0; font-size: var(--step--1); line-height: 1.4; color: var(--ink-2); }
+@media (max-width: 700px) { .pl-rules { grid-template-columns: 1fr; gap: var(--space-s); } }
+
+/* ---- Narration ------------------------------------------------------------- */
 
 .pl-narration {
   padding: var(--space-m);
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--space-2xs);
-  justify-content: center;
+  min-height: 7.5rem;
 }
-.pl-narration-label {
-  font-family: var(--font-mono);
-  font-size: 0.62rem;
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
-  color: var(--ink-3);
-}
-.pl-narration-text {
-  font-size: var(--step-0);
-  line-height: 1.5;
-  color: var(--ink);
-  margin: 0;
-  max-width: 40ch;
-}
-.pl-narration-sub { font-size: var(--step--1); color: var(--ink-2); margin: 0; max-width: 42ch; }
+.pl-narration-label { font-family: var(--font-mono); font-size: var(--step--2); letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--ink-3); }
+.pl-narration-text { font-size: var(--step-1); line-height: 1.4; color: var(--ink); margin: 0; max-width: 52ch; font-family: var(--font-display); font-variation-settings: var(--fraunces-display); font-weight: 500; }
+.pl-narration-sub { font-size: var(--step--1); color: var(--ink-2); margin: 0; max-width: 60ch; }
 
 /* ---- Mobile -------------------------------------------------------------
-   Chips become a vertical list and are never dropped. The reference
-   implementation drops its chips and its narration at 375px, leaving the two
-   panes a non-technical reader can least interpret. Invert that: the
-   schematic pane is what goes, the comprehension layer stays.            */
+   The flow turns vertical. Connectors run down the left; the return path is
+   drawn as a bracket beside 03–04 so the loop stays visible on a phone.   */
 
-@media (max-width: 860px) {
-  .pl-stages { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .pl-stage { border-bottom: 1px solid var(--line); }
-  .pl-panes { grid-template-columns: 1fr; }
-  .pl-schematic { border-right: none; border-bottom: var(--hairline); }
-}
-
-@media (max-width: 560px) {
-  .pl-stages { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 1023px) { .pipeline { width: 100%; } }
+@media (max-width: 700px) {
+  .pl-flow { grid-template-columns: 1.25rem minmax(0, 1fr); grid-template-rows: none; column-gap: var(--space-s); row-gap: 0; padding: var(--space-m) var(--space-m) var(--space-s); }
+  .pl-stage { border-top: none; border-left: 2px solid var(--line-2); padding: var(--space-xs) 0 var(--space-xs) var(--space-m); margin: 0; }
+  .pl-stage::before { left: -6px; top: 1.05rem; }
+  .pl-stage:not(:nth-child(6))::after { display: none; }
+  .pl-stage[data-state="done"] { border-left-color: var(--line-strong); }
+  .pl-stage[aria-selected="true"] { border-left-color: var(--gold); }
+  .pl-stage[data-state="failed"] { border-left-color: var(--fail); }
+  .pl-stage:last-of-type { border-left-color: transparent; }
+  .pl-loop { height: auto; margin: 0; padding: var(--space-2xs) 0 var(--space-2xs) var(--space-m); border: none; border-left: 2px solid var(--fail); border-radius: 0; text-align: left; white-space: normal; }
+  .pl-loop::before { left: -6px; top: 50%; transform: translateY(-50%) rotate(-90deg); border-left: 5px solid transparent; border-right: 5px solid transparent; border-bottom: 8px solid var(--fail); }
+  .pl-loop span { position: static; transform: none; background: none; padding: 0; }
+  .pl-loop span::before { content: "\2191  "; }
+  /* Source order puts the loop after 06; on mobile place it between 04 and 05 */
+  .pl-flow { display: flex; flex-direction: column; padding-left: calc(var(--space-m) + 6px); }
+  .pl-stage[data-i="0"] { order: 1; } .pl-stage[data-i="1"] { order: 2; } .pl-stage[data-i="2"] { order: 3; }
+  .pl-stage[data-i="3"] { order: 4; } .pl-loop { order: 5; } .pl-stage[data-i="4"] { order: 6; } .pl-stage[data-i="5"] { order: 7; }
   .pl-bar { gap: var(--space-2xs); }
   .pl-transport { margin-left: 0; width: 100%; }
   .pl-btn { flex: 1; }
-  /* Schematic is the decoration; chips and narration are the story. */
-  .pl-schematic { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .pl-node, .pl-loop, .pl-stage { transition: none; }
+  .pl-loop, .pl-stage { transition: none; }
 }

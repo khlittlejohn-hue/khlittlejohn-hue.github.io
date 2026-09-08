@@ -60,10 +60,12 @@
       Kyle Littlejohn
     </a>
     <div class="nav-links">
-      <a href="../work/" aria-current="page">Work</a>
-      <a href="../operating-system.html">Operating System</a>
-      <a href="../thinking.html">Thinking</a>
-      <a href="../about.html">About</a>
+      <div class="nav-sections">
+        <a href="../work/" aria-current="page">Work</a>
+        <a href="../operating-system.html">Operating System</a>
+        <a href="../thinking.html">Thinking</a>
+        <a href="../about.html">About</a>
+      </div>
       <a class="nav-cta" href="../home.html#contact">Let's talk &rarr;</a>
       <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle light and dark theme" aria-pressed="false">
         <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
@@ -76,7 +78,7 @@
 <main id="main" class="page">
 
   <header class="cs-header">
-    <span class="cs-eyebrow">Case Study 03 &middot; KLJ Ventures &middot; Current</span>
+    <div class="cs-eyebrow-row"><span class="cs-eyebrow">Case Study 03 &middot; KLJ Ventures &middot; Current</span><span class="infra-row" aria-label="Tier 3 of 3: AI operating infrastructure"><span class="infra" data-tier="3"><i></i><i></i><i></i></span><span class="infra-name"><b>AI operating infrastructure</b></span></span></div>
     <h1 class="cs-title">I built an AI operating system that produces executive-grade work, then rebuilt it around the ways it failed.</h1>
     <p class="cs-dek">I founded KLJ Ventures to help organizations adopt AI. Then I built the operating system that runs it, caught it fabricating, and re-architected it so the failure modes were caught and corrected rather than tolerated.</p>
   </header>
@@ -96,28 +98,31 @@
     </div>
   </dl>
 
-  <section class="cs-beat">
-    <span class="cs-beat-label">Context</span>
+  <div class="cs-frame">
+    <div class="cs-body">
+
+  <section class="cs-beat" id="beat-01" data-kind="context">
+    <span class="cs-beat-label"><span class="n">01</span>Context</span>
     <h2>A company that needed more throughput than one person has</h2>
     <p>KLJ Ventures exists to help organizations learn, adopt and operationalize AI. That means consulting delivery, product development and operating-system design, which is a lot of surface area for a firm with one employee. The obvious move was to use AI to expand what I could produce. The obvious move is also where most people stop, and it is why most of what gets called an AI workflow is really just a faster way to generate first drafts.</p>
   </section>
 
-  <section class="cs-beat">
-    <span class="cs-beat-label">Problem</span>
+  <section class="cs-beat" id="beat-02" data-kind="context">
+    <span class="cs-beat-label"><span class="n">02</span>Problem</span>
     <h2>Generation was never the bottleneck</h2>
     <p>Getting an AI system to produce a resume, a research brief or a strategy document is not hard. Getting one to produce work you would sign your name to, repeatedly, without reading every word yourself, is a completely different problem.</p>
     <p>The first version of the system produced a great deal of output. Some of it was excellent. Some of it was confidently, fluently wrong.</p>
   </section>
 
-  <section class="cs-beat">
-    <span class="cs-beat-label">Diagnosis</span>
+  <section class="cs-beat" id="beat-03" data-kind="context">
+    <span class="cs-beat-label"><span class="n">03</span>Diagnosis</span>
     <h2>The constraint is trust, not capability</h2>
     <p>An assistant that is right 90% of the time and gives no signal about which 10% is wrong does not save you 90% of the work. It costs you 100% of the review, because you have to check everything.</p>
     <p>So the interesting engineering problem was never prompting. It was building the layer that catches known classes of error automatically, so the human gate at the end spends its attention on judgment rather than proofreading. That is the same problem as building any operating model: define what good looks like, inspect against it, and make the inspection cheap enough that it always happens.</p>
   </section>
 
-  <section class="cs-beat">
-    <span class="cs-beat-label">Decision</span>
+  <section class="cs-beat" id="beat-04" data-kind="decision">
+    <span class="cs-beat-label"><span class="n">04</span>Decision</span>
     <h2>Treating fabrication as a defect, not a property</h2>
     <p>The consequential call was how to categorize the failures.</p>
     <p>The common framing is that language models hallucinate, that this is inherent, and that the mitigation is for the human to check the output carefully. That framing is comfortable and it is also an excuse for never fixing anything, because it locates the problem in the technology rather than in the system built around it.</p>
@@ -126,8 +131,8 @@
     <p>That single reframing is what turned a collection of prompts into an operating system, because it forced everything that followed: documented failures, a testing layer, approval gates, and a review architecture that assumes the system will be wrong and is designed to catch it.</p>
   </section>
 
-  <section class="cs-beat">
-    <span class="cs-beat-label">What I built</span>
+  <section class="cs-beat" id="beat-05" data-kind="mechanism">
+    <span class="cs-beat-label"><span class="n">05</span>What I built</span>
     <h2>The loop that runs when something goes wrong</h2>
     <div class="chain">
       <span class="chain-label">Every failure runs this path</span>
@@ -144,8 +149,8 @@
     <p>Around that principle sits the rest of it: 14 functional domains, adversarial review on anything consequential, and a human approval gate everything passes through before it leaves. The agent count is the least interesting number here. What matters is that the system assumes it will fail, and is instrumented to catch itself when it does.</p>
   </section>
 
-  <section class="cs-beat">
-    <span class="cs-beat-label">The system</span>
+  <section class="cs-beat" id="beat-06" data-kind="mechanism">
+    <span class="cs-beat-label"><span class="n">06</span>The system</span>
     <h2>Six stages, and the one that matters is the loop back</h2>
     <p>Below is the actual path work takes. Read it as a static diagram, or run it. The failure scenario is the interesting one, because the backward arrow is the part most AI diagrams leave out.</p>
 
@@ -161,38 +166,39 @@
         </div>
       </div>
 
-      <div class="pl-stages" role="tablist" aria-label="Pipeline stages">
-        <button class="pl-stage" role="tab" id="plTab0" aria-selected="true"  aria-controls="plPanel" tabindex="0" data-i="0"><span class="pl-stage-n">01</span><span class="pl-stage-name">Intake</span></button>
-        <button class="pl-stage" role="tab" id="plTab1" aria-selected="false" aria-controls="plPanel" tabindex="-1" data-i="1"><span class="pl-stage-n">02</span><span class="pl-stage-name">Routing</span></button>
-        <button class="pl-stage" role="tab" id="plTab2" aria-selected="false" aria-controls="plPanel" tabindex="-1" data-i="2"><span class="pl-stage-n">03</span><span class="pl-stage-name">Production</span></button>
-        <button class="pl-stage" role="tab" id="plTab3" aria-selected="false" aria-controls="plPanel" tabindex="-1" data-i="3"><span class="pl-stage-n">04</span><span class="pl-stage-name">Quality control</span></button>
-        <button class="pl-stage pl-stage--gate" role="tab" id="plTab4" aria-selected="false" aria-controls="plPanel" tabindex="-1" data-i="4"><span class="pl-stage-n">05</span><span class="pl-stage-name">Human review</span></button>
-        <button class="pl-stage" role="tab" id="plTab5" aria-selected="false" aria-controls="plPanel" tabindex="-1" data-i="5"><span class="pl-stage-n">06</span><span class="pl-stage-name">Output</span></button>
+      <!-- The flow IS the navigator. Six stages as tabs laid out as a diagram
+           with connectors, and the return path drawn beneath 03–04 so the
+           loop is a line on the page rather than a sentence in a list. -->
+      <div class="pl-flow" role="tablist" aria-label="Pipeline stages">
+        <button class="pl-stage" role="tab" id="plTab0" aria-selected="true"  aria-controls="plPanel" tabindex="0" data-i="0"><span class="pl-stage-n">01</span><span class="pl-stage-name">Intake</span><span class="pl-stage-role">classify</span></button>
+        <button class="pl-stage" role="tab" id="plTab1" aria-selected="false" aria-controls="plPanel" tabindex="-1" data-i="1"><span class="pl-stage-n">02</span><span class="pl-stage-name">Routing</span><span class="pl-stage-role">assign agents</span></button>
+        <button class="pl-stage" role="tab" id="plTab2" aria-selected="false" aria-controls="plPanel" tabindex="-1" data-i="2"><span class="pl-stage-n">03</span><span class="pl-stage-name">Production</span><span class="pl-stage-role">draft</span></button>
+        <button class="pl-stage" role="tab" id="plTab3" aria-selected="false" aria-controls="plPanel" tabindex="-1" data-i="3"><span class="pl-stage-n">04</span><span class="pl-stage-name">Quality control</span><span class="pl-stage-role">150+ gates</span></button>
+        <button class="pl-stage pl-stage--gate" role="tab" id="plTab4" aria-selected="false" aria-controls="plPanel" tabindex="-1" data-i="4"><span class="pl-stage-n">05</span><span class="pl-stage-name">Human review</span><span class="pl-stage-role">judgment</span></button>
+        <button class="pl-stage" role="tab" id="plTab5" aria-selected="false" aria-controls="plPanel" tabindex="-1" data-i="5"><span class="pl-stage-n">06</span><span class="pl-stage-name">Output</span><span class="pl-stage-role">approved work</span></button>
+        <div class="pl-loop" id="plLoop" aria-hidden="true"><span>fails a gate &middot; returns to Production</span></div>
       </div>
 
-      <div class="pl-panes">
-        <div class="pl-schematic" aria-hidden="true">
-          <div class="pl-node" data-node="0">Intake</div>
-          <div class="pl-node" data-node="1">Routing</div>
-          <div class="pl-node" data-node="2">Production</div>
-          <div class="pl-node" data-node="3">Quality control</div>
-          <div class="pl-loop" id="plLoop">&uarr; fails a gate, returns to Production</div>
-          <div class="pl-node" data-node="4">Human review</div>
-          <div class="pl-node" data-node="5">Output</div>
-        </div>
-        <div class="pl-narration" id="plPanel" role="tabpanel" aria-live="polite" tabindex="0">
-          <span class="pl-narration-label" id="plLabel">Stage 01 &middot; Intake</span>
-          <p class="pl-narration-text" id="plText">A request arrives and is classified by type, urgency and which domain owns it.</p>
-          <p class="pl-narration-sub" id="plSub">Nothing starts until the system knows what kind of work this is.</p>
-        </div>
+      <!-- Static governance, visible before Play. Three rules the diagram
+           enforces; each sentence appears in the narrative on this page. -->
+      <dl class="pl-rules" aria-label="Governance rules the pipeline enforces">
+        <div><dt>Separation</dt><dd>No agent grades its own work.</dd></div>
+        <div><dt>Traceability</dt><dd>A claim that does not trace to the canonical source is rejected.</dd></div>
+        <div><dt>Authority</dt><dd>A human approval gate everything passes through before it leaves.</dd></div>
+      </dl>
+
+      <div class="pl-narration" id="plPanel" role="tabpanel" aria-live="polite" tabindex="0">
+        <span class="pl-narration-label" id="plLabel">Stage 01 &middot; Intake</span>
+        <p class="pl-narration-text" id="plText">A request arrives and is classified by type, urgency and which domain owns it.</p>
+        <p class="pl-narration-sub" id="plSub">Nothing starts until the system knows what kind of work this is.</p>
       </div>
     </div>
 
     <p>The human review stage is a real gate, not a formality. Nothing reaches anyone outside the system without passing it, and its job is judgment rather than proofreading, because the gates upstream have already caught the mechanical failures.</p>
   </section>
 
-  <section class="cs-beat">
-    <span class="cs-beat-label">Result</span>
+  <section class="cs-beat cs-beat--result" id="beat-07" data-kind="result">
+    <span class="cs-beat-label"><span class="n">07</span>Result</span>
     <h2>What the governance layer looks like now</h2>
 
     <figure class="metric" style="max-width:var(--measure)">
@@ -203,8 +209,8 @@
     <p>That number is the clearest evidence I can offer, because it is not a measure of scale. It is a measure of how many times the system has been wrong, been caught, and been corrected at the architectural level rather than the individual output. Every gate is traceable to the specific failure that produced it and to the architectural change that followed, which is the part that matters: a correction that lives in a document gets forgotten, and a correction that lives in a gate does not.</p>
   </section>
 
-  <section class="cs-beat">
-    <span class="cs-beat-label">Result</span>
+  <section class="cs-beat cs-beat--result" id="beat-08" data-kind="result">
+    <span class="cs-beat-label"><span class="n">08</span>Result</span>
     <h2>What it produces</h2>
     <p>Gates and rule captures are the engineering proof. The work product is the other half, and it is the half that matters to anyone who does not care how the system is built.</p>
     <p>The clearest example is a strategic growth blueprint produced for a client, roughly 60 pages, with an accompanying executive briefing designed to be read in one sitting while remaining traceable back to the underlying analysis. Producing depth is not the hard part. Producing depth that stays usable is, and that compression is the same skill I was hired for at Kaseya, running on different machinery.</p>
@@ -213,8 +219,8 @@
     <p class="cs-turn">A system that stops at synthesis produces a very good summary. Decision infrastructure has to get to the decision.</p>
   </section>
 
-  <section class="cs-beat">
-    <span class="cs-beat-label">Result</span>
+  <section class="cs-beat cs-beat--result" id="beat-09" data-kind="result">
+    <span class="cs-beat-label"><span class="n">09</span>Result</span>
     <h2>Two moments of judgment</h2>
     <p>Two examples from that engagement, described without the client's figures or identity, because the reasoning is the transferable part.</p>
     <p><strong>It refused a number that was in the client's favour.</strong> Leadership reported an acquisition cost low enough to be a headline. The system did not use it. It reconstructed the arithmetic, showed the figure was daily channel spend divided by daily signups, and labelled it a channel cost pending a definition of its denominator. In the same section, months where no data had been reported were drawn as a dashed line rather than a solid one, because inventing the shape of a trend nobody measured is the most common way a chart lies.</p>
@@ -225,26 +231,76 @@
     </div>
   </section>
 
-  <section class="cs-beat">
-    <span class="cs-beat-label">What I'd change now</span>
+  <section class="cs-beat" id="beat-10" data-kind="reflection">
+    <span class="cs-beat-label"><span class="n">10</span>What I'd change now</span>
     <h2>I trusted the model too much at the start</h2>
     <p>The honest failure is at the beginning. I built the first version assuming good instructions would produce good output, and that review was a light final step rather than a structural component. That was wrong, and I found out the way you always find out, which is that something plausible and incorrect got far enough to matter.</p>
     <p>What I would do differently is build the inspection layer first. Quality control is not something you add once you discover you need it. It is the part that determines whether the rest of the system is usable at all, and it belongs in the architecture from the first version.</p>
     <p>That is the same conclusion I reached about operating cadence years earlier, in a company with no AI in it at all.</p>
   </section>
 
-  <nav class="cs-next" aria-label="More work">
-    <a href="./amc-networks.html">
-      <span class="lbl">First case study</span>
-      <span class="ttl">AMC Networks &rarr;</span>
-    </a>
-    <a href="../home.html#contact">
-      <span class="lbl">Or</span>
-      <span class="ttl">Let's talk &rarr;</span>
-    </a>
-  </nav>
+    </div>
+
+    <aside class="cs-rail" aria-label="Sections of this case study">
+      <span class="mlabel cs-rail-label">In this study</span>
+      <ol class="cs-index">
+        <li><a href="#beat-01" data-kind="context"><span class="n">01</span><span class="k" aria-hidden="true"></span><span>Context</span></a></li>
+        <li><a href="#beat-02" data-kind="context"><span class="n">02</span><span class="k" aria-hidden="true"></span><span>Problem</span></a></li>
+        <li><a href="#beat-03" data-kind="context"><span class="n">03</span><span class="k" aria-hidden="true"></span><span>Diagnosis</span></a></li>
+        <li><a href="#beat-04" data-kind="decision"><span class="n">04</span><span class="k" aria-hidden="true"></span><span>Decision</span></a></li>
+        <li><a href="#beat-05" data-kind="mechanism"><span class="n">05</span><span class="k" aria-hidden="true"></span><span>What I built</span></a></li>
+        <li><a href="#beat-06" data-kind="mechanism"><span class="n">06</span><span class="k" aria-hidden="true"></span><span>The system</span></a></li>
+        <li><a href="#beat-07" data-kind="result"><span class="n">07</span><span class="k" aria-hidden="true"></span><span>Result</span></a></li>
+        <li><a href="#beat-08" data-kind="result"><span class="n">08</span><span class="k" aria-hidden="true"></span><span>Result</span></a></li>
+        <li><a href="#beat-09" data-kind="result"><span class="n">09</span><span class="k" aria-hidden="true"></span><span>Result</span></a></li>
+        <li><a href="#beat-10" data-kind="reflection"><span class="n">10</span><span class="k" aria-hidden="true"></span><span>What I'd change now</span></a></li>
+      </ol>
+      <div class="cs-rail-key" aria-hidden="true">
+        <span><span class="k" data-kind="mechanism"></span>what I built</span>
+        <span><span class="k" data-kind="decision"></span>the call</span>
+        <span><span class="k" data-kind="result"></span>evidence</span>
+      </div>
+    </aside>
+  </div>
+
+  <section class="page-end">
+    <div>
+      <h2>If you have a mandate that needs an owner, let&rsquo;s talk.</h2>
+      <p>A 20-minute call is the fastest way to find out whether I am useful.</p>
+    </div>
+    <div class="end-actions">
+      <a class="btn-primary" href="../home.html#contact">Let's talk</a>
+      <a class="btn-quiet" href="./amc-networks.html">First case study: AMC Networks &rarr;</a>
+    </div>
+  </section>
+
+  <footer class="site-foot">
+    <span class="foot-note">Built and maintained by Kyle Littlejohn.</span>
+    <div class="foot-links">
+      <a href="../home.html">Home</a>
+      <a href="./">Work</a>
+      <a href="../operating-system.html">Operating System</a>
+      <a href="../thinking.html">Thinking</a>
+      <a href="../about.html">About</a>
+      <a href="../home.html#contact">Contact</a>
+    </div>
+  </footer>
 
 </main>
+
+<script>
+/* Beat index. Marks the beat currently in view; the index itself is static
+   HTML so orientation works with JavaScript disabled. */
+(function(){
+  var links=document.querySelectorAll('.cs-index a');if(!links.length||!('IntersectionObserver' in window))return;
+  var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a;});
+  var current=null;
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){if(current)current.removeAttribute('aria-current');current=map[e.target.id];if(current)current.setAttribute('aria-current','true');}});
+  },{rootMargin:'-20% 0px -60% 0px',threshold:0});
+  document.querySelectorAll('.cs-beat[id]').forEach(function(s){io.observe(s);});
+})();
+</script>
 
 <script>
 /* Pipeline explainer. Play-driven, never autoplay, never scroll-triggered.
@@ -255,7 +311,6 @@
   if (!root) return;
 
   var tabs   = Array.prototype.slice.call(root.querySelectorAll('.pl-stage'));
-  var nodes  = Array.prototype.slice.call(root.querySelectorAll('.pl-node'));
   var loop   = document.getElementById('plLoop');
   var label  = document.getElementById('plLabel');
   var text   = document.getElementById('plText');
@@ -303,14 +358,10 @@
       t.setAttribute('aria-selected', on ? 'true' : 'false');
       t.tabIndex = on ? 0 : -1;
       if (isFailMoment && i === 3) { t.setAttribute('data-state', 'failed'); }
+      else if (seq.slice(0, step).indexOf(i) !== -1 && !on) { t.setAttribute('data-state', 'done'); }
       else { t.removeAttribute('data-state'); }
     });
 
-    nodes.forEach(function (n, i) {
-      n.removeAttribute('data-on'); n.removeAttribute('data-done'); n.removeAttribute('data-fail');
-      if (i === stageIdx) { n.setAttribute(isFailMoment && i === 3 ? 'data-fail' : 'data-on', 'true'); }
-      else if (seq.slice(0, step).indexOf(i) !== -1) { n.setAttribute('data-done', 'true'); }
-    });
 
     loop.setAttribute('data-on', loopVisible ? 'true' : 'false');
     label.textContent = 'Stage ' + ('0' + (stageIdx + 1)) + ' \u00B7 ' + copy[0];
