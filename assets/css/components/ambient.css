@@ -1,0 +1,122 @@
+/* ============================================================================
+   components/ambient.css — the operating environment the page sits inside.
+
+   Recovered in spirit from the pre-2.0 site's spatial treatment. The point is
+   NOT a decorative graphic. It is that the same visual language used by the
+   14-domain system map should be present, quietly, everywhere — so the AI work
+   reads as the environment the career happens in rather than as one section
+   the page passes through.
+
+   CONTRAST DISCIPLINE. This layer sits behind every word on the page, so its
+   alpha is a text-legibility parameter, not a taste parameter. The ceilings
+   are declared in ambient.js and were set by sampling rendered pixels beneath
+   real text in both themes, not by estimating. Light theme is deliberately
+   quieter and drops the gold beacons entirely: a warm point at any useful
+   opacity on a cream ground eats the contrast of --ink-3 sitting on top of it.
+   ============================================================================ */
+
+/* The field itself. Fixed, so it behaves as an environment the content scrolls
+   through rather than a texture glued to the document. */
+#ambient {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: var(--z-ambient);
+  pointer-events: none;
+  display: block;
+}
+
+/* html carries the ground colour so <body> can be transparent and let the
+   field through. Without this the page background would paint over the canvas
+   and the whole layer would be invisible. */
+html { background: var(--bg); }
+body { background: transparent; position: relative; }
+
+/* Content must sit above the field. .page is the only wrapper every band
+   shares, so raising it is enough and avoids a global z-index on * . */
+.page { position: relative; z-index: var(--z-content); }
+
+/* The sunken band keeps its distinct ground but stops short of opaque, so the
+   field continues through the one section that is actually about the system.
+   92% keeps the composite within the contrast budget measured for solid
+   --bg-sunk; the remaining 8% is what makes the band feel inhabited. */
+.band--sunk { background: color-mix(in oklab, var(--bg-sunk) 92%, transparent); }
+
+/* Atmospheric depth. Two very wide, very low radials fixed to the viewport,
+   sitting between the node field and the content. Gold in dark; in light they
+   are nearly absent, because a cream ground has no depth to gain from a wash
+   and everything to lose in text contrast. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-ambient);
+  pointer-events: none;
+  background:
+    radial-gradient(70% 55% at 78% 8%,
+      color-mix(in oklab, var(--gold) 5%, transparent), transparent 72%),
+    radial-gradient(60% 50% at 8% 92%,
+      color-mix(in oklab, var(--gold) 3%, transparent), transparent 74%);
+}
+@media (prefers-color-scheme: light) {
+  body::before {
+    background:
+      radial-gradient(70% 55% at 78% 8%,
+        color-mix(in oklab, var(--gold) 3%, transparent), transparent 72%),
+      radial-gradient(60% 50% at 8% 92%,
+        color-mix(in oklab, var(--gold) 2%, transparent), transparent 74%);
+  }
+}
+:root[data-theme="light"] body::before {
+  background:
+    radial-gradient(70% 55% at 78% 8%,
+      color-mix(in oklab, var(--gold) 3%, transparent), transparent 72%),
+    radial-gradient(60% 50% at 8% 92%,
+      color-mix(in oklab, var(--gold) 2%, transparent), transparent 74%);
+}
+
+/* The hero already declared its own local wash. With the global atmosphere in
+   place that stacked into a visible hotspot, so the local one is retired here
+   rather than deleted from identity.css, keeping that file's rationale intact. */
+.hero::before { background: none; }
+
+
+/* ---- TEXT THAT SITS ON THE FIELD ----------------------------------------
+   Anything inside a card is safe: .pgroup, .cap5 and .sysmap-detail all paint
+   an opaque --surface, so the field cannot reach the text on them. What
+   follows is the set of strings that sit DIRECTLY on the field.
+
+   --ink-3 is 4.82:1 on the dark ground — three hundredths above the AA floor.
+   That is not enough headroom to survive any background at all, so every
+   exposed --ink-3 string is promoted one step to --ink-2 (9.43:1). This is a
+   legibility fix first and an ambient-layer prerequisite second: running small
+   text at the AA floor on an executive site was already the wrong call. */
+.label,
+.arc-when,
+.arc-note,
+.arc-read-label,
+.sm-hint,
+.os-figure span,
+.toolrow-label,
+.human-facts span,
+.hero-meta dt { color: var(--ink-2); }
+
+/* Exposed gold, light theme only. --gold is 4.54:1 on the light ground, which
+   leaves 0.04 of headroom — the field's own darkening consumes all of it and
+   lands at 4.21. --gold-deep starts at 6.70:1 and finishes at 6.21. Dark theme
+   is untouched: --gold is 12.06:1 there and has room to spare. */
+@media (prefers-color-scheme: light) {
+  .arc-step--now .arc-when,
+  .arc-read li:last-child { color: var(--gold-deep); }
+}
+:root[data-theme="light"] .arc-step--now .arc-when,
+:root[data-theme="light"] .arc-read li:last-child { color: var(--gold-deep); }
+
+/* Re-assert the current-position gold in dark, since the promotion rule above
+   also matches .arc-when and loads later than career-arc.css. */
+.arc-step--now .arc-when { color: var(--gold); }
+@media (prefers-color-scheme: light) {
+  .arc-step--now .arc-when { color: var(--gold-deep); }
+}
+:root[data-theme="light"] .arc-step--now .arc-when { color: var(--gold-deep); }

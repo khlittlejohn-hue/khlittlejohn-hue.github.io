@@ -1,0 +1,336 @@
+/* ============================================================================
+   layouts/home-v2.css — Acts III, V, VI and VII.
+
+   Proof grouped by employer, five capabilities instead of a taxonomy, the
+   human layer, and the closing point-of-view band.
+
+   The governing decision in this file: numbers are never presented bare. The
+   pre-2.0 site had a KPI wall where "$1.75B" floated with a two-word caption,
+   which invites the reader to assume Kyle produced the figure. Every number
+   here inherits an employer heading and carries its own mechanism line, so the
+   claim it makes is the claim that is actually true.
+   ============================================================================ */
+
+/* A band head carrying only its eyebrow. The label's own bottom margin exists
+   to separate it from an h2; with no h2 it just adds slack. */
+.band-head--bare { margin-bottom: var(--space-m); }
+.band-head--bare .label { margin-bottom: 0; }
+
+
+/* ---- ACT III · PROOF, GROUPED -------------------------------------------- */
+
+.proofset { display: grid; gap: var(--space-m); }
+@media (min-width: 900px) { .proofset { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+.pgroup {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-l);
+  padding: var(--space-m);
+  text-decoration: none;
+  color: inherit;
+}
+
+.pgroup-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2xs);
+  padding-bottom: var(--space-2xs);
+  margin-bottom: var(--space-s);
+  border-bottom: 1px solid var(--line);
+}
+.pgroup-co {
+  font-family: var(--font-display);
+  font-variation-settings: var(--fraunces-data);
+  font-size: var(--step-1);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+.pgroup-when {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.pstat { padding-block: var(--space-2xs); }
+.pstat + .pstat { border-top: 1px dashed var(--line); }
+
+/* The figure. Fraunces at data settings — no wonk, so numerals stay sober. */
+.pstat-n {
+  display: block;
+  font-family: var(--font-display);
+  font-variation-settings: var(--fraunces-data);
+  font-size: var(--step-2);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--gold);
+  font-variant-numeric: tabular-nums;
+  margin-bottom: 3px;
+}
+.pstat-what {
+  display: block;
+  font-size: var(--step--1);
+  line-height: 1.45;
+  color: var(--ink-2);
+  text-wrap: pretty;
+}
+
+.pgroup-cue {
+  margin-top: auto;
+  padding-top: var(--space-s);
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: 0.04em;
+  color: var(--ink-3);
+  transition: color var(--dur-fast) var(--ease-out);
+}
+.pgroup:hover .pgroup-cue,
+.pgroup:focus-visible .pgroup-cue { color: var(--gold); }
+
+/* A group with no case study behind it is a <div>, not an <a>, and must not
+   pretend to be clickable. */
+.pgroup--static { cursor: default; }
+.pgroup--static .pgroup-cue { color: var(--ink-faint); }
+
+
+/* ---- ACT V · CAPABILITIES ------------------------------------------------ */
+
+.caps5 { display: grid; gap: var(--space-s); }
+@media (min-width: 760px)  { .caps5 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1080px) { .caps5 { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+.cap5 {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-l);
+  padding: var(--space-m);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+}
+
+/* The fifth card is the hinge into the operating-system band: it is the one
+   capability the rest of the page has to earn the right to claim.
+
+   It also spans two columns on the three-up grid. Five cards in a three-column
+   grid otherwise resolve to 3 + 2 and leave a visible hole in the second row.
+   Widening this card closes the hole AND puts the emphasis on the capability
+   that the section is building toward, so the fix is compositional rather than
+   a patch. On the two-up grid five resolves to 3 + 2 with the hole in the same
+   place, so it spans there too. */
+.cap5--ai { border-color: var(--gold-line); background: linear-gradient(var(--gold-wash), var(--gold-wash)) var(--surface); }
+@media (min-width: 760px)  { .cap5--ai { grid-column: span 2; } }
+@media (min-width: 1080px) { .cap5--ai { grid-column: span 2; } }
+
+.cap5-n {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  color: var(--ink-3);
+}
+.cap5--ai .cap5-n { color: var(--gold); }
+
+.cap5 h3 {
+  font-family: var(--font-display);
+  font-variation-settings: var(--fraunces-data);
+  font-size: var(--step-1);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.18;
+  margin: 0;
+}
+.cap5 p {
+  font-size: var(--step--1);
+  line-height: 1.55;
+  color: var(--ink-2);
+  margin: 0;
+  text-wrap: pretty;
+}
+
+/* Evidence line — the specific thing that makes the capability claim checkable. */
+.cap5-ev {
+  margin-top: auto;
+  padding-top: var(--space-2xs);
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  line-height: 1.5;
+  color: var(--ink-3);
+  border-top: 1px dashed var(--line);
+}
+
+/* Tools are a footnote to capability, never the story. */
+.toolrow {
+  margin-top: var(--space-m);
+  padding-top: var(--space-s);
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2xs) var(--space-s);
+  align-items: baseline;
+}
+.toolrow-label {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.toolrow ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3xs) var(--space-xs);
+  margin: 0;
+  padding: 0;
+}
+.toolrow li {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  color: var(--ink-2);
+}
+.toolrow li:not(:last-child)::after { content: " ·"; color: var(--ink-faint); }
+
+
+/* ---- ACT IV LEAD-IN ------------------------------------------------------ */
+
+.os-thesis {
+  font-size: var(--step-1);
+  line-height: 1.5;
+  color: var(--ink-2);
+  max-width: 52ch;
+  margin: 0 0 var(--space-l);
+  text-wrap: pretty;
+}
+
+.os-figure {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-m) var(--space-xl);
+}
+
+/* The legend variant. A rule underneath ties the three figures to the diagram
+   below rather than letting them float as a standalone stat row, and the tight
+   bottom margin keeps them inside the map's visual group. */
+.os-legend {
+  padding-bottom: var(--space-s);
+  margin-bottom: var(--space-l);
+  border-bottom: 1px solid var(--line);
+}
+.os-figure div { display: flex; flex-direction: column; gap: 2px; }
+.os-figure b {
+  font-family: var(--font-display);
+  font-variation-settings: var(--fraunces-data);
+  font-size: var(--step-3);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--gold);
+  font-variant-numeric: tabular-nums;
+}
+.os-figure span {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* LIGHT-THEME CONTRAST FIX.
+   --gold (#90680C) clears AA on the page ground, on surface and on surface-2,
+   which is what it was tuned against. It does NOT clear it on --bg-sunk: the
+   sunken band is darker than the page, so the same gold measures 4.16:1 there
+   against a 4.5 requirement. --gold-deep measures 6.13:1 on that ground and
+   holds the same hue, so the band reads identically and passes.
+   Same story for the 12%-gold wash behind the AI capability card: gold on that
+   panel is 4.31:1, gold-deep is 6.36:1.
+   Declared twice because the viewer's toggle must beat the media query. */
+@media (prefers-color-scheme: light) {
+  .band--sunk .os-figure b { color: var(--gold-deep); }
+  .cap5--ai .cap5-n        { color: var(--gold-deep); }
+}
+:root[data-theme="light"] .band--sunk .os-figure b { color: var(--gold-deep); }
+:root[data-theme="light"] .cap5--ai .cap5-n        { color: var(--gold-deep); }
+
+
+/* ---- ACT VI · THE HUMAN LAYER -------------------------------------------- */
+
+.human { display: grid; gap: var(--space-l); align-items: center; }
+@media (min-width: 820px) { .human { grid-template-columns: 220px minmax(0, 1fr); } }
+
+.human-portrait {
+  width: 100%;
+  max-width: 220px;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: var(--radius-l);
+  border: 1px solid var(--gold-line);
+  justify-self: start;
+}
+
+.human-body p {
+  font-size: var(--step-0);
+  line-height: 1.6;
+  color: var(--ink-2);
+  margin: 0 0 var(--space-s);
+  max-width: var(--measure-narrow);
+  text-wrap: pretty;
+}
+
+.human-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-m) var(--space-xl);
+  margin: var(--space-m) 0 0;
+  padding-top: var(--space-s);
+  border-top: 1px solid var(--line);
+}
+.human-facts div { display: flex; flex-direction: column; gap: 2px; }
+.human-facts b {
+  font-family: var(--font-display);
+  font-variation-settings: var(--fraunces-data);
+  font-size: var(--step-2);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+.human-facts span {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: 0.04em;
+  color: var(--ink-3);
+}
+
+
+/* ---- ACT VII · POINT OF VIEW --------------------------------------------- */
+
+.povs { display: grid; gap: var(--space-s); }
+@media (min-width: 900px) { .povs { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+.pov {
+  border-left: 2px solid var(--gold-line);
+  padding: var(--space-2xs) 0 var(--space-2xs) var(--space-s);
+}
+.pov p {
+  font-family: var(--font-display);
+  font-variation-settings: var(--fraunces-display);
+  font-size: var(--step-1);
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin: 0;
+  text-wrap: pretty;
+}
+
+.pov-out { margin-top: var(--space-l); }

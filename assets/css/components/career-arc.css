@@ -1,0 +1,254 @@
+/* ============================================================================
+   components/career-arc.css — Act II.
+
+   Recovered from the pre-2.0 site, which carried a full six-step timeline
+   (Maximus -> Optimity -> AArete -> Kaseya -> SOL/AMC -> Education) that the
+   2.0 cutover replaced with a three-entry "through-line". That reduction is
+   the single biggest reason the site stopped answering "who is this".
+
+   What is recovered: the structure (company / role / dates / one line of
+   substance), the visual progression, and the glowing current-position marker.
+   What is NOT recovered: the legacy markup, the legacy palette, and the legacy
+   SOL/AMC copy, which used sequential "advancing from ... to ..." phrasing that
+   was explicitly corrected on 2026-09-07. Account Manager was continuous.
+
+   Layout: a horizontal spine on desktop, because the point of this section is
+   that the eye should travel the whole career in one movement. Below 940px it
+   becomes a vertical rail, which is the only honest way to read six steps on a
+   phone.
+   ============================================================================ */
+
+.arcline {
+  --dot: 13px;
+  --spine: 1px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* ---- DESKTOP: horizontal spine ------------------------------------------
+   Threshold is 1080px, not the 940px an earlier revision used. At 960px the
+   six columns resolved to 129px each, which forced the role titles and notes
+   into narrow ribbons and pushed the row to 397px tall — taller than the
+   vertical rail it was supposedly improving on. Below 1080px the rail wins. */
+@media (min-width: 1080px) {
+  .arcline {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: var(--space-m);
+    position: relative;
+    padding-top: calc(var(--dot) + var(--space-s));
+  }
+
+  /* The spine is drawn once across the whole row rather than per-step, so it
+     cannot develop the sub-pixel seams that per-cell borders produce. It stops
+     short of both ends so the run reads as a segment of a longer career, not a
+     closed box. */
+  .arcline::before {
+    content: "";
+    position: absolute;
+    top: calc(var(--dot) / 2);
+    left: 8%;
+    right: 8%;
+    height: var(--spine);
+    background: linear-gradient(90deg,
+      transparent,
+      var(--line-2) 12%,
+      var(--line-2) 78%,
+      var(--gold-line) 100%);
+  }
+
+  .arc-step { position: relative; padding-top: var(--space-m); }
+
+  .arc-step .arc-dot {
+    position: absolute;
+    top: calc(var(--dot) / -2 - var(--space-s) / 2);
+    left: 0;
+    width: var(--dot);
+    height: var(--dot);
+  }
+
+  /* "Optimity Advisors" is the only company name that wraps at these column
+     widths. Left alone it pushed that column's role and note a line lower than
+     the other five, so the row read as ragged rather than as a rank. Reserving
+     two lines in every column costs one line of space and buys a clean
+     horizontal read across all six. */
+  .arc-co { min-height: 2.24em; }
+
+  /* Same reasoning one level down: four of the six role titles wrap to two
+     lines and two do not, which staggered the note paragraphs underneath.
+     Reserving THREE lines here lands every note on the same baseline. Three
+     rather than two because Kaseya's real title — "Senior Manager, Strategic
+     Finance & Business Operations" — takes three lines at these widths, and
+     the title is a fact, so the layout adapts to it rather than the reverse.
+     Below roughly 1200px a longer title can still take a fourth line and
+     restore a one-line stagger; that is a deliberate stopping point, not an
+     oversight. */
+  .arc-role { min-height: 4.05em; }
+}
+
+/* ---- MOBILE / TABLET: vertical rail --------------------------------------
+   Ceiling must stay exactly one pixel below the horizontal threshold above.
+   When that threshold moved 940 -> 1080 this was briefly left at 939, which
+   opened a 140px band where neither rule applied and the list rendered with
+   no spine and no layout at all. */
+@media (max-width: 1079px) {
+  .arcline {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-m);
+    position: relative;
+    padding-left: calc(var(--dot) + var(--space-s));
+  }
+  .arcline::before {
+    content: "";
+    position: absolute;
+    left: calc(var(--dot) / 2);
+    top: 0.4rem;
+    bottom: 0.4rem;
+    width: var(--spine);
+    background: linear-gradient(180deg, var(--line-2), var(--gold-line));
+  }
+  .arc-step { position: relative; }
+  .arc-step .arc-dot {
+    position: absolute;
+    left: calc(-1 * (var(--dot) + var(--space-s)));
+    top: 0.35rem;
+    width: var(--dot);
+    height: var(--dot);
+  }
+}
+
+/* ---- SHARED -------------------------------------------------------------- */
+
+.arc-dot {
+  border-radius: 50%;
+  background: var(--surface-2);
+  border: 1px solid var(--line-strong);
+  box-shadow: 0 0 0 4px var(--bg);
+  transition: border-color var(--dur-base) var(--ease-out),
+              background var(--dur-base) var(--ease-out),
+              box-shadow var(--dur-base) var(--ease-out);
+}
+
+/* The current position. Recovered verbatim in intent from the legacy
+   .arc-now .arc-dot rule: gold fill, a ring cut out of the page ground so the
+   spine does not run visibly through it, and a soft bloom. This is the one
+   moment on the page where a number-free element is allowed to glow. */
+.arc-step--now .arc-dot {
+  background: var(--gold);
+  border-color: var(--gold);
+  box-shadow: 0 0 0 4px var(--bg),
+              0 0 18px -2px color-mix(in oklab, var(--gold) 70%, transparent);
+}
+.arc-step--now .arc-dot::after {
+  content: "";
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+  border: 1px solid var(--gold);
+  opacity: 0;
+  animation: arcNow 3.6s var(--ease-out) infinite;
+}
+@keyframes arcNow {
+  0%, 100% { transform: scale(0.75); opacity: 0; }
+  45%      { transform: scale(1.25); opacity: 0.45; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .arc-step--now .arc-dot::after { animation: none; opacity: 0.35; transform: none; }
+}
+
+.arc-when {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  font-weight: 500;
+  letter-spacing: 0.07em;
+  color: var(--ink-3);
+  margin-bottom: var(--space-3xs);
+  font-variant-numeric: tabular-nums;
+}
+.arc-step--now .arc-when { color: var(--gold); }
+
+.arc-co {
+  font-family: var(--font-display);
+  font-variation-settings: var(--fraunces-data);
+  font-size: var(--step-1);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 0 0 2px;
+}
+
+.arc-role {
+  display: block;
+  font-size: var(--step--1);
+  line-height: 1.35;
+  color: var(--ink-2);
+  margin-bottom: var(--space-2xs);
+}
+
+.arc-note {
+  font-size: var(--step--1);
+  line-height: 1.5;
+  color: var(--ink-3);
+  margin: 0;
+  text-wrap: pretty;
+}
+
+/* ---- THE INTERPRETATION STRIP -------------------------------------------
+   The arc shows what happened. This says what it means. Without it the
+   timeline is a list; with it, it is an argument.                         */
+
+.arc-read {
+  margin-top: var(--space-l);
+  padding-top: var(--space-m);
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-2xs) var(--space-xs);
+}
+
+.arc-read-label {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-right: var(--space-2xs);
+}
+
+.arc-read ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-2xs) var(--space-xs);
+}
+
+.arc-read li {
+  font-size: var(--step--1);
+  color: var(--ink-2);
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--space-xs);
+}
+.arc-read li:not(:last-child)::after {
+  content: "\2192";           /* rightwards arrow */
+  color: var(--ink-faint);
+}
+.arc-read li:last-child { color: var(--gold); font-weight: 500; }
+
+.arc-summary {
+  margin: var(--space-s) 0 0;
+  font-size: var(--step-0);
+  line-height: 1.55;
+  color: var(--ink-2);
+  max-width: var(--measure-narrow);
+  text-wrap: pretty;
+}

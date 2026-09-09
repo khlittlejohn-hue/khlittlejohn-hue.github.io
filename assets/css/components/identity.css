@@ -1,0 +1,199 @@
+/* ============================================================================
+   components/identity.css — Act I, and the recovered depth language.
+
+   Two jobs.
+
+   1. IDENTITY. The 2.1 hero was strong but anonymous: it opened on a
+      proposition without ever stating whose proposition it was. A recruiter
+      arriving from a resume link or an outreach email already has the name;
+      what they lack is confirmation they are in the right place and a signal
+      about what Kyle is open to. This block supplies both ABOVE the locked
+      headline, without touching a word of it.
+
+   2. DEPTH. The pre-2.0 site carried a material language the 2.1 rebuild
+      dropped: gold bloom under primary actions, a lift on interactive
+      surfaces, an inset top highlight that made panels read as physical, and
+      an ambient gold field behind the hero. Those are recovered here and
+      translated onto 2.1's token names — nothing is copied verbatim, because
+      the legacy palette variables (--panel, --ink2, --flag-line) no longer
+      exist in this system.
+
+   Motion note: 2.1's --dur-* tokens collapse to 0ms under reduced motion, so
+   every transition written against a token is automatically safe. The ambient
+   loops carry literal durations and therefore declare their own guards.
+   ============================================================================ */
+
+/* ---- IDENTITY BLOCK ------------------------------------------------------ */
+
+/* The hero portrait is gone: the page uses one photograph, in the Background
+   section, where it has context. Identity at the top is carried typographically
+   instead. That collapses the hero to a single column — the 7fr/3fr split only
+   ever existed to seat the portrait beside the deck, and .hero-sub already caps
+   itself at 52ch, so nothing runs to the full 1240px measure. */
+.hero {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    "identity"
+    "eyebrow"
+    "title"
+    "body";
+}
+
+.hero-identity {
+  grid-area: identity;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-2xs) var(--space-m);
+  margin-bottom: var(--space-m);
+}
+
+/* The name is set in mono, not the display serif. The serif belongs to the
+   headline; giving the name the same voice would make them compete. Mono
+   reads as a nameplate — identification, not assertion. */
+.identity-name {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.identity-rule {
+  flex: 1 1 3rem;
+  height: 1px;
+  min-width: 2rem;
+  background: linear-gradient(90deg, var(--gold-line), transparent);
+}
+
+/* Availability. Deliberately quiet — a bordered chip rather than a banner.
+   "Open to select executive opportunities" is a positioning statement, and
+   shouting it would invert the meaning. */
+.identity-open {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--ink-2);
+  border: 1px solid var(--line-2);
+  border-radius: 999px;
+  padding: 0.3rem 0.7rem;
+  background: var(--surface);
+  white-space: nowrap;
+}
+
+/* The live dot. Steady ring plus a slow expanding halo — the same device the
+   legacy site used on its current-position marker, at a lower amplitude. */
+.identity-open .dot {
+  position: relative;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+  flex: none;
+}
+.identity-open .dot::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 1px solid var(--gold);
+  opacity: 0;
+  animation: identityPulse 3.4s var(--ease-out) infinite;
+}
+@keyframes identityPulse {
+  0%, 100% { transform: scale(0.7); opacity: 0; }
+  50%      { transform: scale(1.15); opacity: 0.5; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .identity-open .dot::after { animation: none; opacity: 0.4; transform: none; }
+}
+
+@media (max-width: 640px) {
+  .hero-identity { gap: var(--space-2xs) var(--space-s); }
+  .identity-rule { display: none; }
+  .identity-name { font-size: var(--step--2); letter-spacing: 0.13em; }
+}
+
+
+/* ---- AMBIENT FIELD -------------------------------------------------------
+   A gold wash behind the hero, recovered from the legacy system-map surface
+   (which used a 420x320 radial at 12% gold). Sits at --z-ambient so it never
+   intercepts a pointer event, and fades out well before the band edge so it
+   reads as light rather than as a shape.                                   */
+
+.hero { isolation: isolate; }
+
+/* Inset is 0 on the horizontal axis deliberately. An earlier revision bled
+   -20% left and right to let the glow run off the page edge; because .hero is
+   also .page (max-width 1240px, centred), that produced 228px of real
+   horizontal document overflow and a scrollbar on every viewport. The radial
+   falloff already does the softening, so the bleed bought nothing. */
+.hero::before {
+  content: "";
+  position: absolute;
+  z-index: var(--z-ambient);
+  pointer-events: none;
+  inset: -12% 0 18% 0;
+  background:
+    radial-gradient(48% 60% at 68% 22%,
+      color-mix(in oklab, var(--gold) 11%, transparent), transparent 68%),
+    radial-gradient(40% 55% at 12% 78%,
+      color-mix(in oklab, var(--gold) 6%, transparent), transparent 70%);
+}
+.hero > * { position: relative; z-index: var(--z-content); }
+
+
+/* ---- RECOVERED DEPTH LANGUAGE -------------------------------------------
+   The legacy treatments, re-expressed on 2.1 tokens. Applied via a utility
+   class so the effect is opt-in per component rather than a global override
+   that would catch surfaces it was never designed for.                    */
+
+/* Gold bloom under the primary action. Legacy used a -14px spread at 70%
+   gold; kept, because the value was tuned and still reads correctly. */
+.btn-primary {
+  transition: transform var(--dur-fast) var(--ease-out),
+              box-shadow var(--dur-base) var(--ease-out),
+              filter var(--dur-fast) var(--ease-out);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px -14px color-mix(in oklab, var(--gold) 70%, transparent);
+}
+.btn-primary:active { transform: translateY(0); }
+
+.btn-quiet {
+  transition: transform var(--dur-fast) var(--ease-out),
+              border-color var(--dur-fast) var(--ease-out),
+              color var(--dur-fast) var(--ease-out);
+}
+.btn-quiet:hover { transform: translateY(-2px); border-color: var(--gold); color: var(--gold); }
+
+/* Interactive surface: hairline warms toward gold, panel lifts, shadow deepens.
+   The inset top highlight is what stops a dark panel reading as a flat hole —
+   it was in the legacy CSS on every card class and is the single most
+   load-bearing detail in the recovered material language. */
+.lift {
+  box-shadow: inset 0 1px 0 color-mix(in oklab, #fff 6%, transparent);
+  transition: transform var(--dur-base) var(--ease-out),
+              border-color var(--dur-base) var(--ease-out),
+              box-shadow var(--dur-base) var(--ease-out);
+}
+:root[data-theme="light"] .lift { box-shadow: inset 0 1px 0 #fff; }
+
+.lift:hover,
+.lift:focus-visible {
+  transform: translateY(-3px);
+  border-color: color-mix(in oklab, var(--gold) 32%, var(--line));
+  box-shadow: inset 0 1px 0 color-mix(in oklab, #fff 8%, transparent),
+              0 18px 40px -26px rgb(0 0 0 / 0.60);
+}
+:root[data-theme="light"] .lift:hover,
+:root[data-theme="light"] .lift:focus-visible {
+  box-shadow: inset 0 1px 0 #fff, 0 16px 34px -24px rgb(60 50 35 / 0.28);
+}
