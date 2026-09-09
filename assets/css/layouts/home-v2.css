@@ -383,3 +383,77 @@
    narrow tower with the rest of the row empty. Homepage only: home-v2.css is
    not loaded by any other page, and it follows nav.css in source order. */
 .band-head h2 { max-width: 34ch; }
+
+
+/* ============================================================================
+   POSITIONING PASS — 2026-09-09
+   ============================================================================ */
+
+/* Proof before chronology. A single quiet line under the hero so an executive
+   has evidence in the first screenful without being asked to read a timeline
+   first. Deliberately typographic rather than a card grid: cards here would
+   compete with the Evidence band further down, which is where these figures
+   are actually sourced and explained. */
+.proofline-band { padding-block: 0 var(--space-l); }
+.proofline {
+  list-style: none;
+  margin: 0;
+  padding: var(--space-s) 0 0;
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2xs) var(--space-l);
+  font-size: var(--step--1);
+  color: var(--ink-2);
+}
+.proofline li { display: inline-flex; align-items: baseline; gap: 0.4em; }
+.proofline b {
+  font-family: var(--font-display);
+  font-variation-settings: var(--fraunces-data);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+@media (max-width: 700px) { .proofline { gap: var(--space-3xs) var(--space-m); } }
+
+/* The agent count is evidence, not the achievement. Same row, less weight. */
+.os-figure--quiet b { font-size: var(--step-2); color: var(--ink-2); }
+.os-figure--quiet span { color: var(--ink-3); }
+
+/* Tools as a toolkit with three named groups rather than fifteen equal items.
+   The label leads, the group names carry the structure, and the products sit
+   at body weight so the row reads as capability rather than a software list. */
+.toolrow ul { flex-direction: column; gap: var(--space-2xs); }
+.toolrow li { color: var(--ink-2); font-family: var(--font-body); }
+.toolrow li::after { content: none; }
+.toolrow li em {
+  font-style: normal;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-right: var(--space-2xs);
+}
+
+/* Each principle now carries its argument. The claim stays in the display
+   face; the reasoning sits under it in body type so the pair reads as a
+   position rather than a pull-quote. */
+.pov cite {
+  display: block;
+  margin-top: var(--space-2xs);
+  font-style: normal;
+  font-family: var(--font-body);
+  font-size: var(--step--1);
+  line-height: 1.55;
+  color: var(--ink-2);
+  text-wrap: pretty;
+}
+
+/* Personality, held apart from the professional figures above it. */
+.human-aside {
+  margin: var(--space-s) 0 0;
+  font-size: var(--step--1);
+  color: var(--ink-3);
+}
