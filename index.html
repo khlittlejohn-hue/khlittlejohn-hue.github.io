@@ -128,14 +128,11 @@
        was whose proposition it is, and what he is open to. Both now sit above
        it, in mono, so they identify without competing with the headline.   -->
   <section class="page hero" id="top">
-    <!-- Availability chip removed 2026-09-08 (Kyle). The rule went with it: it
-         existed only to divide the name from the chip, and a rule running to
-         nothing reads as a missing element rather than a considered one. -->
-    <div class="hero-identity">
-      <span class="identity-name">Kyle Littlejohn</span>
-      <span class="identity-rule" aria-hidden="true"></span>
-      <span class="identity-open">Open to select executive opportunities</span>
-    </div>
+    <!-- Identity block removed 2026-09-09 (Kyle, V3). The name is carried by the
+         nav; repeating it here made the first thing an executive read a reminder
+         of who owns the website. The availability line went with it and now sits
+         in the contact band, where a job-seeking signal belongs. The hero opens
+         on the disciplines instead: what he is, not that he is looking. -->
 
     <!-- Kyle, 2026-09-08: add Program Management as a third named discipline.
          "scope" retired — it was hedging a title rather than naming a practice,
@@ -185,69 +182,126 @@
          progression better than a sentence can, and the eyebrow already names
          the section. An explanatory h2 was telling the reader the conclusion
          that the visual proves two inches lower. -->
-    <div class="band-head band-head--bare">
+    <div class="band-head band-head--center">
       <span class="label" aria-hidden="true">Career</span>
-      <!-- The section's heading, for the outline: without it the six company
-           names (h3) hang directly under the page h1. -->
-      <h2 class="visually-hidden">Career</h2>
+      <h2>Career</h2>
+      <p class="band-dek">Six roles. Five industries. One operating method.</p>
     </div>
 
-    <ol class="arcline">
-      <li class="arc-step">
-        <span class="arc-dot" aria-hidden="true"></span>
-        <span class="arc-when">Summer 2013</span>
-        <h3 class="arc-co">Maximus</h3>
-        <span class="arc-role">Systems Analyst Intern</span>
-        <p class="arc-note">Translated business requirements into technical specifications on New York State government technology programs.</p>
+    <!-- V3 career spine. Company, dates and title are ALWAYS visible; the
+         detail block opens for whichever node is nearest the centre of the
+         viewport. Progressive disclosure only — nothing here is hidden from a
+         reader without JavaScript, because .tl gets the collapsing behaviour
+         from the .tl--js class that career.js adds. If the script never runs,
+         all six nodes render fully expanded and the section still reads.
+
+         Maximus deliberately carries NO operating move. The record contains no
+         method evidence at all for 2013, and attaching one to make the visual
+         symmetrical would be exactly the back-projection this framework was
+         built to avoid. It says "learning the work", which is what it was. -->
+    <ol class="tl" id="careerTl">
+      <li class="tl-node">
+        <span class="tl-dot" aria-hidden="true"></span>
+        <div class="tl-head">
+          <span class="tl-when">Summer 2013</span>
+          <h3 class="tl-co">Maximus</h3>
+          <span class="tl-role">Systems Analyst Intern</span>
+        </div>
+        <div class="tl-detail">
+          <div class="tl-row"><span class="tl-k">There to solve</span><p>Business and operational requirements on New York State government technology programs needed translating into specifications developers could build from.</p></div>
+          <div class="tl-row"><span class="tl-k">Owned</span><p>The translation itself, under the guidance of senior systems analysts. Nothing independently.</p></div>
+          <div class="tl-row tl-row--start"><span class="tl-k">What it was</span><p>Learning the work. No operating method yet, and the record does not pretend otherwise.</p></div>
+        </div>
       </li>
-      <li class="arc-step">
-        <span class="arc-dot" aria-hidden="true"></span>
-        <span class="arc-when">2014&ndash;2017</span>
-        <h3 class="arc-co">Optimity Advisors</h3>
-        <span class="arc-role">Consultant &rarr; Senior Consultant</span>
-        <p class="arc-note">Enterprise transformation and compliance across financial services, healthcare and media. Built the models behind a company-wide reorganization at Beacon Health.</p>
+
+      <li class="tl-node">
+        <span class="tl-dot" aria-hidden="true"></span>
+        <div class="tl-head">
+          <span class="tl-when">2014&ndash;2017</span>
+          <h3 class="tl-co">Optimity Advisors</h3>
+          <span class="tl-role">Consultant &rarr; Senior Consultant</span>
+        </div>
+        <div class="tl-detail">
+          <div class="tl-row"><span class="tl-k">There to solve</span><p>Enterprise transformation and regulatory compliance across financial services, healthcare and media. At Beacon Health, a company-wide reorganization to cut costs and use staff time better.</p></div>
+          <div class="tl-row"><span class="tl-k">Owned</span><p>The diagnostic interviews with client-facing and clinical provider teams, and the financial models and executive presentations behind the reorganization. Leadership approved and ran it.</p></div>
+          <div class="tl-row"><span class="tl-k">Evidence</span><p>The Beacon Health engagement cut operating costs 15% and improved process efficiency 25% over six months.</p></div>
+          <div class="tl-row tl-row--move"><span class="tl-k">Move developed</span><p><b>Find the layer.</b> The only work in the record that begins by interviewing the organization to locate the real problem rather than accepting the presented one.</p></div>
+        </div>
       </li>
-      <li class="arc-step">
-        <span class="arc-dot" aria-hidden="true"></span>
-        <span class="arc-when">2017&ndash;2018</span>
-        <h3 class="arc-co">AArete</h3>
-        <span class="arc-role">Consulting Manager</span>
-        <p class="arc-note">Led operational and cost transformation at bluebird bio across procurement, legal, HR and operations.</p>
+
+      <li class="tl-node">
+        <span class="tl-dot" aria-hidden="true"></span>
+        <div class="tl-head">
+          <span class="tl-when">2017&ndash;2018</span>
+          <h3 class="tl-co">AArete</h3>
+          <span class="tl-role">Consulting Manager</span>
+        </div>
+        <div class="tl-detail">
+          <div class="tl-row"><span class="tl-k">There to solve</span><p>bluebird bio needed to reduce cost without degrading the service levels the business depended on.</p></div>
+          <div class="tl-row"><span class="tl-k">Owned</span><p>Vendor renegotiation and purchasing redesign across procurement, legal, HR and operations, and the reporting framework that put initiative progress, financial impact and risk in one place.</p></div>
+          <div class="tl-row"><span class="tl-k">Evidence</span><p>$1M+ in annualised savings, with every service commitment preserved. I was the consultant on the engagement, not a bluebird bio employee.</p></div>
+          <div class="tl-row tl-row--move"><span class="tl-k">Move developed</span><p><b>One basis for comparison.</b> Cost structure and existing service commitments assessed together, rather than cutting first and checking commitments after.</p></div>
+        </div>
       </li>
-      <li class="arc-step">
-        <span class="arc-dot" aria-hidden="true"></span>
-        <span class="arc-when">2018&ndash;2020</span>
-        <h3 class="arc-co">Kaseya</h3>
-        <span class="arc-role">Senior Manager, Strategic Finance &amp; Business Operations</span>
-        <p class="arc-note">Built the post-close operating system that brought 14 acquired companies onto one set of plans, reporting and metrics.</p>
+
+      <li class="tl-node">
+        <span class="tl-dot" aria-hidden="true"></span>
+        <div class="tl-head">
+          <span class="tl-when">2018&ndash;2020</span>
+          <h3 class="tl-co">Kaseya</h3>
+          <span class="tl-role">Senior Manager, Strategic Finance &amp; Business Operations</span>
+        </div>
+        <div class="tl-detail">
+          <div class="tl-row"><span class="tl-k">There to solve</span><p>Fourteen acquisitions had each arrived with their own systems, KPI definitions and planning calendars. Leadership could not compare anything to anything, which is a capital allocation problem wearing a reporting problem's clothes.</p></div>
+          <div class="tl-row"><span class="tl-k">Owned</span><p>The post-close operating and reporting infrastructure, and the analysis underneath board-level reporting. I did not own the acquisition decisions.</p></div>
+          <div class="tl-row"><span class="tl-k">Evidence</span><p>Fourteen companies onto one reporting stack instead of fourteen. I contributed the financial narrative and data room materials behind a $500M+ round from TPG and Insight Partners. The company's valuation moved from roughly $350M to $1.75B over the period.</p></div>
+          <div class="tl-row tl-row--move"><span class="tl-k">Move proven at scale</span><p><b>One basis for comparison.</b> Leadership needed a common basis for comparison, which is a different thing from more visibility and has to be built deliberately underneath the businesses.</p></div>
+        </div>
       </li>
-      <li class="arc-step">
-        <span class="arc-dot" aria-hidden="true"></span>
-        <span class="arc-when">2020&ndash;2026</span>
-        <h3 class="arc-co">SOL Consulting</h3>
-        <span class="arc-role">Director, Strategy &amp; Client Delivery</span>
-        <p class="arc-note">Held Account Manager ownership of the AMC Networks account throughout the engagement while also taking on Senior Technical Project Manager and then Senior Program Manager scope as it grew.</p>
+
+      <li class="tl-node">
+        <span class="tl-dot" aria-hidden="true"></span>
+        <div class="tl-head">
+          <span class="tl-when">2020&ndash;2026</span>
+          <h3 class="tl-co">SOL Consulting</h3>
+          <span class="tl-role">Director, Strategy &amp; Client Delivery</span>
+        </div>
+        <div class="tl-detail">
+          <div class="tl-row"><span class="tl-k">There to solve</span><p>A fast-growing streaming portfolio at AMC Networks running on processes built for something smaller. Teams spent their time reconciling information instead of moving campaigns forward.</p></div>
+          <div class="tl-row"><span class="tl-k">Owned</span><p>The account and the operating cadence throughout, and a delivery team of 8 whom I managed directly. No authority over any of the 16 business units whose work had to change.</p></div>
+          <div class="tl-row"><span class="tl-k">Evidence</span><p>End-to-end campaign cycle time fell roughly 30%. The client expanded the engagement from $280K to $2.1M across five years.</p></div>
+          <div class="tl-row tl-row--move"><span class="tl-k">Move developed</span><p><b>Establish cadence.</b> Reporting and rhythm are operating infrastructure rather than administration. Installing them early is what makes risk visible while leadership still has cheap options.</p></div>
+        </div>
       </li>
-      <li class="arc-step arc-step--now">
-        <span class="arc-dot" aria-hidden="true"></span>
-        <span class="arc-when">2026&ndash;Present</span>
-        <h3 class="arc-co">KLJ Ventures</h3>
-        <span class="arc-role">Founder, AI Systems Consultant</span>
-        <p class="arc-note">Helping organizations adopt and operationalize AI, and running the production operating system described below.</p>
+
+      <li class="tl-node tl-node--now">
+        <span class="tl-dot" aria-hidden="true"></span>
+        <div class="tl-head">
+          <span class="tl-when">2026&ndash;Present</span>
+          <h3 class="tl-co">KLJ Ventures</h3>
+          <span class="tl-role">Founder, AI Systems Consultant</span>
+        </div>
+        <div class="tl-detail">
+          <div class="tl-row"><span class="tl-k">There to solve</span><p>A consultancy needing more throughput than one person has, without putting my name on work nobody had checked.</p></div>
+          <div class="tl-row"><span class="tl-k">Owned</span><p>Every design decision, failure diagnosis and governance rule in the system.</p></div>
+          <div class="tl-row"><span class="tl-k">Evidence</span><p>120+ specialized agents across 14 functional domains, with automated checks enforced on everything the careers pipeline produces before it reaches my review.</p></div>
+          <div class="tl-row tl-row--move"><span class="tl-k">What AI added</span><p><b>Nothing grades its own work.</b> The principle is longstanding. The explicit, automated mechanism is new, because a colleague brings some independent judgment to a review and a language model brings none.</p></div>
+        </div>
       </li>
     </ol>
 
-    <div class="arc-read">
-      <span class="arc-read-label">Progression</span>
-      <ol>
-        <li>Systems</li>
-        <li>Consulting</li>
-        <li>Transformation</li>
-        <li>Business operations</li>
-        <li>Executive operating leadership</li>
-        <li>AI-native systems</li>
-      </ol>
-    </div>
+    <!-- The evolution, stated once so the whole arc reads at a glance without
+         opening six nodes. Deliberately not six framework badges: the first
+         entry is not a move, and the last names what AI added rather than
+         implying it was always there. -->
+    <ol class="tl-arc" aria-label="How the method developed">
+      <li>Learning the work</li>
+      <li>Diagnosis</li>
+      <li>Comparison</li>
+      <li>Comparison at scale</li>
+      <li>Cadence</li>
+      <li>Independent checking</li>
+    </ol>
   </section>
 
   <!-- ACT III · PROOF =====================================================
@@ -255,9 +309,18 @@
        inherits its context and cannot be read as something Kyle claims sole
        credit for. Each mechanism line states what he actually did.        -->
   <section class="page band" id="proof">
+    <!-- Retitled 2026-09-09 (Kyle, V3). The three cards used to be Kaseya, AMC
+         and "Transformation" — two companies and a type of work, which gave the
+         reader no organizing principle to hold. All three are now case studies,
+         and the subhead carries the kind of work each one demonstrates.
+
+         The bluebird bio and Beacon Health figures that lived in the retired
+         third card were NOT dropped; they moved into the career nodes above,
+         where they sit with the engagement that produced them. -->
     <div class="band-head">
       <span class="label">Evidence</span>
-      <h2>Selected results</h2>
+      <h2>Selected work</h2>
+      <p class="band-dek">Three environments, one method, different evidence.</p>
     </div>
 
     <div class="proofset">
@@ -266,18 +329,13 @@
           <h3 class="pgroup-co">Kaseya</h3>
           <span class="pgroup-when">2018&ndash;2020</span>
         </div>
-        <div class="pstat">
-          <span class="pstat-n">$350M &rarr; $1.75B</span>
-          <span class="pstat-what">The company's valuation over the period I partnered with the C-suite on planning rhythms and board reporting.</span>
-        </div>
-        <div class="pstat">
-          <span class="pstat-n">14</span>
-          <span class="pstat-what">Acquired companies brought onto one set of plans, reporting and metrics.</span>
-        </div>
-        <div class="pstat">
-          <span class="pstat-n">$500M+</span>
-          <span class="pstat-what">Growth financing from TPG and Insight Partners. I contributed the financial narrative and data room materials.</span>
-        </div>
+        <p class="pgroup-kind">Portfolio-scale operating infrastructure</p>
+        <dl class="pmeta">
+          <div><dt>Mandate</dt><dd>Fourteen acquisitions, each reporting on its own systems and definitions. Leadership could not compare anything to anything.</dd></div>
+          <div><dt>Intervention</dt><dd>Built the post-close operating and reporting infrastructure, and standardized KPI definitions across the portfolio.</dd></div>
+          <div><dt>Result</dt><dd><b>14</b> companies onto one reporting stack. <b>$500M+</b> growth financing from TPG and Insight Partners, where I contributed the financial narrative and data room materials. Valuation moved from roughly <b>$350M to $1.75B</b> across the period.</dd></div>
+          <div><dt>Why it matters</dt><dd>Leadership declined an acquisition on the analysis I built. Infrastructure that never changes a decision has failed.</dd></div>
+        </dl>
         <span class="pgroup-cue">Read the case study &rarr;</span>
       </a>
 
@@ -286,40 +344,96 @@
           <h3 class="pgroup-co">AMC Networks</h3>
           <span class="pgroup-when">2020&ndash;2026</span>
         </div>
-        <div class="pstat">
-          <span class="pstat-n">$280K &rarr; $2.1M</span>
-          <span class="pstat-what">Account growth across five years, through sustained scope expansion and contract renewals.</span>
-        </div>
-        <div class="pstat">
-          <span class="pstat-n">16 &middot; 12 &middot; 32</span>
-          <span class="pstat-what">Business units aligned, external partners coordinated, digital channels integrated. None of them reported to me.</span>
-        </div>
-        <div class="pstat">
-          <span class="pstat-n">~30%</span>
-          <span class="pstat-what">Cut in execution cycle time, from governance frameworks that replaced status-chasing with real-time visibility.</span>
-        </div>
+        <p class="pgroup-kind">Enterprise transformation without authority</p>
+        <dl class="pmeta">
+          <div><dt>Mandate</dt><dd>A streaming portfolio growing faster than the operating model underneath it, across <b>16</b> business units, <b>12</b> partners and <b>32</b> channels. None of them reported to me.</dd></div>
+          <div><dt>Intervention</dt><dd>One source of truth for status, risk and decisions, a standardized cadence across every unit and partner, and early risk escalation.</dd></div>
+          <div><dt>Result</dt><dd>Campaign cycle time fell roughly <b>30%</b>. The client expanded the engagement from <b>$280K to $2.1M</b>. Digital revenue grew about <b>65%</b> across streaming and distribution; I ran the AMC+ launch delivery that contributed to it, and the growth was a company result rather than mine alone.</dd></div>
+          <div><dt>Why it matters</dt><dd>Alignment came from visibility, not mandate. That is the whole argument for building the cadence early.</dd></div>
+        </dl>
         <span class="pgroup-cue">Read the case study &rarr;</span>
       </a>
 
-      <div class="pgroup pgroup--static">
+      <a class="pgroup lift" href="work/executive-office.html">
         <div class="pgroup-head">
-          <h3 class="pgroup-co">Transformation</h3>
-          <span class="pgroup-when">2014&ndash;2018</span>
+          <h3 class="pgroup-co">Executive Office</h3>
+          <span class="pgroup-when">2026&ndash;Present</span>
         </div>
-        <div class="pstat">
-          <span class="pstat-n">$1M+</span>
-          <span class="pstat-what">Annualised savings at bluebird bio through vendor renegotiation and purchasing process redesign.</span>
-        </div>
-        <div class="pstat">
-          <span class="pstat-n">15% &middot; 25%</span>
-          <span class="pstat-what">Operating cost reduction and process-efficiency improvement from a company-wide reorganization at Beacon Health, over a six-month engagement.</span>
-        </div>
-        <div class="pstat">
-          <span class="pstat-n">65%</span>
-          <span class="pstat-what">AMC's digital revenue grew this much across streaming and distribution. I ran the AMC+ launch delivery that contributed to it; the growth itself was a company result, not mine alone.</span>
-        </div>
-        <span class="pgroup-cue">Detailed on the resume</span>
-      </div>
+        <p class="pgroup-kind">An AI operating system built and governed from scratch</p>
+        <dl class="pmeta">
+          <div><dt>Mandate</dt><dd>Produce work I would sign my name to, repeatedly, without reading every word myself. Generating output was never the hard part.</dd></div>
+          <div><dt>Intervention</dt><dd>Separated generation from evaluation so no agent grades its own work, and encoded each failure as an automated check rather than fixing it once.</dd></div>
+          <!-- The gate count is registered to work/executive-office.html only
+               (Kyle, 2026-09-07: the exact number is operationally fragile and
+               the floor claim is scoped to the careers pipeline). It is named
+               there, not here. -->
+          <div><dt>Result</dt><dd><b>120+</b> specialized agents across <b>14</b> functional domains, with automated checks enforced on everything the careers pipeline produces before it reaches my review.</dd></div>
+          <div><dt>Why it matters</dt><dd>The system caught itself inventing a number inside a paragraph claiming it prevents invented numbers. That is the check working.</dd></div>
+        </dl>
+        <span class="pgroup-cue">Read the case study &rarr;</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ACT III(b) · DECISION INFRASTRUCTURE ================================
+       New in V3. This band replaces four competing enumerations that were
+       scattered across three pages: three principles on this homepage, five
+       steps and three more principles on operating-system.html, and a
+       three-move sentence on the Work index. None of them agreed, none was
+       named, and only one of the four ever reached a decision.
+
+       The hierarchy is deliberate and must be preserved:
+         MOVE      what he does
+         PRINCIPLE why that move works
+         EVIDENCE  where it was actually demonstrated
+       Collapsing principle and move produces a wall of slogans, which is what
+       the old "Operating principles" band had become.
+
+       The origin thesis leads because the term flattens into consultant
+       register without it. Kyle's ruling: never ship the name without the
+       provenance in the same viewport.                                    -->
+  <section class="page band" id="method">
+    <div class="band-head band-head--center">
+      <span class="label">The method</span>
+      <h2>Decision infrastructure</h2>
+    </div>
+
+    <p class="method-origin">I have entered five industries cold and spent most of my career outside the organization I was trying to move. The method is what is left when you cannot rely on knowing the domain or directing anyone.</p>
+
+    <p class="method-lede">Five moves. They depend on one another rather than happening in order, and the last one is the only test that counts.</p>
+
+    <ol class="moves">
+      <li class="move">
+        <h3 class="move-name">Find the layer</h3>
+        <p class="move-principle">Integrate the layer, not the company.</p>
+        <p class="move-ev">The presented problem and the real problem are usually different. Fourteen incompatible KPI definitions is a symptom; a capital allocation problem is the cause.</p>
+      </li>
+      <li class="move">
+        <h3 class="move-name">One basis for comparison</h3>
+        <p class="move-principle">The decision requires a common basis for comparison.</p>
+        <p class="move-ev">Not more visibility, which is a different thing and does not produce it. You cannot allocate capital across a portfolio you cannot compare.</p>
+      </li>
+      <li class="move">
+        <h3 class="move-name">Establish cadence</h3>
+        <p class="move-principle">Cadence earns its authority.</p>
+        <p class="move-ev">Reporting and rhythm are operating infrastructure, not administration. Installed early, they make risk visible while leadership still has cheap options.</p>
+      </li>
+      <li class="move">
+        <h3 class="move-name">Nothing grades its own work</h3>
+        <p class="move-principle">Inspection should be cheap.</p>
+        <p class="move-ev">A system that evaluates its own reasoning is exposed to the assumptions that produced the error. The principle is longstanding; the automated mechanism is new, and the AI work is what forced it.</p>
+      </li>
+      <li class="move">
+        <h3 class="move-name">Reach the decision</h3>
+        <p class="move-principle">The real test is whether leadership does something different because of the infrastructure.</p>
+        <p class="move-ev">Not whether it produces reports. At Kaseya the clearest proof was an acquisition the executive team declined on analysis I built. I did not make that call, and it was not mine to make.</p>
+      </li>
+    </ol>
+
+    <div class="method-loop">
+      <span class="label">Around all five</span>
+      <p class="method-loop-line">Every failure becomes a permanent check.</p>
+      <p class="method-loop-ev">A correction that lives in a document gets forgotten. One that lives in a gate does not. Applied to machine-produced work, the same rule reads: fabrication is a system bug.</p>
     </div>
   </section>
 
@@ -333,38 +447,39 @@
       <h2>Core capabilities</h2>
     </div>
 
-    <div class="caps5">
-      <div class="cap5">
-        <span class="cap5-n">01</span>
+    <!-- Demoted to an index in V3 (Kyle: "a quiet keyword/scan layer", "almost
+         an executive capability index, not a major narrative section"). The
+         card chrome and the descriptive paragraph under each item are what made
+         this band 881px — fourth-largest on the page, competing with the method
+         band above it. Name and evidence survive, because a capability claim
+         with no checkable fact behind it is just adjectives; the paragraph that
+         restated the name in longer words does not.
+
+         The cap5--ai highlight went with them. Emphasising one card said "AI is
+         Kyle's special capability", which inverts the positioning: AI is the
+         layer the method now runs on, argued in its own band below. -->
+    <ul class="capdex">
+      <li>
         <h3>Executive operating cadence</h3>
-        <p>The planning rhythm, KPI spine and board reporting a leadership team decides from.</p>
-        <span class="cap5-ev">Direct working relationship with the CEO at three organizations.</span>
-      </div>
-      <div class="cap5">
-        <span class="cap5-n">02</span>
+        <span class="capdex-ev">Direct working relationship with the CEO at three organizations.</span>
+      </li>
+      <li>
         <h3>Strategy to execution</h3>
-        <p>Turning an ambiguous mandate into owners, sequencing and accountability that survives contact with delivery.</p>
-        <span class="cap5-ev">Platform strategy and launch delivery for AMC+.</span>
-      </div>
-      <div class="cap5">
-        <span class="cap5-n">03</span>
+        <span class="capdex-ev">Platform strategy and launch delivery for AMC+.</span>
+      </li>
+      <li>
         <h3>Cross-functional transformation</h3>
-        <p>Aligning teams that do not report to one another, and holding that alignment for years rather than quarters.</p>
-        <span class="cap5-ev">16 business units, 12 external partners, 32 digital channels.</span>
-      </div>
-      <div class="cap5">
-        <span class="cap5-n">04</span>
+        <span class="capdex-ev">16 business units, 12 external partners, 32 digital channels.</span>
+      </li>
+      <li>
         <h3>Enterprise program leadership</h3>
-        <p>Multi-workstream execution with dependencies, risk and delivery held explicitly instead of discovered late.</p>
-        <span class="cap5-ev">14 acquisitions integrated; 10 concurrent initiatives; a delivery team of 8.</span>
-      </div>
-      <div class="cap5 cap5--ai">
-        <span class="cap5-n">05</span>
+        <span class="capdex-ev">14 acquisitions integrated; 10 concurrent initiatives; a delivery team of 8.</span>
+      </li>
+      <li>
         <h3>AI transformation</h3>
-        <p>Redesigning operating work around AI without removing human accountability.</p>
-        <span class="cap5-ev">Automated quality gates in the middle, a human approval on every output that leaves it. 120+ specialized agents behind that.</span>
-      </div>
-    </div>
+        <span class="capdex-ev">Automated quality gates, a human approval on every output that leaves the system, and 120+ specialized agents behind it.</span>
+      </li>
+    </ul>
 
     <div class="toolrow">
       <span class="toolrow-label">Operating toolkit</span>
@@ -384,10 +499,25 @@
     <!-- The eyebrow here read "The Operating System" directly above a heading
          that says "A production AI operating system" — the same words twice in
          two lines. Dropped rather than reworded. -->
-    <div class="band-head band-head--split">
+    <!-- Was .band-head--split: a two-column grid with align-items:end, which
+         bottom-aligned a short h2 against a taller thesis column and opened a
+         large gap above the heading. Stacked and centred instead, with the
+         thesis spanning the content width beneath it.
+
+         The thesis also gained a problem statement. "Generation was never the
+         constraint. Trust was." is a good line that assumed the reader already
+         knew which problem it answered. Naming the problem first fixes that
+         without rewriting the argument. -->
+    <div class="band-head band-head--center">
       <h2>A production AI operating system for executive work.</h2>
-      <p class="os-thesis">Generation was never the constraint. Trust was. An assistant that is right most of the time still creates review work, because you cannot tell which part is wrong without checking all of it. So I built the quality controls into the workflow itself, and kept human judgment where the cost of a wrong decision is highest.</p>
     </div>
+
+    <div class="os-problem">
+      <span class="label">The problem</span>
+      <p>Generating work was never the constraint. Knowing whether the work was right was.</p>
+    </div>
+
+    <p class="os-thesis">An assistant that is right most of the time still creates review work, because you cannot tell which part is wrong without checking all of it. So I built the quality controls into the workflow itself, and kept human judgment where the cost of a wrong decision is highest.</p>
 
     <!-- These three figures used to sit beside the paragraph, half a screen
          from the thing they describe. Moved directly above the diagram so they
@@ -439,67 +569,94 @@
     <p style="margin-top:var(--space-l)"><a class="btn-primary" href="work/executive-office.html">See how it works &rarr;</a></p>
     </div>
     </div>
+
+    <!-- The proof artifact. This is deliberately an artifact of Kyle's OWN
+         system about Kyle's own material: no client, no counterparty, nothing
+         redacted. A client deliverable would only prove he was in the room.
+         This is inspectable by a stranger, which is the entire point.
+
+         The quote is verbatim from the docstring of the validator that caught
+         it, but deliberately stops short of the fabricated figure itself: that
+         number is on the validator's BANNED list, whose rule reads "do not
+         reintroduce in any form". Reprinting it here to tell the story would
+         break the very gate the story is about. The sentence below carries the
+         point without it, and is the striking half regardless. -->
+    <figure class="os-catch">
+      <span class="label">The check working</span>
+      <blockquote>
+        <p>&ldquo;It was invented during the build and would have shipped inside a paragraph arguing that the system catches fabrication.&rdquo;</p>
+      </blockquote>
+      <figcaption>From the validator that caught it. The system had produced a count of its own documented rule captures that appears in no canonical record anywhere, and the gate refused the figure before it reached this page. Every gate exists because something failed once, was diagnosed, and was encoded so that class of error gets caught if it recurs. The number itself is now permanently banned from the site, which is why it does not appear above.</figcaption>
+    </figure>
   </section>
 
-  <!-- ACT VI · THE HUMAN LAYER ============================================ -->
+  <!-- ACT VII · POINT OF VIEW =============================================
+       Moved above Background in V3, and rebuilt. This band used to restate the
+       three operating principles, which now live inside the method band as the
+       argument under each move. Repeating them here would have rebuilt, in two
+       adjacent sections, the exact duplication V3 existed to remove.
+
+       What replaces them is the harder material: the questions the method has
+       NOT answered, lifted verbatim from thinking.html. A polished methodology
+       is what every candidate presents. An operator publishing the places his
+       own method has a soft edge is not, and it is the strongest anti-generic
+       signal on the site.                                                  -->
+  <section class="page band" id="pov">
+    <div class="band-head band-head--center">
+      <span class="label">Point of view</span>
+      <h2>What I have not resolved</h2>
+      <p class="band-dek">Three questions the method raises and does not answer.</p>
+    </div>
+    <div class="povs">
+      <blockquote class="pov">
+        <p>Cadence should be installed early, but early is exactly when you have no credibility to install it.</p>
+        <cite>Solving one visible thing first and spending the credit immediately has worked for me. That is a sequencing trick rather than an answer.</cite>
+      </blockquote>
+      <blockquote class="pov">
+        <p>What is the honest price of the status quo?</p>
+        <cite>Every proposed change is measured against its cost. Almost nothing is measured against the cost of continuing as-is, because that cost appears on no line item.</cite>
+      </blockquote>
+      <blockquote class="pov">
+        <p>When does adding another quality gate stop paying for itself?</p>
+        <cite>Gates cost time on every run forever, to prevent an error that happened once. I suspect some of mine are no longer worth what they cost.</cite>
+      </blockquote>
+    </div>
+    <p class="pov-out"><a class="btn-quiet" href="thinking.html">Read the thinking &rarr;</a></p>
+  </section>
+
+  <!-- ACT VI · THE HUMAN LAYER ============================================
+       Rebuilt in V3 around three dimensions rather than a list of credentials.
+       "Neuroscience degree + five industries + 50 countries" was a collection
+       of facts, not a background, and the travel line ("a plan that survives
+       about a day and a half") was removed at Kyle's instruction: it was cute
+       and told an executive nothing.                                       -->
   <section class="page band" id="background">
     <div class="band-head">
       <span class="label">Background</span>
-      <h2>Neuroscience, process management, and five industries entered cold</h2>
+      <h2>The operator, the builder, and the person</h2>
     </div>
     <div class="human">
       <img class="human-portrait" src="assets/kyle@2x.jpg" alt="Kyle Littlejohn" width="230" height="230" loading="lazy">
       <div class="human-body">
-        <!-- Trimmed. The industry list duplicated the hero deck, "five
-             industries entered cold" already appears in this section's heading
-             and again in the figures below, and two clauses were doing
-             rhetorical work rather than carrying information — one of which
-             echoed the headline at the top of the page. -->
-        <p>I studied neuroscience at William &amp; Mary with a minor in process management. Both are the study of how a system takes in incomplete information and produces a decision.</p>
-        <p>Each of those five industries was one I entered without the domain, and had to become useful in quickly.</p>
-        <!-- Warmth restored 2026-09-08. The restraint pass stripped these lines
-             along with the self-promotional copy Kyle actually objected to;
-             those are different things. Wording is his own, carried over from
-             about.html — no new claims. -->
-        <p>Thirty-plus endurance races, marathons and Hyrox mostly, with the occasional ultra when I have lost perspective. Training is the one part of my life with a genuinely honest feedback loop, which is probably why I keep going back to it.</p>
-        <p>Fifty-plus countries, usually with a plan that survives about a day and a half. I cook seriously, which is the other place where a process either works or it does not and there is no arguing with the result.</p>
+        <div class="human-dim">
+          <span class="human-k">The operator</span>
+          <p>Five industries I entered without the domain: biotech, credit ratings, health insurance, infrastructure SaaS and streaming media. Becoming useful quickly turns out to be most of the job when you are the person handed the thing nobody owns. That pattern is not on my resume as a skill, and it is probably the most transferable thing I do.</p>
+        </div>
+        <div class="human-dim">
+          <span class="human-k">The builder</span>
+          <p>I studied neuroscience at William &amp; Mary with a minor in process management, which sounded like an odd pairing at the time. Both are the study of how a system takes in incomplete information and produces a decision. I would rather build the operating model than inherit one, which is eventually why I started building the systems instead of advising on them.</p>
+        </div>
+        <div class="human-dim">
+          <span class="human-k">The person</span>
+          <p>Thirty-plus endurance races, marathons and Hyrox mostly, with the occasional ultra when I have lost perspective. Training is the one part of my life with a genuinely honest feedback loop, which is probably why I keep going back to it. Outside the work I spend an unreasonable amount of time running, traveling and figuring out how to make things work better than they did the first time.</p>
+        </div>
         <p><a class="btn-quiet" href="about.html">Full background &rarr;</a></p>
-        <!-- Two groups, not four equivalent KPIs. The first pair is
-             professional proof; the second is personality, and giving them the
-             same visual weight made the row read as a personal dashboard. -->
         <div class="human-facts">
           <div><b>12+</b><span>years operating</span></div>
           <div><b>5</b><span>industries entered cold</span></div>
         </div>
-        <p class="human-aside">Outside it: 30+ endurance races, 50+ countries.</p>
       </div>
     </div>
-  </section>
-
-  <!-- ACT VII · POINT OF VIEW =============================================
-       Three lines, all drawn verbatim from the site's own longer writing, so
-       this band is a doorway into that work rather than a new set of claims.
-       Thinking earns a place here; it does not earn a nav slot.          -->
-  <section class="page band" id="pov">
-    <div class="band-head">
-      <span class="label">Point of view</span>
-      <h2>Operating principles</h2>
-    </div>
-    <div class="povs">
-      <blockquote class="pov">
-        <p>Cadence earns its authority.</p>
-        <cite>Install operating rhythm early, but do not confuse a new meeting with earned credibility.</cite>
-      </blockquote>
-      <blockquote class="pov">
-        <p>Inspection should be cheap.</p>
-        <cite>If checking the work takes longer than doing the work, quality control eventually disappears.</cite>
-      </blockquote>
-      <blockquote class="pov">
-        <p>Fabrication is a system bug.</p>
-        <cite>The answer is not better prompting. It is a workflow that makes unsupported output difficult to produce.</cite>
-      </blockquote>
-    </div>
-    <p class="pov-out"><a class="btn-quiet" href="thinking.html">Read the thinking &rarr;</a></p>
   </section>
 
   <!-- ACT VIII · CONTACT =================================================== -->
@@ -512,6 +669,9 @@
          no longer exists. -->
     <h2>Let's talk.</h2>
     <p class="contact-sub">A 20-minute call is the fastest way to find out whether I am useful to you.</p>
+    <!-- Relocated from the hero 2026-09-09 (Kyle, V3). Wording is his, approved
+         verbatim on 2026-09-07 and unchanged; only its position moved. -->
+    <p class="contact-open">Open to select executive opportunities.</p>
     <form class="cform" id="contactForm" novalidate>
       <div class="cform-row">
         <div>
@@ -612,6 +772,7 @@
 <script src="assets/js/ambient.js" defer></script>
 <script src="assets/js/sysmap.js" defer></script>
 <script src="assets/js/story.js" defer></script>
+<script src="assets/js/career.js" defer></script>
 <!-- Analytics: the same GoatCounter property production has used since launch. Privacy-preserving, no cookies, no cross-site identifiers. -->
 <script data-goatcounter="https://khlittlejohn.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
