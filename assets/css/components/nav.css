@@ -152,6 +152,15 @@
 
 /* Buttons live here so every page can use them, not only home. */
 .btn-primary, .btn-quiet {
+  /* background and font are declared because these classes sit on BOTH <a> and
+     <button>. An anchor is transparent and inherits the page font; a button is
+     neither — it takes the UA's ButtonFace fill and the UA font stack. The one
+     <button class="btn-quiet"> on the site (Trace a request) was rendering as a
+     filled light box carrying near-white --ink text: an invisible label on a
+     control that looked broken. .btn-primary re-declares its gold background
+     twelve lines below, so it is unaffected by the transparent default. */
+  background: transparent;
+  font: inherit;
   display: inline-block;
   font-size: var(--step-0);
   padding: var(--space-2xs) var(--space-m);

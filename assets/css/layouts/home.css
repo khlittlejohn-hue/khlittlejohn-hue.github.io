@@ -273,7 +273,7 @@
 /* ---- CONTACT ------------------------------------------------------------- */
 
 .contact { text-align: center; padding-block: var(--space-2xl); }
-.contact h2 { font-size: var(--step-4); max-width: 26ch; margin-inline: auto; margin-bottom: var(--space-m); }
+.contact h2 { font-size: var(--step-3); max-width: 26ch; margin-inline: auto; margin-bottom: var(--space-m); }
 .contact p { margin-inline: auto; color: var(--ink-2); }
 .contact .contact-sub { margin-bottom: var(--space-l); font-size: var(--step-1); line-height: 1.45; max-width: 44ch; text-wrap: pretty; }
 
