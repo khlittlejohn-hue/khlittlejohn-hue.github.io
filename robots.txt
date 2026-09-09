@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /_archive/
 
 Sitemap: https://kylelittlejohn.com/sitemap.xml
