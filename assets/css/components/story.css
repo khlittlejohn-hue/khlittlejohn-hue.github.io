@@ -1,0 +1,115 @@
+/* ============================================================================
+   components/story.css — three additions that make the page behave like the
+   thing it describes: one continuous narrative, a career that resolves as you
+   move through it, and an operating system you can watch run.
+
+   Every rule here is opacity, colour or transform. Nothing changes layout, so
+   the locked hero geometry and every measured breakpoint are untouched.
+   Motion is gated twice: the --dur-* tokens collapse under reduced motion, and
+   the literal durations below carry their own guard.
+   ============================================================================ */
+
+/* ---- 1. THE NARRATIVE RAIL ----------------------------------------------
+   Eight acts, fixed to the right edge on wide screens. The current act is
+   gold; its label is written out, the others are dots. It answers the brief's
+   own question — "does it read as one story or stacked sections?" — by
+   drawing the story's spine on the page. Hidden below 1200px, where the page
+   margin is too narrow to hold it without touching the content column.     */
+.acts {
+  position: fixed;
+  right: var(--space-m);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: var(--z-sticky);
+  display: none;
+  flex-direction: column;
+  gap: var(--space-s);
+  margin: 0; padding: 0; list-style: none;
+}
+@media (min-width: 1200px) { .js .acts { display: flex; } }
+.acts a {
+  display: flex; align-items: center; justify-content: flex-end; gap: var(--space-xs);
+  text-decoration: none;
+  color: var(--ink-3);
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  min-height: 24px;
+}
+.acts .t {
+  opacity: 0;
+  transform: translateX(6px);
+  transition: opacity var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out);
+  background: var(--bg);
+  padding: 2px 6px;
+  border-radius: var(--radius-s);
+}
+.acts .d {
+  width: 6px; height: 6px; border-radius: 50%; flex: none;
+  background: transparent; border: 1px solid var(--line-strong);
+  transition: background var(--dur-base) var(--ease-out), border-color var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out);
+}
+.acts a:hover .t, .acts a:focus-visible .t, .acts a[aria-current] .t { opacity: 1; transform: none; }
+.acts a:hover .d { border-color: var(--ink-2); }
+.acts a[aria-current] { color: var(--gold); }
+.acts a[aria-current] .d { background: var(--gold); border-color: var(--gold); transform: scale(1.35); }
+.acts a[data-done] .d { background: var(--line-strong); }
+:root[data-theme="light"] .acts a[aria-current] { color: var(--gold-deep); }
+
+/* ---- 2. THE ARC RESOLVES AS YOU ARRIVE ----------------------------------
+   Steps begin quiet and settle to full ink as they enter the viewport, in
+   order. The current-position marker keeps its glow; the others simply
+   arrive. Under reduced motion, or without JS, everything is already lit.  */
+.js .arc-step { transition: opacity 420ms var(--ease-out), transform 420ms var(--ease-out); }
+.js .arc-step:not(.in) { opacity: 0.28; transform: translateY(6px); }
+.js .arc-step:not(.in) .arc-dot { border-color: var(--line-2); }
+.js .arc-step.in .arc-dot { border-color: var(--gold-line); background: var(--surface-raised); }
+.js .arc-step--now.in .arc-dot { background: var(--gold); border-color: var(--gold); }
+@media (prefers-reduced-motion: reduce) {
+  .js .arc-step:not(.in) { opacity: 1; transform: none; }
+  .js .arc-step { transition: none; }
+}
+
+/* ---- 3. TRACE A REQUEST -------------------------------------------------
+   The map shows the system's shape; the six-stage flow below it states the
+   sequence. Neither shows the two together. Trace runs one request through
+   both at once: the flow lights stage by stage while the map hands the work
+   from the core to a domain, back through quality control, to the human gate,
+   and out. It is the difference between a diagram of a system and a system.  */
+.os-trace {
+  display: flex; align-items: center; gap: var(--space-m); flex-wrap: wrap;
+  margin-top: var(--space-l);
+}
+.os-trace-status {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  color: var(--ink-2);
+  min-height: 1.5em;
+}
+.os-trace-status b { color: var(--gold); font-weight: 600; }
+:root[data-theme="light"] .os-trace-status b { color: var(--gold-deep); }
+
+.os-stage { transition: color var(--dur-base) var(--ease-out); }
+.os-stage .os-name, .os-stage .os-role { transition: color var(--dur-base) var(--ease-out); }
+.os-stage::before { transition: background var(--dur-base) var(--ease-out), border-color var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out); }
+.os-stage[data-live] .os-name { color: var(--ink); }
+.os-stage[data-live] .os-role { color: var(--ink-2); }
+.os-stage[data-live]::before {
+  background: var(--gold); border-color: var(--gold);
+  box-shadow: 0 0 0 4px var(--bg-sunk), 0 0 16px -2px color-mix(in oklab, var(--gold) 60%, transparent);
+}
+.os-stage[data-done]::before { background: var(--line-strong); border-color: var(--line-strong); }
+.os-stage[data-done] .os-name { color: var(--ink-2); }
+/* The gate stage is already marked gold in home.css; when live it reads as
+   the one place the request waits. */
+.os-stage--gate[data-live] .os-n { color: var(--gold); }
+
+/* The map's edge and node styles carry the active state already; the trace
+   simply drives them. This adds a travelling emphasis on the active edge. */
+.sysmap.tracing .sm-line.active { stroke-width: 2.6; opacity: 1; }
+.sysmap.tracing .sm-core .ring { stroke-width: 2.4; }
+@media (prefers-reduced-motion: reduce) {
+  .os-stage, .os-stage .os-name, .os-stage .os-role, .os-stage::before { transition: none; }
+}
+

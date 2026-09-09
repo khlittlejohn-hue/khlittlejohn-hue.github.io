@@ -20,7 +20,14 @@
 /* ---- ACT III · PROOF, GROUPED -------------------------------------------- */
 
 .proofset { display: grid; gap: var(--space-m); }
-@media (min-width: 900px) { .proofset { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+/* Three-up from 760px, not 900. Between 760 and 899 the groups stacked into a
+   single column of three 525px cards — 1.6 screens of one-column cards on an
+   iPad — while the capabilities directly beneath were already two-up. */
+@media (min-width: 760px) { .proofset { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 760px) and (max-width: 899px) {
+  .pgroup { padding: var(--space-s); }
+  .pstat-n { font-size: var(--step-1); }
+}
 
 .pgroup {
   display: flex;
@@ -97,7 +104,9 @@
 /* A group with no case study behind it is a <div>, not an <a>, and must not
    pretend to be clickable. */
 .pgroup--static { cursor: default; }
-.pgroup--static .pgroup-cue { color: var(--ink-faint); }
+/* --ink-faint is not a text colour (2.41:1 on surface). --ink-3 is 4.6:1 and
+   the cue still reads quieter than the linked groups' gold hover. */
+.pgroup--static .pgroup-cue { color: var(--ink-3); }
 
 
 /* ---- ACT V · CAPABILITIES ------------------------------------------------ */

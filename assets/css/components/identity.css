@@ -45,7 +45,11 @@
   flex-wrap: wrap;
   align-items: baseline;
   gap: var(--space-2xs) var(--space-m);
-  margin-bottom: var(--space-m);
+  /* One step more air than the eyebrow gets. The nameplate and the eyebrow are
+     the same typographic object — tracked uppercase mono — and at 24px apart
+     they read as two lines of one label. At 56px the nameplate reads as the
+     masthead and the eyebrow as the first line of the headline group. */
+  margin-bottom: var(--space-xl);
 }
 
 /* The name is set in mono, not the display serif. The serif belongs to the
@@ -97,27 +101,30 @@
   background: var(--gold);
   flex: none;
 }
+/* Static. career-arc.css reserves the pulse for the current-position marker —
+   "the one moment on the page where a number-free element is allowed to glow" —
+   and a second pulsing dot one screen above it made that untrue. The ring stays
+   as a still halo so the chip keeps its "live" reading without motion. */
 .identity-open .dot::after {
   content: "";
   position: absolute;
   inset: -3px;
   border-radius: 50%;
   border: 1px solid var(--gold);
-  opacity: 0;
-  animation: identityPulse 3.4s var(--ease-out) infinite;
-}
-@keyframes identityPulse {
-  0%, 100% { transform: scale(0.7); opacity: 0; }
-  50%      { transform: scale(1.15); opacity: 0.5; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .identity-open .dot::after { animation: none; opacity: 0.4; transform: none; }
+  opacity: 0.4;
 }
 
 @media (max-width: 640px) {
   .hero-identity { gap: var(--space-2xs) var(--space-s); }
   .identity-rule { display: none; }
   .identity-name { font-size: var(--step--2); letter-spacing: 0.13em; }
+}
+/* At 320px the availability chip is wider than the column (nowrap + 38
+   characters of mono) and was the only element on the page pushing the
+   document past the viewport. Let it wrap; the dot stays on the first line. */
+@media (max-width: 380px) {
+  .identity-open { white-space: normal; max-width: 100%; align-items: flex-start; }
+  .identity-open .dot { margin-top: 0.45em; }
 }
 
 

@@ -84,9 +84,13 @@
               stroke-width var(--dur-base) var(--ease-out),
               fill var(--dur-base) var(--ease-out);
 }
+/* SVG text scales with the stage: viewBox is 680 wide and the stage renders at
+   ~574px on a 1440 screen and ~499px at 1080, so a 13px/11.5px pair landed at
+   11/9.7px and 9.5/8.4px — under the 11.5px floor the rest of the system
+   holds. Raised so the rendered size clears the floor at 1080 and above. */
 .sm-node .num {
   fill: var(--ink-2);
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 600;
   font-family: var(--font-mono);
   text-anchor: middle;
@@ -96,7 +100,7 @@
 }
 .sm-node .lbl {
   fill: var(--ink-2);
-  font-size: 11.5px;
+  font-size: 14px;
   font-weight: 600;
   font-family: var(--font-mono);
   text-anchor: middle;
@@ -134,7 +138,7 @@
 }
 .sm-core .sub {
   fill: var(--ink-2);
-  font-size: 9px;
+  font-size: 10.5px;
   font-weight: 500;
   font-family: var(--font-mono);
   text-anchor: middle;

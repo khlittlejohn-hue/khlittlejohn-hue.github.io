@@ -126,7 +126,16 @@
     var light = themeIsLight();
     return {
       light: light,
-      node: read(light ? "--line-strong" : "--line-2", light ? "#B9AF9E" : "#34313C"),
+      /* Dark reads --line-strong too (was --line-2). The alpha budget was never
+         the reason the dark field measured flat: #34313C at 0.80 over the ground
+         composites to ~1.5:1 against it — the node colour itself was within a
+         hair of the page. #46424F at the same alphas composites to ~2.0:1, which
+         is visible, and the text budget still clears: unmasked worst case
+         --ink-2 over a full dot is 5.63:1 (was 6.68), over a line 7.70 (was
+         8.00); --ink-3 over a line 3.94 (was 4.09). Both --ink-3 figures are
+         below AA with or without this change, which is why the mask exists and
+         why every exposed --ink-3 string was already promoted in ambient.css. */
+      node: read("--line-strong", light ? "#B9AF9E" : "#46424F"),
       gold: read(light ? "--gold-deep" : "--gold", light ? "#6F5008" : "#F5C451"),
       a: light ? CFG.light : CFG.dark
     };

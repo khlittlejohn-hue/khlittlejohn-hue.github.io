@@ -119,8 +119,20 @@
   core.appendChild(el("circle", { cx: cx, cy: cy, r: coreR, class: "ring" }));
   var ct = el("text", { x: cx, y: cy - 3, class: "ttl" }); ct.textContent = "Chief";
   var ct2 = el("text", { x: cx, y: cy + 15, class: "ttl" }); ct2.textContent = "of Staff";
-  var cs = el("text", { x: cx, y: cy + 33, class: "sub" }); cs.textContent = "orchestration";
-  core.appendChild(ct); core.appendChild(ct2); core.appendChild(cs);
+  /* The "orchestration" sub-label is gone. SVG text scales with the viewBox,
+     so its 10.5px CSS size rendered at 8.86px on a 1440 desktop and smaller
+     still on narrower screens — under the 11.52px floor tokens.css declares as
+     the point below which nothing readable is set. No fixed CSS value fixes
+     that, because the scale factor moves with the viewport; the string would
+     have needed ~20px CSS to hold the floor at the narrowest width the map is
+     shown, which does not fit inside a 112px core.
+
+     Removing it costs nothing: the detail panel beside the map already reads
+     "Chief of Staff · Orchestration" at full size, the SVG's aria-label still
+     names the orchestration core for screen readers, and the phone list chip
+     carries the same words. It was a third line of type inside a small circle
+     that no one could read. */
+  core.appendChild(ct); core.appendChild(ct2);
   svg.appendChild(core);
 
   /* Nodes. */

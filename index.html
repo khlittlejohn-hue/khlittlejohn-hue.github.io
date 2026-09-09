@@ -57,6 +57,9 @@
 <!-- Loaded last: the ambient layer overrides the hero's local wash and the
      sunk band's opaque ground, so it must win on source order. -->
 <link rel="stylesheet" href="assets/css/components/ambient.css">
+<!-- Narrative rail, arriving career arc, Trace a request. Opacity/colour/
+     transform only; no layout change. -->
+<link rel="stylesheet" href="assets/css/components/story.css">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Person","name":"Kyle Littlejohn",
 "url":"https://kylelittlejohn.com/","image":"https://kylelittlejohn.com/assets/kyle.jpg",
@@ -103,6 +106,19 @@
   </div>
 </nav>
 
+<!-- The story's spine, drawn on the page. Eight acts; the current one is
+     written out. Rendered only with JS and only above 1200px (story.css). -->
+<ol class="acts" id="acts" aria-label="Sections of this page">
+  <li><a href="#top"><span class="t">Identity</span><span class="d" aria-hidden="true"></span></a></li>
+  <li><a href="#career"><span class="t">Career</span><span class="d" aria-hidden="true"></span></a></li>
+  <li><a href="#proof"><span class="t">Evidence</span><span class="d" aria-hidden="true"></span></a></li>
+  <li><a href="#capabilities"><span class="t">Capabilities</span><span class="d" aria-hidden="true"></span></a></li>
+  <li><a href="#os"><span class="t">Operating system</span><span class="d" aria-hidden="true"></span></a></li>
+  <li><a href="#background"><span class="t">Background</span><span class="d" aria-hidden="true"></span></a></li>
+  <li><a href="#pov"><span class="t">Point of view</span><span class="d" aria-hidden="true"></span></a></li>
+  <li><a href="#contact"><span class="t">Contact</span><span class="d" aria-hidden="true"></span></a></li>
+</ol>
+
 <main id="main">
 
   <!-- ACT I · IDENTITY =====================================================
@@ -110,14 +126,18 @@
        is reproduced verbatim. What was missing was never the proposition — it
        was whose proposition it is, and what he is open to. Both now sit above
        it, in mono, so they identify without competing with the headline.   -->
-  <section class="page hero">
+  <section class="page hero" id="top">
     <div class="hero-identity">
       <span class="identity-name">Kyle Littlejohn</span>
       <span class="identity-rule" aria-hidden="true"></span>
       <span class="identity-open"><span class="dot" aria-hidden="true"></span>Open to select executive opportunities</span>
     </div>
 
-    <span class="hero-eyebrow">Strategy &amp; Operations &middot; Chief of Staff scope</span>
+    <!-- Kyle, 2026-09-08: add Program Management as a third named discipline.
+         "scope" retired — it was hedging a title rather than naming a practice,
+         and it does not survive next to two real disciplines. The frozen-hero
+         gate covers the H1 and the deck only, both untouched. -->
+    <span class="hero-eyebrow">Strategy &amp; Operations &middot; Chief of Staff &middot; Program Management</span>
     <h1 class="hero-title">Senior leaders hand me the mandate nobody owns.</h1>
 
     <div class="hero-body">
@@ -149,7 +169,10 @@
          the section. An explanatory h2 was telling the reader the conclusion
          that the visual proves two inches lower. -->
     <div class="band-head band-head--bare">
-      <span class="label">Career</span>
+      <span class="label" aria-hidden="true">Career</span>
+      <!-- The section's heading, for the outline: without it the six company
+           names (h3) hang directly under the page h1. -->
+      <h2 class="visually-hidden">Career</h2>
     </div>
 
     <ol class="arcline">
@@ -214,7 +237,7 @@
        Grouped by employer rather than pooled into a KPI wall, so every figure
        inherits its context and cannot be read as something Kyle claims sole
        credit for. Each mechanism line states what he actually did.        -->
-  <section class="page band">
+  <section class="page band" id="proof">
     <div class="band-head">
       <span class="label">Evidence</span>
       <h2>Selected results</h2>
@@ -287,7 +310,7 @@
        Five things, not a taxonomy. Each carries an evidence line, because a
        capability claim without a checkable fact behind it is just adjectives.
        The fifth is the hinge into the operating-system band.              -->
-  <section class="page band">
+  <section class="page band" id="capabilities">
     <div class="band-head">
       <span class="label">Expertise</span>
       <h2>Core capabilities</h2>
@@ -384,11 +407,18 @@
       <li class="os-stage"><span class="os-n">06</span><span class="os-name">Output</span><span class="os-role">work I have approved</span></li>
     </ol>
 
+    <!-- Runs one request through the map and the six stages together. The
+         narration is built from the stage names and role lines above. -->
+    <div class="os-trace">
+      <button class="btn-quiet" type="button" id="osTrace">Trace a request &rarr;</button>
+      <span class="os-trace-status" id="osTraceStatus" role="status" aria-live="polite"></span>
+    </div>
+
     <p style="margin-top:var(--space-l)"><a class="btn-primary" href="work/executive-office.html">See how it works &rarr;</a></p>
   </section>
 
   <!-- ACT VI · THE HUMAN LAYER ============================================ -->
-  <section class="page band">
+  <section class="page band" id="background">
     <div class="band-head">
       <span class="label">Background</span>
       <h2>Neuroscience, process management, and five industries entered cold</h2>
@@ -419,7 +449,7 @@
        Three lines, all drawn verbatim from the site's own longer writing, so
        this band is a doorway into that work rather than a new set of claims.
        Thinking earns a place here; it does not earn a nav slot.          -->
-  <section class="page band">
+  <section class="page band" id="pov">
     <div class="band-head">
       <span class="label">Point of view</span>
       <h2>Operating principles</h2>
@@ -535,6 +565,7 @@
 </script>
 <script src="assets/js/ambient.js" defer></script>
 <script src="assets/js/sysmap.js" defer></script>
+<script src="assets/js/story.js" defer></script>
 <!-- Analytics: the same GoatCounter property production has used since launch. Privacy-preserving, no cookies, no cross-site identifiers. -->
 <script data-goatcounter="https://khlittlejohn.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
