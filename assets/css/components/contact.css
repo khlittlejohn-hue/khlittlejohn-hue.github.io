@@ -68,7 +68,7 @@
 /* Only mark invalid AFTER the field has been interacted with, so an empty
    untouched form is not aggressively red on arrival. */
 .cform input:not(:placeholder-shown):invalid,
-.cform textarea:not(:placeholder-shown):invalid { border-color: var(--danger, #C0552F); }
+.cform textarea:not(:placeholder-shown):invalid { border-color: var(--fail); }
 
 .cform button { justify-self: start; cursor: pointer; }
 .cform button[disabled] { opacity: 0.55; cursor: progress; }
@@ -83,7 +83,7 @@
   color: var(--ink-2);
 }
 .cform-status[data-state="ok"]   { color: var(--gold); }
-.cform-status[data-state="err"]  { color: var(--danger, #C0552F); }
+.cform-status[data-state="err"]  { color: var(--fail); }
 
 .cform-fallback {
   font-size: var(--step--1);

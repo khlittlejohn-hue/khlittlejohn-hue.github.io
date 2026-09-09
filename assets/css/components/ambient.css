@@ -120,3 +120,11 @@ body::before {
   .arc-step--now .arc-when { color: var(--gold-deep); }
 }
 :root[data-theme="light"] .arc-step--now .arc-when { color: var(--gold-deep); }
+
+/* Missed in the original sweep: the contact form's success message is exposed
+   gold on the page ground, so it takes the same light-theme promotion as every
+   other exposed gold string. 4.21:1 -> 6.21:1. */
+@media (prefers-color-scheme: light) {
+  .cform-status[data-state="ok"] { color: var(--gold-deep); }
+}
+:root[data-theme="light"] .cform-status[data-state="ok"] { color: var(--gold-deep); }

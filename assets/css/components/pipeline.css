@@ -49,7 +49,7 @@
 .pl-scenario {
   font: inherit;
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: var(--step--2);
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
   padding: var(--space-3xs) var(--space-2xs);
