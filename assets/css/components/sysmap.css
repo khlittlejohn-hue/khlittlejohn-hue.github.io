@@ -90,7 +90,10 @@
    holds. Raised so the rendered size clears the floor at 1080 and above. */
 .sm-node .num {
   fill: var(--ink-2);
-  font-size: 15px;
+  /* Rendered size, not document size — see syncTypeScale() in sysmap.js.
+     --sm-k is the inverse viewBox scale, so this resolves to 13px on screen at
+     every viewport instead of shrinking with the stage. */
+  font-size: calc(13px * var(--sm-k, 1));
   font-weight: 600;
   font-family: var(--font-mono);
   text-anchor: middle;
@@ -100,7 +103,10 @@
 }
 .sm-node .lbl {
   fill: var(--ink-2);
-  font-size: 14px;
+  /* Rendered size, not document size — see syncTypeScale() in sysmap.js.
+     --sm-k is the inverse viewBox scale, so this resolves to 11.5px on screen at
+     every viewport instead of shrinking with the stage. */
+  font-size: calc(11.5px * var(--sm-k, 1));
   font-weight: 600;
   font-family: var(--font-mono);
   text-anchor: middle;
@@ -130,7 +136,10 @@
 .sm-core .halo { fill: none; stroke: var(--gold); stroke-width: 1.2; opacity: 0.35; }
 .sm-core .ttl {
   fill: var(--gold);
-  font-size: 15px;
+  /* Rendered size, not document size — see syncTypeScale() in sysmap.js.
+     --sm-k is the inverse viewBox scale, so this resolves to 13.5px on screen at
+     every viewport instead of shrinking with the stage. */
+  font-size: calc(13.5px * var(--sm-k, 1));
   font-weight: 600;
   font-family: var(--font-display);
   font-variation-settings: var(--fraunces-data);

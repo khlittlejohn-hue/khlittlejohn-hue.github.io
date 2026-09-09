@@ -25,7 +25,7 @@
   align-items: start;
 }
 .cs-body { min-width: 0; }
-.cs-rail { position: sticky; top: calc(var(--space-l) + 61px); padding-top: var(--space-xl); }
+.cs-rail { position: sticky; top: calc(var(--space-l) + var(--nav-h)); padding-top: var(--space-xl); }
 .cs-rail-label { display: block; margin-bottom: var(--space-s); }
 .cs-index { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
 .cs-index a {

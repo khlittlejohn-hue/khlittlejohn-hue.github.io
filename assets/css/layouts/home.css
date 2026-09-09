@@ -127,50 +127,13 @@
 .proof .metric-cue { margin-top: auto; padding-top: var(--space-s); }
 @media (max-width: 700px) { .proof { grid-template-columns: 1fr; } }
 
-/* ---- METHOD ARC ----------------------------------------------------------
-   The through-line. Establishes that the AI work is the latest expression of
-   a long-running discipline rather than a career pivot.                   */
-
-.arc {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--grid-gutter);
-  counter-reset: arcstep;
-}
-
-.arc-step {
-  position: relative;
-  padding-top: var(--space-m);
-  border-top: 2px solid var(--line-2);
-  transition: border-color var(--dur-base) var(--ease-out);
-}
-.arc-step:last-child { border-top-color: var(--gold); }
-a.arc-step { text-decoration: none; color: inherit; display: block; transition: border-color var(--dur-base) var(--ease-out); }
-a.arc-step:hover { border-top-color: var(--gold); }
-a.arc-step:hover .arc-what { color: var(--gold); }
-a.arc-step:focus-visible { outline: var(--focus-ring); outline-offset: 4px; border-radius: var(--radius-s); }
-.arc-step .infra { margin-bottom: var(--space-s); }
-@media (max-width: 700px) { .arc { grid-template-columns: 1fr; } }
-
-.arc-when {
-  font-family: var(--font-mono);
-  font-size: var(--step--2);
-  font-weight: 700;
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
-  color: var(--ink-3);
-  display: block;
-  margin-bottom: var(--space-2xs);
-}
-.arc-what {
-  font-family: var(--font-display);
-  font-variation-settings: var(--fraunces-display);
-  font-size: var(--step-1);
-  font-weight: 600;
-  line-height: 1.25;
-  margin-bottom: var(--space-2xs);
-}
-.arc-note { font-size: var(--step--1); line-height: 1.5; color: var(--ink-2); }
+/* ---- METHOD ARC — REMOVED 2026-09-09 -------------------------------------
+   This block styled a `.arc` component that no longer exists in any page. It
+   was not inert: `.arc-step` set a per-step `border-top`, which the live career
+   timeline inherited, drawing six segmented rules with gaps between them —
+   the exact seam artefact career-arc.css was written to avoid by drawing one
+   continuous spine. `.arc-when`'s uppercase also came from here by accident and
+   is now declared deliberately in career-arc.css.                          */
 
 /* ---- CAPABILITIES -------------------------------------------------------- */
 

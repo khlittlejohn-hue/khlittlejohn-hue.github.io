@@ -16,6 +16,13 @@
    drawing the story's spine on the page. Hidden below 1200px, where the page
    margin is too narrow to hold it without touching the content column.     */
 .acts {
+  /* The rail's box overlaps the right edge of the content column by ~79px at
+     1440 — unavoidable, since the column is 1240 and the viewport gutter is
+     only 100. The box is almost entirely empty, so the overlap is harmless
+     visually; what mattered was that it was also intercepting pointer events
+     over that strip. The container is now transparent to the pointer and only
+     the links themselves are hit-testable. */
+  pointer-events: none;
   position: fixed;
   right: var(--space-m);
   top: 50%;
@@ -28,6 +35,7 @@
 }
 @media (min-width: 1200px) { .js .acts { display: flex; } }
 .acts a {
+  pointer-events: auto;
   display: flex; align-items: center; justify-content: flex-end; gap: var(--space-xs);
   text-decoration: none;
   color: var(--ink-3);

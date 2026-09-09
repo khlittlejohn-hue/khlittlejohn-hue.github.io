@@ -74,7 +74,7 @@
    the four section links on a single line. The bar is static on phones so the
    reading viewport is not taxed on every scroll; the CTA is repeated at the
    foot of every page, so nothing is lost. ~96px instead of 152px.          */
-@media (max-width: 700px) {
+@media (max-width: 819px) {
   .nav { position: static; backdrop-filter: none; background: var(--bg); }
   .nav-inner { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; column-gap: var(--space-xs); row-gap: var(--space-xs); align-items: center; }
   .nav-brand { grid-column: 1; }
@@ -88,7 +88,7 @@
    frame was built to remove. The row is now a single non-wrapping line that
    scrolls sideways when it must, with the trailing edge faded so the overflow
    is legible as overflow. Bar height is 95px at every phone width. */
-@media (max-width: 700px) {
+@media (max-width: 819px) {
   .nav-sections {
     grid-column: 1 / -1; grid-row: 2;
     display: flex; gap: var(--space-m); flex-wrap: nowrap;
@@ -102,7 +102,7 @@
 }
 /* Between 701 and 900px the single sticky row also wrapped (115px at 768):
    brand + five links + CTA + toggle exceed the width at the desktop gap. */
-@media (min-width: 701px) and (max-width: 900px) {
+@media (min-width: 820px) and (max-width: 1040px) {
   .nav-inner { gap: var(--space-s); }
   .nav-links { gap: var(--space-s); }
 }

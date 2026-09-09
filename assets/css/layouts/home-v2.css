@@ -343,3 +343,43 @@
 }
 
 .pov-out { margin-top: var(--space-l); }
+
+
+/* ============================================================================
+   DEAD-COLUMN FIXES — 2026-09-08
+
+   Three separate reports of "this doesn't fill the page" turned out to be one
+   cause. In 2.1 the operating-system band was wrapped in .os-band, a two-column
+   grid: prose on the left, the six pipeline stages on the right. The V2.0
+   rebuild dissolved that wrapper, so everything inside it fell to full width —
+   a 24ch heading, a 52ch paragraph and six short pipeline rows, each hugging
+   the left edge of a 1240px page with nothing opposite.
+   ============================================================================ */
+
+/* Headline and thesis as a pair, rather than two stacked left-aligned blocks
+   with half the band empty beside them. */
+@media (min-width: 1000px) {
+  .band-head--split {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--space-2xl);
+    align-items: end;
+  }
+  .band-head--split h2 { max-width: none; margin: 0; }
+  .band-head--split .os-thesis { margin: 0; max-width: none; }
+}
+
+/* The pipeline regains a right-hand column: the trace control and the status
+   line that narrates whichever stage is currently lit. */
+.os-run { display: grid; gap: var(--space-l); }
+@media (min-width: 1000px) {
+  .os-run { grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); gap: var(--space-2xl); align-items: start; }
+  .os-run-side { position: sticky; top: calc(var(--nav-h) + var(--space-l)); }
+}
+.os-run-side > p { margin-top: var(--space-l); }
+
+/* Long band headings were breaking at 24ch — "Neuroscience, process management,
+   and five industries entered cold" is 62 characters, so it stacked into a
+   narrow tower with the rest of the row empty. Homepage only: home-v2.css is
+   not loaded by any other page, and it follows nav.css in source order. */
+.band-head h2 { max-width: 34ch; }

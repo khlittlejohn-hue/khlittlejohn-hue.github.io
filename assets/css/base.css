@@ -173,6 +173,9 @@ img, svg, video, canvas { max-width: 100%; height: auto; display: block; }
 
 /* Vertical rhythm between major page bands. This token does most of the work
    of making the page feel like a company site rather than a document. */
+/* Any anchored target clears the sticky nav rather than landing under it. */
+[id] { scroll-margin-top: calc(var(--nav-h) + var(--space-m)); }
+
 .band { padding-block: var(--band-y); }
 .band + .band { border-top: var(--hairline); }
 .band--sunk { background: var(--bg-sunk); }

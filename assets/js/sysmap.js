@@ -28,56 +28,57 @@
   var CORE = {
     name: "Chief of Staff · Orchestration",
     tag: "The core",
-    desc: "A Chief of Staff aggregates all 14 domains into one operating picture, an Executive Assistant runs the day, and an independent QA team reviews the system from the outside.",
+    desc: "A Chief of Staff aggregates every domain into one operating picture, an Executive Assistant runs the day, and an independent QA function reviews the system from the outside.",
     roles: ["Chief of Staff", "Executive Assistant", "Independent QA / Super-User Review"],
     note: "A human on every decision that leaves the system."
   };
 
-  /* Colour per department is data, not decoration: it is what makes an
-     individual packet traceable back to the domain that dispatched it. */
+  /* PUBLIC MAP SCOPE, 2026-09-09.
+     The underlying system runs more domains than this. Several of them cover
+     the principal's own administration rather than professional work, and they
+     are deliberately absent from the PUBLIC map: an executive-facing diagram
+     that enumerates personal-life automation reframes the whole system as
+     exactly that. The omitted domains still exist and still run; this array is
+     a presentation scope, not the architecture.
+
+     Deliberately described in the abstract — this file is served to the public,
+     so spelling out what was withheld would republish the thing being withheld.
+
+     What remains is the work-facing architecture, unpadded. No domain was
+     invented to hold the count up: the map is smaller and true rather than
+     larger and misleading. Colour is data, not decoration — it is what makes an
+     individual routed packet traceable to the domain that dispatched it. */
   var DEPTS = [
-    { k: "careers", lbl: "Careers", name: "Careers & Job Search", c: "#E8954E",
-      desc: "Sources roles, tailors resumes to each posting, runs a multi-stage quality-control pipeline, and drafts the outreach that follows.",
-      roles: ["Talent Sourcer", "Resume Strategist", "Application QC Reviewer", "Outreach Writer"] },
+    { k: "clients", lbl: "Clients", name: "Client Engagements", c: "#A3E635",
+      desc: "Scopes and delivers outside consulting work, and keeps the commercial side of it in order.",
+      roles: ["Client Partner", "Engagement Manager", "Scope & Agreements", "Delivery Reporting"] },
     { k: "research", lbl: "Research", name: "Research & Intelligence", c: "#A78BFA",
       desc: "Deep-dive research on companies, people, and decisions, with every claim backed by a cited source.",
       roles: ["Company Analyst", "People Researcher", "Source Verifier", "Briefing Synthesizer"] },
     { k: "comms", lbl: "Comms", name: "Communications", c: "#34D399",
-      desc: "Voice-matched drafting for email, networking, and writing, built to sound like the principal rather than a model.",
-      roles: ["Voice-Match Writer", "Networking Strategist", "Editor", "Message Auditor"] },
-    { k: "finance", lbl: "Finance", name: "Accounting & Finance", c: "#F5C451",
-      desc: "Wealth strategy, an investment research desk, and the tax and portfolio operations behind them.",
-      roles: ["Wealth Strategist", "Investment Analyst", "Tax Operations", "Portfolio Manager"] },
+      desc: "Voice-matched drafting for correspondence and writing, built to sound like the principal rather than a model.",
+      roles: ["Voice-Match Writer", "Editor", "Message Auditor", "Review Gate"] },
     { k: "calendar", lbl: "Calendar", name: "Calendar & Scheduling", c: "#F472B6",
       desc: "Conflict resolution, focus-block protection, and a briefing packet ready before every meeting.",
       roles: ["Scheduling Coordinator", "Focus-Block Guardian", "Briefing-Packet Builder", "Conflict Resolver"] },
     { k: "email", lbl: "Email", name: "Email Operations", c: "#6FD8E8",
-      desc: "Inbox triage, categorisation, escalation of what matters, and drafted replies waiting for a click.",
-      roles: ["Inbox Triage", "Categorisation", "Escalation Router", "Reply Drafter"] },
-    { k: "lifestyle", lbl: "Lifestyle", name: "Lifestyle & Operations", c: "#34D399",
-      desc: "The logistics of a life: bills, travel, documents, events, and reminders, handled.",
-      roles: ["Bills & Payments", "Travel Planner", "Document Manager", "Events & Reminders"] },
-    { k: "fitness", lbl: "Fitness", name: "Fitness & Performance", c: "#F472B6",
-      desc: "Training plans, a race calendar, nutrition, and longitudinal health tracking.",
-      roles: ["Training Coach", "Race-Calendar Planner", "Nutrition Lead", "Health Tracker"] },
+      desc: "Inbox triage, categorization, escalation of what matters, and drafted replies waiting for a click.",
+      roles: ["Inbox Triage", "Categorization", "Escalation Router", "Reply Drafter"] },
     { k: "tools", lbl: "Tools", name: "Dashboard & Tools", c: "#F5C451",
-      desc: "The internal tooling, data pipelines, and rendering layer the rest of the office runs on.",
+      desc: "The internal tooling, data pipelines, and rendering layer the rest of the system runs on.",
       roles: ["Tooling Engineer", "Data-Pipeline Owner", "Rendering Engineer", "UX Designer"] },
-    { k: "learning", lbl: "Learning", name: "Learning & Improvement", c: "#FFD47E",
-      desc: "Captures incoming ideas, evaluates them on the merits, and implements the ones worth adopting.",
-      roles: ["Capture", "Evaluation Reviewer", "Implementation Engineer", "Adoption Tracker"] },
-    { k: "marketing", lbl: "Marketing", name: "Social & Marketing", c: "#A78BFA",
-      desc: "A content pipeline with a consistent voice, a posting cadence, and a path to monetisation.",
-      roles: ["Content Producer", "Brand-Voice Lead", "Cadence Planner", "Monetisation Strategist"] },
-    { k: "ventures", lbl: "Ventures", name: "Entrepreneur & Ventures", c: "#34D399",
-      desc: "Pressure-tests new business ideas through a full investor-panel review before any commitment.",
-      roles: ["Venture Analyst", "Investor Panel", "Market Validator", "Go / No-Go Reviewer"] },
     { k: "apps", lbl: "Apps", name: "App Development", c: "#22D3EE",
       desc: "Runs the product teams behind the software I build, from sprint plan through release gate.",
       roles: ["Product Manager", "Engineering Lead", "QA Lead", "Design Lead"] },
-    { k: "clients", lbl: "Clients", name: "Client Engagements", c: "#A3E635",
-      desc: "Scopes and delivers outside consulting work, and keeps the commercial side of it in order.",
-      roles: ["Client Partner", "Engagement Manager", "Scope & Agreements", "Delivery Reporting"] }
+    { k: "ventures", lbl: "Ventures", name: "Ventures & Diligence", c: "#34D399",
+      desc: "Pressure-tests a new business case through a full review panel before any commitment is made.",
+      roles: ["Venture Analyst", "Review Panel", "Market Validator", "Go / No-Go Reviewer"] },
+    { k: "marketing", lbl: "Marketing", name: "Content & Positioning", c: "#A78BFA",
+      desc: "A content pipeline with a consistent voice, a publishing cadence, and a measurable objective.",
+      roles: ["Content Producer", "Brand-Voice Lead", "Cadence Planner", "Performance Analyst"] },
+    { k: "learning", lbl: "Learning", name: "Learning & Improvement", c: "#FFD47E",
+      desc: "Captures incoming ideas, evaluates them on the merits, and implements the ones worth adopting.",
+      roles: ["Capture", "Evaluation Reviewer", "Implementation Engineer", "Adoption Tracker"] }
   ];
 
   var NS = "http://www.w3.org/2000/svg";
@@ -156,6 +157,26 @@
   });
 
   stage.appendChild(svg);
+
+  /* CONSTANT RENDERED TYPE SIZE.
+     SVG text scales with the viewBox, so a fixed CSS px size renders smaller
+     as the stage narrows. Measured before this fix: node labels declared at
+     14px rendered 8.41px at a 900px viewport and 9.69px at 1024 — well under
+     the 11.52px floor tokens.css sets, across the whole 861-1200px band where
+     the map is shown. Bumping the declaration could not fix it, because the
+     scale factor moves with the viewport.
+
+     Publishing the inverse scale as a custom property lets the stylesheet ask
+     for a rendered size instead of a document size: font-size: calc(11.5px *
+     var(--sm-k)) resolves to 11.5 CSS pixels on screen at every width. */
+  function syncTypeScale() {
+    var box = svg.getBoundingClientRect();
+    if (!box.width) return;
+    stage.style.setProperty("--sm-k", (680 / box.width).toFixed(4));
+  }
+  syncTypeScale();
+  if ("ResizeObserver" in window) new ResizeObserver(syncTypeScale).observe(stage);
+  else window.addEventListener("resize", syncTypeScale);
 
   /* ---- Detail panel ------------------------------------------------------ */
 

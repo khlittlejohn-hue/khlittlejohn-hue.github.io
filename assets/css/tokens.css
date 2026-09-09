@@ -154,6 +154,14 @@
   --focus-ring: 2px solid var(--gold);
   --focus-offset: 3px;
 
+  /* ---- STICKY NAV HEIGHT -------------------------------------------------
+     Anything that offsets against the nav reads this instead of hardcoding a
+     number. Two call sites previously carried a literal 61px, which was simply
+     wrong in the tablet band where the nav wears its taller two-row frame, and
+     every case-study anchor had scroll-margin-top:0 — so a rail click landed
+     the section heading underneath the nav.                               */
+  --nav-h: 61px;
+
   /* ---- LAYERS ------------------------------------------------------------ */
   --z-ambient: 0;
   --z-content: 2;
@@ -237,6 +245,9 @@
    A first-class token path, not an afterthought. Durations collapse to zero
    so every component inherits the behaviour without writing its own query.
    Five of eight premium sites studied declare nothing here at all.        */
+/* The nav switches to its two-row frame at 819px; the offset must follow. */
+@media (max-width: 819px) { :root { --nav-h: 96px; } }
+
 @media (prefers-reduced-motion: reduce) {
   :root {
     --dur-instant: 0ms;

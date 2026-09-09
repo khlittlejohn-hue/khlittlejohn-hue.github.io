@@ -17,8 +17,14 @@
    ============================================================================ */
 
 .pipeline {
-  /* Escapes the text column on desktop to sit across text + rail. */
-  width: calc(100% + var(--rail-w) + var(--space-2xl));
+  /* Escapes into the GUTTER only, not across the rail.
+     It previously claimed the rail's full width (--rail-w + --space-2xl),
+     which put 240px of the diagram underneath a position:sticky rail. Sticky
+     is a positioned element, so the rail painted on top: "Human review"
+     collided with the rail rule and hit-testing inside the diagram returned
+     rail links. Escaping only into the gutter gives both a column of their
+     own — the fix is layout, not overflow suppression. */
+  width: calc(100% + var(--space-2xl));
   border: var(--hairline);
   border-radius: var(--radius-l);
   background: var(--surface);
