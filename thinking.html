@@ -47,10 +47,18 @@
 <link rel="stylesheet" href="assets/css/components/nav.css">
 <link rel="stylesheet" href="assets/css/layouts/case-study.css">
 <link rel="stylesheet" href="assets/css/layouts/editorial.css">
+<!-- Loaded last: the ambient layer overrides the hero's local wash and the
+     sunk band's opaque ground, so it must win on source order. -->
+<link rel="stylesheet" href="assets/css/components/ambient.css">
 </head>
 <body>
 
 <a class="skip-link" href="#main">Skip to content</a>
+
+<!-- The operating environment. Purely presentational, so it is hidden from
+     assistive technology and takes no pointer events. Degrades to nothing at
+     all without JS or canvas. -->
+<canvas id="ambient" aria-hidden="true"></canvas>
 
 <nav class="nav" aria-label="Primary">
   <div class="page nav-inner">
@@ -213,6 +221,7 @@
   });
 })();
 </script>
+<script src="assets/js/ambient.js" defer></script>
 <!-- Analytics: the same GoatCounter property production has used since launch. Privacy-preserving, no cookies, no cross-site identifiers. -->
 <script data-goatcounter="https://khlittlejohn.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
