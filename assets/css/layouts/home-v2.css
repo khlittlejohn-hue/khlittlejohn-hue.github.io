@@ -272,17 +272,32 @@
 
 /* ---- ACT VI · THE HUMAN LAYER -------------------------------------------- */
 
-.human { display: grid; gap: var(--space-l); align-items: center; }
-@media (min-width: 820px) { .human { grid-template-columns: 220px minmax(0, 1fr); } }
+/* 2026-09-10 — rebuilt from a two-column grid to a floated portrait (Kyle:
+   "tons of blank space next to my background... put my pic in the top right
+   and have the words form around it"). The grid put a 54ch-capped paragraph
+   measure inside a column that was often 850px+ wide on desktop, which is
+   where the blank space actually came from — the text column, not the
+   photo. A float does not have that problem: the column it sits in is the
+   whole point, and it is capped so the section reads as one vertical column
+   rather than stretching the full band width. */
+.human { max-width: var(--measure); display: flow-root; }
 
 .human-portrait {
-  width: 100%;
-  max-width: 220px;
+  float: right;
+  width: 168px;
+  max-width: 38%;
   aspect-ratio: 1;
   object-fit: cover;
   border-radius: var(--radius-l);
   border: 1px solid var(--gold-line);
-  justify-self: start;
+  margin: 0 0 var(--space-m) var(--space-m);
+}
+/* Below 560px a float this size leaves too few characters per line to read
+   comfortably — the text would wrap into a narrow ribbon beside the photo
+   for the whole first paragraph. Phone width gets the photo full-width at
+   the top instead, same vertical-column intent, no float needed to get it. */
+@media (max-width: 560px) {
+  .human-portrait { float: none; width: 136px; max-width: 40%; margin: 0 0 var(--space-m); }
 }
 
 .human-body p {
@@ -293,8 +308,13 @@
   max-width: var(--measure-narrow);
   text-wrap: pretty;
 }
+/* The three dimension paragraphs run well past the portrait's height, so
+   this never fires in practice — kept as a floor so the link never renders
+   in the narrow strip beside the photo if the copy above it is ever cut. */
+.human-body p:has(> a.btn-quiet) { clear: both; }
 
 .human-facts {
+  clear: both;
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-m) var(--space-xl);
@@ -484,7 +504,14 @@
   font-weight: 400;
   line-height: 1.35;
   color: var(--ink-2);
-  max-width: 34ch;
+  /* Wide enough that both current one-liners ("Six roles. Five industries.
+     One operating method." and "Three environments, one method, different
+     evidence.") never wrap on their own account (Kyle, 2026-09-10) — the cap
+     only exists to stop a much longer future dek from running the full band
+     width, not to force-wrap a 51-character sentence into two short lines.
+     Still a max-width, not a fixed width, so a narrow viewport wraps exactly
+     as before. */
+  max-width: 46ch;
   margin: var(--space-2xs) auto 0;
   text-wrap: balance;
 }
@@ -716,27 +743,41 @@
   }
 }
 
-/* The evolution, at a glance. Not six framework badges: the first entry is not
-   a move and the last names what AI added. */
-.tl-arc {
-  list-style: none;
-  margin: var(--space-l) 0 0;
-  padding: var(--space-s) 0 0;
-  border-top: 1px solid var(--line);
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: var(--space-2xs) var(--space-s);
-  font-family: var(--font-mono);
-  font-size: var(--step--2);
-  letter-spacing: 0.05em;
-  color: var(--ink-3);
+/* The popover is position:absolute, so opening it does not natively push
+   anything below the career row — left alone it floats on top of the
+   Selected Work cards beneath (reported 2026-09-10). :has() lets the ROW
+   reserve exactly the space its own open panel needs, live, so the section
+   before/after content reflows instead of the panel covering it. Sized PER
+   NODE rather than to the tallest of the six, because a single worst-case
+   reserve would leave a large dead gap under the row every time a shorter
+   panel opened — the same "blank space" problem this pass exists to remove.
+   Values are measured against each node's actual rendered detail height
+   plus a buffer; six known, fixed children, same assumption the edge-
+   anchoring rule above already makes — a seventh node means these get
+   re-measured too. */
+@media (min-width: 1080px) {
+  .tl { transition: margin-bottom var(--dur-slow, .45s) ease; }
+  .tl:has(.tl-node:nth-child(1).is-open),
+  .tl:has(.tl-node:nth-child(1):focus-within) { margin-bottom: 19rem; }
+  .tl:has(.tl-node:nth-child(2).is-open),
+  .tl:has(.tl-node:nth-child(2):focus-within) { margin-bottom: 29rem; }
+  .tl:has(.tl-node:nth-child(3).is-open),
+  .tl:has(.tl-node:nth-child(3):focus-within) { margin-bottom: 27.5rem; }
+  .tl:has(.tl-node:nth-child(4).is-open),
+  .tl:has(.tl-node:nth-child(4):focus-within) { margin-bottom: 34rem; }
+  .tl:has(.tl-node:nth-child(5).is-open),
+  .tl:has(.tl-node:nth-child(5):focus-within) { margin-bottom: 30.5rem; }
+  .tl:has(.tl-node:nth-child(6).is-open),
+  .tl:has(.tl-node:nth-child(6):focus-within) { margin-bottom: 26rem; }
 }
-.tl-arc li { display: flex; align-items: center; gap: var(--space-s); }
-.tl-arc li + li::before { content: "\2192"; color: var(--line-strong); }
-.tl-arc li:last-child { color: var(--gold-deep); }
-
+@media (min-width: 1080px) and (hover: hover) and (pointer: fine) {
+  .tl:has(.tl-node:nth-child(1):hover) { margin-bottom: 19rem; }
+  .tl:has(.tl-node:nth-child(2):hover) { margin-bottom: 29rem; }
+  .tl:has(.tl-node:nth-child(3):hover) { margin-bottom: 27.5rem; }
+  .tl:has(.tl-node:nth-child(4):hover) { margin-bottom: 34rem; }
+  .tl:has(.tl-node:nth-child(5):hover) { margin-bottom: 30.5rem; }
+  .tl:has(.tl-node:nth-child(6):hover) { margin-bottom: 26rem; }
+}
 
 /* ---- ACT III · SELECTED WORK, CONSISTENT METADATA ------------------------ */
 
