@@ -27,9 +27,13 @@
 
 /* The hero portrait is gone: the page uses one photograph, in the Background
    section, where it has context. Identity at the top is carried typographically
-   instead. That collapses the hero to a single column — the 7fr/3fr split only
-   ever existed to seat the portrait beside the deck, and .hero-sub already caps
-   itself at 52ch, so nothing runs to the full 1240px measure. */
+   instead. That collapses the hero itself (the H1's row) to a single column —
+   the 7fr/3fr split only ever existed to seat the portrait beside the deck.
+   The H1 spans this single column at the full page measure, per the frozen-
+   hero spec. .hero-body, the row below it, is its own grid again as of
+   2026-09-10 (see home-v2.css) — a facts sidebar next to the 52ch deck rather
+   than a plain stack — so the section as a whole still uses the width this
+   comment used to say nothing ran to. */
 .hero {
   grid-template-columns: minmax(0, 1fr);
   grid-template-areas:

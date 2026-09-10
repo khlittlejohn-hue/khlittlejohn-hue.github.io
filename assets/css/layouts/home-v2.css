@@ -17,6 +17,57 @@
 .band-head--bare .label { margin-bottom: 0; }
 
 
+/* ---- ACT I · HERO, SIDEBAR FACTS ------------------------------------------
+   2026-09-10 — identity.css collapsed .hero to a single column when the
+   portrait moved out (correct: the H1 needs the full page measure, and it is
+   frozen and untouched here). What that left uncorrected: hero-sub caps at
+   52ch and hero-cta is two buttons, so .hero-body read as a narrow stack
+   pinned to the left edge of a 1240px .page with the entire right half empty
+   above the fold. Kyle, looking at the rendered page: the deck, the CTAs and
+   the facts row were all sitting in a left column with dead space beside
+   them.
+
+   Fix follows the same device as the Background rebuild one band down: a
+   sidebar grid rather than a wider text column. hero-sub stays at a readable
+   52ch inside .hero-main; hero-meta (Based / Currently) becomes a facts rail
+   in the second column, matching the vertical-rule facts pattern case studies
+   already use in .cs-rail-facts. At 52ch, .hero-main happens to fill almost
+   exactly the space the grid leaves it once the rail and gap are subtracted,
+   so nothing here is stretched past a comfortable reading measure to hit the
+   width — the two pieces just now sit side by side instead of stacked. */
+@media (min-width: 860px) {
+  .hero-body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(220px, 300px);
+    column-gap: var(--space-2xl);
+    align-items: start;
+  }
+  .hero-meta {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-m);
+    margin-top: 0;
+    padding-top: 0;
+    padding-left: var(--space-l);
+    border-top: none;
+    border-left: 1px solid var(--line-2);
+  }
+  .hero-meta div { min-width: 0; }
+}
+
+/* The proofline strip directly under the hero reads as part of the same
+   block (only a hairline separates them), so once hero-body fills the full
+   width above it, four short facts left-aligned under that started reading
+   as their own dead zone on the right. Spreading them edge to edge is the
+   same fix as the sidebar above: use the width that is already there rather
+   than adding visual weight to make the row longer. Below 860px this stays
+   the original compact, left-hugging line — there is no room to spread it
+   meaningfully on tablet and phone. */
+@media (min-width: 860px) {
+  .proofline { justify-content: space-between; }
+}
+
+
 /* ---- ACT III · PROOF, GROUPED -------------------------------------------- */
 
 .proofset { display: grid; gap: var(--space-m); }
