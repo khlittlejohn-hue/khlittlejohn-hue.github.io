@@ -275,7 +275,14 @@
 .contact { text-align: center; padding-block: var(--space-2xl); }
 .contact h2 { font-size: var(--step-3); max-width: 26ch; margin-inline: auto; margin-bottom: var(--space-m); }
 .contact p { margin-inline: auto; color: var(--ink-2); }
-.contact .contact-sub { margin-bottom: var(--space-l); font-size: var(--step-1); line-height: 1.45; max-width: 44ch; text-wrap: pretty; }
+/* 2026-09-10 — was 44ch, which wrapped this 75-character sentence across
+   three lines at some window widths (Kyle: "This shouldnt take up 3 lines").
+   44ch was narrower than the sentence needed at any width; widened to match
+   the 52-60ch band every other centred sub/lead line on the site already
+   uses (hero-sub, cs-dek, work-hero .lead). At that measure the sentence
+   reads as one clean line on desktop and wraps normally, never awkwardly,
+   on narrow viewports. Copy is unchanged, layout only. */
+.contact .contact-sub { margin-bottom: var(--space-l); font-size: var(--step-1); line-height: 1.45; max-width: 58ch; text-wrap: pretty; }
 
 /* ---- RESPONSIVE ---------------------------------------------------------- */
 
