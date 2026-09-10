@@ -100,14 +100,25 @@
     <span class="fact"><b>50+</b><span>countries</span></span>
   </p>
 
-  <section class="cs-beat">
+  <!-- 2026-09-10 — wrapped in the .cs-frame/.cs-rail pattern the case studies
+       already use (both stylesheets were already loaded here; only the
+       markup was missing). Body copy caps at --measure (68ch) sitewide via
+       base.css, which is the right reading width — the bug was never the
+       text, it was a 1240px .page with nothing else in it, so a 68ch column
+       left roughly a third of the page empty on the right at desktop widths.
+       A sticky section index gives that width a real job instead of
+       stretching the prose past a comfortable line length to fill it. -->
+  <div class="cs-frame">
+    <div class="cs-body">
+
+  <section class="cs-beat" id="ab-01">
     <span class="cs-beat-label">The work</span>
     <h2>Five industries I knew nothing about</h2>
     <p>Biotech, credit ratings, health insurance, infrastructure SaaS, streaming media. I walked into each of them without the domain and had to become useful quickly, which turns out to be most of the job when you are the person handed the thing nobody owns.</p>
     <p>That pattern is not on my resume as a skill, but it is probably the most transferable thing I do. The method in <a href="index.html#method">how I work</a> came out of needing something that survives contact with an industry I have never seen.</p>
   </section>
 
-  <section class="cs-beat">
+  <section class="cs-beat" id="ab-02">
     <span class="cs-beat-label">Outside it</span>
     <h2>Marathons, Hyrox, and a long-running argument with my own pacing</h2>
     <p>Thirty-plus endurance races. Marathons and Hyrox mostly, with the occasional ultra when I have lost perspective. Training is the one part of my life with a genuinely honest feedback loop, which is probably why I keep going back to it.</p>
@@ -115,7 +126,7 @@
     <p>I cook seriously, which is the other place where a process either works or it does not and there is no arguing with the result.</p>
   </section>
 
-  <section class="cs-beat">
+  <section class="cs-beat" id="ab-03">
     <span class="cs-beat-label">Background</span>
     <h2>A neuroscience degree that turned out to be relevant</h2>
     <p>I studied neuroscience at William &amp; Mary with a minor in process management, which sounded like an odd pairing at the time and has aged better than expected. Both are the study of how a system takes in messy information and produces a decision.</p>
@@ -128,12 +139,25 @@
     </p>
   </section>
 
-  <section class="cs-beat">
+  <section class="cs-beat" id="ab-04">
     <span class="cs-beat-label">Now</span>
     <h2>What I am looking for</h2>
     <p>A Chief of Staff or Strategy and Operations seat where the problems are genuinely ambiguous and the operating model is not yet built. I am most useful early, when the shape of the thing is still undecided, and I would rather build the infrastructure than inherit it.</p>
     <p>Based in New York, open to remote. <a href="index.html#contact">A 20-minute call</a> is the fastest way to work out whether I am useful to you.</p>
   </section>
+
+    </div>
+
+    <aside class="cs-rail" aria-label="Sections of this page">
+      <span class="mlabel cs-rail-label">On this page</span>
+      <ol class="cs-index">
+        <li><a href="#ab-01"><span class="n">01</span><span class="k" aria-hidden="true"></span><span>The work</span></a></li>
+        <li><a href="#ab-02"><span class="n">02</span><span class="k" aria-hidden="true"></span><span>Outside it</span></a></li>
+        <li><a href="#ab-03"><span class="n">03</span><span class="k" aria-hidden="true"></span><span>Background</span></a></li>
+        <li><a href="#ab-04"><span class="n">04</span><span class="k" aria-hidden="true"></span><span>Now</span></a></li>
+      </ol>
+    </aside>
+  </div>
 
   <section class="page-end">
     <div>
@@ -157,6 +181,20 @@
   </footer>
 
 </main>
+<script>
+/* Section index. Marks the section currently in view; the index itself is
+   static HTML so orientation works with JavaScript disabled. Ported from
+   the case-study beat index (work/*.html), same mechanism. */
+(function(){
+  var links=document.querySelectorAll('.cs-index a');if(!links.length||!('IntersectionObserver' in window))return;
+  var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a;});
+  var current=null;
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){if(current)current.removeAttribute('aria-current');current=map[e.target.id];if(current)current.setAttribute('aria-current','true');}});
+  },{rootMargin:'-20% 0px -60% 0px',threshold:0});
+  document.querySelectorAll('.cs-beat[id]').forEach(function(s){io.observe(s);});
+})();
+</script>
 <script>
 /* Theme toggle. Ported from production index.html (main @ 17f135a). */
 (function(){

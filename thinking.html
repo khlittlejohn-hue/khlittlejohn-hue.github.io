@@ -105,7 +105,19 @@
     </div>
   </dl>
 
-  <section class="cs-beat">
+  <!-- 2026-09-10 — wrapped in the .cs-frame/.cs-rail pattern the case
+       studies already use (both stylesheets were already loaded here; only
+       the markup was missing). This is the longest page on the site and had
+       no orientation device at all once you scrolled past the tk-map — a
+       68ch text column with a third of a 1240px .page sitting empty beside
+       it for several thousand pixels of scroll. A sticky index fixes both
+       at once: it fills the width with something a reader on this page
+       actually wants, and it is the only page here long enough that a
+       reader might want to jump straight to one open question or note. -->
+  <div class="cs-frame">
+    <div class="cs-body">
+
+  <section class="cs-beat" id="tk-01">
     <span class="cs-beat-label">Open questions</span>
     <h2>Three that resist a clean answer</h2>
 
@@ -131,7 +143,7 @@
     </div>
   </section>
 
-  <section class="cs-beat">
+  <section class="cs-beat" id="tk-02">
     <span class="cs-beat-label">Decisions</span>
     <h2>Two calls and what they cost</h2>
 
@@ -152,7 +164,7 @@
     </div>
   </section>
 
-  <section class="cs-beat">
+  <section class="cs-beat" id="tk-03">
     <span class="cs-beat-label">Notes</span>
     <h2>Shorter observations</h2>
 
@@ -182,6 +194,18 @@
     </div>
   </section>
 
+    </div>
+
+    <aside class="cs-rail" aria-label="Sections of this page">
+      <span class="mlabel cs-rail-label">On this page</span>
+      <ol class="cs-index">
+        <li><a href="#tk-01"><span class="n">01</span><span class="k" aria-hidden="true"></span><span>Open questions</span></a></li>
+        <li><a href="#tk-02"><span class="n">02</span><span class="k" aria-hidden="true"></span><span>Decisions</span></a></li>
+        <li><a href="#tk-03"><span class="n">03</span><span class="k" aria-hidden="true"></span><span>Notes</span></a></li>
+      </ol>
+    </aside>
+  </div>
+
   <section class="page-end">
     <div>
       <h2>If you have a mandate that needs an owner, let’s talk.</h2>
@@ -204,6 +228,20 @@
   </footer>
 
 </main>
+<script>
+/* Section index. Marks the section currently in view; the index itself is
+   static HTML so orientation works with JavaScript disabled. Ported from
+   the case-study beat index (work/*.html), same mechanism. */
+(function(){
+  var links=document.querySelectorAll('.cs-index a');if(!links.length||!('IntersectionObserver' in window))return;
+  var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a;});
+  var current=null;
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){if(current)current.removeAttribute('aria-current');current=map[e.target.id];if(current)current.setAttribute('aria-current','true');}});
+  },{rootMargin:'-20% 0px -60% 0px',threshold:0});
+  document.querySelectorAll('.cs-beat[id]').forEach(function(s){io.observe(s);});
+})();
+</script>
 <script>
 /* Theme toggle. Ported from production index.html (main @ 17f135a). */
 (function(){
