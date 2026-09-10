@@ -49,10 +49,9 @@
 <link rel="stylesheet" href="assets/css/components/contact.css">
 <link rel="stylesheet" href="assets/css/layouts/home.css">
 <!-- Website 2.0 rebuild: identity, recovered depth language, career arc,
-     the interactive system map, and the re-composed lower page. -->
+     and the re-composed lower page. -->
 <link rel="stylesheet" href="assets/css/components/identity.css">
 <link rel="stylesheet" href="assets/css/components/career-arc.css">
-<link rel="stylesheet" href="assets/css/components/sysmap.css">
 <link rel="stylesheet" href="assets/css/layouts/home-v2.css">
 <!-- Loaded last: the ambient layer overrides the hero's local wash and the
      sunk band's opaque ground, so it must win on source order. -->
@@ -93,7 +92,6 @@
       <div class="nav-sections">
         <a href="./" aria-current="page">Home</a>
         <a href="work/">Work</a>
-        <a href="operating-system.html">Operating System</a>
         <a href="thinking.html">Thinking</a>
         <a href="about.html">About</a>
         <a href="assets/Kyle-Littlejohn-Resume.pdf">Resume</a>
@@ -107,14 +105,13 @@
   </div>
 </nav>
 
-<!-- The story's spine, drawn on the page. Eight acts; the current one is
+<!-- The story's spine, drawn on the page. Seven acts; the current one is
      written out. Rendered only with JS and only above 1200px (story.css). -->
 <ol class="acts" id="acts" aria-label="Sections of this page">
   <li><a href="#top"><span class="t">Identity</span><span class="d" aria-hidden="true"></span></a></li>
   <li><a href="#career"><span class="t">Career</span><span class="d" aria-hidden="true"></span></a></li>
   <li><a href="#proof"><span class="t">Evidence</span><span class="d" aria-hidden="true"></span></a></li>
   <li><a href="#capabilities"><span class="t">Capabilities</span><span class="d" aria-hidden="true"></span></a></li>
-  <li><a href="#os"><span class="t">Operating system</span><span class="d" aria-hidden="true"></span></a></li>
   <li><a href="#background"><span class="t">Background</span><span class="d" aria-hidden="true"></span></a></li>
   <li><a href="#pov"><span class="t">Point of view</span><span class="d" aria-hidden="true"></span></a></li>
   <li><a href="#contact"><span class="t">Contact</span><span class="d" aria-hidden="true"></span></a></li>
@@ -439,8 +436,7 @@
 
   <!-- ACT V(a) · CAPABILITIES =============================================
        Five things, not a taxonomy. Each carries an evidence line, because a
-       capability claim without a checkable fact behind it is just adjectives.
-       The fifth is the hinge into the operating-system band.              -->
+       capability claim without a checkable fact behind it is just adjectives. -->
   <section class="page band" id="capabilities">
     <div class="band-head">
       <span class="label">Expertise</span>
@@ -489,105 +485,6 @@
         <li><em>Delivery</em> Jira &middot; Confluence &middot; Smartsheet &middot; Microsoft Project</li>
       </ul>
     </div>
-  </section>
-
-  <!-- ACT IV · THE OPERATING SYSTEM =======================================
-       The centrepiece. The interactive map is recovered from the pre-2.0
-       site; it is the only element on the page that lets a visitor
-       interrogate the system rather than read a claim about it.          -->
-  <section class="page band band--sunk" id="os">
-    <!-- The eyebrow here read "The Operating System" directly above a heading
-         that says "A production AI operating system" — the same words twice in
-         two lines. Dropped rather than reworded. -->
-    <!-- Was .band-head--split: a two-column grid with align-items:end, which
-         bottom-aligned a short h2 against a taller thesis column and opened a
-         large gap above the heading. Stacked and centred instead, with the
-         thesis spanning the content width beneath it.
-
-         The thesis also gained a problem statement. "Generation was never the
-         constraint. Trust was." is a good line that assumed the reader already
-         knew which problem it answered. Naming the problem first fixes that
-         without rewriting the argument. -->
-    <div class="band-head band-head--center">
-      <h2>A production AI operating system for executive work.</h2>
-    </div>
-
-    <div class="os-problem">
-      <span class="label">The problem</span>
-      <p>Generating work was never the constraint. Knowing whether the work was right was.</p>
-    </div>
-
-    <p class="os-thesis">An assistant that is right most of the time still creates review work, because you cannot tell which part is wrong without checking all of it. So I built the quality controls into the workflow itself, and kept human judgment where the cost of a wrong decision is highest.</p>
-
-    <!-- These three figures used to sit beside the paragraph, half a screen
-         from the thing they describe. Moved directly above the diagram so they
-         function as its legend: "14 domains" now sits inches from fourteen
-         labelled nodes, and the visitor understands what the map IS before
-         reaching for it. Hierarchy and proximity doing the work that another
-         paragraph of explanation would otherwise have to. -->
-    <div class="os-figure os-legend">
-      <div><b>Automated</b><span>quality gates</span></div>
-      <div><b>Human</b><span>approval on every output</span></div>
-      <div class="os-figure--quiet"><b>120+</b><span>specialized agents</span></div>
-    </div>
-
-    <div class="sysmap" id="sysmap" aria-label="Interactive map of the Executive Office: explore each domain">
-      <div class="sysmap-map">
-        <div class="sysmap-stage" id="smStage"></div>
-        <span class="sm-hint">Hover, tap or tab a domain</span>
-      </div>
-      <div class="sysmap-list" id="smList" aria-label="Domains"></div>
-      <aside class="sysmap-detail" id="smDetail" aria-live="polite"></aside>
-    </div>
-    <noscript>
-      <img src="assets/system.png" alt="The Executive Office system dashboard" style="width:100%;border-radius:var(--radius-l);border:1px solid var(--line);margin-top:var(--space-m);display:block" loading="lazy">
-    </noscript>
-
-    <div class="os-run">
-    <ol class="os-flow" aria-label="How work moves through the system">
-      <li class="os-stage"><span class="os-n">01</span><span class="os-name">Intake</span><span class="os-role">classify the request</span></li>
-      <li class="os-stage"><span class="os-n">02</span><span class="os-name">Routing</span><span class="os-role">assign the agents that own it</span></li>
-      <li class="os-stage"><span class="os-n">03</span><span class="os-name">Production</span><span class="os-role">draft, never self-graded</span></li>
-      <li class="os-stage os-stage--qc"><span class="os-n">04</span><span class="os-name">Quality control</span><span class="os-role">automated quality gates</span><span class="os-loop">fails a gate, returns to 03</span></li>
-      <li class="os-stage os-stage--gate"><span class="os-n">05</span><span class="os-name">Human review</span><span class="os-role">the judgment that never gets automated</span></li>
-      <li class="os-stage"><span class="os-n">06</span><span class="os-name">Output</span><span class="os-role">work I have approved</span></li>
-    </ol>
-
-    <!-- The trace control and its narration sit BESIDE the stages, not under
-         them. The status line names the stage that is currently lit, so
-         proximity is the point; it also gives the six short rows a right-hand
-         column, which they lost when .os-band was dissolved in the rebuild. -->
-    <div class="os-run-side">
-
-    <!-- Runs one request through the map and the six stages together. The
-         narration is built from the stage names and role lines above. -->
-    <div class="os-trace">
-      <button class="btn-quiet" type="button" id="osTrace">Trace a request &rarr;</button>
-      <span class="os-trace-status" id="osTraceStatus" role="status" aria-live="polite"></span>
-    </div>
-
-    <p style="margin-top:var(--space-l)"><a class="btn-primary" href="work/executive-office.html">See how it works &rarr;</a></p>
-    </div>
-    </div>
-
-    <!-- The proof artifact. This is deliberately an artifact of Kyle's OWN
-         system about Kyle's own material: no client, no counterparty, nothing
-         redacted. A client deliverable would only prove he was in the room.
-         This is inspectable by a stranger, which is the entire point.
-
-         The quote is verbatim from the docstring of the validator that caught
-         it, but deliberately stops short of the fabricated figure itself: that
-         number is on the validator's BANNED list, whose rule reads "do not
-         reintroduce in any form". Reprinting it here to tell the story would
-         break the very gate the story is about. The sentence below carries the
-         point without it, and is the striking half regardless. -->
-    <figure class="os-catch">
-      <span class="label">The check working</span>
-      <blockquote>
-        <p>&ldquo;It was invented during the build and would have shipped inside a paragraph arguing that the system catches fabrication.&rdquo;</p>
-      </blockquote>
-      <figcaption>From the validator that caught it. The system had produced a count of its own documented rule captures that appears in no canonical record anywhere, and the gate refused the figure before it reached this page. Every gate exists because something failed once, was diagnosed, and was encoded so that class of error gets caught if it recurs. The number itself is now permanently banned from the site, which is why it does not appear above.</figcaption>
-    </figure>
   </section>
 
   <!-- ACT VII · POINT OF VIEW =============================================
@@ -705,7 +602,6 @@
     <div class="foot-links">
       <a href="#career">Career</a>
       <a href="work/">Work</a>
-      <a href="operating-system.html">Operating System</a>
       <a href="thinking.html">Thinking</a>
       <a href="about.html">About</a>
         <a href="assets/Kyle-Littlejohn-Resume.pdf">Resume</a>
@@ -770,7 +666,6 @@
 })();
 </script>
 <script src="assets/js/ambient.js" defer></script>
-<script src="assets/js/sysmap.js" defer></script>
 <script src="assets/js/story.js" defer></script>
 <script src="assets/js/career.js" defer></script>
 <!-- Analytics: the same GoatCounter property production has used since launch. Privacy-preserving, no cookies, no cross-site identifiers. -->
