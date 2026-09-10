@@ -492,9 +492,19 @@
 
 
 /* ---- ACT II · CAREER SPINE ----------------------------------------------- */
-/* Company, dates and title are ALWAYS rendered. Only .tl-detail collapses, and
-   only once career.js has added .tl--js — so a reader without JavaScript gets
-   all six nodes fully expanded rather than six bare headings. */
+/* 2026-09-10 — reoriented left-to-right on request. Company and dates (and,
+   below 1080px, role) are ALWAYS rendered — nothing here is ever hidden from
+   a reader without JavaScript or without a mouse. Only .tl-detail — the
+   there-to-solve / owned / evidence / move rows — collapses into a hover/tap
+   panel, and only once career.js has added .tl--js AND the row is wide enough
+   to run horizontally. Below that width, or with JS unavailable, every detail
+   block stays expanded in normal document flow. That is the same fail-safe
+   philosophy the rest of this section already used; only the trigger changed,
+   from "nearest the vertical centre of the viewport" to "hovered, focused, or
+   tapped". Default DOM order is unchanged and load-bearing: Maximus first,
+   KLJ Ventures last, so the horizontal row reads left-to-right exactly as the
+   markup already reads top-to-bottom. Do not reorder the .tl-node children to
+   "fix" the visual — fix the CSS instead. */
 
 .tl { list-style: none; margin: 0; padding: 0; }
 .tl-node {
@@ -508,7 +518,9 @@
    visibly cutting through the body copy of whichever node was open. Confining
    it to the inter-node gap means it never crosses text, and needs no opaque
    background to mask it (the ambient field shows through these bands, so a
-   masking background would have read as a floating rectangle). */
+   masking background would have read as a floating rectangle). Horizontal
+   mode replaces this per-node connector with a single spine across the row;
+   see the >=1080px block below. */
 .tl-node::before {
   content: "";
   position: absolute;
@@ -529,9 +541,15 @@
   border: 1px solid var(--line-strong);
   position: relative;
   z-index: 1;
+  transition: background var(--dur-base) var(--ease-out), border-color var(--dur-base) var(--ease-out);
 }
-.tl-node.is-active .tl-dot { background: var(--gold); border-color: var(--gold); }
 .tl-node--now .tl-dot { border-color: var(--gold); }
+/* Gold dot = "this one is open", on any input: mouse hover, keyboard focus,
+   or the tap-toggle career.js adds. Same accent the rest of the page already
+   uses for emphasis, so the affordance needs no new colour to read. */
+.tl-node:hover .tl-dot,
+.tl-node:focus-within .tl-dot,
+.tl-node.is-open .tl-dot { background: var(--gold); border-color: var(--gold); }
 
 .tl-when {
   display: block;
@@ -550,6 +568,17 @@
   line-height: 1.15;
 }
 .tl-role { display: block; font-size: var(--step--1); color: var(--ink-2); }
+
+/* .tl-head is the part that is ALWAYS visible and, once career.js runs, the
+   part a reader clicks or tabs to. It gets the interactive treatment (cursor,
+   focus ring) unconditionally; whether that affordance does anything is a
+   layout question answered by the media queries below. */
+.tl-head { border-radius: var(--radius-s); }
+.tl--js .tl-head { cursor: pointer; }
+.tl-head:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
 
 /* The detail block reads as a document, so it is left-aligned inside a centred
    column. Centred body copy at this length is a legibility cost with no gain. */
@@ -573,18 +602,118 @@
 .tl-row--move .tl-k { color: var(--gold-deep); }
 .tl-row--move b { font-weight: 600; }
 
-.tl--js .tl-detail {
-  max-height: 0;
-  opacity: 0;
-  overflow: hidden;
-  margin-top: 0;
-  transition: max-height var(--dur-slow, .45s) ease, opacity var(--dur-slow, .45s) ease,
-              margin-top var(--dur-slow, .45s) ease;
+/* ---- <1080px: vertical rail, everything expanded -------------------------
+   Same ceiling as the horizontal threshold below, one pixel apart on purpose
+   (see the note on that query). Nothing collapses here regardless of .tl--js:
+   a stacked, always-open read is the correct phone and small-tablet treatment,
+   and it means a touch user never has to discover a tap target to see the
+   content — the fallback this section needs is "don't require the gesture at
+   all" rather than "make the gesture reachable". */
+
+/* ---- >=1080px: horizontal row, hover/tap to open -------------------------
+   Threshold matches the one the pre-2.0 horizontal attempt on this exact
+   section used and documented: six columns below ~1080px resolve too narrow
+   for the company/role text to sit on a clean baseline. That reasoning still
+   applies here, one layer up — it decided where the ROW breaks; this decides
+   where the DETAIL POPOVER is allowed to exist at all. */
+@media (min-width: 1080px) {
+  .tl {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2xs);
+    position: relative;
+  }
+  .tl-node {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: var(--space-m) var(--space-2xs) var(--space-l);
+  }
+  .tl-node::before { content: none; }
+
+  /* One spine across the whole row, drawn once so it cannot develop the
+     sub-pixel seams a per-cell border would. It runs through the dots, not
+     the text, and stops short of both ends so the run reads as a segment of
+     a longer career rather than a closed box — same intent as the vertical
+     rail's spine, rotated 90 degrees. */
+  .tl::before {
+    content: "";
+    position: absolute;
+    top: calc(var(--space-m) + 4.5px);
+    left: 4%;
+    right: 4%;
+    height: 1px;
+    background: linear-gradient(90deg,
+      transparent,
+      var(--line-2) 10%,
+      var(--line-2) 85%,
+      var(--gold-line) 100%);
+    z-index: 0;
+  }
+
+  /* Company + dates are the compact, at-rest row Kyle asked for. Role stays
+     visible too, rather than being folded into the popover — the pre-2.0
+     horizontal version already solved "does the role line fit" with a
+     reserved two/three-line height, and that fix is recovered as-is below.
+     Only the there-to-solve/owned/evidence/move rows — the actual paragraphs
+     — move into the hover panel. */
+  .tl-co { min-height: 2.24em; }
+  .tl-role { min-height: 4.05em; }
+
+  /* The popover. Anchored to its own node (position: relative, set above),
+     sized independently of the ~1/6-width column so six columns of narrow
+     text don't force the paragraphs into a vertical ribbon. Width is capped
+     both by a fixed ch-derived value and by the viewport, so it can never
+     force horizontal scroll on a laptop-width screen. */
+  .tl--js .tl-detail {
+    position: absolute;
+    top: 100%;
+    max-width: none;
+    width: min(28rem, calc(100vw - 2 * var(--page-pad)));
+    margin: var(--space-2xs) 0 0;
+    padding: var(--space-m);
+    background: var(--surface-raised);
+    border: var(--hairline);
+    border-radius: var(--radius-m);
+    box-shadow: var(--shadow-raised);
+    z-index: 10;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    pointer-events: none;
+    transition: max-height var(--dur-slow, .45s) ease, opacity var(--dur-slow, .45s) ease;
+  }
+
+  /* Edge anchoring. Six known, fixed children — Maximus never gains a
+     seventh neighbour without this section being rebuilt anyway — so this is
+     tuned to the actual row rather than solved generically. The two leftmost
+     nodes open their popover flush with their own left edge so it cannot run
+     off the page's left padding; the two rightmost mirror that on the right;
+     the middle two centre under the node, which the row has width for. */
+  .tl-node:nth-child(1) .tl-detail,
+  .tl-node:nth-child(2) .tl-detail { left: 0; }
+  .tl-node:nth-child(3) .tl-detail,
+  .tl-node:nth-child(4) .tl-detail { left: 50%; transform: translateX(-50%); }
+  .tl-node:nth-child(5) .tl-detail,
+  .tl-node:nth-child(6) .tl-detail { left: auto; right: 0; }
+
+  /* Open state: real mouse hover, keyboard focus, or the .is-open class
+     career.js toggles on click/tap. Hover is scoped to devices that report
+     genuine hover + a fine pointer, so a touchscreen never gets stuck in a
+     sticky, one-tap-behind hover state — it relies on the click toggle
+     instead, which fires identically for touch, mouse and keyboard. */
+  .tl--js .tl-node.is-open .tl-detail,
+  .tl--js .tl-node:focus-within .tl-detail {
+    max-height: 46rem;
+    opacity: 1;
+    pointer-events: auto;
+  }
 }
-.tl--js .tl-node.is-active .tl-detail {
-  max-height: 46rem;
-  opacity: 1;
-  margin-top: var(--space-s);
+@media (min-width: 1080px) and (hover: hover) and (pointer: fine) {
+  .tl--js .tl-node:hover .tl-detail {
+    max-height: 46rem;
+    opacity: 1;
+    pointer-events: auto;
+  }
 }
 
 /* The evolution, at a glance. Not six framework badges: the first entry is not

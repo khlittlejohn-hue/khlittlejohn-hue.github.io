@@ -1,25 +1,44 @@
 /* ============================================================================
-   career.js — progressive disclosure for the V3 career spine.
+   career.js — hover/tap disclosure for the V3 career spine.
 
-   Company, dates and title are permanent. This script only decides WHICH node
-   has its detail block open, based on which one is nearest the vertical centre
-   of the viewport.
+   2026-09-10 — rewritten for the horizontal layout. Company, dates and (below
+   1080px) role are permanent. This script's only job is deciding WHICH node's
+   detail panel (the there-to-solve/owned/evidence/move rows) is open, and
+   making that reachable on every input type:
 
-   The collapsing behaviour lives behind the .tl--js class, which this file
-   adds. Two consequences, both deliberate:
+     - Mouse:    real CSS :hover, scoped in career-arc's stylesheet to devices
+                 that report genuine hover + a fine pointer. This script does
+                 not need to do anything for that case.
+     - Keyboard: :focus-within, also pure CSS. This script's job is making
+                 .tl-head a reachable, identifiable control — tabindex, a
+                 button role, and an aria-expanded state — since the markup
+                 does not ship those baked in (progressive enhancement: no JS
+                 means no synthetic control, and a plain heading is still a
+                 plain heading).
+     - Touch:    hover does not exist here, so this script adds a click/tap
+                 listener that toggles an .is-open class. That is the actual
+                 fallback the task requires, not a media-query trick — a tap
+                 fires `click` on every input type, including a screen-reader
+                 "activate" gesture, so it is also the most robust of the
+                 three paths.
 
-     1. Without JavaScript the markup renders with all six nodes expanded. The
-        section is longer but completely readable, which is the correct failure
-        mode for a career history.
-     2. If the script loads but never manages to activate a node, the fail-safe
-        below removes .tl--js and restores that same expanded state. The 2.0
-        system map shipped a bug of exactly this shape — an animation class set
-        opacity to 0 and the "reveal" never ran, so the map rendered as an empty
-        box. Same guard, same reason.
+   The collapsing behaviour lives entirely behind .tl--js, which only this
+   file adds, and only the >=1080px stylesheet rules act on it. Two
+   consequences, both deliberate, both inherited from the previous version of
+   this file:
 
-   Collapsed detail is hidden with max-height and overflow, never display:none
-   or visibility:hidden, so assistive technology still reaches all six nodes in
-   full regardless of which one is visually open.
+     1. Without JavaScript, or below 1080px, every detail block renders fully
+        expanded. Longer section, completely readable — the correct failure
+        mode for a career history, and the correct default for a phone, where
+        there is no natural "hover a segment" gesture to fall back on at all.
+     2. If the script loads but a click handler throws or never attaches, the
+        section still reads: nothing here removes content from the DOM or
+        hides it with display:none, so a reader who never gets an interactive
+        panel just gets the un-collapsed version instead of a dead one.
+
+   Collapsed detail is hidden with max-height/opacity/overflow, never
+   display:none or visibility:hidden, so assistive technology can still reach
+   all six nodes regardless of which one is visually open.
    ============================================================================ */
 
 (function () {
@@ -33,60 +52,75 @@
 
   tl.classList.add("tl--js");
 
-  /* Seed the first node open. At load the section sits below the fold, so the
-     nearest-to-centre search below has nothing on screen to choose and would
-     leave every detail collapsed until the reader scrolls into range. Opening
-     the first node means the spine is never rendered fully closed, including
-     for someone who arrives mid-section through the #career anchor. */
-  var active = 0;
-  nodes[0].classList.add("is-active");
+  var controls = nodes.map(function (node, i) {
+    var head = node.querySelector(".tl-head");
+    var detail = node.querySelector(".tl-detail");
+    if (!head || !detail) return null;
 
-  function pick() {
-    var mid = window.innerHeight / 2;
-    var best = -1;
-    var bestDist = Infinity;
+    if (!detail.id) detail.id = "tl-detail-" + (i + 1);
+    head.setAttribute("tabindex", "0");
+    head.setAttribute("role", "button");
+    head.setAttribute("aria-controls", detail.id);
+    head.setAttribute("aria-expanded", "false");
 
-    for (var i = 0; i < nodes.length; i++) {
-      var r = nodes[i].getBoundingClientRect();
-      if (r.bottom < 0 || r.top > window.innerHeight) continue;
-      var dist = Math.abs(r.top + r.height / 2 - mid);
-      if (dist < bestDist) { bestDist = dist; best = i; }
+    var coEl = node.querySelector(".tl-co");
+    if (coEl && coEl.textContent) {
+      head.setAttribute("aria-label", "Show details for " + coEl.textContent.trim());
     }
 
-    /* Nothing on screen — the section is above or below the viewport. Keep the
-       last choice rather than closing everything, so scrolling back does not
-       land on a collapsed node. */
-    if (best === -1 || best === active) return;
+    return { node: node, head: head, detail: detail };
+  }).filter(Boolean);
 
-    if (active > -1) nodes[active].classList.remove("is-active");
-    nodes[best].classList.add("is-active");
-    active = best;
-  }
+  if (!controls.length) return;
 
-  var ticking = false;
-  function onScroll() {
-    if (ticking) return;
-    ticking = true;
-    window.requestAnimationFrame(function () {
-      pick();
-      ticking = false;
+  function closeAll(except) {
+    controls.forEach(function (c) {
+      if (c.node === except) return;
+      c.node.classList.remove("is-open");
+      c.head.setAttribute("aria-expanded", "false");
     });
   }
 
-  window.addEventListener("scroll", onScroll, { passive: true });
-  window.addEventListener("resize", onScroll);
-  pick();
+  function toggle(c) {
+    var willOpen = !c.node.classList.contains("is-open");
+    closeAll();
+    if (willOpen) {
+      c.node.classList.add("is-open");
+      c.head.setAttribute("aria-expanded", "true");
+    }
+  }
 
-  /* Fail-safe. .tl--js collapses every detail block, so if activation never
-     happens the section degrades to six headings with no substance. Expanding
-     everything is the honest fallback.
+  controls.forEach(function (c) {
+    /* Mouse users who click get the same "pinned open" state a tap gets —
+       useful for reading at their own pace instead of holding a hover. */
+    c.head.addEventListener("click", function (e) {
+      e.preventDefault();
+      toggle(c);
+    });
 
-     The in-view test matters: "nothing is active" is the CORRECT state while
-     the section is still below the fold, and firing on that alone would tear
-     the behaviour out on every page load before the reader ever reached it. */
-  window.setTimeout(function () {
-    var r = tl.getBoundingClientRect();
-    var inView = r.top < window.innerHeight && r.bottom > 0;
-    if (inView && active === -1) tl.classList.remove("tl--js");
-  }, 2500);
+    /* Hovering a DIFFERENT node than the one currently pinned open closes the
+       pin, so a mouse user never sees two panels — one CSS-hovered, one
+       JS-pinned — competing for the same space. */
+    c.head.addEventListener("mouseenter", function () {
+      closeAll(c.node);
+    });
+
+    c.head.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " " || e.key === "Spacebar") {
+        e.preventDefault();
+        toggle(c);
+      } else if (e.key === "Escape") {
+        closeAll();
+        c.head.focus();
+      }
+    });
+  });
+
+  tl.addEventListener("mouseleave", function () {
+    closeAll();
+  });
+
+  document.addEventListener("click", function (e) {
+    if (!tl.contains(e.target)) closeAll();
+  });
 })();
