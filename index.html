@@ -58,8 +58,10 @@
 <link rel="stylesheet" href="assets/css/components/career-arc.css?v=20261108">
 <link rel="stylesheet" href="assets/css/layouts/home-v2.css?v=20261108">
 <!-- Hero grid and portrait: its own file so the layout cannot be undone by an
-     older cached copy of home.css or identity.css. -->
+     older cached copy of home.css or identity.css. The Executive Office map is
+     restored (Kyle asked for it back, 2026-11-08). -->
 <link rel="stylesheet" href="assets/css/components/hero.css?v=20261108">
+<link rel="stylesheet" href="assets/css/components/sysmap.css?v=20261108">
 <!-- Loaded last: the ambient layer overrides the hero's local wash and the
      sunk band's opaque ground, so it must win on source order. -->
 <link rel="stylesheet" href="assets/css/components/ambient.css?v=20261108">
@@ -119,13 +121,14 @@
   </div>
 </nav>
 
-<!-- The story's spine, drawn on the page. Six acts, one per band; the current one is
-     written out. Rendered only with JS, from 1440px up, and only when the viewport
-     is tall enough to hold it (story.css). -->
+<!-- The story's spine, drawn on the page. Seven acts, one per band; the current one is
+     written out. Rendered only with JS and only from 1440px up, and only when the
+     viewport is tall enough to hold it (story.css). -->
 <nav aria-label="Sections of this page">
 <ol class="acts" id="acts">
   <li><a href="#top"><span class="t">Identity</span><span class="d" aria-hidden="true"></span></a></li>
   <li><a href="#career"><span class="t">Career</span><span class="d" aria-hidden="true"></span></a></li>
+  <li><a href="#system"><span class="t">System</span><span class="d" aria-hidden="true"></span></a></li>
   <li><a href="#proof"><span class="t">Evidence</span><span class="d" aria-hidden="true"></span></a></li>
   <li><a href="#method"><span class="t">Method</span><span class="d" aria-hidden="true"></span></a></li>
   <li><a href="#capabilities"><span class="t">Capabilities</span><span class="d" aria-hidden="true"></span></a></li>
@@ -318,6 +321,51 @@
         </div>
       </li>
     </ol>
+  </section>
+
+  <!-- ACT II(b) · THE SYSTEM ===============================================
+       The Executive Office map, restored 2026-11-08 (Kyle: "we had a really cool
+       diagram with all of my departments and all the different agents ... I really
+       liked that before"). It was cut on 2026-09-10 as a fifth restatement of the AI
+       claim; Kyle's call overrides that. The heading and intro make no claim that is
+       not already on the page, and the map's own text is audited against the
+       current canon (see assets/js/sysmap.js). -->
+  <section class="page band" id="system">
+    <div class="band-head band-head--center">
+      <span class="label">The system</span>
+      <h2>The Executive Office, mapped</h2>
+      <p class="band-dek">Hover or tap a domain to see its agents and roles. A human approves every output that leaves the system.</p>
+    </div>
+
+    <div class="os-figure os-legend">
+      <div><b>Automated</b><span>quality gates</span></div>
+      <div><b>Human</b><span>approval on every output</span></div>
+      <div class="os-figure--quiet"><b>120+</b><span>specialized agents</span></div>
+    </div>
+
+    <div class="sysmap" id="sysmap" role="group" aria-label="Interactive map of the Executive Office. Explore each domain.">
+      <div class="sysmap-map">
+        <div class="sysmap-stage" id="smStage"></div>
+        <span class="sm-hint">Hover, tap or tab a domain</span>
+      </div>
+      <div class="sysmap-list" id="smList" role="group" aria-label="Domains"></div>
+      <aside class="sysmap-detail" id="smDetail" aria-live="polite"></aside>
+    </div>
+    <p class="sm-note">A selection of the system's 14 functional domains.</p>
+    <noscript>
+      <ul class="sm-static">
+        <li>Client Engagements</li>
+        <li>Research &amp; Intelligence</li>
+        <li>Communications</li>
+        <li>Calendar &amp; Scheduling</li>
+        <li>Email Operations</li>
+        <li>Dashboard &amp; Tools</li>
+        <li>App Development</li>
+        <li>Ventures &amp; Diligence</li>
+        <li>Content &amp; Positioning</li>
+        <li>Learning &amp; Improvement</li>
+      </ul>
+    </noscript>
   </section>
 
   <!-- ACT III · PROOF =====================================================
@@ -626,6 +674,7 @@
 <script src="assets/js/ambient.js?v=20261108" defer></script>
 <script src="assets/js/story.js?v=20261108" defer></script>
 <script src="assets/js/career.js?v=20261108" defer></script>
+<script src="assets/js/sysmap.js?v=20261108" defer></script>
 <!-- Analytics: the same GoatCounter property production has used since launch. Privacy-preserving, no cookies, no cross-site identifiers. -->
 <script data-goatcounter="https://khlittlejohn.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
