@@ -172,7 +172,112 @@
               border-color var(--dur-base) var(--ease-out),
               color var(--dur-base) var(--ease-out);
 }
-.btn-primary { background: var(--gold); color: var(--gold-ink); font-weight: 550; }
+.btn-primary { background: var(--gold); color: var(--gold-ink); font-weight: 600; }
+.btn-primary:hover { background: var(--gold-deep); }
+.btn-quiet { border-color: var(--line-2); color: var(--ink); }
+.btn-quiet:hover { border-color: var(--gold); color: var(--gold); }
+
+/* ---- Theme toggle -------------------------------------------------------
+   Ported from production index.html (main @ 17f135a), behavior updated
+   2026-11-07 (decision 718): with no stored choice the page follows the
+   visitor's operating-system color scheme (the head script on every page);
+   the toggle persists an explicit choice. Sun shows in dark mode (click for
+   light), moon shows in light mode.                                        */
+
+.icon-btn { grid-column: 3; grid-row: 1; width: 34px; height: 34px; }
+  .nav-links { display: contents; }
+  .nav-links a:not(.nav-cta) { grid-row: 2; font-size: var(--step--1); }
+}
+/* Five destinations no longer fit one 14px row at 390px, so the second row was
+   wrapping to two and the bar measured 140px — the 152px problem the two-row
+   frame was built to remove. The row is now a single non-wrapping line that
+   scrolls sideways when it must, with the trailing edge faded so the overflow
+   is legible as overflow. Bar height is 95px at every phone width. */
+@media (max-width: 819px) {
+  .nav-sections {
+    grid-column: 1 / -1; grid-row: 2;
+    display: flex; gap: var(--space-m); flex-wrap: nowrap;
+    overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch;
+    mask-image: linear-gradient(90deg, #000 calc(100% - 2.5rem), transparent);
+    padding-bottom: 2px;
+  }
+  .nav-sections::-webkit-scrollbar { display: none; }
+  .nav-sections a { white-space: nowrap; flex: none; }
+  .nav-brand { font-size: var(--step--1); }
+}
+/* Between 701 and 900px the single sticky row also wrapped (115px at 768):
+   brand + five links + CTA + toggle exceed the width at the desktop gap. */
+@media (min-width: 820px) and (max-width: 1040px) {
+  .nav-inner { gap: var(--space-s); }
+  .nav-links { gap: var(--space-s); }
+}
+@media (max-width: 360px) {
+  .nav-sections { gap: var(--space-s); }
+  .nav-sections a { font-size: var(--step--2); }
+  .nav-cta { padding-inline: var(--space-2xs); font-size: var(--step--2); }
+  .nav-inner { column-gap: var(--space-2xs); }
+}
+
+/* ---- Shared band heading, used on every page ----------------------------- */
+.band-head { margin-bottom: var(--space-l); }
+.band-head h2 { font-size: var(--step-3); max-width: 24ch; }
+.band-head .label { display: block; margin-bottom: var(--space-2xs); }
+
+/* ---- Shared page footer -------------------------------------------------- */
+.site-foot {
+  border-top: var(--hairline);
+  padding-block: var(--space-l);
+  display: flex;
+  gap: var(--space-m);
+  flex-wrap: wrap;
+  align-items: baseline;
+  font-size: var(--step--1);
+  color: var(--ink-3);
+}
+.site-foot a { color: var(--ink-2); text-decoration: none; }
+.site-foot a:hover { color: var(--gold); }
+.site-foot .foot-links { margin-left: auto; display: flex; gap: var(--space-m); flex-wrap: wrap; }
+.site-foot .foot-note { max-width: 46ch; line-height: 1.5; }
+@media (max-width: 700px) { .site-foot .foot-links { margin-left: 0; } }
+
+/* ---- Page ending: the same closing move on every page ------------------
+   A short, confident line and the two routes: talk, or keep reading.      */
+.page-end {
+  border-top: var(--hairline);
+  padding-block: var(--space-2xl);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--space-l);
+  align-items: end;
+}
+.page-end h2 { font-size: var(--step-3); max-width: 22ch; }
+.page-end p { color: var(--ink-2); margin-top: var(--space-s); max-width: 48ch; }
+.page-end .end-actions { display: flex; gap: var(--space-s); flex-wrap: wrap; }
+@media (max-width: 760px) { .page-end { grid-template-columns: 1fr; align-items: start; padding-block: var(--space-xl); } }
+
+/* Buttons live here so every page can use them, not only home. */
+.btn-primary, .btn-quiet {
+  /* background and font are declared because these classes sit on BOTH <a> and
+     <button>. An anchor is transparent and inherits the page font; a button is
+     neither — it takes the UA's ButtonFace fill and the UA font stack. The one
+     <button class="btn-quiet"> on the site (Trace a request) was rendering as a
+     filled light box carrying near-white --ink text: an invisible label on a
+     control that looked broken. .btn-primary re-declares its gold background
+     twelve lines below, so it is unaffected by the transparent default. */
+  background: transparent;
+  font: inherit;
+  display: inline-block;
+  font-size: var(--step-0);
+  padding: var(--space-2xs) var(--space-m);
+  border-radius: var(--radius-s);
+  text-decoration: none;
+  border: 1px solid transparent;
+  line-height: 1.5;
+  transition: background-color var(--dur-base) var(--ease-out),
+              border-color var(--dur-base) var(--ease-out),
+              color var(--dur-base) var(--ease-out);
+}
+.btn-primary { background: var(--gold); color: var(--gold-ink); font-weight: 600; }
 .btn-primary:hover { background: var(--gold-deep); }
 .btn-quiet { border-color: var(--line-2); color: var(--ink); }
 .btn-quiet:hover { border-color: var(--gold); color: var(--gold); }
@@ -204,3 +309,13 @@
 .icon-btn .moon { display: none; }
 :root[data-theme="light"] .icon-btn .sun { display: none; }
 :root[data-theme="light"] .icon-btn .moon { display: inline; }
+
+/* ---- Background motion control ------------------------------------------
+   Sits beside the theme toggle. The pause glyph shows while the field moves,
+   the play glyph once the visitor has paused it (aria-pressed=true). Under
+   1024px the field is a still frame, so there is nothing to pause and the
+   control is hidden rather than left as a button that does nothing. */
+#ambientToggle .play { display: none; }
+#ambientToggle[aria-pressed="true"] .pause { display: none; }
+#ambientToggle[aria-pressed="true"] .play { display: inline; }
+@media (max-width: 1023px) { #ambientToggle { display: none; } }

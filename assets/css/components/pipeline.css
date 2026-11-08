@@ -85,7 +85,7 @@
               color var(--dur-fast) var(--ease-out);
 }
 .pl-btn:hover { border-color: var(--gold); color: var(--gold); }
-.pl-btn--primary { background: var(--gold); color: var(--gold-ink); border-color: var(--gold); font-weight: 550; }
+.pl-btn--primary { background: var(--gold); color: var(--gold-ink); border-color: var(--gold); font-weight: 600; }
 .pl-btn--primary:hover { background: var(--gold-deep); border-color: var(--gold-deep); color: var(--gold-ink); }
 
 /* ---- The flow --------------------------------------------------------------

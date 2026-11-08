@@ -111,6 +111,18 @@
   var nodes = [], w = 0, h = 0, dpr = 1, raf = null, last = 0;
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  /* THE FIELD IS STILL, NOT ABSENT, IN THREE CASES (Fable audit E2 task 11,
+     WCAG 2.2.2: auto-starting motion longer than 5 seconds that runs in
+     parallel with content needs a pause mechanism). The visitor asked for no
+     motion (prefers-reduced-motion), the visitor paused it with the control in
+     the nav (stored as localStorage ambient=off), or the viewport is under
+     1024px, where the mask erases nearly all of the field anyway and a loop
+     would only spend a phone's battery. In every case one frame is drawn and
+     it is repainted on scroll so the mask keeps the field clear of the text. */
+  var NARROW = 1024;
+  function userOff() { try { return localStorage.getItem("ambient") === "off"; } catch (e) { return false; } }
+  function still() { return reduce || userOff() || window.innerWidth < NARROW; }
+
   function themeIsLight() {
     var t = document.documentElement.dataset.theme;
     if (t === "light") return true;
@@ -331,14 +343,15 @@
     draw(t);
   }
 
-  function start() { if (!raf && !reduce) { last = 0; raf = requestAnimationFrame(step); } }
+  function start() { if (!raf && !still() && !document.hidden) { last = 0; raf = requestAnimationFrame(step); } }
   function stop() { if (raf) { cancelAnimationFrame(raf); raf = null; } }
 
   resize();
 
   var rt = null;
   window.addEventListener("resize", function () {
-    clearTimeout(rt); rt = setTimeout(resize, 180);
+    clearTimeout(rt);
+    rt = setTimeout(function () { resize(); if (still()) stop(); else start(); syncButton(); }, 180);
   });
 
   /* A hidden tab should cost nothing. */
@@ -358,10 +371,25 @@
      the page. Coalesced to one repaint per frame. */
   var pending = false;
   window.addEventListener("scroll", function () {
-    if (!reduce || pending) return;
+    if (!still() || pending) return;
     pending = true;
     requestAnimationFrame(function () { pending = false; draw(0); });
   }, { passive: true });
 
-  if (reduce) draw(0); else start();
+  /* The pause control. aria-pressed=true means motion is paused; the label
+     stays constant, which is the toggle-button pattern screen readers expect.
+     Hidden under 1024px by CSS, where there is no motion to pause. */
+  var btn = document.getElementById("ambientToggle");
+  function syncButton() { if (btn) btn.setAttribute("aria-pressed", String(userOff())); }
+  if (btn) {
+    syncButton();
+    btn.addEventListener("click", function () {
+      var off = !userOff();
+      try { if (off) localStorage.setItem("ambient", "off"); else localStorage.removeItem("ambient"); } catch (e) {}
+      syncButton();
+      if (off) { stop(); draw(0); } else { start(); if (!raf) draw(0); }
+    });
+  }
+
+  if (still()) draw(0); else start();
 })();

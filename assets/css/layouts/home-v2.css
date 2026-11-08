@@ -296,97 +296,9 @@
 :root[data-theme="light"] .cap5--ai .cap5-n        { color: var(--gold-deep); }
 
 
-/* ---- ACT VI · THE HUMAN LAYER -------------------------------------------- */
-
-/* 2026-09-10, first pass — rebuilt from a two-column grid to a floated
-   portrait (Kyle: "tons of blank space next to my background... put my pic
-   in the top right and have the words form around it"). That fixed the
-   photo's dead margin but created a new one: the whole section collapsed to
-   a single 68ch column inside a 1240px .page, so the entire right half of
-   the band sat empty next to every sibling section (#method, #capabilities)
-   that fills the same container edge to edge. Kyle: "This should take up
-   the page. not be condensed."
-
-   Second pass — full-width sidebar layout. The portrait moves into its own
-   column (matches the .os-run-side sticky pattern used lower on the page)
-   and the three dimension blocks become a two-column sub-grid inside the
-   remaining width, same device as .moves: an odd block count means the last
-   one spans full width instead of sitting alone in a half column. This
-   fills the band's actual width instead of just widening a single text
-   measure past comfortable reading length. */
-.human { display: block; }
-@media (min-width: 860px) {
-  .human {
-    display: grid;
-    grid-template-columns: minmax(200px, 260px) minmax(0, 1fr);
-    gap: var(--space-2xl);
-    align-items: start;
-  }
-}
-
-.human-portrait {
-  display: block;
-  width: 168px;
-  max-width: 40%;
-  aspect-ratio: 1;
-  object-fit: cover;
-  border-radius: var(--radius-l);
-  border: 1px solid var(--gold-line);
-  margin: 0 0 var(--space-m);
-}
-@media (min-width: 860px) {
-  .human-portrait {
-    width: 100%;
-    max-width: none;
-    margin: 0;
-    position: sticky;
-    top: calc(var(--nav-h) + var(--space-l));
-  }
-}
-
-.human-dims { display: grid; gap: var(--space-l); }
-@media (min-width: 640px) {
-  .human-dims { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-l) var(--space-xl); }
-  .human-dims .human-dim:last-child { grid-column: 1 / -1; }
-}
-
-.human-body p {
-  font-size: var(--step-0);
-  line-height: 1.6;
-  color: var(--ink-2);
-  margin: 0;
-  max-width: var(--measure-narrow);
-  text-wrap: pretty;
-}
-
-.human-foot { margin-top: var(--space-l); }
-
-.human-facts {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-m) var(--space-xl);
-  margin: var(--space-m) 0 0;
-  padding-top: var(--space-s);
-  border-top: 1px solid var(--line);
-}
-.human-facts div { display: flex; flex-direction: column; gap: 2px; }
-.human-facts b {
-  font-family: var(--font-display);
-  font-variation-settings: var(--fraunces-data);
-  font-size: var(--step-2);
-  font-weight: 600;
-  line-height: 1;
-  letter-spacing: -0.03em;
-  color: var(--ink);
-  font-variant-numeric: tabular-nums;
-}
-.human-facts span {
-  font-family: var(--font-mono);
-  font-size: var(--step--2);
-  letter-spacing: 0.04em;
-  color: var(--ink-3);
-}
-
+/* ACT VI (the homepage Background band) was cut 2026-11-07 (Kyle, decision 716):
+   its three paragraphs live on About, and the hero now carries the one large
+   portrait. Its .human* rules went with it. */
 
 /* ---- ACT VII · POINT OF VIEW --------------------------------------------- */
 
@@ -531,14 +443,6 @@
   color: var(--ink-2);
   text-wrap: pretty;
 }
-
-/* Personality, held apart from the professional figures above it. */
-.human-aside {
-  margin: var(--space-s) 0 0;
-  font-size: var(--step--1);
-  color: var(--ink-3);
-}
-
 
 /* ============================================================================
    V3 — 2026-09-09
@@ -812,32 +716,73 @@
    NODE rather than to the tallest of the six, because a single worst-case
    reserve would leave a large dead gap under the row every time a shorter
    panel opened — the same "blank space" problem this pass exists to remove.
-   Values are measured against each node's actual rendered detail height
-   plus a buffer; six known, fixed children, same assumption the edge-
+   Values re-measured 2026-11-07 after the Move rows became links (each
+   panel shrank): panel height below the row plus a 1.5rem buffer, so no dead
+   gap exceeds 2rem; six known, fixed children, same assumption the edge-
    anchoring rule above already makes — a seventh node means these get
    re-measured too. */
 @media (min-width: 1080px) {
   .tl { transition: margin-bottom var(--dur-slow, .45s) ease; }
   .tl:has(.tl-node:nth-child(1).is-open),
-  .tl:has(.tl-node:nth-child(1):focus-within) { margin-bottom: 19rem; }
+  .tl:has(.tl-node:nth-child(1):focus-within) { margin-bottom: 19.5rem; }
   .tl:has(.tl-node:nth-child(2).is-open),
-  .tl:has(.tl-node:nth-child(2):focus-within) { margin-bottom: 29rem; }
+  .tl:has(.tl-node:nth-child(2):focus-within) { margin-bottom: 27rem; }
   .tl:has(.tl-node:nth-child(3).is-open),
-  .tl:has(.tl-node:nth-child(3):focus-within) { margin-bottom: 27.5rem; }
+  .tl:has(.tl-node:nth-child(3):focus-within) { margin-bottom: 25.5rem; }
   .tl:has(.tl-node:nth-child(4).is-open),
-  .tl:has(.tl-node:nth-child(4):focus-within) { margin-bottom: 34rem; }
+  .tl:has(.tl-node:nth-child(4):focus-within) { margin-bottom: 32rem; }
   .tl:has(.tl-node:nth-child(5).is-open),
-  .tl:has(.tl-node:nth-child(5):focus-within) { margin-bottom: 30.5rem; }
+  .tl:has(.tl-node:nth-child(5):focus-within) { margin-bottom: 28.5rem; }
   .tl:has(.tl-node:nth-child(6).is-open),
-  .tl:has(.tl-node:nth-child(6):focus-within) { margin-bottom: 26rem; }
+  .tl:has(.tl-node:nth-child(6):focus-within) { margin-bottom: 23rem; }
 }
 @media (min-width: 1080px) and (hover: hover) and (pointer: fine) {
-  .tl:has(.tl-node:nth-child(1):hover) { margin-bottom: 19rem; }
-  .tl:has(.tl-node:nth-child(2):hover) { margin-bottom: 29rem; }
-  .tl:has(.tl-node:nth-child(3):hover) { margin-bottom: 27.5rem; }
-  .tl:has(.tl-node:nth-child(4):hover) { margin-bottom: 34rem; }
-  .tl:has(.tl-node:nth-child(5):hover) { margin-bottom: 30.5rem; }
-  .tl:has(.tl-node:nth-child(6):hover) { margin-bottom: 26rem; }
+  .tl:has(.tl-node:nth-child(1):hover) { margin-bottom: 19.5rem; }
+  .tl:has(.tl-node:nth-child(2):hover) { margin-bottom: 27rem; }
+  .tl:has(.tl-node:nth-child(3):hover) { margin-bottom: 25.5rem; }
+  .tl:has(.tl-node:nth-child(4):hover) { margin-bottom: 32rem; }
+  .tl:has(.tl-node:nth-child(5):hover) { margin-bottom: 28.5rem; }
+  .tl:has(.tl-node:nth-child(6):hover) { margin-bottom: 23rem; }
+}
+
+/* ---- CAREER NODE: PHONE DISCLOSURE AND MOVE LINK --------------------------
+   2026-11-07 (Fable audit E2 tasks 5 and 6). Below 1080px the six nodes used to
+   render fully expanded, about 4,500px of timeline before the first case card.
+   Company, dates, role and the Move link stay visible; the three text rows
+   (there to solve, owned, evidence) sit behind a native <details>. At 1080px and
+   up the <details> is the popover's own content: its summary is hidden, and
+   career.js opens it for engines without ::details-content. */
+.tl-more { margin: 0; }
+.tl-more > summary {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2xs);
+  min-height: 44px;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  border-radius: var(--radius-s);
+}
+.tl-more > summary::-webkit-details-marker { display: none; }
+.tl-more > summary::after { content: "+"; font-size: 1.1em; line-height: 1; }
+.tl-more[open] > summary::after { content: "\2212"; }
+.tl-more > summary:focus-visible { outline: var(--focus-ring); outline-offset: var(--focus-offset); }
+.tl-more[open] > summary { margin-bottom: var(--space-2xs); }
+.tl-more .tl-row + .tl-row { margin-top: var(--space-2xs); }
+.tl-detail > .tl-row--move { margin-top: var(--space-2xs); }
+/* The Move row is a pointer into the Method band, not a restatement of it. */
+.tl-row--move a { color: var(--gold-deep); text-decoration: none; }
+.tl-row--move a:hover { text-decoration: underline; }
+.tl-row--move a:focus-visible { outline: var(--focus-ring); outline-offset: 2px; border-radius: var(--radius-s); }
+@media (min-width: 1080px) {
+  .tl-more > summary { display: none; }
+  .tl-more::details-content { content-visibility: visible; display: block; }
 }
 
 /* ---- ACT III · SELECTED WORK, CONSISTENT METADATA ------------------------ */
@@ -1025,20 +970,6 @@
   line-height: 1.45;
   color: var(--ink-3);
 }
-
-
-/* ---- HUMAN LAYER, THREE DIMENSIONS -------------------------------------- */
-
-.human-k {
-  display: block;
-  font-family: var(--font-mono);
-  font-size: var(--step--2);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--gold-deep);
-  margin-bottom: 2px;
-}
-.human-dim p { margin: 0; }
 
 
 /* ---- CONTACT ------------------------------------------------------------- */

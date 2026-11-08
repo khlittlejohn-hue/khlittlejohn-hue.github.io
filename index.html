@@ -4,14 +4,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- No flash of wrong theme: set the theme attribute before first paint.
-     Ported verbatim from production index.html (main @ 17f135a). -->
+     Order of precedence (Kyle, decision 718, 2026-11-07): the visitor's own
+     stored toggle, then their operating-system color scheme, then dark. The
+     toggle persists an explicit choice; with none stored the page follows the
+     OS. This runs synchronously in <head>, before any CSS paints. -->
 <script>
   (function(){
-    try{
-      var stored=localStorage.getItem('theme');
-      /* dark is the brand default; only an explicit user toggle to light overrides it */
-      document.documentElement.dataset.theme=(stored==='light'||stored==='dark')?stored:'dark';
-    }catch(e){document.documentElement.dataset.theme='dark';}
+    var t;
+    try{t=localStorage.getItem('theme');}catch(e){}
+    if(t!=='light'&&t!=='dark'){
+      t=(window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark';
+    }
+    document.documentElement.dataset.theme=t;
     document.documentElement.className='js';
   })();
 </script>
@@ -41,7 +45,7 @@
 <meta name="twitter:image" content="https://kylelittlejohn.com/assets/website-card-100.png">
 <meta name="twitter:image:alt" content="Kyle Littlejohn, Chief of Staff and Strategy / Operations leader. He turns executive ambiguity into shipped outcomes, and built the AI operating system that multiplies how fast he does it.">
 <link rel="preconnect" href="https://fonts.bunny.net">
-<link rel="stylesheet" href="https://fonts.bunny.net/css?family=fraunces:400,500,600,700|geist:300,400,500,600,700|geist-mono:400,500&display=swap">
+<link rel="stylesheet" href="https://fonts.bunny.net/css?family=fraunces:400,500,600,700|geist:400,500,600|geist-mono:400,500&display=swap">
 <link rel="stylesheet" href="assets/css/tokens.css">
 <link rel="stylesheet" href="assets/css/base.css">
 <link rel="stylesheet" href="assets/css/components/nav.css">
@@ -97,6 +101,10 @@
         <a href="assets/Kyle-Littlejohn-Resume.pdf">Resume</a>
       </div>
       <a class="nav-cta" href="index.html#contact">Let&rsquo;s talk &rarr;</a>
+      <button class="icon-btn" id="ambientToggle" type="button" aria-label="Pause background motion" aria-pressed="false">
+        <svg class="pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+        <svg class="play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10-6.5a1 1 0 0 0 0-1.72l-10-6.5A1 1 0 0 0 8 5.5z"/></svg>
+      </button>
       <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle light and dark theme" aria-pressed="false">
         <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
         <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
@@ -105,14 +113,14 @@
   </div>
 </nav>
 
-<!-- The story's spine, drawn on the page. Six acts; the current one is
+<!-- The story's spine, drawn on the page. Six acts, one per band; the current one is
      written out. Rendered only with JS and only above 1200px (story.css). -->
 <ol class="acts" id="acts" aria-label="Sections of this page">
   <li><a href="#top"><span class="t">Identity</span><span class="d" aria-hidden="true"></span></a></li>
   <li><a href="#career"><span class="t">Career</span><span class="d" aria-hidden="true"></span></a></li>
   <li><a href="#proof"><span class="t">Evidence</span><span class="d" aria-hidden="true"></span></a></li>
+  <li><a href="#method"><span class="t">Method</span><span class="d" aria-hidden="true"></span></a></li>
   <li><a href="#capabilities"><span class="t">Capabilities</span><span class="d" aria-hidden="true"></span></a></li>
-  <li><a href="#background"><span class="t">Background</span><span class="d" aria-hidden="true"></span></a></li>
   <li><a href="#contact"><span class="t">Contact</span><span class="d" aria-hidden="true"></span></a></li>
 </ol>
 
@@ -220,9 +228,12 @@
           <span class="tl-role">Systems Analyst Intern</span>
         </div>
         <div class="tl-detail">
-          <div class="tl-row"><span class="tl-k">There to solve</span><p>Business and operational requirements on New York State government technology programs needed translating into specifications developers could build from.</p></div>
-          <div class="tl-row"><span class="tl-k">Owned</span><p>The translation itself, working under senior systems analysts and bridging the business and technical teams.</p></div>
-          <div class="tl-row tl-row--start"><span class="tl-k">What it was</span><p>Learning the work. The first place I turned what a business needed into something a technical team could build from.</p></div>
+          <details class="tl-more">
+            <summary>Details</summary>
+              <div class="tl-row"><span class="tl-k">There to solve</span><p>Business and operational requirements on New York State government technology programs needed translating into specifications developers could build from.</p></div>
+              <div class="tl-row"><span class="tl-k">Owned</span><p>The translation itself, working under senior systems analysts and bridging the business and technical teams.</p></div>
+              <div class="tl-row tl-row--start"><span class="tl-k">What it was</span><p>Learning the work. The first place I turned what a business needed into something a technical team could build from.</p></div>
+          </details>
         </div>
       </li>
 
@@ -234,9 +245,12 @@
           <span class="tl-role">Consultant &rarr; Senior Consultant</span>
         </div>
         <div class="tl-detail">
-          <div class="tl-row"><span class="tl-k">There to solve</span><p>Enterprise transformation and regulatory compliance across financial services, healthcare and media. At Beacon Health, a company-wide reorganization to cut costs and use staff time better.</p></div>
-          <div class="tl-row"><span class="tl-k">Owned</span><p>The diagnostic interviews with client-facing and clinical provider teams, and the financial models and executive presentations behind the reorganization. Leadership approved and ran it.</p></div>
-          <div class="tl-row"><span class="tl-k">Evidence</span><p>The Beacon Health engagement cut operating costs 15% and improved process efficiency 25% over 6 months.</p></div>
+          <details class="tl-more">
+            <summary>Details</summary>
+              <div class="tl-row"><span class="tl-k">There to solve</span><p>Enterprise transformation and regulatory compliance across financial services, healthcare and media. At Beacon Health, a company-wide reorganization to cut costs and use staff time better.</p></div>
+              <div class="tl-row"><span class="tl-k">Owned</span><p>The diagnostic interviews with client-facing and clinical provider teams, and the financial models and executive presentations behind the reorganization. Leadership approved and ran it.</p></div>
+              <div class="tl-row"><span class="tl-k">Evidence</span><p>The Beacon Health engagement cut operating costs 15% and improved process efficiency 25% over 6 months.</p></div>
+          </details>
           <div class="tl-row tl-row--move"><span class="tl-k">Move developed</span><p><b><a href="#method">Find the layer</a>.</b></p></div>
         </div>
       </li>
@@ -249,9 +263,12 @@
           <span class="tl-role">Consulting Manager</span>
         </div>
         <div class="tl-detail">
-          <div class="tl-row"><span class="tl-k">There to solve</span><p>bluebird bio needed to reduce cost without degrading the service levels the business depended on.</p></div>
-          <div class="tl-row"><span class="tl-k">Owned</span><p>Vendor renegotiation and purchasing redesign across procurement, legal, HR and operations, and the reporting framework that put initiative progress, financial impact and risk in one place.</p></div>
-          <div class="tl-row"><span class="tl-k">Evidence</span><p>$1M+ in annualized savings, with every service commitment preserved. I led the AArete engagement team serving bluebird bio.</p></div>
+          <details class="tl-more">
+            <summary>Details</summary>
+              <div class="tl-row"><span class="tl-k">There to solve</span><p>bluebird bio needed to reduce cost without degrading the service levels the business depended on.</p></div>
+              <div class="tl-row"><span class="tl-k">Owned</span><p>Vendor renegotiation and purchasing redesign across procurement, legal, HR and operations, and the reporting framework that put initiative progress, financial impact and risk in one place.</p></div>
+              <div class="tl-row"><span class="tl-k">Evidence</span><p>$1M+ in annualized savings, with every service commitment preserved. I led the AArete engagement team serving bluebird bio.</p></div>
+          </details>
           <div class="tl-row tl-row--move"><span class="tl-k">Move developed</span><p><b><a href="#method">One basis for comparison</a>.</b></p></div>
         </div>
       </li>
@@ -264,9 +281,12 @@
           <span class="tl-role">Senior Manager, Strategic Finance &amp; Business Operations</span>
         </div>
         <div class="tl-detail">
-          <div class="tl-row"><span class="tl-k">There to solve</span><p>Each of 10 acquired companies arrived with its own systems, KPI definitions and planning calendar. Leadership could not compare anything to anything, which is a capital allocation problem wearing a reporting problem's clothes.</p></div>
-          <div class="tl-row"><span class="tl-k">Owned</span><p>The post-close operating and reporting infrastructure, the analysis underneath board-level reporting, and the financial picture the executive team used when it weighed the next acquisition.</p></div>
-          <div class="tl-row"><span class="tl-k">Evidence</span><p>10 acquired companies onto one reporting stack, over about 2.5 years. I contributed the financial narrative and data room materials behind a $500M+ round from TPG and Insight Partners. The company's valuation moved from roughly $350M to $1.75B over the period.</p></div>
+          <details class="tl-more">
+            <summary>Details</summary>
+              <div class="tl-row"><span class="tl-k">There to solve</span><p>Each of 10 acquired companies arrived with its own systems, KPI definitions and planning calendar. Leadership could not compare anything to anything, which is a capital allocation problem wearing a reporting problem's clothes.</p></div>
+              <div class="tl-row"><span class="tl-k">Owned</span><p>The post-close operating and reporting infrastructure, the analysis underneath board-level reporting, and the financial picture the executive team used when it weighed the next acquisition.</p></div>
+              <div class="tl-row"><span class="tl-k">Evidence</span><p>10 acquired companies onto one reporting stack, over about 2.5 years. I contributed the financial narrative and data room materials behind a $500M+ round from TPG and Insight Partners. The company's valuation moved from roughly $350M to $1.75B over the period.</p></div>
+          </details>
           <div class="tl-row tl-row--move"><span class="tl-k">Move proven at scale</span><p><b><a href="#method">One basis for comparison</a>, proven at scale.</b></p></div>
         </div>
       </li>
@@ -279,9 +299,12 @@
           <span class="tl-role">Director, Strategy &amp; Client Delivery</span>
         </div>
         <div class="tl-detail">
-          <div class="tl-row"><span class="tl-k">There to solve</span><p>A fast-growing streaming portfolio at AMC Networks running on processes built for something smaller. Teams spent their time reconciling information instead of moving campaigns forward.</p></div>
-          <div class="tl-row"><span class="tl-k">Owned</span><p>The account and the operating cadence throughout, and a delivery team of 8 whom I managed directly, with 16 business units aligned through cadence and visibility rather than reporting lines.</p></div>
-          <div class="tl-row"><span class="tl-k">Evidence</span><p>End-to-end campaign cycle time fell roughly 30%. The client expanded the engagement from $280K to $2.1M across 5+ years.</p></div>
+          <details class="tl-more">
+            <summary>Details</summary>
+              <div class="tl-row"><span class="tl-k">There to solve</span><p>A fast-growing streaming portfolio at AMC Networks running on processes built for something smaller. Teams spent their time reconciling information instead of moving campaigns forward.</p></div>
+              <div class="tl-row"><span class="tl-k">Owned</span><p>The account and the operating cadence throughout, and a delivery team of 8 whom I managed directly, with 16 business units aligned through cadence and visibility rather than reporting lines.</p></div>
+              <div class="tl-row"><span class="tl-k">Evidence</span><p>End-to-end campaign cycle time fell roughly 30%. The client expanded the engagement from $280K to $2.1M across 5+ years.</p></div>
+          </details>
           <div class="tl-row tl-row--move"><span class="tl-k">Move developed</span><p><b><a href="#method">Establish cadence</a>.</b></p></div>
         </div>
       </li>
@@ -294,9 +317,12 @@
           <span class="tl-role">Founder, AI Systems Consultant</span>
         </div>
         <div class="tl-detail">
-          <div class="tl-row"><span class="tl-k">There to solve</span><p>A consultancy needing more throughput than one person has, without putting my name on work nobody had checked.</p></div>
-          <div class="tl-row"><span class="tl-k">Owned</span><p>Every design decision, failure diagnosis and governance rule in the system.</p></div>
-          <div class="tl-row"><span class="tl-k">Evidence</span><p>120+ specialized agents across 14 functional domains, with automated checks enforced on every written deliverable in its most heavily used pipeline before it reaches my review.</p></div>
+          <details class="tl-more">
+            <summary>Details</summary>
+              <div class="tl-row"><span class="tl-k">There to solve</span><p>A consultancy needing more throughput than one person has, without putting my name on work nobody had checked.</p></div>
+              <div class="tl-row"><span class="tl-k">Owned</span><p>Every design decision, failure diagnosis and governance rule in the system.</p></div>
+              <div class="tl-row"><span class="tl-k">Evidence</span><p>120+ specialized agents across 14 functional domains, with automated checks enforced on every written deliverable in its most heavily used pipeline before it reaches my review.</p></div>
+          </details>
           <div class="tl-row tl-row--move"><span class="tl-k">What AI added</span><p><b><a href="#method">Nothing grades its own work</a>.</b></p></div>
         </div>
       </li>
@@ -489,45 +515,6 @@
     </div>
   </section>
 
-  <!-- ACT VI · THE HUMAN LAYER ============================================
-       Rebuilt in V3 around three dimensions rather than a list of credentials.
-       "Neuroscience degree + five industries + 50 countries" was a collection
-       of facts, not a background, and the travel line ("a plan that survives
-       about a day and a half") was removed at Kyle's instruction: it was cute
-       and told an executive nothing.                                       -->
-  <section class="page band" id="background">
-    <div class="band-head">
-      <span class="label">Background</span>
-      <h2>The operator, the builder, and the person</h2>
-    </div>
-    <div class="human">
-      <img class="human-portrait" src="assets/kyle@2x.jpg" alt="Kyle Littlejohn" width="230" height="230" loading="lazy">
-      <div class="human-body">
-        <div class="human-dims">
-          <div class="human-dim">
-            <span class="human-k">The operator</span>
-            <p>Five industries I entered without the domain: biotech, credit ratings, health insurance, infrastructure SaaS and streaming media. Becoming useful quickly turns out to be most of the job when you are the person handed the thing nobody owns. That pattern is not on my resume as a skill, and it is probably the most transferable thing I do.</p>
-          </div>
-          <div class="human-dim">
-            <span class="human-k">The builder</span>
-            <p>I studied neuroscience at William &amp; Mary with a minor in process management, which sounded like an odd pairing at the time. Both are the study of how a system takes in incomplete information and produces a decision. I would rather build the operating model than inherit one, which is eventually why I started building the systems instead of advising on them.</p>
-          </div>
-          <div class="human-dim">
-            <span class="human-k">The person</span>
-            <p>Thirty-plus endurance races, marathons and Hyrox mostly, with the occasional ultra when I have lost perspective. Training is the one part of my life with a genuinely honest feedback loop, which is probably why I keep going back to it. Outside the work I spend an unreasonable amount of time running, traveling and figuring out how to make things work better than they did the first time.</p>
-          </div>
-        </div>
-        <div class="human-foot">
-          <p><a class="btn-quiet" href="about.html">Full background &rarr;</a></p>
-          <div class="human-facts">
-            <div><b>12+</b><span>years operating</span></div>
-            <div><b>5</b><span>industries entered cold</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- ACT VIII · CONTACT =================================================== -->
   <section class="page contact band" id="contact">
     <!-- This heading restated the hero deck's former "decision infrastructure"
@@ -541,6 +528,15 @@
     <!-- Relocated from the hero 2026-09-09 (Kyle, V3). Wording is his, approved
          verbatim on 2026-09-07 and unchanged; only its position moved. -->
     <p class="contact-open">Open to select executive opportunities. Chief of Staff, Strategy and Operations, and AI transformation roles.</p>
+    <!-- Email first (Fable audit E2 task 7, research R2). A CEO or their EA writes
+         a two-line email; a four-field form is the fallback for visitors without
+         a mail client. The address is selectable text, the subject is prefilled,
+         and LinkedIn is one click away for a reader who wants to check first. -->
+    <div class="contact-primary">
+      <a class="btn-primary" href="mailto:khlittlejohn@gmail.com?subject=Kyle%2C%20a%20conversation%20about%20%5Byour%20company%5D">Email me</a>
+      <p class="contact-addr"><a href="mailto:khlittlejohn@gmail.com">khlittlejohn@gmail.com</a> &middot; <a href="https://www.linkedin.com/in/kyle-littlejohn-" rel="me noopener" target="_blank">LinkedIn</a></p>
+    </div>
+    <p class="cform-lead">Prefer a form? Send a note here.</p>
     <form class="cform" id="contactForm" novalidate>
       <div class="cform-row">
         <div>
@@ -561,11 +557,10 @@
         <textarea id="cf-message" name="message" rows="5" placeholder="What are you working on?" required></textarea>
       </div>
       <input class="cform-hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
-      <button class="btn-primary" type="submit">Send message</button>
+      <button class="btn-quiet" type="submit">Send message</button>
       <p class="cform-status" id="cformStatus" role="status" aria-live="polite"></p>
     </form>
 
-    <p class="cform-fallback">Or email me directly at <a href="mailto:khlittlejohn@gmail.com">khlittlejohn@gmail.com</a>.</p>
   </section>
 
 

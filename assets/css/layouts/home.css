@@ -115,7 +115,7 @@
   line-height: 1.4;
   color: var(--ink-2);
 }
-.hero-meta dd strong { color: var(--ink); font-weight: 550; }
+.hero-meta dd strong { color: var(--ink); font-weight: 600; }
 
 .hero-cta { display: flex; gap: var(--space-s); flex-wrap: wrap; margin-top: var(--space-l); }
 
