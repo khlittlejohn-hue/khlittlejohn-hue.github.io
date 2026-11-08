@@ -114,7 +114,7 @@
   function label(i) {
     var name = stages[i].querySelector(".os-name").textContent.trim();
     var role = stages[i].querySelector(".os-role").textContent.trim();
-    return "<b>" + (i + 1) + " · " + name + "</b> — " + role;
+    return "<b>" + (i + 1) + " · " + name + "</b>: " + role;
   }
 
   function reset() {

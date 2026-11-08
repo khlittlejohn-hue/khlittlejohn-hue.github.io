@@ -19,8 +19,10 @@
      visitor can land here before the redirect fires (slow connection, meta
      refresh blocked, screen reader, or a cached snapshot). The manual
      fallback link below is the path for that visitor. -->
-<meta http-equiv="refresh" content="0; url=work/executive-office.html">
-<link rel="canonical" href="https://kylelittlejohn.com/work/executive-office.html">
+<!-- 2026-11-08: the Executive Office map is back on the homepage (#system), so this old URL now
+     points there instead of at the case study (Fable spec V1.0 section C6). -->
+<meta http-equiv="refresh" content="0; url=./#system">
+<link rel="canonical" href="https://kylelittlejohn.com/">
 <!-- No flash of wrong theme: set the theme attribute before first paint.
      Order of precedence (Kyle, decision 718, 2026-11-07): the visitor's own
      stored toggle, then their operating-system color scheme, then dark. The
@@ -45,12 +47,12 @@
 <link rel="apple-touch-icon" href="https://kylelittlejohn.com/assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.bunny.net">
 <link rel="stylesheet" href="https://fonts.bunny.net/css?family=fraunces:400,500,600,700|geist:400,500,600|geist-mono:400,500&display=swap">
-<link rel="stylesheet" href="assets/css/tokens.css?v=20261108">
-<link rel="stylesheet" href="assets/css/base.css?v=20261108">
-<link rel="stylesheet" href="assets/css/components/nav.css?v=20261108">
+<link rel="stylesheet" href="assets/css/tokens.css?v=20261108b2">
+<link rel="stylesheet" href="assets/css/base.css?v=20261108b2">
+<link rel="stylesheet" href="assets/css/components/nav.css?v=20261108b2">
 <!-- Loaded last: the ambient layer overrides the hero's local wash and the
      sunk band's opaque ground, so it must win on source order. -->
-<link rel="stylesheet" href="assets/css/components/ambient.css?v=20261108">
+<link rel="stylesheet" href="assets/css/components/ambient.css?v=20261108b2">
 </head>
 <body>
 
@@ -93,10 +95,10 @@
   <section class="center-viewport">
     <span class="label">Moved</span>
     <h1>This page has moved</h1>
-    <p class="lead">The Operating System page was folded into the Executive Office case study. You should be redirected automatically. If not, use the link below.</p>
+    <p class="lead">The Operating System page was folded into the Executive Office map on the homepage. You should be redirected automatically. If not, use the link below.</p>
     <div class="end-actions">
-      <a class="btn-primary" href="work/executive-office.html">Continue to the case study &rarr;</a>
-      <a class="btn-quiet" href="./">Return to the homepage &rarr;</a>
+      <a class="btn-primary" href="./#system">Continue to the Executive Office map &rarr;</a>
+      <a class="btn-quiet" href="work/executive-office.html">Read the case study &rarr;</a>
     </div>
   </section>
 
@@ -127,7 +129,7 @@
   });
 })();
 </script>
-<script src="assets/js/ambient.js?v=20261108" defer></script>
+<script src="assets/js/ambient.js?v=20261108b2" defer></script>
 <!-- Analytics: the same GoatCounter property production has used since launch. Privacy-preserving, no cookies, no cross-site identifiers. -->
 <script data-goatcounter="https://khlittlejohn.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

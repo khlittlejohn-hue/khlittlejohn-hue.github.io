@@ -7,8 +7,7 @@
 
    The ring is laid out from the data: the angular step is derived from the
    length of the array, so the ring stays correct if a domain is added or
-   removed. The array is a presentation scope, a selection of the system's
-   functional domains, not the architecture.
+   removed. All 14 functional domains are drawn.
 
    Everything the component does is progressive: without JS the <noscript> list
    in the page renders, and the phone list is built from the same data as the
@@ -26,41 +25,54 @@
   var CORE = {
     name: "Chief of Staff · Orchestration",
     tag: "The core",
-    desc: "A Chief of Staff aggregates every domain into one operating picture, an Executive Assistant runs the day, and an independent QA function reviews the system from the outside.",
-    roles: ["Chief of Staff", "Executive Assistant", "Independent QA / Super-User Review"],
-    note: "A human approves every output that leaves the system."
+    desc: "A Chief of Staff aggregates every domain into one operating picture, a daily-operations agent runs the day, and an independent QA function reviews the system from the outside.",
+    roles: ["Chief of Staff", "Daily Operations", "Independent QA Review"],
+    note: "A human on every decision that leaves the system."
   };
 
-  /* PUBLIC MAP SCOPE. This array is a presentation scope, a selection of the
-     system's 14 functional domains, not the architecture. No domain was
-     invented to hold a count up. Color is data, not decoration: it is what makes
-     a routed packet traceable to the domain that dispatched it. */
+  /* PUBLIC MAP, 2026-11-08. All 14 functional domains (ACHIEVEMENT_BANK section
+     16), named for a public reader. Color is data, not decoration: it is what
+     makes a routed packet traceable to the domain that dispatched it. Four
+     representative roles per domain; no per-domain agent count is published,
+     because counts drift and the only locked public figure is the 120+ floor. */
   var DEPTS = [
     { k: "clients", lbl: "Clients", name: "Client Engagements", c: "#A3E635",
-      desc: "Scopes and delivers outside consulting work, and keeps the commercial side of it in order.",
+      desc: "Scopes and delivers the consulting work, and keeps the commercial side of it in order.",
       roles: ["Client Partner", "Engagement Manager", "Scope & Agreements", "Delivery Reporting"] },
     { k: "research", lbl: "Research", name: "Research & Intelligence", c: "#A78BFA",
-      desc: "Deep-dive research on companies, people, and decisions, with claims traced back to cited sources.",
+      desc: "Deep-dive research on companies, people and decisions, with every claim backed by a cited source.",
       roles: ["Company Analyst", "People Researcher", "Source Verifier", "Briefing Synthesizer"] },
     { k: "comms", lbl: "Comms", name: "Communications", c: "#34D399",
-      desc: "Voice-matched drafting for correspondence and writing, built to sound like me.",
+      desc: "Voice-matched drafting for correspondence and writing, built to sound like the principal rather than a model.",
       roles: ["Voice-Match Writer", "Editor", "Message Auditor", "Review Gate"] },
+    { k: "position", lbl: "Positioning", name: "Executive Positioning", c: "#FB923C",
+      desc: "The resume, the narrative and every claim behind them, checked against one canonical record before anything leaves.",
+      roles: ["Narrative Strategist", "Claims Registrar", "Adversarial Reviewer", "Final Gate"] },
     { k: "calendar", lbl: "Calendar", name: "Calendar & Scheduling", c: "#F472B6",
       desc: "Conflict resolution, focus-block protection, and a briefing packet ready before every meeting.",
       roles: ["Scheduling Coordinator", "Focus-Block Guardian", "Briefing-Packet Builder", "Conflict Resolver"] },
     { k: "email", lbl: "Email", name: "Email Operations", c: "#6FD8E8",
-      desc: "Inbox triage, categorization, escalation of what matters, and drafted replies waiting for a click.",
-      roles: ["Inbox Triage", "Categorization", "Escalation Router", "Reply Drafter"] },
+      desc: "Sorts and escalates correspondence, and drafts the replies that wait for a click.",
+      roles: ["Sorting", "Categorization", "Escalation Router", "Reply Drafter"] },
+    { k: "personal", lbl: "Personal", name: "Personal Operations", c: "#F59E0B",
+      desc: "Travel, documents, renewals and the logistics of a life, run on the same cadence as the work.",
+      roles: ["Travel Planner", "Document Manager", "Payments & Renewals", "Events & Reminders"] },
+    { k: "fitness", lbl: "Fitness", name: "Fitness & Performance", c: "#F87171",
+      desc: "Training plans, a race calendar, nutrition and long-run health tracking.",
+      roles: ["Training Coach", "Race-Calendar Planner", "Nutrition Lead", "Health Tracker"] },
+    { k: "finance", lbl: "Finance", name: "Accounting & Finance", c: "#FCD34D",
+      desc: "Bookkeeping and tax operations for the business, and an investment research desk.",
+      roles: ["Bookkeeper", "Tax Operations", "Investment Analyst", "Portfolio Reviewer"] },
     { k: "tools", lbl: "Tools", name: "Dashboard & Tools", c: "#F5C451",
-      desc: "The internal tooling, data pipelines, and rendering layer the rest of the system runs on.",
+      desc: "The internal tooling, data pipelines and rendering layer the rest of the system runs on.",
       roles: ["Tooling Engineer", "Data-Pipeline Owner", "Rendering Engineer", "UX Designer"] },
     { k: "apps", lbl: "Apps", name: "App Development", c: "#22D3EE",
       desc: "Runs the product teams behind the software I build, from sprint plan through release gate.",
       roles: ["Product Manager", "Engineering Lead", "QA Lead", "Design Lead"] },
-    { k: "ventures", lbl: "Ventures", name: "Ventures & Diligence", c: "#34D399",
+    { k: "ventures", lbl: "Ventures", name: "Ventures & Diligence", c: "#4ADE80",
       desc: "Pressure-tests a new business case through a full review panel before any commitment is made.",
       roles: ["Venture Analyst", "Review Panel", "Market Validator", "Go / No-Go Reviewer"] },
-    { k: "marketing", lbl: "Marketing", name: "Content & Positioning", c: "#A78BFA",
+    { k: "marketing", lbl: "Marketing", name: "Content & Marketing", c: "#C084FC",
       desc: "A content pipeline with a consistent voice, a publishing cadence, and a measurable objective.",
       roles: ["Content Producer", "Brand-Voice Lead", "Cadence Planner", "Performance Analyst"] },
     { k: "learning", lbl: "Learning", name: "Learning & Improvement", c: "#FFD47E",
@@ -84,7 +96,7 @@
   var svg = el("svg", {
     viewBox: "-40 -28 680 656",
     role: "group",
-    "aria-label": "Domains orbiting a Chief of Staff orchestration core"
+    "aria-label": DEPTS.length + " functional domains around a Chief of Staff core"
   });
 
   /* Edges first so nodes paint over them. */
@@ -212,7 +224,7 @@
   var coreChip = document.createElement("button");
   coreChip.type = "button";
   coreChip.className = "core-chip";
-  coreChip.textContent = "Chief of Staff · orchestration core";
+  coreChip.textContent = "Chief of Staff · the core";
   coreChip.addEventListener("click", function () { show("core"); });
   chipEls.core = coreChip;
   list.appendChild(coreChip);

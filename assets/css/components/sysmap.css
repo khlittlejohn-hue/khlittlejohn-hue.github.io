@@ -277,6 +277,13 @@
   .sysmap-list { display: grid; }
   .sm-hint { position: static; display: block; text-align: center; padding-top: var(--space-2xs); }
 }
+/* Under 600px the 14 labels cannot sit beside their nodes without touching, so the
+   ring is drawn with its numbered nodes only and the numbered chips beneath are the
+   legend (the node numbers and the chip numbers are the same numbers). */
+@media (max-width: 600px) {
+  .sm-node .lbl { display: none; }
+  .sm-hint { display: none; }
+}
 
 /* ---- ENTRANCE ------------------------------------------------------------
    Edges draw, nodes pop, core halo begins its slow pulse. Applied only when
@@ -311,7 +318,6 @@
 }
 
 
-/* ---- Restored 2026-11-08: caption and no-JS list -------------------------- */
-.sm-note { margin: var(--space-s) 0 0; text-align: center; font-size: var(--step--1); color: var(--ink-2); }
+/* ---- Restored 2026-11-08: no-JS list -------------------------- */
 .sm-static { list-style: none; margin: var(--space-m) 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--space-2xs); justify-content: center; }
 .sm-static li { font-size: var(--step--1); color: var(--ink-2); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; }
