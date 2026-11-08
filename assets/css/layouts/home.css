@@ -11,20 +11,24 @@
 
 /* ---- HERO ---------------------------------------------------------------- */
 
-/* Areas rather than a nested grid: the headline needs the full page measure,
-   the portrait needs to sit beside the DECK (not the headline) on desktop and
-   above the eyebrow on mobile. One declaration handles both, and the portrait
-   stays a single <img> instead of a duplicated mobile copy. */
+/* Hero composition, 2026-11-07 (Fable audit C2, Kyle: a face near the top).
+   One grid, three named areas for text and one for the portrait, so the same
+   single <img> sits in the right column spanning eyebrow, headline and deck on
+   desktop and above the eyebrow on phones. --portrait is the CSS size of the
+   image; it never exceeds 240px because the sharpest source is 512px and a 2x
+   display needs two pixels per CSS pixel (nothing here is upscaled). The
+   headline keeps its full wording and its balance; only its column narrows. */
 .hero {
-  padding-block: var(--space-2xl) var(--space-xl);
+  --portrait: 240px;
+  padding-block: var(--space-xl) var(--space-xl);
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 7fr) minmax(0, 3fr);
-  column-gap: var(--space-2xl);
+  grid-template-columns: minmax(0, 1fr) var(--portrait);
+  column-gap: var(--space-xl);
   grid-template-areas:
-    "eyebrow  eyebrow"
-    "title    title"
-    "body     portrait";
+    "eyebrow portrait"
+    "title   portrait"
+    "body    portrait";
   align-items: start;
 }
 
@@ -51,7 +55,7 @@
    whole page to work with, balance splits this sentence into two near-equal
    lines on its own; no <br> is needed and none should be added. */
 .hero-title {
-  font-size: clamp(2.59rem, 1.60rem + 4.35vw, 5.00rem);
+  font-size: clamp(2.59rem, 1.20rem + 3.20vw, 4.10rem);
   line-height: 1.0;
   font-weight: 700;
   letter-spacing: -0.035em;
@@ -68,19 +72,20 @@
   text-wrap: pretty;
 }
 
-/* Portrait sized to what the 512px source can carry sharply. Deliberately
-   compact — a small, sharp, well-framed portrait reads more editorial than a
-   large soft one, and the slot grows if a hi-res portrait lands. It now sits
-   beside the DECK rather than the headline, so it reads as secondary to the
-   proposition instead of competing with it for the top line. */
+/* Rounded rectangle with the gold hairline, matching the About portrait, so
+   the circular nav avatar stays the only circle on the page. The head sits
+   close to the top edge of the source, so the crop is pinned there. */
 .hero-portrait {
-  width: 100%;
-  max-width: 200px;
-  aspect-ratio: 1;
+  grid-area: portrait;
+  display: block;
+  width: var(--portrait);
+  height: var(--portrait);
   border-radius: var(--radius-l);
   border: 1px solid var(--gold-line);
   object-fit: cover;
+  object-position: 50% 30%;
   justify-self: end;
+  align-self: start;
 }
 
 /* Two facts, one horizontal line. Industries used to live here and now lives
@@ -286,16 +291,16 @@
 
 /* ---- RESPONSIVE ---------------------------------------------------------- */
 
-@media (max-width: 900px) and (min-width: 701px) {
-  .hero { column-gap: var(--space-xl); grid-template-columns: minmax(0, 1fr) 160px; }
-  .hero-portrait { max-width: 160px; }
+@media (max-width: 859px) and (min-width: 701px) {
+  .hero { --portrait: 160px; column-gap: var(--space-l); }
   .hero-title { font-size: clamp(2.10rem, 1.30rem + 3.60vw, 3.20rem); }
 }
 @media (max-width: 700px) {
-  /* Single column, and the portrait leads — the established mobile behaviour,
-     preserved. Re-declaring the areas is what hoists it above the eyebrow now
-     that the headline sits outside the body. */
+  /* Single column. The portrait leads at 112px, then the identity, then the
+     proof strip below the buttons carries the evidence into the first two
+     screens (research F3: 74% of viewing time sits in the first two). */
   .hero {
+    --portrait: 112px;
     grid-template-columns: 1fr;
     grid-template-areas:
       "portrait"
@@ -303,20 +308,15 @@
       "title"
       "body";
     row-gap: 0;
-    padding-block: var(--space-xl) var(--space-l);
+    padding-block: var(--space-m) var(--space-m);
   }
-  .hero-portrait { max-width: 132px; justify-self: start; margin-bottom: var(--space-m); }
+  .hero-portrait { justify-self: start; margin-bottom: var(--space-s); }
+  .hero-eyebrow { margin-bottom: var(--space-s); }
+  .hero-title { font-size: clamp(2.10rem, 1.30rem + 3.60vw, 3.20rem); margin-bottom: var(--space-m); }
+  .hero-sub { font-size: var(--step-0); line-height: 1.5; }
+  .hero-cta { margin-top: var(--space-m); }
 
-  /* Narrower measure needs a smaller headline, not the desktop size squeezed.
-     At the desktop ceiling this sentence broke to four lines here and stranded
-     "mandate" on its own — the same orphan defect this composition exists to
-     remove. Stepping down lets balance resolve it in three. */
-  .hero-title { font-size: clamp(2.10rem, 1.30rem + 3.60vw, 3.20rem); }
-
-  /* The meta row survives on mobile rather than being dropped: with Industries
-     gone it is two short facts, not a masthead, and "Based" is the first thing
-     a recruiter looks for. Label and value go inline here — stacked, the two
-     rows cost ~107px, which is real estate the CTA needs more. */
+  /* Identity facts sit below the proof strip now; label and value run inline. */
   .hero-meta { gap: var(--space-2xs) var(--space-l); margin-top: var(--space-m); }
   .hero-meta div { flex-direction: row; align-items: baseline; gap: var(--space-2xs); }
   .hero-meta dd { font-size: 0.82rem; }

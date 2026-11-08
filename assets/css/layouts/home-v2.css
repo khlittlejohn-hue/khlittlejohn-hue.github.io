@@ -17,43 +17,18 @@
 .band-head--bare .label { margin-bottom: 0; }
 
 
-/* ---- ACT I · HERO, SIDEBAR FACTS ------------------------------------------
-   2026-09-10 — identity.css collapsed .hero to a single column when the
-   portrait moved out (correct: the H1 needs the full page measure, and it is
-   frozen and untouched here). What that left uncorrected: hero-sub caps at
-   52ch and hero-cta is two buttons, so .hero-body read as a narrow stack
-   pinned to the left edge of a 1240px .page with the entire right half empty
-   above the fold. Kyle, looking at the rendered page: the deck, the CTAs and
-   the facts row were all sitting in a left column with dead space beside
-   them.
-
-   Fix follows the same device as the Background rebuild one band down: a
-   sidebar grid rather than a wider text column. hero-sub stays at a readable
-   52ch inside .hero-main; hero-meta (Based / Currently) becomes a facts rail
-   in the second column, matching the vertical-rule facts pattern case studies
-   already use in .cs-rail-facts. At 52ch, .hero-main happens to fill almost
-   exactly the space the grid leaves it once the rail and gap are subtracted,
-   so nothing here is stretched past a comfortable reading measure to hit the
-   width — the two pieces just now sit side by side instead of stacked. */
-@media (min-width: 860px) {
-  .hero-body {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(220px, 300px);
-    column-gap: var(--space-2xl);
-    align-items: start;
-  }
-  .hero-meta {
-    flex-direction: column;
-    align-items: stretch;
-    gap: var(--space-m);
-    margin-top: 0;
-    padding-top: 0;
-    padding-left: var(--space-l);
-    border-top: none;
-    border-left: 1px solid var(--line-2);
-  }
-  .hero-meta div { min-width: 0; }
+/* ---- ACT I · HERO FACTS ROW ------------------------------------------------
+   2026-11-07 — the facts rail (Based / Currently) is no longer a right-hand
+   sidebar: the right column now belongs to the portrait. The facts moved out of
+   .hero to sit directly under the proof strip as one quiet row, on every width.
+   Evidence reads first, biography second, which is the order the research asks
+   for on a phone's first two screens. */
+.proofline-band .hero-meta {
+  margin: var(--space-s) 0 0;
+  padding-top: 0;
+  border-top: 0;
 }
+.proofline-band .hero-meta div { min-width: 0; }
 
 /* The proofline strip directly under the hero reads as part of the same
    block (only a hairline separates them), so once hero-body fills the full
@@ -499,7 +474,15 @@
   color: var(--ink-2);
 }
 .proofline li { display: inline-flex; align-items: baseline; gap: 0.4em; }
+/* Each figure links to the card or node that proves it (research R4: every
+   proof number carries a visible basis one click away). The block padding
+   keeps the target at least 24px tall (WCAG 2.5.8). */
+.proofline a { display: inline-block; padding-block: 0.3rem; color: inherit; text-decoration: none; }
+.proofline .nb { white-space: nowrap; }
+.proofline a:hover b { color: var(--gold); }
+.proofline a:focus-visible { outline: var(--focus-ring); outline-offset: 2px; border-radius: var(--radius-s); }
 .proofline b {
+  margin-right: 0.4em;
   font-family: var(--font-display);
   font-variation-settings: var(--fraunces-data);
   font-weight: 600;
@@ -507,7 +490,13 @@
   color: var(--ink);
   font-variant-numeric: tabular-nums;
 }
-@media (max-width: 700px) { .proofline { gap: var(--space-3xs) var(--space-m); } }
+/* Phones: a two-column grid so the strip costs three short rows rather than four
+   stacked lines, with the long Kaseya figure spanning both columns. `dense`
+   lets the shorter figures fill the gap beside the first one. */
+@media (max-width: 700px) {
+  .proofline { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-flow: dense; gap: 0 var(--space-m); }
+  .proofline li:nth-child(2) { grid-column: 1 / -1; }
+}
 
 /* The agent count is evidence, not the achievement. Same row, less weight. */
 .os-figure--quiet b { font-size: var(--step-2); color: var(--ink-2); }

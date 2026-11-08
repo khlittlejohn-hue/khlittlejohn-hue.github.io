@@ -137,27 +137,27 @@
     <span class="hero-eyebrow">Strategy &amp; Operations &middot; Chief of Staff &middot; AI Transformation</span>
     <h1 class="hero-title">Senior leaders hand me the mandate nobody owns.</h1>
 
-    <!-- 2026-09-10 — .hero-body rebuilt from a vertical stack to a sidebar grid
-         (Kyle, looking at the rendered page: deck, CTAs and the facts all sat in
-         a left column with the entire right half of a 1240px .page empty except
-         ambient dots). The H1 above is untouched — it already spans the full
-         page measure per the frozen-hero spec. Below it, hero-sub + hero-cta
-         move into .hero-main and hero-meta becomes a right-hand facts rail at
-         860px+, the same sidebar device Background uses for its portrait. See
-         home-v2.css for the grid. -->
+    <!-- 2026-11-07 — the deck and the two buttons stay in .hero-body (H1 and deck
+         untouched, both asserted by the frozen-hero gate). The right column is
+         the portrait; the Based / Currently facts moved below the proof strip.
+         See layouts/home.css for the grid. -->
     <div class="hero-body">
       <div class="hero-main">
         <p class="hero-sub">I turn executive priorities into operating cadence, cross-functional execution and measurable results, across SaaS, media, biotech, financial services and healthcare. Now I build those systems with AI.</p>
         <div class="hero-cta">
-          <a class="btn-primary" href="#career">See the career</a>
+          <a class="btn-primary" href="#proof">See the work</a>
           <a class="btn-quiet" href="#contact">Let&rsquo;s talk</a>
         </div>
       </div>
-      <dl class="hero-meta">
-        <div><dt>Based</dt><dd>New York &middot; Remote</dd></div>
-        <div><dt>Currently</dt><dd><strong>Founder, KLJ Ventures</strong> &middot; AI systems consultancy</dd></div>
-      </dl>
     </div>
+
+    <!-- Portrait (Kyle, 2026-11-07: "putting a face to Kyle Littlejohn is important").
+         Last child of .hero so the grid areas place it: right column spanning
+         eyebrow, headline and deck on desktop, above the eyebrow on phones.
+         Source is the 512px original and its 256px twin; the CSS size never
+         exceeds half the 2x file's pixels per CSS pixel, so nothing is upscaled.
+         A larger original can replace assets/kyle@2x.jpg with no markup change. -->
+    <img class="hero-portrait" src="assets/kyle@2x.jpg" srcset="assets/kyle.jpg 256w, assets/kyle@2x.jpg 512w" sizes="(max-width: 700px) 112px, (max-width: 859px) 160px, 240px" alt="Kyle Littlejohn" width="240" height="240" fetchpriority="high">
   </section>
 
   <!-- Proof before chronology. An executive visitor should have evidence in
@@ -167,10 +167,16 @@
   <section class="page proofline-band">
     <ul class="proofline">
       <li><a href="#career"><b>12+</b> years operating</a></li>
-      <li><a href="work/kaseya.html"><b>$350M &rarr; $1.75B</b> Kaseya&rsquo;s growth, partnered with the C-suite</a></li>
+      <li><a href="work/kaseya.html"><b>$350M &rarr; $1.75B</b> Kaseya&rsquo;s growth, partnered with the <span class="nb">C-suite</span></a></li>
       <li><a href="work/kaseya.html"><b>10</b> acquisitions integrated</a></li>
       <li><a href="work/executive-office.html"><b>120+</b> AI agents in production</a></li>
     </ul>
+    <!-- Identity facts, directly under the proof strip so a phone's first two
+         screens carry evidence before biography. Quiet row, same hairline family. -->
+    <dl class="hero-meta">
+      <div><dt>Based</dt><dd>New York</dd></div>
+      <div><dt>Currently</dt><dd><strong>Founder, KLJ Ventures</strong> &middot; AI systems consultancy</dd></div>
+    </dl>
   </section>
 
   <!-- ACT II · CAREER ARC ==================================================
