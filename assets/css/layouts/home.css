@@ -11,31 +11,9 @@
 
 /* ---- HERO ---------------------------------------------------------------- */
 
-/* Hero composition, 2026-11-07 (Fable audit C2, Kyle: a face near the top).
-   One grid, three named areas for text and one for the portrait, so the same
-   single <img> sits in the right column spanning eyebrow, headline and deck on
-   desktop and above the eyebrow on phones. --portrait is the CSS size of the
-   image; it never exceeds 240px because the sharpest source is 512px and a 2x
-   display needs two pixels per CSS pixel (nothing here is upscaled). The
-   headline keeps its full wording and its balance; only its column narrows. */
-.hero {
-  --portrait: 240px;
-  padding-block: var(--space-xl) var(--space-xl);
-  position: relative;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) var(--portrait);
-  column-gap: var(--space-xl);
-  grid-template-areas:
-    "eyebrow portrait"
-    "title   portrait"
-    "body    portrait";
-  align-items: start;
-}
-
-.hero-eyebrow  { grid-area: eyebrow; }
-.hero-title    { grid-area: title; }
-.hero-body     { grid-area: body; }
-.hero-portrait { grid-area: portrait; }
+/* The hero grid, the portrait and the headline size live in components/hero.css
+   (one file, loaded after this one, so a stale cached copy of an older hero rule
+   can never place the portrait in an implicit row below the buttons). */
 
 .hero-eyebrow {
   font-family: var(--font-mono);
@@ -55,7 +33,6 @@
    whole page to work with, balance splits this sentence into two near-equal
    lines on its own; no <br> is needed and none should be added. */
 .hero-title {
-  font-size: clamp(2.59rem, 1.20rem + 3.20vw, 4.10rem);
   line-height: 1.0;
   font-weight: 700;
   letter-spacing: -0.035em;
@@ -70,22 +47,6 @@
   color: var(--ink-2);
   max-width: 52ch;
   text-wrap: pretty;
-}
-
-/* Rounded rectangle with the gold hairline, matching the About portrait, so
-   the circular nav avatar stays the only circle on the page. The head sits
-   close to the top edge of the source, so the crop is pinned there. */
-.hero-portrait {
-  grid-area: portrait;
-  display: block;
-  width: var(--portrait);
-  height: var(--portrait);
-  border-radius: var(--radius-l);
-  border: 1px solid var(--gold-line);
-  object-fit: cover;
-  object-position: 50% 30%;
-  justify-self: end;
-  align-self: start;
 }
 
 /* Two facts, one horizontal line. Industries used to live here and now lives
@@ -291,43 +252,17 @@
 
 /* ---- RESPONSIVE ---------------------------------------------------------- */
 
-@media (max-width: 859px) and (min-width: 701px) {
-  .hero { --portrait: 160px; column-gap: var(--space-l); }
-  .hero-title { font-size: clamp(2.10rem, 1.30rem + 3.60vw, 3.20rem); }
-}
 @media (max-width: 700px) {
-  /* Single column. The portrait leads at 112px, then the identity, then the
-     proof strip below the buttons carries the evidence into the first two
-     screens (research F3: 74% of viewing time sits in the first two). */
-  .hero {
-    --portrait: 112px;
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "portrait"
-      "eyebrow"
-      "title"
-      "body";
-    row-gap: 0;
-    padding-block: var(--space-m) var(--space-m);
-  }
-  .hero-portrait { justify-self: start; margin-bottom: var(--space-s); }
+  /* Phone spacing for the text that follows the portrait. The layout itself
+     (single column, portrait first) is in components/hero.css. */
   .hero-eyebrow { margin-bottom: var(--space-s); }
-  .hero-title { font-size: clamp(2.10rem, 1.30rem + 3.60vw, 3.20rem); margin-bottom: var(--space-m); }
   .hero-sub { font-size: var(--step-0); line-height: 1.5; }
   .hero-cta { margin-top: var(--space-m); }
 
-  /* Identity facts sit below the proof strip now; label and value run inline. */
+  /* Identity facts sit below the proof strip; label and value run inline. */
   .hero-meta { gap: var(--space-2xs) var(--space-l); margin-top: var(--space-m); }
   .hero-meta div { flex-direction: row; align-items: baseline; gap: var(--space-2xs); }
   .hero-meta dd { font-size: 0.82rem; }
-}
-
-/* Smallest phones only. At 320px the mobile clamp still lands large enough to
-   strand "mandate" on its own line. One step down resolves it to three clean
-   lines. Scoped tightly so 360 and 390 — where the composition already works —
-   are untouched. */
-@media (max-width: 340px) {
-  .hero-title { font-size: 1.68rem; }
 }
 
 /* ---- ROUTING TEASERS -----------------------------------------------------

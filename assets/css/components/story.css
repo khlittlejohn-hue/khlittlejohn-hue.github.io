@@ -44,7 +44,11 @@
    and the hero buttons and the proof strip link to #proof, #career and #contact.
    The render harness asserts it (no fixed element intersects .hero-portrait
    at 1280, 1340, 1366 and 1440). */
-@media (min-width: 1440px) { .js .acts { display: flex; } }
+/* 2026-11-08 (Kyle saw the label clipped at the right edge at his window): the rail
+   is shown only when it fully fits. Width 1440px keeps it clear of the portrait;
+   the height floor keeps all seven acts inside the viewport (7 rows of about 40px,
+   centered), so no mark of the rail can be cut by the top or bottom edge either. */
+@media (min-width: 1440px) and (min-height: 560px) { .js .acts { display: flex; } }
 .acts a {
   pointer-events: auto;
   display: flex; align-items: center; justify-content: flex-end; gap: var(--space-xs);

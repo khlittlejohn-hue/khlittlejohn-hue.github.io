@@ -1,0 +1,90 @@
+/* ============================================================================
+   components/hero.css - the hero grid, the portrait and the headline size.
+
+   2026-11-08 (Kyle, after seeing build 1 at his own window width): "the pic is
+   randomly in the bottom corner", and the headline wrapped to three huge lines
+   between about 900 and 1100px. Two decisions, both mechanical:
+
+   1. TWO MODES, ONE BREAKPOINT. From 1240px the portrait sits beside the
+      headline, top-aligned with the eyebrow, in a right-hand column. Below
+      1240px the portrait is the FIRST thing in a single column, above the
+      eyebrow and left-aligned, at every width down to the smallest phone. It
+      is never in a row of its own below the buttons. 1240 is the width at which
+      the headline still resolves to two lines in the narrowed column (measured
+      at 1246, 1366, 1440 and up); below it a full-width headline holds two
+      lines at least down to 560px and three at the narrowest phones.
+
+   2. THIS FILE OWNS THE LAYOUT. It is a new filename, loaded after
+      identity.css, and it places the portrait with explicit grid lines as well
+      as the named area, so the layout cannot be undone by an older cached
+      stylesheet that still declares the grid without a portrait row.
+
+   The portrait is capped at 240 CSS px: the sharpest source is 512px, and a 2x
+   display needs two pixels per CSS pixel, so nothing is upscaled.
+   ============================================================================ */
+
+section.hero {
+  --portrait: 144px;
+  padding-block: var(--space-l) var(--space-xl);
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    "portrait"
+    "eyebrow"
+    "title"
+    "body";
+  row-gap: 0;
+  align-items: start;
+}
+
+section.hero .hero-portrait {
+  grid-area: portrait;
+  grid-column: 1;
+  grid-row: 1;
+  display: block;
+  width: var(--portrait);
+  height: var(--portrait);
+  margin-bottom: var(--space-m);
+  border-radius: var(--radius-l);
+  border: 1px solid var(--gold-line);
+  object-fit: cover;
+  object-position: 50% 30%;
+  justify-self: start;
+  align-self: start;
+}
+section.hero .hero-eyebrow { grid-area: eyebrow; grid-column: 1; grid-row: 2; }
+section.hero .hero-title   { grid-area: title;   grid-column: 1; grid-row: 3; }
+section.hero .hero-body    { grid-area: body;    grid-column: 1; grid-row: 4; }
+
+/* Full-width headline below 1240px. A 3.6rem ceiling holds two lines from 560px
+   up; the clamp floor keeps the smallest phones at three at most. */
+section.hero .hero-title { font-size: clamp(2.10rem, 1.00rem + 3.20vw, 3.60rem); }
+
+@media (max-width: 700px) {
+  section.hero { --portrait: 112px; padding-block: var(--space-m) var(--space-m); }
+  section.hero .hero-portrait { margin-bottom: var(--space-s); }
+  section.hero .hero-title { margin-bottom: var(--space-m); }
+}
+/* Smallest phones only: one step down so "mandate" is never stranded alone. */
+@media (max-width: 340px) {
+  section.hero .hero-title { font-size: 1.68rem; }
+}
+
+/* ---- WIDE: portrait beside the headline, top-aligned with the eyebrow ---- */
+@media (min-width: 1240px) {
+  section.hero {
+    --portrait: 240px;
+    padding-block: var(--space-xl) var(--space-xl);
+    grid-template-columns: minmax(0, 1fr) var(--portrait);
+    column-gap: var(--space-xl);
+    grid-template-areas:
+      "eyebrow portrait"
+      "title   portrait"
+      "body    portrait";
+  }
+  section.hero .hero-portrait { grid-column: 2; grid-row: 1 / span 3; justify-self: end; margin-bottom: 0; }
+  section.hero .hero-eyebrow { grid-column: 1; grid-row: 1; }
+  section.hero .hero-title   { grid-column: 1; grid-row: 2; font-size: clamp(2.59rem, 1.20rem + 3.20vw, 4.10rem); }
+  section.hero .hero-body    { grid-column: 1; grid-row: 3; }
+}

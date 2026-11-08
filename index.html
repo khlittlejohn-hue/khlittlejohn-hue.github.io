@@ -46,23 +46,26 @@
 <meta name="twitter:image:alt" content="Kyle Littlejohn, Chief of Staff and Strategy and Operations leader. Senior leaders hand me the mandate nobody owns.">
 <link rel="preconnect" href="https://fonts.bunny.net">
 <link rel="stylesheet" href="https://fonts.bunny.net/css?family=fraunces:400,500,600,700|geist:400,500,600|geist-mono:400,500&display=swap">
-<link rel="stylesheet" href="assets/css/tokens.css">
-<link rel="stylesheet" href="assets/css/base.css">
-<link rel="stylesheet" href="assets/css/components/nav.css">
-<link rel="stylesheet" href="assets/css/components/metric.css">
-<link rel="stylesheet" href="assets/css/components/contact.css">
-<link rel="stylesheet" href="assets/css/layouts/home.css">
+<link rel="stylesheet" href="assets/css/tokens.css?v=20261108">
+<link rel="stylesheet" href="assets/css/base.css?v=20261108">
+<link rel="stylesheet" href="assets/css/components/nav.css?v=20261108">
+<link rel="stylesheet" href="assets/css/components/metric.css?v=20261108">
+<link rel="stylesheet" href="assets/css/components/contact.css?v=20261108">
+<link rel="stylesheet" href="assets/css/layouts/home.css?v=20261108">
 <!-- Website 2.0 rebuild: identity, recovered depth language, career arc,
      and the re-composed lower page. -->
-<link rel="stylesheet" href="assets/css/components/identity.css">
-<link rel="stylesheet" href="assets/css/components/career-arc.css">
-<link rel="stylesheet" href="assets/css/layouts/home-v2.css">
+<link rel="stylesheet" href="assets/css/components/identity.css?v=20261108">
+<link rel="stylesheet" href="assets/css/components/career-arc.css?v=20261108">
+<link rel="stylesheet" href="assets/css/layouts/home-v2.css?v=20261108">
+<!-- Hero grid and portrait: its own file so the layout cannot be undone by an
+     older cached copy of home.css or identity.css. -->
+<link rel="stylesheet" href="assets/css/components/hero.css?v=20261108">
 <!-- Loaded last: the ambient layer overrides the hero's local wash and the
      sunk band's opaque ground, so it must win on source order. -->
-<link rel="stylesheet" href="assets/css/components/ambient.css">
+<link rel="stylesheet" href="assets/css/components/ambient.css?v=20261108">
 <!-- Narrative rail, arriving career arc, Trace a request. Opacity/colour/
      transform only; no layout change. -->
-<link rel="stylesheet" href="assets/css/components/story.css">
+<link rel="stylesheet" href="assets/css/components/story.css?v=20261108">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"ProfilePage","dateModified":"2026-11-07",
 "mainEntity":{"@type":"Person","name":"Kyle Littlejohn","url":"https://kylelittlejohn.com/",
@@ -117,7 +120,8 @@
 </nav>
 
 <!-- The story's spine, drawn on the page. Six acts, one per band; the current one is
-     written out. Rendered only with JS and only from 1440px up (story.css). -->
+     written out. Rendered only with JS, from 1440px up, and only when the viewport
+     is tall enough to hold it (story.css). -->
 <nav aria-label="Sections of this page">
 <ol class="acts" id="acts">
   <li><a href="#top"><span class="t">Identity</span><span class="d" aria-hidden="true"></span></a></li>
@@ -637,9 +641,9 @@
   });
 })();
 </script>
-<script src="assets/js/ambient.js" defer></script>
-<script src="assets/js/story.js" defer></script>
-<script src="assets/js/career.js" defer></script>
+<script src="assets/js/ambient.js?v=20261108" defer></script>
+<script src="assets/js/story.js?v=20261108" defer></script>
+<script src="assets/js/career.js?v=20261108" defer></script>
 <!-- Analytics: the same GoatCounter property production has used since launch. Privacy-preserving, no cookies, no cross-site identifiers. -->
 <script data-goatcounter="https://khlittlejohn.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
