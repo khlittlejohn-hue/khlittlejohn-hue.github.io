@@ -10,31 +10,10 @@
 .work-hero h1 { font-size: var(--step-5); max-width: 18ch; margin-bottom: var(--space-m); }
 .work-hero .lead { max-width: 58ch; }
 
-/* The set argument. Three theses read as one claim before any card is opened. */
-.work-thesis-row {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
-  gap: var(--grid-gutter);
-  padding-block: var(--space-l);
-  border-bottom: var(--hairline);
-}
-.work-thesis-item { display: flex; flex-direction: column; gap: var(--space-3xs); }
-.work-thesis-item dt {
-  font-family: var(--font-mono);
-  font-size: var(--step--2); font-weight: 700;
-  letter-spacing: var(--tracking-label); text-transform: uppercase;
-  color: var(--ink-3);
-}
-.work-thesis-item dd {
-  margin: 0;
-  font-family: var(--font-display);
-  font-variation-settings: var(--fraunces-display);
-  font-size: var(--step-1); font-weight: 600; line-height: 1.25;
-}
-
 /* Full-bleed study entries. Deliberately not cards in a grid — a grid of three
    equal tiles reads as a portfolio; stacked entries read as a body of work. */
 .study {
+  position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 13rem);
   gap: var(--space-xl);
@@ -92,4 +71,12 @@
   .work-hero h1 { font-size: var(--step-4); max-width: none; }
 }
 
-.study .infra-row { display: flex; margin: var(--space-2xs) 0 var(--space-s); }
+.study .study-kind { display: block; margin: var(--space-2xs) 0 var(--space-s); }
+
+/* The whole entry is clickable through the cue link, which stretches over it. The
+   entry is an <article>, not an <a>, so a screen reader announces
+   "Read the Kaseya case study" instead of the whole entry as one link. */
+.study .cue::after { content: ""; position: absolute; inset: 0; }
+.study .cue:focus-visible { outline: none; }
+.study:has(.cue:focus-visible) { outline: var(--focus-ring); outline-offset: var(--focus-offset); }
+.study:hover .cue { color: var(--gold); }

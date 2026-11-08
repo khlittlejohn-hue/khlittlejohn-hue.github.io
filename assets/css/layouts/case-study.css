@@ -98,8 +98,11 @@
 
 .cs-facts {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--grid-gutter);
+  /* At a glance (Build 2): Role, Dates, Scope, Outcomes in two columns, then one
+     muted "Company context" row across the page so the company's own numbers (a
+     valuation, a revenue trend) are never read as outcomes Kyle owned. */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-m) var(--grid-gutter);
   padding-block: var(--space-xl);
   border-bottom: var(--hairline);
 }
@@ -125,6 +128,14 @@
   line-height: 1.55;
   color: var(--ink-2);
 }
+.cs-fact--context {
+  grid-column: 1 / -1;
+  padding-top: var(--space-s);
+  border-top: 1px dashed var(--line);
+}
+/* Muted by the dashed rule and the smaller size, not by a lighter ink: the row sits on the
+   ambient field, where --ink-3 measured too close to the 4.5:1 floor. */
+.cs-fact--context dd { font-size: var(--step--2); }
 
 /* ---- BEATS ---------------------------------------------------------------
    Each beat is a numbered section. The label carries the narrative position
@@ -215,7 +226,10 @@
 .cs-beat--result + .cs-beat--result { border-top: var(--hairline); border-top-left-radius: 0; border-top-right-radius: 0; margin-top: 0; }
 .cs-beat--result:has(+ .cs-beat--result) { border-bottom-left-radius: 0; border-bottom-right-radius: 0; margin-bottom: 0; }
 
-.cs-beat p { max-width: var(--measure); }
+.cs-beat p, .cs-beat li { max-width: var(--measure); }
+/* Long-form reading: body at the step-0 size with the loose line height (Build 2). */
+.cs-beat > p, .cs-beat > ul:not(.chain) li { font-size: var(--step-0); line-height: var(--lh-loose); }
+.cs-beat h3 { font-size: var(--step-1); margin: var(--space-m) 0 var(--space-2xs); }
 .cs-beat > p + p { margin-top: var(--space-s); }
 
 .cs-beat ul {
@@ -378,37 +392,8 @@
   .cs-header { padding-block: var(--space-xl) var(--space-l); }
 }
 
-/* ---- CREDENTIALS ---------------------------------------------------------
-   Restored 2026-09-07 from the production site: the four certifications and
-   the Conde Nast Traveler byline are external credibility signals, not the
-   resume-style content the redesign deliberately dropped.
-
-   Both are deliberately SUBORDINATE. Production rendered certifications as a
-   four-card grid, which gave them the same visual weight as a case study.
-   Here they are one quiet line under the degree they extend. The credential
-   should be findable by someone looking for it and invisible to someone who
-   is not.                                                                  */
-
-.creds {
-  margin-top: var(--space-m);
-  padding-top: var(--space-s);
-  border-top: var(--hairline);
-  font-size: var(--step--1);
-  line-height: 1.6;
-  color: var(--ink-2);
-  max-width: var(--measure);
-}
-
-.creds-label {
-  display: block;
-  margin-bottom: var(--space-3xs);
-  font-family: var(--font-mono);
-  font-size: var(--step--2);
-  font-weight: 700;
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
-  color: var(--ink-3);
-}
+/* Certifications were cut from About on 2026-11-08 (gate_247: none on any surface bearing
+   Kyle's name); their .creds rules went with them. */
 
 /* An earned byline, styled as a citation rather than a lifestyle badge.
    Underline stays on the gold so the external link is unambiguous. */
