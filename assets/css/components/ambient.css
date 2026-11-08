@@ -99,7 +99,9 @@ body::before {
 .sm-hint,
 .os-figure span,
 .toolrow-label,
-.hero-meta dt { color: var(--ink-2); }
+.hero-meta dt,
+.foot-note,
+.capdex-ev { color: var(--ink-2); }   /* foot-note, capdex-ev added 2026-11-07: sampled 4.2 to 4.46:1 over the field */
 
 /* Exposed gold, light theme only. --gold is 4.54:1 on the light ground, which
    leaves 0.04 of headroom — the field's own darkening consumes all of it and
@@ -110,7 +112,9 @@ body::before {
   .arc-read li:last-child { color: var(--gold-deep); }
 }
 :root[data-theme="light"] .arc-step--now .arc-when,
-:root[data-theme="light"] .arc-read li:last-child { color: var(--gold-deep); }
+:root[data-theme="light"] .arc-read li:last-child,
+:root[data-theme="light"] .hero-eyebrow { color: var(--gold-deep); }
+/* .hero-eyebrow added 2026-11-07: exposed gold at 4.35:1 over the field in light. */
 
 /* Re-assert the current-position gold in dark, since the promotion rule above
    also matches .arc-when and loads later than career-arc.css. */

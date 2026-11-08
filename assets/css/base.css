@@ -176,6 +176,12 @@ img, svg, video, canvas { max-width: 100%; height: auto; display: block; }
 /* Any anchored target clears the sticky nav rather than landing under it. */
 [id] { scroll-margin-top: calc(var(--nav-h) + var(--space-m)); }
 
+/* Focus Not Obscured (WCAG 2.4.11). The nav is sticky from 820px up, so a keyboard
+   Tab that scrolls an element to the top edge of the viewport would park it
+   under the bar. scroll-padding keeps focused elements clear of it. The nav is
+   static on phones, so no padding there. */
+@media (min-width: 820px) { html { scroll-padding-top: calc(var(--nav-h) + var(--space-s)); } }
+
 .band { padding-block: var(--band-y); }
 .band + .band { border-top: var(--hairline); }
 .band--sunk { background: var(--bg-sunk); }

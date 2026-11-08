@@ -413,6 +413,8 @@
 /* An earned byline, styled as a citation rather than a lifestyle badge.
    Underline stays on the gold so the external link is unambiguous. */
 .byline {
+  display: inline-block;
+  padding-block: 0.2rem;   /* 24px target floor (WCAG 2.5.8) */
   color: var(--gold);
   text-decoration: underline;
   text-decoration-thickness: 1px;
