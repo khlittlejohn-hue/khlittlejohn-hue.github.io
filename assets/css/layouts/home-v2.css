@@ -780,6 +780,10 @@
 .tl-row--move a { color: var(--gold-deep); text-decoration: none; }
 .tl-row--move a:hover { text-decoration: underline; }
 .tl-row--move a:focus-visible { outline: var(--focus-ring); outline-offset: 2px; border-radius: var(--radius-s); }
+/* Below 1080px the node head and the Details toggle are centered, so the Move row
+   under them centers too (Fable sign-off A3: a closed node read as two alignments).
+   At 1080px and up the row is part of the left-aligned popover. */
+@media (max-width: 1079px) { .tl-detail > .tl-row--move { text-align: center; } }
 @media (min-width: 1080px) {
   .tl-more > summary { display: none; }
   .tl-more::details-content { content-visibility: visible; display: block; }

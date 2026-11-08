@@ -13,8 +13,9 @@
    Eight acts, fixed to the right edge on wide screens. The current act is
    gold; its label is written out, the others are dots. It answers the brief's
    own question — "does it read as one story or stacked sections?" — by
-   drawing the story's spine on the page. Hidden below 1200px, where the page
-   margin is too narrow to hold it without touching the content column.     */
+   drawing the story's spine on the page. Hidden below 1440px (was 1200px until the hero portrait
+   claimed the right column), where the page margin is too narrow to hold it
+   without touching the content.     */
 .acts {
   /* The rail's box overlaps the right edge of the content column by ~79px at
      1440 — unavoidable, since the column is 1240 and the viewport gutter is
@@ -33,7 +34,17 @@
   gap: var(--space-s);
   margin: 0; padding: 0; list-style: none;
 }
-@media (min-width: 1200px) { .js .acts { display: flex; } }
+/* Breakpoint raised 1200 -> 1440px on 2026-11-07 (Fable sign-off A1). The hero's
+   right column now holds the portrait out to the page edge, and the fixed rail's
+   current label (IDENTITY) was drawn across it at 1200 to 1391px. Measured over
+   the rendered boxes with every label revealed: overlap 55px at 1280, 23 at 1340,
+   10 at 1366, 0 at 1384, clear from 1392; 1440 is the first common width with a
+   comfortable gap (about 24px). Below that the rail is simply not drawn, which
+   loses nothing: it is a progress indicator, every band is reachable by scrolling,
+   and the hero buttons and the proof strip link to #proof, #career and #contact.
+   The render harness asserts it (no fixed element intersects .hero-portrait
+   at 1280, 1340, 1366 and 1440). */
+@media (min-width: 1440px) { .js .acts { display: flex; } }
 .acts a {
   pointer-events: auto;
   display: flex; align-items: center; justify-content: flex-end; gap: var(--space-xs);
