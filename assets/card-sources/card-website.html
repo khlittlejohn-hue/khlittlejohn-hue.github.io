@@ -1,22 +1,33 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="base.css"><style>
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="base.css">
+<!-- Source for ../website-card-100.png (1200x630 og image). Regenerate with a
+     headless Chrome screenshot at --window-size=1200,630 (device scale 1) from a
+     local server rooted at the repo, then save over ../website-card-100.png.
+     2026-11-07 (Fable audit E2 task 9): the card now carries Kyle's portrait, the
+     literal role kicker that matches the hero eyebrow, and the frozen headline in
+     Fraunces. The old footer line ("not just talks") is gone. Fraunces loads from
+     the same font host the site uses; Georgia is the fallback. -->
+<link rel="stylesheet" href="https://fonts.bunny.net/css?family=fraunces:700|geist-mono:500&display=swap">
+<style>
   body{width:1200px;height:630px}
   body::before{content:"";position:absolute;inset:0;
     background:radial-gradient(900px 500px at 82% -10%, rgba(245,196,81,.11), transparent 60%),
                radial-gradient(700px 400px at -5% 110%, rgba(245,196,81,.05), transparent 60%)}
-  .chip{position:absolute;left:84px;top:76px}
-  .kicker{position:absolute;left:186px;top:78px;font-size:17px}
-  .name{position:absolute;left:186px;top:104px;color:#f3f0ea;font-size:44px;font-weight:700;letter-spacing:-.5px}
-  .statement{position:absolute;left:84px;top:262px;width:1010px;color:#f3f0ea;
-    font-size:47px;line-height:1.27;font-weight:600;letter-spacing:-.3px}
-  .foot{position:absolute;left:84px;bottom:74px;color:#8b857d;font-size:21px;font-family:Helvetica,Arial,sans-serif}
-  .domain{position:absolute;right:96px;bottom:70px;font-size:21px;letter-spacing:2px}
+  .chip{position:absolute;left:84px;top:66px;width:68px;height:68px;font-size:30px;border-radius:16px}
+  .kicker{position:absolute;left:176px;top:68px;font-size:15px;letter-spacing:4px;font-family:"Geist Mono",Menlo,monospace}
+  .name{position:absolute;left:176px;top:94px;color:#f3f0ea;font-size:40px;font-weight:700;letter-spacing:-.4px;font-family:Fraunces,Georgia,serif}
+  .portrait{position:absolute;left:84px;top:196px;width:312px;height:312px;object-fit:cover;object-position:50% 30%;
+    border-radius:24px;border:1px solid rgba(245,196,81,.55);box-shadow:0 18px 50px -20px rgba(0,0,0,.7)}
+  .statement{position:absolute;left:452px;top:204px;width:660px;color:#f3f0ea;
+    font-family:Fraunces,Georgia,serif;font-size:62px;line-height:1.08;font-weight:700;letter-spacing:-1.4px;text-wrap:balance}
+  .rule{position:absolute;left:452px;top:474px;width:84px;height:2px;background:#e8b64c}
+  .domain{position:absolute;left:452px;bottom:84px;font-size:22px;letter-spacing:2px;font-family:"Geist Mono",Menlo,monospace;font-weight:500}
 </style></head><body>
   <div class="grid"></div><div class="panel"></div>
   <div class="chip">KL</div>
-  <div class="kicker">CHIEF OF STAFF &nbsp;·&nbsp; STRATEGY &amp; OPERATIONS &nbsp;·&nbsp; APPLIED-AI BUILDER</div>
+  <div class="kicker">CHIEF OF STAFF &nbsp;·&nbsp; STRATEGY &amp; OPERATIONS &nbsp;·&nbsp; AI TRANSFORMATION</div>
   <div class="name">Kyle Littlejohn</div>
-  <div class="statement">I turn executive ambiguity into <span class="gold">shipped outcomes</span>,
-    multiplied by an AI operating system I built and govern.</div>
-  <div class="foot">Operator who builds with AI, not just talks about it.</div>
-  <div class="domain mono gold">kylelittlejohn.com</div>
+  <img class="portrait" src="../kyle@2x.jpg" alt="Kyle Littlejohn">
+  <div class="statement">Senior leaders hand me the mandate nobody owns.</div>
+  <div class="rule"></div>
+  <div class="domain gold">kylelittlejohn.com</div>
 </body></html>
