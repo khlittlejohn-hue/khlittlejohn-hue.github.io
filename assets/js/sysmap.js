@@ -25,7 +25,7 @@
   var CORE = {
     name: "Chief of Staff · Orchestration",
     tag: "The core",
-    desc: "A Chief of Staff aggregates every domain into one operating picture, a daily-operations agent runs the day, and an independent QA function reviews the system from the outside.",
+    desc: "A Chief of Staff agent aggregates every domain into one operating picture, a daily-operations agent runs the day, and an independent QA function reviews the system from the outside.",
     roles: ["Chief of Staff", "Daily Operations", "Independent QA Review"],
     note: "A human on every decision that leaves the system."
   };
@@ -61,15 +61,15 @@
       desc: "Training plans, a race calendar, nutrition and long-run health tracking.",
       roles: ["Training Coach", "Race-Calendar Planner", "Nutrition Lead", "Health Tracker"] },
     { k: "finance", lbl: "Finance", name: "Accounting & Finance", c: "#FCD34D",
-      desc: "Bookkeeping and tax operations for the business, and an investment research desk.",
-      roles: ["Bookkeeper", "Tax Operations", "Investment Analyst", "Portfolio Reviewer"] },
+      desc: "Bookkeeping and tax operations for the business, and a markets research desk.",
+      roles: ["Bookkeeper", "Tax Operations", "Market Researcher", "Portfolio Reviewer"] },
     { k: "tools", lbl: "Tools", name: "Dashboard & Tools", c: "#F5C451",
       desc: "The internal tooling, data pipelines and rendering layer the rest of the system runs on.",
       roles: ["Tooling Engineer", "Data-Pipeline Owner", "Rendering Engineer", "UX Designer"] },
     { k: "apps", lbl: "Apps", name: "App Development", c: "#22D3EE",
       desc: "Runs the product teams behind the software I build, from sprint plan through release gate.",
       roles: ["Product Manager", "Engineering Lead", "QA Lead", "Design Lead"] },
-    { k: "ventures", lbl: "Ventures", name: "Ventures & Diligence", c: "#4ADE80",
+    { k: "ventures", lbl: "Ventures", name: "Entrepreneur & Ventures", c: "#4ADE80",
       desc: "Pressure-tests a new business case through a full review panel before any commitment is made.",
       roles: ["Venture Analyst", "Review Panel", "Market Validator", "Go / No-Go Reviewer"] },
     { k: "marketing", lbl: "Marketing", name: "Content & Marketing", c: "#C084FC",
