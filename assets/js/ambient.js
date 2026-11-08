@@ -42,7 +42,7 @@
        full viewport leaves those regions nearly empty. At 90 nodes the two
        95px margins on a 1440 screen held about four nodes between them and
        measured flat. */
-    density: 5200,       /* one node per N css px^2, before the cap */
+    density: 6600,       /* one node per N css px^2, before the cap (5200 until Build 2: about 21% fewer nodes, calmer) */
     maxNodes: 150,
     linkDist: 132,       /* px at which two nodes stop being connected */
     drift: 0.012,
@@ -67,7 +67,9 @@
        demo". Halved in count and cut to just over half strength. The network
        GEOMETRY — the connections and the node field — is the stronger brand
        element and is untouched. */
-    dark:  { line: 0.32, dot: 0.80, beacon: 0.52, beacons: 5 },
+    /* Build 2 (2026-11-08): line 0.32 to 0.26, dot 0.80 to 0.66, beacons 5 to 3, so the
+       field reads as a calm environment. Light is unchanged (already quiet). */
+    dark:  { line: 0.26, dot: 0.66, beacon: 0.52, beacons: 3 },
     /* Light leans on LINES rather than points. On a cream ground every mark
        darkens, so a field of dots reads as dust while the same weight spent on
        connections reads as fine architectural linework. Beacons stay off for

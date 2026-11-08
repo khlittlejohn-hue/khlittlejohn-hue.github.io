@@ -1,75 +1,60 @@
 /* ============================================================================
-   career.js - hover/tap disclosure for the V3 career spine.
+   career.js - which role's details are open, on every input type.
 
-   2026-09-10 - rewritten for the horizontal layout. Company, dates and (below
-   720px) role are permanent. This script's only job is deciding WHICH node's
-   detail panel (the there-to-solve/owned/evidence/move rows) is open, and
-   making that reachable on every input type:
+   Build 2 (2026-11-08). Three layouts (see layouts/home-v2.css):
+     - 1080px and up: one row, a popover under each node.
+     - 720 to 1079px: a 3 by 2 grid of heads and ONE full-width drawer under it.
+     - under 720px: stacked cards with every detail already showing.
 
-     - Mouse:    real CSS :hover, scoped in career-arc's stylesheet to devices
-                 that report genuine hover + a fine pointer. This script does
-                 not need to do anything for that case.
-     - Keyboard: :focus-within, also pure CSS. This script's job is making
-                 .tl-head a reachable, identifiable control - tabindex, a
-                 button role, and an aria-expanded state - since the markup
-                 does not ship those baked in (progressive enhancement: no JS
-                 means no synthetic control, and a plain heading is still a
-                 plain heading).
-     - Touch:    hover does not exist here, so this script adds a click/tap
-                 listener that toggles an .is-open class. That is the actual
-                 fallback the task requires, not a media-query trick - a tap
-                 fires `click` on every input type, including a screen-reader
-                 "activate" gesture, so it is also the most robust of the
-                 three paths.
+   From 720px up each head is a button (tabindex, role, aria-expanded,
+   aria-controls). Hover (1080 and up, real pointers only), focus, click and tap
+   open the panel; Enter or Space toggles it; Escape closes it and returns focus.
+   Below 720px there is nothing to open, so the head stays a plain heading.
 
-   The collapsing behavior lives entirely behind .tl--js, which only this
-   file adds, and only the >=720px stylesheet rules act on it. Two
-   consequences, both deliberate, both inherited from the previous version of
-   this file:
+   The row reserves exactly the open panel's height under itself, measured live,
+   so an open panel never floats over the Selected work cards and never leaves a
+   dead gap (this replaced a table of hard-coded margins).
 
-     1. Without JavaScript, or below 720px (2026-11-08), every detail block
-        renders in normal flow. There is no disclosure element: the popover at
-        720px and up is the only model, and below it nothing is hidden.
-     2. If the script loads but a click handler throws or never attaches, the
-        section still reads: nothing here removes content from the DOM or
-        hides it with display:none, so a reader who never gets an interactive
-        panel just gets the un-collapsed version instead of a dead one.
+   In drawer mode a pointer on its way down to the drawer crosses the second row's
+   heads, so hover there opens a panel only after a short dwell. The deliberate
+   gestures (click, tap, focus, keyboard) open at once.
 
-   Collapsed detail is hidden with max-height/opacity/overflow, never
-   display:none or visibility:hidden, so assistive technology can still reach
-   all six nodes regardless of which one is visually open.
+   No JavaScript, or under 720px: every detail renders in normal flow. Nothing
+   here removes content from the DOM or hides it with display:none.
    ============================================================================ */
-
 (function () {
   "use strict";
-
   var tl = document.getElementById("careerTl");
   if (!tl) return;
-
   var nodes = Array.prototype.slice.call(tl.querySelectorAll(".tl-node"));
   if (nodes.length < 2) return;
-
   tl.classList.add("tl--js");
 
   var wide = window.matchMedia("(min-width: 720px)");
+  var popover = window.matchMedia("(min-width: 1080px)");
+  var finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
 
   var controls = nodes.map(function (node, i) {
-    var head = node.querySelector(".tl-head");
-    var detail = node.querySelector(".tl-detail");
+    var head = node.querySelector(".tl-head"), detail = node.querySelector(".tl-detail");
     if (!head || !detail) return null;
     if (!detail.id) detail.id = "tl-detail-" + (i + 1);
-    var coEl = node.querySelector(".tl-co");
+    var co = node.querySelector(".tl-co");
     return { node: node, head: head, detail: detail,
-             label: coEl && coEl.textContent ? "Show details for " + coEl.textContent.trim() : "" };
+             label: co && co.textContent ? "Show details for " + co.textContent.trim() : "" };
   }).filter(Boolean);
-
   if (!controls.length) return;
 
-  /* Two layouts, two interaction models. At 720px and up the row is
-     horizontal and each head is a button that opens a popover showing ALL of the
-     role's details. Below 720px each role is a card with every detail already
-     showing, so the head is just a heading: giving it role=button and a tab stop
-     there would be a control that does nothing. */
+  function pinned() { return controls.filter(function (c) { return c.node.classList.contains("is-open"); })[0] || null; }
+
+  /* Space the panel needs under the row, measured from where it is anchored
+     (its own node in popover mode, the row itself in drawer mode). */
+  function reserve(c) {
+    if (!c || !wide.matches) { tl.style.marginBottom = ""; return; }
+    var anchorBottom = (c.detail.offsetParent === tl) ? tl.offsetHeight : (c.node.offsetTop + c.node.offsetHeight);
+    var need = anchorBottom + 8 + c.detail.scrollHeight - tl.offsetHeight;
+    tl.style.marginBottom = Math.max(0, Math.round(need)) + 24 + "px";
+  }
+
   function applyMode() {
     controls.forEach(function (c) {
       if (wide.matches) {
@@ -83,8 +68,8 @@
         c.node.classList.remove("is-open");
       }
     });
+    reserve(null);
   }
-
   function closeAll(except) {
     controls.forEach(function (c) {
       if (c.node === except) return;
@@ -92,53 +77,53 @@
       if (wide.matches) c.head.setAttribute("aria-expanded", "false");
     });
   }
-
+  function open(c) {
+    closeAll(c.node);
+    c.node.classList.add("is-open");
+    c.head.setAttribute("aria-expanded", "true");
+    reserve(c);
+  }
   function toggle(c) {
-    var willOpen = !c.node.classList.contains("is-open");
-    closeAll();
-    if (willOpen) {
-      c.node.classList.add("is-open");
-      c.head.setAttribute("aria-expanded", "true");
-    }
+    if (c.node.classList.contains("is-open")) { closeAll(); reserve(null); }
+    else open(c);
   }
 
   applyMode();
-  if (wide.addEventListener) wide.addEventListener("change", applyMode);
-  else if (wide.addListener) wide.addListener(applyMode);
+  if (wide.addEventListener) { wide.addEventListener("change", applyMode); popover.addEventListener("change", applyMode); }
+  else { wide.addListener(applyMode); popover.addListener(applyMode); }
+
+  var dwell = null;
+  function cancelDwell() { if (dwell) { clearTimeout(dwell); dwell = null; } }
 
   controls.forEach(function (c) {
-    /* Mouse users who click get the same "pinned open" state a tap gets -
-       useful for reading at their own pace instead of holding a hover. */
-    c.head.addEventListener("click", function (e) {
-      if (!wide.matches) return;
-      e.preventDefault();
-      toggle(c);
-    });
+    c.head.addEventListener("click", function (e) { if (!wide.matches) return; e.preventDefault(); cancelDwell(); c.node.classList.remove("is-dismissed"); toggle(c); });
 
-    /* Hovering a DIFFERENT node than the one currently pinned open closes the
-       pin, so a mouse user never sees two panels - one CSS-hovered, one
-       JS-pinned - competing for the same space. */
-    c.head.addEventListener("mouseenter", function () {
-      closeAll(c.node);
+    c.node.addEventListener("mouseenter", function () {
+      if (!wide.matches || !finePointer.matches) return;
+      if (popover.matches) {
+        /* The CSS :hover rule opens it at once; make the pinned state follow the pointer. */
+        closeAll(c.node); reserve(c);
+      } else {
+        cancelDwell();
+        dwell = setTimeout(function () { dwell = null; open(c); }, pinned() ? 260 : 140);
+      }
     });
+    c.node.addEventListener("mouseleave", function () { cancelDwell(); c.node.classList.remove("is-dismissed"); });
+    c.node.addEventListener("focusout", function (e) { if (!c.node.contains(e.relatedTarget)) c.node.classList.remove("is-dismissed"); });
+    c.node.addEventListener("focusin", function () { if (wide.matches) reserve(c); });
 
     c.head.addEventListener("keydown", function (e) {
       if (!wide.matches) return;
-      if (e.key === "Enter" || e.key === " " || e.key === "Spacebar") {
-        e.preventDefault();
-        toggle(c);
-      } else if (e.key === "Escape") {
-        closeAll();
-        c.head.focus();
+      if (e.key === "Enter" || e.key === " " || e.key === "Spacebar") { e.preventDefault(); toggle(c); }
+      else if (e.key === "Escape") {
+        /* :focus-within and :hover would keep the panel drawn while the head is focused,
+           so Escape also marks the node dismissed until focus or the pointer leaves it. */
+        closeAll(); reserve(null); c.node.classList.add("is-dismissed");
       }
     });
   });
 
-  tl.addEventListener("mouseleave", function () {
-    closeAll();
-  });
-
-  document.addEventListener("click", function (e) {
-    if (!tl.contains(e.target)) closeAll();
-  });
+  tl.addEventListener("mouseleave", function () { cancelDwell(); if (popover.matches) reserve(pinned()); });
+  tl.addEventListener("focusout", function (e) { if (!tl.contains(e.relatedTarget)) reserve(pinned()); });
+  document.addEventListener("click", function (e) { if (!tl.contains(e.target)) { closeAll(); reserve(null); } });
 })();

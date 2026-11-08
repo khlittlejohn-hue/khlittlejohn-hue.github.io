@@ -1,90 +1,187 @@
 /* ============================================================================
-   components/hero.css - the hero grid, the portrait and the headline size.
+   components/hero.css - the identity hero. ONE FILE OWNS THE HERO.
 
-   2026-11-08 (Kyle, after seeing build 1 at his own window width): "the pic is
-   randomly in the bottom corner", and the headline wrapped to three huge lines
-   between about 900 and 1100px. Two decisions, both mechanical:
+   Build 2 (Fable redesign spec V1.1, 2026-11-08; Kyle 11-07: "a who-I-am type
+   thing with the picture"). The portrait sits top-left beside the name at EVERY
+   width; the eyebrow and one plain paragraph sit under the name; the frozen
+   headline and deck follow at full page width. Nothing is ever placed below the
+   buttons.
 
-   1. TWO MODES, ONE BREAKPOINT. From 1240px the portrait sits beside the
-      headline, top-aligned with the eyebrow, in a right-hand column. Below
-      1240px the portrait is the FIRST thing in a single column, above the
-      eyebrow and left-aligned, at every width down to the smallest phone. It
-      is never in a row of its own below the buttons. 1240 is the width at which
-      the headline still resolves to two lines in the narrowed column (measured
-      at 1246, 1366, 1440 and up); below it a full-width headline holds two
-      lines at least down to 560px and three at the narrowest phones.
+   Every selector is written as `section.hero ...` so its specificity beats any
+   older cached copy of home.css or identity.css that still declares a hero.
 
-   2. THIS FILE OWNS THE LAYOUT. It is a new filename, loaded after
-      identity.css, and it places the portrait with explicit grid lines as well
-      as the named area, so the layout cannot be undone by an older cached
-      stylesheet that still declares the grid without a portrait row.
-
-   The portrait is capped at 240 CSS px: the sharpest source is 512px, and a 2x
-   display needs two pixels per CSS pixel, so nothing is upscaled.
+   The portrait never exceeds 200 CSS px: the sharpest source is 512 px, a 2x
+   display needs two pixels per CSS pixel, so nothing is upscaled. kyle.jpg (256)
+   and kyle@2x.jpg (512) are the same image at 1x and 2x.
    ============================================================================ */
 
 section.hero {
-  --portrait: 144px;
-  padding-block: var(--space-l) var(--space-xl);
+  --portrait: 200px;
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  grid-template-areas:
-    "portrait"
-    "eyebrow"
-    "title"
-    "body";
+  grid-template-columns: var(--portrait) minmax(0, 1fr);
+  column-gap: var(--space-l);
   row-gap: 0;
+  grid-template-areas:
+    "portrait id"
+    "portrait eyebrow"
+    "portrait intro"
+    "title    title"
+    "body     body";
   align-items: start;
+  padding-block: var(--space-l) var(--space-xl);
 }
 
 section.hero .hero-portrait {
   grid-area: portrait;
-  grid-column: 1;
-  grid-row: 1;
   display: block;
   width: var(--portrait);
   height: var(--portrait);
-  margin-bottom: var(--space-m);
+  justify-self: start;
+  align-self: start;
   border-radius: var(--radius-l);
   border: 1px solid var(--gold-line);
   object-fit: cover;
   object-position: 50% 30%;
-  justify-self: start;
-  align-self: start;
 }
-section.hero .hero-eyebrow { grid-area: eyebrow; grid-column: 1; grid-row: 2; }
-section.hero .hero-title   { grid-area: title;   grid-column: 1; grid-row: 3; }
-section.hero .hero-body    { grid-area: body;    grid-column: 1; grid-row: 4; }
 
-/* Full-width headline below 1240px. A 3.6rem ceiling holds two lines from 560px
-   up; the clamp floor keeps the smallest phones at three at most. */
-section.hero .hero-title { font-size: clamp(2.10rem, 1.00rem + 3.20vw, 3.60rem); }
+section.hero .hero-id {
+  grid-area: id;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+  margin: 0 0 var(--space-2xs);
+}
+section.hero .id-name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-variation-settings: var(--fraunces-display);
+  font-size: var(--step-3);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  color: var(--ink);
+}
+/* A sentence, not a label: sentence case, body size, the gold dot kept. */
+section.hero .id-open {
+  margin: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2xs);
+  font-family: var(--font-body);
+  font-size: var(--step--1);
+  line-height: 1.4;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink-2);
+}
+section.hero .id-dot {
+  flex: none;
+  width: 7px;
+  height: 7px;
+  margin-top: 0.5em;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--gold) 25%, transparent);
+}
 
-@media (max-width: 700px) {
-  section.hero { --portrait: 112px; padding-block: var(--space-m) var(--space-m); }
-  section.hero .hero-portrait { margin-bottom: var(--space-s); }
-  section.hero .hero-title { margin-bottom: var(--space-m); }
+section.hero .hero-eyebrow {
+  grid-area: eyebrow;
+  display: block;
+  margin: 0 0 var(--space-s);
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+section.hero .hero-intro {
+  grid-area: intro;
+  margin: 0;
+  font-size: var(--step-0);
+  line-height: 1.5;
+  color: var(--ink-2);
+  max-width: 66ch;
+  text-wrap: pretty;
+}
+
+section.hero .hero-title {
+  grid-area: title;
+  font-size: clamp(2.59rem, 1.20rem + 3.20vw, 4.10rem);
+  line-height: 1.0;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  margin: var(--space-xl) 0 var(--space-m);
+  max-width: none;
+  text-wrap: balance;
+}
+section.hero .hero-body { grid-area: body; }
+section.hero .hero-sub {
+  font-size: var(--step-1);
+  line-height: 1.45;
+  color: var(--ink-2);
+  max-width: 52ch;
+  text-wrap: pretty;
+}
+section.hero .hero-cta {
+  display: flex;
+  gap: var(--space-s);
+  flex-wrap: wrap;
+  margin-top: var(--space-m);
+}
+
+/* ---- RESPONSIVE ---------------------------------------------------------- */
+@media (max-width: 899px) and (min-width: 700px) {
+  section.hero {
+    --portrait: 160px;
+    column-gap: var(--space-m);
+    grid-template-areas:
+      "portrait id"
+      "portrait eyebrow"
+      "intro    intro"
+      "title    title"
+      "body     body";
+  }
+  section.hero .hero-intro { margin-top: var(--space-s); max-width: none; }
+  section.hero .hero-sub { max-width: 64ch; font-size: var(--step-0); }
+  section.hero .hero-title { font-size: clamp(2.10rem, 1.30rem + 3.60vw, 3.20rem); margin-top: var(--space-l); }
+}
+@media (min-width: 700px) and (max-width: 780px) {
+  section.hero .hero-intro { margin-top: var(--space-2xs); }
+  section.hero .hero-title { margin-top: var(--space-m); }
+}
+@media (max-width: 699px) {
+  /* Face and name on one row, then the eyebrow, paragraph, headline, deck, buttons. */
+  section.hero {
+    --portrait: 96px;
+    column-gap: var(--space-s);
+    grid-template-areas:
+      "portrait id"
+      "eyebrow  eyebrow"
+      "intro    intro"
+      "title    title"
+      "body     body";
+    padding-block: var(--space-m) var(--space-m);
+  }
+  section.hero .hero-id { align-self: start; margin: 0; }
+  section.hero .id-name { font-size: var(--step-2); }
+  section.hero .hero-eyebrow { margin: var(--space-s) 0 var(--space-2xs); }
+  section.hero .hero-title {
+    font-size: clamp(2.10rem, 1.30rem + 3.60vw, 3.20rem);
+    margin: var(--space-m) 0 var(--space-s);
+  }
+  section.hero .hero-intro { font-size: 0.97rem; line-height: 1.45; }
+  section.hero .hero-sub { font-size: 0.97rem; line-height: 1.45; }
+  /* Both actions on one row where they fit (390 and up), stacked below that. */
+  section.hero .hero-cta { margin-top: var(--space-s); gap: var(--space-2xs); }
+  section.hero .hero-cta a { font-size: 0.94rem; padding-inline: 14px; }
 }
 /* Smallest phones only: one step down so "mandate" is never stranded alone. */
+@media (max-width: 399px) {
+  section.hero .hero-title { margin-top: var(--space-s); }
+}
 @media (max-width: 340px) {
   section.hero .hero-title { font-size: 1.68rem; }
-}
-
-/* ---- WIDE: portrait beside the headline, top-aligned with the eyebrow ---- */
-@media (min-width: 1240px) {
-  section.hero {
-    --portrait: 240px;
-    padding-block: var(--space-xl) var(--space-xl);
-    grid-template-columns: minmax(0, 1fr) var(--portrait);
-    column-gap: var(--space-xl);
-    grid-template-areas:
-      "eyebrow portrait"
-      "title   portrait"
-      "body    portrait";
-  }
-  section.hero .hero-portrait { grid-column: 2; grid-row: 1 / span 3; justify-self: end; margin-bottom: 0; }
-  section.hero .hero-eyebrow { grid-column: 1; grid-row: 1; }
-  section.hero .hero-title   { grid-column: 1; grid-row: 2; font-size: clamp(2.59rem, 1.20rem + 3.20vw, 4.10rem); }
-  section.hero .hero-body    { grid-column: 1; grid-row: 3; }
 }

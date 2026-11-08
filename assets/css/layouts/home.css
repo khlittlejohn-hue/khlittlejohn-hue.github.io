@@ -15,70 +15,8 @@
    (one file, loaded after this one, so a stale cached copy of an older hero rule
    can never place the portrait in an implicit row below the buttons). */
 
-.hero-eyebrow {
-  font-family: var(--font-mono);
-  font-size: var(--step--1);
-  font-weight: 500;
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
-  color: var(--gold);
-  display: block;
-  margin-bottom: var(--space-m);
-}
-
-/* The headline spans the full page measure rather than the 7fr column.
-   The old rule capped it at 16ch, which at the --step-6 ceiling computed to
-   roughly the column width itself — so the measure and the column constrained
-   it simultaneously and "infrastructure" took a line of its own. Given the
-   whole page to work with, balance splits this sentence into two near-equal
-   lines on its own; no <br> is needed and none should be added. */
-.hero-title {
-  line-height: 1.0;
-  font-weight: 700;
-  letter-spacing: -0.035em;
-  margin-bottom: var(--space-l);
-  max-width: none;
-  text-wrap: balance;
-}
-
-.hero-sub {
-  font-size: var(--step-1);
-  line-height: 1.45;
-  color: var(--ink-2);
-  max-width: 52ch;
-  text-wrap: pretty;
-}
-
-/* Two facts, one horizontal line. Industries used to live here and now lives
-   in the deck, so this row carries only what the deck does not say. Laid out
-   horizontally because a vertical sidebar stack is what left ~314px of dead
-   column underneath it. */
-.hero-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-m) var(--space-xl);
-  margin: var(--space-l) 0 0;
-  padding-top: var(--space-s);
-  border-top: 1px solid var(--line-2);
-}
-.hero-meta div { display: flex; flex-direction: column; gap: 2px; min-width: 22ch; }
-.hero-meta dt {
-  font-family: var(--font-mono);
-  font-size: var(--step--2);
-  font-weight: 700;
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
-  color: var(--ink-3);
-}
-.hero-meta dd {
-  margin: 0;
-  font-size: var(--step--1);
-  line-height: 1.4;
-  color: var(--ink-2);
-}
-.hero-meta dd strong { color: var(--ink); font-weight: 600; }
-
-.hero-cta { display: flex; gap: var(--space-s); flex-wrap: wrap; margin-top: var(--space-l); }
+/* The hero's eyebrow, headline, deck, buttons and identity block are all in
+   components/hero.css. */
 
 
 /* ---- PROOF STRIP ---------------------------------------------------------
@@ -251,19 +189,6 @@
 .contact .contact-sub { margin-bottom: var(--space-l); font-size: var(--step-1); line-height: 1.45; max-width: 58ch; text-wrap: pretty; }
 
 /* ---- RESPONSIVE ---------------------------------------------------------- */
-
-@media (max-width: 700px) {
-  /* Phone spacing for the text that follows the portrait. The layout itself
-     (single column, portrait first) is in components/hero.css. */
-  .hero-eyebrow { margin-bottom: var(--space-s); }
-  .hero-sub { font-size: var(--step-0); line-height: 1.5; }
-  .hero-cta { margin-top: var(--space-m); }
-
-  /* Identity facts sit below the proof strip; label and value run inline. */
-  .hero-meta { gap: var(--space-2xs) var(--space-l); margin-top: var(--space-m); }
-  .hero-meta div { flex-direction: row; align-items: baseline; gap: var(--space-2xs); }
-  .hero-meta dd { font-size: 0.82rem; }
-}
 
 /* ---- ROUTING TEASERS -----------------------------------------------------
    Compact entries into Thinking and About. These replaced full-height

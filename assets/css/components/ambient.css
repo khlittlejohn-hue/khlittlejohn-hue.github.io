@@ -99,9 +99,10 @@ body::before {
 .sm-hint,
 .os-figure span,
 .toolrow-label,
-.hero-meta dt,
 .foot-note,
-.capdex-ev { color: var(--ink-2); }   /* foot-note, capdex-ev added 2026-11-07: sampled 4.2 to 4.46:1 over the field */
+.capdex-ev,
+.tl-scope,
+.proofline small { color: var(--ink-2); }   /* foot-note, capdex-ev added 2026-11-07: sampled 4.2 to 4.46:1 over the field */
 
 /* Exposed gold, light theme only. --gold is 4.54:1 on the light ground, which
    leaves 0.04 of headroom — the field's own darkening consumes all of it and

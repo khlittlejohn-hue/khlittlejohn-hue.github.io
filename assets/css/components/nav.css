@@ -326,4 +326,3 @@
 .nav-links a:not(.nav-cta), .nav-sections a { display: inline-flex; align-items: center; min-height: 28px; }
 .site-foot a { display: inline-block; padding-block: 0.3rem; }
 .cs-index a { min-height: 28px; align-items: center; }
-.tl-row--move a { display: inline-block; padding-block: 0.25rem; }
