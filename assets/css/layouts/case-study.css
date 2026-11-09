@@ -453,7 +453,7 @@
 
 /* Case-study header on wide windows: the title on the left, the dek beside it on the right,
    under the eyebrow row, instead of a short stack with the right half empty. */
-@media (min-width: 1100px) {
+@media (min-width: 1240px) {
   .cs-header {
     display: grid;
     grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);

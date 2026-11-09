@@ -84,7 +84,7 @@
 /* ---- POLISH 2 (2026-11-09): use the page width ----------------------------------------
    From 1100px each entry is three columns: the title block, the description, the proof.
    The description keeps its 58ch measure; it no longer leaves the middle of the row empty. */
-@media (min-width: 1100px) {
+@media (min-width: 1240px) {
   .study { grid-template-columns: minmax(0, 1fr) minmax(0, 16rem); }
   .study > div:first-child {
     display: grid;
@@ -98,7 +98,7 @@
   .study p { grid-column: 2; grid-row: 1 / span 3; }
   .study .cue { grid-column: 2; grid-row: 4; justify-self: start; }
 }
-@media (min-width: 1100px) {
+@media (min-width: 1240px) {
   .work-hero {
     display: grid;
     grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
