@@ -196,6 +196,14 @@ img, svg, video, canvas { max-width: 100%; height: auto; display: block; }
     background-position: 50% 0;
     background-size: calc(100% - 2 * var(--page-pad)) 1px;
   }
+  /* the home footer is a .page box too */
+  .page.site-foot {
+    border-top: 0;
+    background-image: linear-gradient(var(--line), var(--line));
+    background-repeat: no-repeat;
+    background-position: 50% 0;
+    background-size: calc(100% - 2 * var(--page-pad)) 1px;
+  }
 }
 .band--sunk { background: var(--bg-sunk); }
 

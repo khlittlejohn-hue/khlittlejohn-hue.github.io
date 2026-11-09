@@ -77,7 +77,7 @@
      not by ad-hoc margins.                                               */
   --grid-cols: 12;
   --grid-gutter: clamp(1rem, 0.6rem + 1.6vw, 2rem);
-  --page-max: 1240px;
+  --page-max: 1856px;        /* Polish 2: content up to 1760px (this includes the 48px page padding each side); about 94% of the window up to there */
   --page-max-prose: 1120px;  /* case studies: text column + rail */
   --rail-w: 15rem;           /* the case-study rail */
   --page-pad: clamp(1.25rem, 0.7rem + 2.4vw, 3rem);
