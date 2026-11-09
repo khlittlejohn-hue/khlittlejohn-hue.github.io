@@ -1065,3 +1065,13 @@ a.pgroup-cue:focus-visible { outline: none; }
   }
 }
 
+/* ---- ANCHOR LANDING ---------------------------------------------------------
+   base.css already clears the nav twice (scroll-margin-top plus, from 820px, the
+   root's scroll-padding), and a band then adds its own top padding, so a jump to a
+   band left its heading about 260px down the screen. Pull the band up by its own
+   padding so the eyebrow and heading land about 40px under the bar (sticky from
+   820px, static above that). Applies to every band on this page: the index, the
+   dot rail, the hero button and the proof strip links. */
+.band[id] { scroll-margin-top: calc(var(--space-m) - var(--band-y)); }
+/* Phones: the band padding is 1.75rem here (Phone length pass), not --band-y. */
+@media (max-width: 699px) { .band[id] { scroll-margin-top: calc(var(--space-m) - 1.75rem); } }
