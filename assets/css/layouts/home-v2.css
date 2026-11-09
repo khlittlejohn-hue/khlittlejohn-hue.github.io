@@ -1140,3 +1140,5 @@ a.pgroup-cue:focus-visible { outline: none; }
   #career .tl-node { padding-bottom: var(--space-xs); }
 }
 .cform-status:empty { margin: calc(-1 * var(--space-s)) 0 0; min-height: 0; height: 0; }   /* the empty live region adds no row gap */
+/* The empty live region adds no row gap at the foot of the form either. */
+.cform:has(.cform-status:empty) { margin-bottom: calc(-1 * var(--space-s)); }
