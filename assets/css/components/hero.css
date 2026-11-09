@@ -2,10 +2,15 @@
    components/hero.css - the identity hero. ONE FILE OWNS THE HERO.
 
    Build 2 (Fable redesign spec V1.1, 2026-11-08; Kyle 11-07: "a who-I-am type
-   thing with the picture"). The portrait sits top-left beside the name at EVERY
-   width; the eyebrow and one plain paragraph sit under the name; the frozen
-   headline and deck follow at full page width. Nothing is ever placed below the
-   buttons.
+   thing with the picture"). The portrait sits top-left at EVERY width and is never
+   placed below the text.
+
+   Polish pass 2026-11-08 (third outside review, adopted): from 960px up the hero is
+   ONE composition. The portrait is a narrow left column and the adjacent column
+   carries the name, the availability line, the eyebrow, the frozen headline, the
+   frozen deck, the buttons and, last and small, the employer sentence. Below 960px
+   the hero stacks as before (portrait and name first, then the rest), with the
+   employer sentence smaller and the gap to the headline tighter.
 
    Every selector is written as `section.hero ...` so its specificity beats any
    older cached copy of home.css or identity.css that still declares a hero.
@@ -22,12 +27,14 @@ section.hero {
   grid-template-columns: var(--portrait) minmax(0, 1fr);
   column-gap: var(--space-l);
   row-gap: 0;
+  /* Unified composition (960px and up): the portrait spans every row of the text column. */
   grid-template-areas:
     "portrait id"
     "portrait eyebrow"
-    "portrait intro"
-    "title    title"
-    "body     body";
+    "portrait title"
+    "portrait body"
+    "portrait intro";
+  grid-template-rows: auto auto auto auto 1fr;
   align-items: start;
   padding-block: var(--space-l) var(--space-xl);
 }
@@ -88,7 +95,7 @@ section.hero .id-dot {
 section.hero .hero-eyebrow {
   grid-area: eyebrow;
   display: block;
-  margin: 0 0 var(--space-s);
+  margin: 0 0 var(--space-xs);
   font-family: var(--font-mono);
   font-size: var(--step--2);
   font-weight: 500;
@@ -97,13 +104,14 @@ section.hero .hero-eyebrow {
   color: var(--gold);
 }
 
+/* The employer sentence: a supporting line, last in the column, smaller than the deck. */
 section.hero .hero-intro {
   grid-area: intro;
-  margin: 0;
-  font-size: var(--step-0);
+  margin: var(--space-m) 0 0;
+  font-size: var(--step--1);
   line-height: 1.5;
   color: var(--ink-2);
-  max-width: 66ch;
+  max-width: 62ch;
   text-wrap: pretty;
 }
 
@@ -113,7 +121,7 @@ section.hero .hero-title {
   line-height: 1.0;
   font-weight: 700;
   letter-spacing: -0.035em;
-  margin: var(--space-xl) 0 var(--space-m);
+  margin: var(--space-xs) 0 var(--space-m);
   max-width: none;
   text-wrap: balance;
 }
@@ -133,7 +141,8 @@ section.hero .hero-cta {
 }
 
 /* ---- RESPONSIVE ---------------------------------------------------------- */
-@media (max-width: 899px) and (min-width: 700px) {
+@media (max-width: 959px) and (min-width: 700px) {
+  /* Option B (stacked): the one-column headline would wrap past two lines here. */
   section.hero {
     --portrait: 160px;
     column-gap: var(--space-m);
@@ -143,14 +152,15 @@ section.hero .hero-cta {
       "intro    intro"
       "title    title"
       "body     body";
+    grid-template-rows: auto;
   }
-  section.hero .hero-intro { margin-top: var(--space-s); max-width: none; }
+  section.hero .hero-intro { margin-top: var(--space-s); max-width: none; font-size: var(--step--1); }
   section.hero .hero-sub { max-width: 64ch; font-size: var(--step-0); }
-  section.hero .hero-title { font-size: clamp(2.10rem, 1.30rem + 3.60vw, 3.20rem); margin-top: var(--space-l); }
+  section.hero .hero-title { font-size: clamp(2.10rem, 1.30rem + 3.60vw, 3.20rem); margin-top: var(--space-m); }
 }
 @media (min-width: 700px) and (max-width: 780px) {
   section.hero .hero-intro { margin-top: var(--space-2xs); }
-  section.hero .hero-title { margin-top: var(--space-m); }
+  section.hero .hero-title { margin-top: var(--space-s); }
 }
 @media (max-width: 699px) {
   /* Face and name on one row, then the eyebrow, paragraph, headline, deck, buttons. */
@@ -163,6 +173,7 @@ section.hero .hero-cta {
       "intro    intro"
       "title    title"
       "body     body";
+    grid-template-rows: auto;
     padding-block: var(--space-m) var(--space-m);
   }
   section.hero .hero-id { align-self: start; margin: 0; }
@@ -172,7 +183,7 @@ section.hero .hero-cta {
     font-size: clamp(2.10rem, 1.30rem + 3.60vw, 3.20rem);
     margin: var(--space-m) 0 var(--space-s);
   }
-  section.hero .hero-intro { font-size: 0.97rem; line-height: 1.45; }
+  section.hero .hero-intro { margin: 0; font-size: 0.875rem; line-height: 1.45; }
   section.hero .hero-sub { font-size: 0.97rem; line-height: 1.45; }
   /* Both actions on one row where they fit (390 and up), stacked below that. */
   section.hero .hero-cta { margin-top: var(--space-s); gap: var(--space-2xs); }
