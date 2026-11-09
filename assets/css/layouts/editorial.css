@@ -90,3 +90,8 @@
 
 /* Supporting pages read at the prose width. */
 .page--editorial { max-width: var(--page-max-prose); }
+
+/* About: the "Featured on" list. Three plain rows, no bullets, the same citation-style
+   link as every other byline (.byline in case-study.css). */
+.press-list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-2xs); }
+.press-list li { margin: 0; padding: 0; }
