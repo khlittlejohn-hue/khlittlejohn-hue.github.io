@@ -942,3 +942,48 @@ a.pgroup-cue:focus-visible { outline: none; }
   .cform { gap: var(--space-xs); }
   .cform textarea { min-height: 6rem; height: 6rem; }
 }
+
+
+/* ============================================================================
+   POLISH PASS (2026-11-08, third outside review, adopted items 2 to 4)
+   - the outcome strip reads figure, short label, small context line
+   - a plain text index of the long page, right after the strip
+   - the three work cards share row lines on desktop
+   No copy changes here: wording lives in index.html.
+   ============================================================================ */
+
+/* ---- OUTCOME STRIP: figure, SHORT label, small context line ---------------
+   Same structure at every width. The label is body type; the context line keeps
+   the site's mono label voice. Where subgrid is supported (all current browsers)
+   the three rows are shared across the four items so the labels and the context
+   lines sit on common lines instead of drifting with the label length. */
+.proofline .pl-label {
+  display: block;
+  margin-top: 3px;
+  font-size: var(--step--1);
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--ink);
+  text-wrap: balance;
+}
+.proofline small { margin-top: var(--space-3xs); line-height: 1.45; }
+@supports (grid-template-rows: subgrid) {
+  .proofline { row-gap: 0; }
+  .proofline li {
+    grid-row: span 3;
+    display: grid;
+    grid-template-rows: subgrid;
+    row-gap: 0;
+    padding-bottom: var(--space-xs);
+  }
+  .proofline li a {
+    grid-row: 1 / span 3;
+    display: grid;
+    grid-template-rows: subgrid;
+    row-gap: 0;
+    align-content: start;
+  }
+  .proofline li a > b { align-self: end; }
+}
+@media (min-width: 1000px) { .proofline li { padding-bottom: 0; } }
+
