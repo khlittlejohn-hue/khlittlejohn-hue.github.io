@@ -73,7 +73,12 @@
   background: transparent; border: 1px solid var(--line-strong);
   transition: background var(--dur-base) var(--ease-out), border-color var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out);
 }
-.acts a:hover .t, .acts a:focus-visible .t, .acts a[aria-current] .t { opacity: 1; transform: none; }
+/* Polish 2: the page is up to 1760px wide, so the rail's dots live in the page padding and a label
+   never sits over content. The current act's label is written out only where the margin beside
+   the content can hold it (2000px and up); below that the labels appear on hover and focus only,
+   as an overlay with its own background, and the dots stay. */
+.acts a:hover .t, .acts a:focus-visible .t { opacity: 1; transform: none; }
+@media (min-width: 2000px) { .acts a[aria-current] .t { opacity: 1; transform: none; } }
 .acts a:hover .d { border-color: var(--ink-2); }
 .acts a[aria-current] { color: var(--gold); }
 .acts a[aria-current] .d { background: var(--gold); border-color: var(--gold); transform: scale(1.35); }
