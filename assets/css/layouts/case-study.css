@@ -59,7 +59,7 @@
 .cs-eyebrow-row .cs-eyebrow { margin: 0; }
 
 .cs-header {
-  padding-block: var(--space-2xl) var(--space-xl);
+  padding-block: var(--space-xl) var(--space-l);
   border-bottom: var(--hairline);
 }
 
@@ -103,7 +103,7 @@
      valuation, a revenue trend) are never read as outcomes Kyle owned. */
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--space-m) var(--grid-gutter);
-  padding-block: var(--space-xl);
+  padding-block: var(--space-l);
   border-bottom: var(--hairline);
 }
 
@@ -141,7 +141,7 @@
    Each beat is a numbered section. The label carries the narrative position
    (Diagnosis, Decision) which is what makes the page skimmable by heading. */
 
-.cs-beat { padding-block: var(--space-xl); border-bottom: var(--hairline); }
+.cs-beat { padding-block: var(--space-l); border-bottom: var(--hairline); }
 .cs-beat:last-of-type { border-bottom: none; }
 
 .cs-beat-label {
@@ -174,8 +174,8 @@
      reflection — italic display lead, no rule                              */
 .cs-beat[data-kind="decision"] {
   border-bottom: none;
-  padding: var(--space-xl) var(--space-l);
-  margin-block: var(--space-m);
+  padding: var(--space-l);
+  margin-block: var(--space-s);
   border: 1px solid var(--line-2);
   border-radius: var(--radius-m);
   position: relative;

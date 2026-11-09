@@ -1075,3 +1075,18 @@ a.pgroup-cue:focus-visible { outline: none; }
 .band[id] { scroll-margin-top: calc(var(--space-m) - var(--band-y)); }
 /* Phones: the band padding is 1.75rem here (Phone length pass), not --band-y. */
 @media (max-width: 699px) { .band[id] { scroll-margin-top: calc(var(--space-m) - 1.75rem); } }
+
+
+/* ============================================================================
+   POLISH 2 (2026-11-09): band rhythm. Kyle: "a really big gap between 10 acquired
+   companies and evidence ... These gaps make tons of white space." Band padding is
+   --band-y (about 56px at most, tokens.css), so two blocks of content sit about
+   112px apart at most; the strip, the section index and Selected work share one
+   rhythm. No band adds a bottom margin on top of its padding.
+   ============================================================================ */
+.proofline-band { padding-block: 0 var(--space-m); }
+.section-index { padding-block: 0; }
+.band-head { margin-bottom: var(--space-m); }
+@media (max-width: 699px) {
+  .proofline-band { padding-block: 0 var(--space-xs); }
+}

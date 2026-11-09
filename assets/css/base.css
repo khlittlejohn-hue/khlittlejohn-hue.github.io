@@ -183,7 +183,20 @@ img, svg, video, canvas { max-width: 100%; height: auto; display: block; }
 @media (min-width: 820px) { html { scroll-padding-top: calc(var(--nav-h) + var(--space-s)); } }
 
 .band { padding-block: var(--band-y); }
+/* The last block in a band never adds its own bottom margin to the band's padding. */
+.band > :last-child { margin-bottom: 0; }
 .band + .band { border-top: var(--hairline); }
+/* Polish 2: the band hairline stops at the content edges instead of running out into the page
+   padding (it was drawn on the section box, which includes the page padding). */
+@media screen {
+  .band + .band {
+    border-top: 0;
+    background-image: linear-gradient(var(--line), var(--line));
+    background-repeat: no-repeat;
+    background-position: 50% 0;
+    background-size: calc(100% - 2 * var(--page-pad)) 1px;
+  }
+}
 .band--sunk { background: var(--bg-sunk); }
 
 /* Generic stack. Spacing comes from gap, never from child margins. */

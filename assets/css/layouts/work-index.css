@@ -6,7 +6,7 @@
    and what the set as a whole argues.
    ============================================================================ */
 
-.work-hero { padding-block: var(--space-2xl) var(--space-l); border-bottom: var(--hairline); }
+.work-hero { padding-block: var(--space-xl) var(--space-l); border-bottom: var(--hairline); }
 .work-hero h1 { font-size: var(--step-5); max-width: 18ch; margin-bottom: var(--space-m); }
 .work-hero .lead { max-width: 58ch; }
 
@@ -18,7 +18,7 @@
   grid-template-columns: minmax(0, 1fr) minmax(0, 13rem);
   gap: var(--space-xl);
   align-items: start;
-  padding-block: var(--space-xl);
+  padding-block: var(--space-l);
   border-bottom: var(--hairline);
   text-decoration: none;
   transition: background-color var(--dur-base) var(--ease-out);

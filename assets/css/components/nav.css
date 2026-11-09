@@ -139,7 +139,7 @@
    A short, confident line and the two routes: talk, or keep reading.      */
 .page-end {
   border-top: var(--hairline);
-  padding-block: var(--space-2xl);
+  padding-block: var(--space-xl);
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   gap: var(--space-l);
@@ -244,7 +244,7 @@
    A short, confident line and the two routes: talk, or keep reading.      */
 .page-end {
   border-top: var(--hairline);
-  padding-block: var(--space-2xl);
+  padding-block: var(--space-xl);
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   gap: var(--space-l);

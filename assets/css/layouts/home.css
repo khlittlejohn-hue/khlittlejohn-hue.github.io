@@ -176,7 +176,7 @@
 
 /* ---- CONTACT ------------------------------------------------------------- */
 
-.contact { text-align: center; padding-block: var(--space-2xl); }
+.contact { text-align: center; padding-block: var(--band-y); }
 .contact h2 { font-size: var(--step-3); max-width: 26ch; margin-inline: auto; margin-bottom: var(--space-m); }
 .contact p { margin-inline: auto; color: var(--ink-2); }
 /* 2026-09-10 — was 44ch, which wrapped this 75-character sentence across

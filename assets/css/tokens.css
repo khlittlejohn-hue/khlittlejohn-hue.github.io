@@ -70,7 +70,7 @@
      Tuned down 2026-09-07 after visual QA: the previous 9rem ceiling stacked
      with band padding and produced stretches of empty scroll on the homepage.
      Density is doing some of the work now. */
-  --band-y: clamp(3.25rem, 2.25rem + 4vw, 6rem);
+  --band-y: clamp(2.25rem, 1.5rem + 2vw, 3.5rem);   /* Polish 2: about 56px at most, so about 112px between two blocks of content */
 
   /* ---- GRID --------------------------------------------------------------
      12 columns with a real gutter. Asymmetry is expressed by span choice,
