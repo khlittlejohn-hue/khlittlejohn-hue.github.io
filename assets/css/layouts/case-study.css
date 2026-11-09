@@ -448,6 +448,7 @@
 @container csb (min-width: 1360px) {
   .cs-groups--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: var(--space-l); }
   .cs-groups--3 .cs-group > h3 { margin-top: 0; }
+  .cs-groups--3 > .cs-group:first-child > h3 { margin-top: 0; }  /* the base first-child rule outranks the reset above (Fable V5 C1) */
   .cs-groups--3 .cs-group > ul { margin-top: var(--space-xs); }
 }
 
