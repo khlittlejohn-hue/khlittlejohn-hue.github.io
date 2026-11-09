@@ -1043,3 +1043,25 @@ a.pgroup-cue:focus-visible { outline: none; }
   .si-list a { letter-spacing: 0.07em; padding-block: 0.5rem; }
 }
 
+/* ---- SELECTED WORK: shared row lines on desktop ---------------------------
+   From 760px the three cards are side by side. Each card spans six shared rows
+   (context, title, role, description, result, link), so every row starts at the
+   same height in all three cards whatever the text length. Below 760px the cards
+   stack and keep their natural heights. Browsers without subgrid keep the flex
+   layout above. */
+@media (min-width: 760px) {
+  @supports (grid-template-rows: subgrid) {
+    .proofset { row-gap: 0; }
+    .pgroup {
+      display: grid;
+      grid-row: span 6;
+      grid-template-rows: subgrid;
+      row-gap: 0;
+      align-content: start;
+    }
+    .pgroup > * { min-width: 0; }
+    .pgroup-title { align-self: start; }
+    a.pgroup-cue { justify-self: start; align-self: start; margin-top: 0; }
+  }
+}
+
