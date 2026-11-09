@@ -901,3 +901,44 @@ a.pgroup-cue::after { content: ""; position: absolute; inset: 0; border-radius: 
 .pgroup:has(.pgroup-cue:focus-visible) { outline: var(--focus-ring); outline-offset: var(--focus-offset); }
 a.pgroup-cue:focus-visible { outline: none; }
 .pgroup:hover { border-color: var(--gold-line); }
+
+
+/* ---- PHONE LENGTH (Round 2, 2026-11-08) -------------------------------------
+   The homepage ran past 12,000px at 390px wide. This tightens spacing and card
+   padding only; no copy and no detail is hidden or moved (the career cards still
+   show every row, the map keeps its static flow and its tappable list). Band
+   spacing is 56px between bands (28px above and below each), inside the 40 to
+   64px range. Desktop and tablet are untouched: everything here is under 700px. */
+@media (max-width: 699px) {
+  .band { padding-block: 1.75rem; }
+  .band-head { margin-bottom: var(--space-m); }
+  .band-head h2 { font-size: var(--step-2); }
+  .proofline-band { padding-block: 0 var(--space-s); }
+  .proofline { padding-top: var(--space-s); gap: var(--space-xs) var(--space-s); }
+  .proofset { gap: var(--space-s); }
+  .pgroup { padding: var(--space-s); }
+  .pgroup-role { margin-bottom: var(--space-xs); }
+  .pgroup-body { margin-bottom: var(--space-xs); }
+  .pgroup-results { padding-top: var(--space-xs); }
+  a.pgroup-cue { padding-top: var(--space-xs); }
+  .tl { gap: var(--space-xs); }
+  .tl-node { padding: var(--space-s); }
+  .tl-detail { margin-top: var(--space-xs); padding-top: var(--space-xs); gap: var(--space-xs); }
+  .capdex { gap: var(--space-s); }
+  .toolrow { margin-top: var(--space-m); }
+  .moves { gap: var(--space-s); }
+  .move { padding-top: var(--space-xs); }
+  .os-thesis { font-size: var(--step-0); margin: var(--space-xs) auto var(--space-m); }
+  .os-legend { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-xs) var(--space-m); margin-bottom: var(--space-m); }
+  .os-figure b { font-size: var(--step-2); }
+  .os-run { gap: var(--space-m); }
+  .os-stage { padding-block: var(--space-2xs); }
+  .os-stage::before { top: 0.8rem; }
+  .os-run-side > p { margin-top: var(--space-s); }
+  .tl-row p, .pgroup-body, .pgroup-results, .capdex-ev, .move-ev { line-height: 1.45; }
+  .tl-scope { line-height: 1.35; margin-top: var(--space-3xs); }
+  .tl-row { gap: 0; }
+  .contact-primary { margin-bottom: var(--space-m); gap: var(--space-xs); }
+  .cform { gap: var(--space-xs); }
+  .cform textarea { min-height: 6rem; height: 6rem; }
+}

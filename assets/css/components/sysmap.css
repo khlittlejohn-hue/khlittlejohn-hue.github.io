@@ -321,3 +321,20 @@
 /* ---- Restored 2026-11-08: no-JS list -------------------------- */
 .sm-static { list-style: none; margin: var(--space-m) 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--space-2xs); justify-content: center; }
 .sm-static li { font-size: var(--step--1); color: var(--ink-2); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; }
+
+/* ---- Phone length (Round 2, 2026-11-08) ---------------------------------------
+   A smaller ring and a tighter detail panel on phones. The numbered ring, the
+   tappable list and the detail panel all stay; only their size and padding
+   change. */
+@media (max-width: 600px) {
+  .sysmap { gap: var(--space-s); }
+  .sysmap-map { max-width: 21rem; }
+  /* The drawing carries about 60px of empty ground above and below the ring at this
+     size; crop it (nothing is drawn there) so it does not read as a gap. */
+  .sysmap-stage { overflow: hidden; }
+  .sysmap-stage svg { margin-block: -2.9rem; }
+  .sysmap-detail { padding: var(--space-s); }
+  .dt-name { font-size: var(--step-1); }
+  .dt-desc { margin-bottom: var(--space-xs); }
+  .sysmap-list button { min-height: 40px; padding-block: 0.25rem; }
+}
