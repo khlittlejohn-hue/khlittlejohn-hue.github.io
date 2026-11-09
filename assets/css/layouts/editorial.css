@@ -77,7 +77,7 @@
   .ab-hero .lead{grid-area:lead;max-width:52ch;margin:0}
   .ab-portrait{grid-area:portrait;width:200px;height:200px;max-width:none;aspect-ratio:1;border-radius:var(--radius-l);
     border:1px solid var(--gold-line);object-fit:cover;object-position:50% 30%;margin:0;align-self:start}
-  .facts{display:flex;flex-wrap:wrap;gap:var(--space-2xs) var(--space-l);padding-block:var(--space-m);border-bottom:var(--hairline);font-family:var(--font-mono);font-size:var(--step--1);color:var(--ink-2)}
+  .facts{max-width:none;display:flex;flex-wrap:wrap;gap:var(--space-2xs) var(--space-l);padding-block:var(--space-m);border-bottom:var(--hairline);font-family:var(--font-mono);font-size:var(--step--1);color:var(--ink-2)}
   .fact b{font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums;margin-right:var(--space-3xs)}
   .fact span{color:var(--ink-3)}
   @media(max-width:820px){
