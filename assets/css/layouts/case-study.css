@@ -21,10 +21,10 @@
 .cs-frame {
   display: grid;
   grid-template-columns: minmax(0, 1fr) var(--rail-w);
-  column-gap: var(--space-2xl);
+  column-gap: var(--space-xl);
   align-items: start;
 }
-.cs-body { min-width: 0; }
+.cs-body { min-width: 0; container-type: inline-size; container-name: csb; }
 .cs-rail { position: sticky; top: calc(var(--space-l) + var(--nav-h)); padding-top: var(--space-xl); }
 .cs-rail-label { display: block; margin-bottom: var(--space-s); }
 .cs-index { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
@@ -191,10 +191,10 @@
 .cs-beat[data-kind="decision"] h2 { font-style: italic; font-variation-settings: "SOFT" 60, "WONK" 1, "opsz" 72; }
 .cs-beat[data-kind="decision"] + .cs-beat { border-top: none; }
 .cs-beat[data-kind="mechanism"] h2 { max-width: none; }
-.cs-beat[data-kind="mechanism"] > ul { list-style: none; padding: 0; margin: 0; max-width: var(--measure); counter-reset: mech; }
-.cs-beat[data-kind="mechanism"] > ul > li { counter-increment: mech; display: grid; grid-template-columns: 2.2rem minmax(0, 1fr); gap: var(--space-s); padding-block: var(--space-s); border-top: var(--hairline); margin: 0; color: var(--ink-2); }
-.cs-beat[data-kind="mechanism"] > ul > li::before { content: counter(mech, decimal-leading-zero); font-family: var(--font-mono); font-size: var(--step--2); letter-spacing: var(--tracking-label); color: var(--gold); padding-top: 0.35em; }
-.cs-beat[data-kind="mechanism"] > ul > li:last-child { border-bottom: var(--hairline); }
+.cs-beat[data-kind="mechanism"] > ul, .cs-beat[data-kind="mechanism"] .cs-group > ul { list-style: none; padding: 0; margin: 0; max-width: var(--measure); counter-reset: mech; }
+.cs-beat[data-kind="mechanism"] > ul > li, .cs-beat[data-kind="mechanism"] .cs-group > ul > li { counter-increment: mech; display: grid; grid-template-columns: 2.2rem minmax(0, 1fr); gap: var(--space-s); padding-block: var(--space-s); border-top: var(--hairline); margin: 0; color: var(--ink-2); }
+.cs-beat[data-kind="mechanism"] > ul > li::before, .cs-beat[data-kind="mechanism"] .cs-group > ul > li::before { content: counter(mech, decimal-leading-zero); font-family: var(--font-mono); font-size: var(--step--2); letter-spacing: var(--tracking-label); color: var(--gold); padding-top: 0.35em; }
+.cs-beat[data-kind="mechanism"] > ul > li:last-child, .cs-beat[data-kind="mechanism"] .cs-group > ul > li:last-child { border-bottom: var(--hairline); }
 /* Result lists share the ledger grammar; each line is an outcome entry. */
 .cs-beat--result > ul { list-style: none; padding: 0; margin: 0; max-width: var(--measure); counter-reset: res; }
 .cs-beat--result > ul > li { counter-increment: res; display: grid; grid-template-columns: 2.2rem minmax(0, 1fr); gap: var(--space-s); padding-block: var(--space-s); border-top: var(--hairline); margin: 0; color: var(--ink); }
@@ -228,7 +228,7 @@
 
 .cs-beat p, .cs-beat li { max-width: var(--measure); }
 /* Long-form reading: body at the step-0 size with the loose line height (Build 2). */
-.cs-beat > p, .cs-beat > ul:not(.chain) li { font-size: var(--step-0); line-height: var(--lh-loose); }
+.cs-beat > p, .cs-beat > ul:not(.chain) li, .cs-beat .cs-group > ul li { font-size: var(--step-0); line-height: var(--lh-loose); }
 .cs-beat h3 { font-size: var(--step-1); margin: var(--space-m) 0 var(--space-2xs); }
 .cs-beat > p + p { margin-top: var(--space-s); }
 
@@ -418,3 +418,53 @@
   .cs-beat--result .cs-beat-label .n { color: var(--ink-2); }
 }
 :root[data-theme="light"] .cs-beat--result .cs-beat-label .n { color: var(--ink-2); }
+
+
+/* ============================================================================
+   POLISH 2 (2026-11-09): use the page width on the reading pages.
+   The container is up to 1760px now. Prose keeps its 68ch measure, but the space beside it
+   is used: from 940px of body width the label and heading take a left column and the text
+   sits beside them; grouped lists run side by side; result lists run two across; the
+   at-a-glance facts run four across. Switches on the body column's own width (container
+   query), so it adapts to the window, the rail and the zoom level together.
+   ============================================================================ */
+.cs-groups { display: grid; gap: var(--space-m); }
+.cs-group > h3 { margin-top: var(--space-m); }
+.cs-groups > .cs-group:first-child > h3 { margin-top: var(--space-m); }
+
+@container csb (min-width: 940px) {
+  .cs-beat { display: flow-root; --cs-head: clamp(14rem, 27%, 22rem); }
+  .cs-beat > .cs-beat-label,
+  .cs-beat > h2 { float: left; clear: left; width: var(--cs-head); max-width: var(--cs-head); }
+  .cs-beat > :not(.cs-beat-label):not(h2) { margin-left: calc(var(--cs-head) + var(--space-xl)); }
+  .cs-beat[data-kind="decision"]::before { z-index: 1; }
+  .cs-beat--result { --cs-head: clamp(14rem, 27%, 20rem); }
+  .cs-groups--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--space-l); }
+}
+@media (min-width: 1100px) { .cs-facts { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@container csb (min-width: 1180px) {
+  .cs-beat--result > ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--space-l); max-width: none; }
+}
+@container csb (min-width: 1360px) {
+  .cs-groups--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: var(--space-l); }
+  .cs-groups--3 .cs-group > h3 { margin-top: 0; }
+  .cs-groups--3 .cs-group > ul { margin-top: var(--space-xs); }
+}
+
+/* Case-study header on wide windows: the title on the left, the dek beside it on the right,
+   under the eyebrow row, instead of a short stack with the right half empty. */
+@media (min-width: 1100px) {
+  .cs-header {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    grid-template-areas: "eyebrow eyebrow" "title dek";
+    column-gap: var(--space-xl);
+    align-items: end;
+  }
+  .cs-header .cs-eyebrow-row { grid-area: eyebrow; }
+  .cs-header .cs-title { grid-area: title; margin-bottom: 0; max-width: 22ch; }
+  .cs-header .cs-dek { grid-area: dek; max-width: none; margin: 0; padding-bottom: 0.4em; }
+}
+@container csb (min-width: 1300px) {
+  .cs-beat p, .cs-beat li { max-width: 72ch; }
+}

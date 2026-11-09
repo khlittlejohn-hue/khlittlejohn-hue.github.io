@@ -1090,3 +1090,53 @@ a.pgroup-cue:focus-visible { outline: none; }
 @media (max-width: 699px) {
   .proofline-band { padding-block: 0 var(--space-xs); }
 }
+
+/* ---- POLISH 2: use the width (the container is up to 1760px now) --------------------------
+   Real layout, not stretched text: the toolkit is three columns across the band, the six scope
+   items run three across, the four principles run four across, and the hiring contact is two
+   columns (the ask and the address on the left, the form on the right). Each switches on the
+   width it needs, not on a device name. */
+@media (min-width: 900px) {
+  .toolrow { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-xs); align-items: start; }
+  .toolrow ul { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-s) var(--space-xl); }
+  .toolrow li { display: grid; gap: var(--space-3xs); align-content: start; }
+  .toolrow li em { margin-right: 0; }
+  .toolrow li:not(:last-child)::after { content: none; }
+}
+@media (min-width: 1180px) {
+  .capdex { grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: var(--space-xl); }
+}
+@media (min-width: 1280px) {
+  .moves { grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: var(--space-l); }
+}
+@media (min-width: 1100px) {
+  .contact {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: var(--space-2xl);
+    align-content: start;
+    text-align: left;
+  }
+  .contact h2 { grid-column: 1; margin-inline: 0; max-width: 26ch; }
+  .contact .contact-sub, .contact .contact-open { grid-column: 1; margin-inline: 0; }
+  .contact .contact-primary { grid-column: 1; justify-items: start; margin: var(--space-s) 0 0; }
+  .contact .cform-lead { grid-column: 2; grid-row: 1; margin: 0 !important; align-self: start; }
+  .contact .cform { grid-column: 2; grid-row: 1 / span 5; max-width: none; margin: 2rem 0 0; align-self: start; }
+}
+
+/* Spread rows: the outcome strip, the toolkit and the system legend run edge to edge, so the
+   last item sits at the container edge instead of leaving the right side empty. */
+@media (min-width: 1000px) {
+  .proofline { grid-template-columns: repeat(4, auto); justify-content: space-between; }
+}
+@media (min-width: 900px) {
+  .toolrow ul { display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-between; }
+  .toolrow li { flex: 0 1 auto; max-width: 34%; }
+  .os-legend { display: flex; justify-content: space-between; }
+}
+/* The career row reserves room for its scope lines; the band does not add more below them. */
+@media (min-width: 1080px) {
+  #career { padding-bottom: var(--space-l); }
+  #career .tl-node { padding-bottom: var(--space-xs); }
+}
+.cform-status:empty { margin: calc(-1 * var(--space-s)) 0 0; min-height: 0; height: 0; }   /* the empty live region adds no row gap */

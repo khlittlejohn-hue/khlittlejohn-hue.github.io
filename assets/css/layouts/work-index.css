@@ -80,3 +80,31 @@
 .study .cue:focus-visible { outline: none; }
 .study:has(.cue:focus-visible) { outline: var(--focus-ring); outline-offset: var(--focus-offset); }
 .study:hover .cue { color: var(--gold); }
+
+/* ---- POLISH 2 (2026-11-09): use the page width ----------------------------------------
+   From 1100px each entry is three columns: the title block, the description, the proof.
+   The description keeps its 58ch measure; it no longer leaves the middle of the row empty. */
+@media (min-width: 1100px) {
+  .study { grid-template-columns: minmax(0, 1fr) minmax(0, 16rem); }
+  .study > div:first-child {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    column-gap: var(--space-xl);
+    align-items: start;
+  }
+  .study .study-meta { grid-column: 1; grid-row: 1; }
+  .study .study-kind { grid-column: 1; grid-row: 2; }
+  .study h2 { grid-column: 1; grid-row: 3; max-width: none; }
+  .study p { grid-column: 2; grid-row: 1 / span 3; }
+  .study .cue { grid-column: 2; grid-row: 4; justify-self: start; }
+}
+@media (min-width: 1100px) {
+  .work-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    column-gap: var(--space-xl);
+    align-items: end;
+  }
+  .work-hero h1 { margin-bottom: 0; }
+  .work-hero .lead { max-width: none; margin: 0; padding-bottom: 0.4em; }
+}

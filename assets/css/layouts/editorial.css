@@ -95,3 +95,27 @@
    link as every other byline (.byline in case-study.css). */
 .press-list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-2xs); }
 .press-list li { margin: 0; padding: 0; }
+
+/* ---- POLISH 2 (2026-11-09): page headers use the width ---------------------------------
+   Thinking: the title on the left and the lead beside it. About: the lead moves to the
+   right of the title (portrait stays first, at the top). The facts row spreads edge to edge. */
+@media (min-width: 1100px) {
+  .tk-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    column-gap: var(--space-xl);
+    align-items: end;
+  }
+  .tk-hero h1 { margin-bottom: 0; }
+  .tk-hero .lead { max-width: none; margin: 0; padding-bottom: 0.4em; }
+  .ab-hero {
+    grid-template-columns: 200px minmax(0, 1.25fr) minmax(0, 1fr);
+    grid-template-areas: "portrait title lead";
+    align-items: center;
+  }
+  .ab-hero .lead { max-width: none; }
+  .facts { justify-content: space-between; }
+}
+
+/* A thinking note sits directly in its beat; the beat already pads it. */
+.cs-beat > .entry { padding-block: 0; border-bottom: 0; }

@@ -148,7 +148,7 @@
 .page-end h2 { font-size: var(--step-3); max-width: 22ch; }
 .page-end p { color: var(--ink-2); margin-top: var(--space-s); max-width: 48ch; }
 .page-end .end-actions { display: flex; gap: var(--space-s); flex-wrap: wrap; }
-@media (max-width: 760px) { .page-end { grid-template-columns: 1fr; align-items: start; padding-block: var(--space-xl); } }
+@media (max-width: 760px) { .page-end { grid-template-columns: 1fr; align-items: start; padding-block: var(--space-l); } }
 
 /* Buttons live here so every page can use them, not only home. */
 .btn-primary, .btn-quiet {
@@ -253,7 +253,7 @@
 .page-end h2 { font-size: var(--step-3); max-width: 22ch; }
 .page-end p { color: var(--ink-2); margin-top: var(--space-s); max-width: 48ch; }
 .page-end .end-actions { display: flex; gap: var(--space-s); flex-wrap: wrap; }
-@media (max-width: 760px) { .page-end { grid-template-columns: 1fr; align-items: start; padding-block: var(--space-xl); } }
+@media (max-width: 760px) { .page-end { grid-template-columns: 1fr; align-items: start; padding-block: var(--space-l); } }
 
 /* Buttons live here so every page can use them, not only home. */
 .btn-primary, .btn-quiet {
